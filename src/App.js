@@ -84,12 +84,14 @@ function App() {
   return (
     <StoreProvider>
       <div>
+        
         {showLoader && <Loader />}
         {route.pathname !== "/dashboard" &&
           route.pathname !== "/dashboard-page3" &&
           route.pathname !== "/page-one" && (
             <Navbar isloggedIn={isloggedIn} setIsloggedIn={setIsloggedIn} />
           )}
+
         {/* {showLoader && <Loader />}
         {route.pathname !== "/dashboard" &&
           route.pathname !== "/dashboard-page3" &&
