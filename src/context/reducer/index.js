@@ -17,6 +17,7 @@ const reducer = (state, action) => {
         },
       };
     case "ADD_AMENITIES":
+      console.log('tttyryyry', action.payload)
       return {
         ...state,
         form: {

@@ -26,7 +26,7 @@ const ListPropertyCard = ({
             className="!opacity-100"
           >
             <img
-              src={`${process.env.REACT_APP_SERVERURL}/static/${image}`}
+              src={image}
               alt={name}
               className="object-cover w-full h-full group-hover:scale-125 transition-a"
             />
