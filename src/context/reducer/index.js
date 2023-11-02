@@ -1,5 +1,3 @@
-import { act } from "react-dom/test-utils";
-
 const reducer = (state, action) => {
   console.log("from_reducer", action.payload);
   switch (action.type) {
@@ -132,6 +130,8 @@ const reducer = (state, action) => {
       };
     case "UPDATE_TOGGLE":
       return { ...state, updatePropertyToggle: action.payload };
+    case "TOGGLE_SIDEBAR":
+      return { ...state, open: !state.open };
     default:
       return state;
   }

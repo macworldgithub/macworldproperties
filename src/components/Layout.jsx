@@ -1,11 +1,11 @@
-import React from 'react';
+import React,{useState} from 'react';
 import Sidebar from './common/Sidebar';
 
 const Layout = ({children}) => {
   return (
-    <div className='flex layout'>
-        <Sidebar/>
-        <main className='w-screen h-screen'>
+    <div className='flex w-screen layout overflow-hidden'>
+        <Sidebar />
+        <main className='w-full h-screen' >
             {children}
         </main>
 </div>

@@ -15,7 +15,7 @@ const FeaturedPropertyCard = ({
   bedRoom,
   bathRoom,
   postedby,
-  image,
+  image
 }) => {
   console.log("checking...", propIds);
   return (
@@ -24,8 +24,9 @@ const FeaturedPropertyCard = ({
     >
       <div className="group !opacity-100 overflow-hidden relative">
         <Link to={`/property-information/${propIds}`} className="!opacity-100">
+          {console.log('llllllllll', image)}
           <img
-            src={`${process.env.REACT_APP_SERVERURL}/static/${image[0]}`}
+            src={image[0]}
             alt={name}
             className="w-full h-fit md:h-[200px] object-cover group-hover:scale-125 transition-a sma3:h-[50%]"
           />

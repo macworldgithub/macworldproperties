@@ -122,8 +122,8 @@ const SingleProperty = ({
                         <div className="container mx-auto h-screen p-4">
                           <Gallery
                             items={image.map((element) => ({
-                              original: `${process.env.REACT_APP_SERVERURL}/static/${element}`,
-                              thumbnail: `${process.env.REACT_APP_SERVERURL}/static/${element}`,
+                              original: element,
+                              thumbnail: element,
                             }))}
                           />
 
@@ -290,7 +290,7 @@ const SingleProperty = ({
           <div className="col-span-2" onClick={toggleModal}>
             <img
               className="w-full h-full object-cover"
-              src={`${process.env.REACT_APP_SERVERURL}/static/${image[0]}`}
+              src={image[0]}
             ></img>
             {/* <img className='w-full h-full object-cover' src={image[0]}></img> */}
           </div>
@@ -298,14 +298,14 @@ const SingleProperty = ({
             <div className="row-span-1" onClick={toggleModal}>
               <img
                 className="w-full h-full object-cover"
-                src={`${process.env.REACT_APP_SERVERURL}/static/${image[1]}`}
+                src={image[1]}
               ></img>
             </div>
 
             <div className="relative row-span-1" onClick={toggleModal}>
               <img
                 className="w-full h-full object-cover"
-                src={`${process.env.REACT_APP_SERVERURL}/static/${image[2]}`}
+                src={image[2]}
               ></img>
               <div className="absolute inset-0 bg-black opacity-75 text-white flex justify-center items-center cursor-pointer">
                 <p className="text-4xl">{`+${image.length - 3} images`}</p>

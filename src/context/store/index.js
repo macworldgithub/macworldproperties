@@ -26,6 +26,7 @@ const initialState = {
   isAuthorize: false,
   updateProperty: null,
   updatePropertyToggle: false,
+  open: true
 };
 
 export const Store = createContext(initialState);

@@ -12,12 +12,15 @@ import Videoupload from "../components/common/Videoupload";
 import Navbar from "../components/common/Navbar";
 import { stubTrue } from "lodash";
 import { storage } from "../config/firebase";
+import ReactLoading from 'react-loading';
+import Loading from "react-loading";
 
 const Dashboardpage3 = () => {
   const [stepcount, setStepcount] = useState(3);
   const [isChecked, setIsChecked] = useState(false);
   const [images, setImages] = useState([]);
   const [firebaseImagesLinks, setFirebaseImagesLinks] = useState([])
+  const [loading, setLoading] = useState(false);
 
   const [videoLinks, setVideoLinks] = useState([]);
 
@@ -54,12 +57,23 @@ const Dashboardpage3 = () => {
   };
 
   const handleUpload = () => {
+
+    if (firebaseImagesLinks?.length < 1) {
+      swal({
+        title: "Error",
+        text: "Retry",
+        icon: "success",
+      });
+    }
     dispatch({
       type: "ADD_MEDIA",
       payload: { images: firebaseImagesLinks, videos: videoLinks },
     });
+    const temp = JSON.stringify(state.form);
+    const temp1 = JSON.parse(temp);
+    temp1.upload.images = firebaseImagesLinks
     // const formData = new FormData();
-    
+
     // for (let i = 0; i < firebaseImagesLinks?.length; i++) {
     //   formData.append("photos", firebaseImagesLinks);
     // }
@@ -68,7 +82,7 @@ const Dashboardpage3 = () => {
     // formData.append("bodyOfData", );
     console.log("imagesss", state.form.upload);
     axios
-      .post(`${process.env.REACT_APP_SERVERURL}/property/upload`, state.form)
+      .post(`${process.env.REACT_APP_SERVERURL}/property/upload`, temp1)
       .then((res) => {
         console.log(res.data);
         swal({
@@ -76,9 +90,10 @@ const Dashboardpage3 = () => {
           text: res?.data?.message,
           icon: "success",
         });
-        // dispatch({ type: "EMPTY_FORM" });
-        // setImages([]);
-        // setVideoLinks([]);
+        dispatch({ type: "EMPTY_FORM" });
+        setImages([]);
+        setVideoLinks([]);
+        setFirebaseImagesLinks([])
       });
   };
 
@@ -124,6 +139,7 @@ const Dashboardpage3 = () => {
   }
 
   const handleFirebaseUpload = (fileArray) => {
+    setLoading(true)
     const temp = [...fileArray];
     const temp2 = [];
     for (let i = 0; i < fileArray.length; i++) {
@@ -133,17 +149,20 @@ const Dashboardpage3 = () => {
 
           storage.ref('images').child(imageName + '.png').getDownloadURL().then((url) => {
             console.log('trian', url);
-            temp.map(item => {
-              if (item == url) {
-                return
-              }
-              temp2.push(url)
-              // setUpdateScreen(state => !state);
-            })
+            // temp.map(item => {
+            //   if (item == url) {
+            //     return
+            //   }
+            temp2.push(url)
+            // setUpdateScreen(state => !state);
+            // })
           })
         })
       setFirebaseImagesLinks(temp2)
     }
+    setTimeout(() => {
+      setLoading(false)
+    }, 8000)
 
     // for (let i = 0; i < firebaseImages.length; i++) {
     //   let imgRef = ref(imageDB, `/files/${Date.now()}`);
@@ -158,10 +177,17 @@ const Dashboardpage3 = () => {
     // }
   }
 
-
   return (
-    <Layout>
-      {console.log("final_Page", firebaseImagesLinks)}
+    <Layout style={{ position: 'relative', backgroundColor: 'blue', zIndex: 999, overFlow:'hidden' }}>
+
+      {loading && (
+        <div className={`h-full ${state.open?"w-[80%]":"w-[95%]"} flex basis-full bg-transparent absolute z-40`}>
+          <div className="h-full w-full backdrop-blur-sm flex justify-center items-center flex-col text-center" >
+            <ReactLoading type='balls' color='#facc15' width={100} />
+            <h1 className="text-lg mt-7">Image Uploading ...</h1>
+          </div>
+        </div>
+      )}
 
       <div
         className="bg-gradient-to-r from-gradient via-ordinary to-ordinary h-screen overflow-x-hidden"
@@ -277,6 +303,7 @@ const Dashboardpage3 = () => {
           </div>
         </div>
       </div>
+
     </Layout>
   );
 };
