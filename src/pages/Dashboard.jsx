@@ -862,6 +862,7 @@ export const Customisedcheckbox = ({ name, value, handleChange }) => {
     </div>
   );
 };
+
 const CustomisedSelect = ({
   label,
   options,
@@ -906,6 +907,7 @@ const CustomisedInput = ({
   onfocus,
   onblur,
 }) => {
+  
   return (
     <div>
       <label class="block mb-2 text-md font-medium text-gray-900 dark:text-white">
