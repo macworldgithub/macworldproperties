@@ -1,10 +1,28 @@
+import video from "../../../assets/video/video.mp4";
+import Filters from "./Filters";
 const Hero = () => {
   return (
-    <div
-      className="relative w-screen min-h-screen flex items-center justify-center md:mt-[-10vh]  overflow-hidden"
-      style={{ backgroundColor: "#050505" }}
-    >
-      <div
+    <div className="relative">
+      <div className="relative w-screen h-screen flex items-center justify-center   overflow-hidden">
+        <video
+          id="v"
+          poster=""
+          autoPlay={true}
+          muted={true}
+          loop={true}
+          playsInline={true}
+          className="w-full" // Use "w-full" to make it responsive
+          alt=""
+          width="640" // Set the width of your video
+          height="160" // Set the height of your video
+        >
+          <source
+            src={video} // Use the imported video file as the source
+            type="video/mp4"
+          />
+        </video>
+
+        {/* <div
         className="absolute inset-0 w-screen h-full"
         style={{
           backgroundImage: "url('/images/bgimage3.png')",
@@ -24,6 +42,10 @@ const Hero = () => {
             properties!
           </h5>
         </div>
+      </div> */}
+      </div>
+      <div className="absolute bottom-10 w-full">
+        <Filters />
       </div>
     </div>
   );
