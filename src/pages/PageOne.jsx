@@ -233,13 +233,13 @@ const PageOne = () => {
         subCategory: state?.form?.typesAndPurpose?.subCategory,
         purpose: state?.form?.typesAndPurpose?.purpose,
         // rentalDetails
-        rentAED: state?.form?.rentDetails?.rent,
-        rentFrequency: state?.form?.rentDetails?.rentFrequency,
-        contractperiod: state?.form?.rentDetails?.minimumContractPeriod,
-        vacatingperiod: state?.form?.rentDetails?.noticePeriod,
+        rentAED: state?.form?.rentalDetails?.rent,
+        rentFrequency: state?.form?.rentalDetails?.rentFrequency,
+        contractperiod: state?.form?.rentalDetails?.minimumContractPeriod,
+        vacatingperiod: state?.form?.rentalDetails?.noticePeriod,
         maintfee:
-          state?.form?.rentDetails?.state?.form?.rentDetails?.maintainanceFee,
-        paidby: state?.form?.rentDetails?.paidBy,
+          state?.form?.rentalDetails?.state?.form?.rentalDetails?.maintainanceFee,
+        paidby: state?.form?.rentalDetails?.paidBy,
         //  ================ New Values =============
         location: state?.form?.locationAndAddress?.location,
         longitude: state?.form?.locationAndAddress?.longitude,

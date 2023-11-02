@@ -33,6 +33,7 @@ const Dashboard = () => {
   const [petPolicy, setPolicy] = useState("");
   const [otherRooms, setOtherRooms] = useState("");
   const [stepcount, setStepcount] = useState(2);
+  const [petOptions, setPetOptions] = useState([]);
 
   const { state, dispatch } = useContext(Store);
   // const handleChange = (e) => {
@@ -51,7 +52,7 @@ const Dashboard = () => {
   // const [floorOptions, setFloorOptions] = useState([]);
 
   // const [petValue, setPetValue] = useState("option1");
-  const [petOptions, setPetOptions] = useState([]);
+
 
   // const [formData, setFormData] = useState({
   //     building: "",
@@ -78,7 +79,7 @@ const Dashboard = () => {
   // });
 
   useEffect(() => {
-    if(state?.updatePropertyToggle){
+    if (state?.updatePropertyToggle) {
       console.log('pppppppppp', state?.updateProperty?.amenities)
       setAmeneties(state?.updateProperty?.amenities)
       handleFormEdit()
@@ -94,12 +95,14 @@ const Dashboard = () => {
 
   const handleChange = (e) => {
     const { value } = e.target;
+    console.log('new_busaine', value)
     const amenitiesArrayClone = [...ameneties];
-    if (amenitiesArrayClone.some((item) => item == value)) {
-      const tempArray = amenitiesArrayClone.filter((ele) => ele.name != value);
+    if (amenitiesArrayClone.some((item) => item.value == value)) {
+      const tempArray = amenitiesArrayClone.filter((ele) => ele.value != value);
       setAmeneties(tempArray);
       return;
     }
+    console.log('pqwpepqwepqe', { name: value, value: value })
     setAmeneties([...ameneties, { name: value, value: value }]);
   };
 
@@ -350,20 +353,20 @@ const Dashboard = () => {
     <Layout>
       <div
         className="bg-gradient-to-r from-gradient via-ordinary to-ordinary h-screen overflow-x-hidden"
-        // style={{
-        //     backgroundImage: "url('/images/info1.jpg')",
-        //     backgroundRepeat: "no-repeat",
-        //     backgroundSize: "cover",
-        // }}
+      // style={{
+      //     backgroundImage: "url('/images/info1.jpg')",
+      //     backgroundRepeat: "no-repeat",
+      //     backgroundSize: "cover",
+      // }}
       >
         <div
           className="relative inset-0 p-10"
-          // style={{
-          //     backgroundColor: "rgba(0, 0, 0, 0.1)", // Adjust the opacity as needed
-          //     backdropFilter: "brightness(0.8)", // Adjust the brightness to darken the background
-          // }}
+        // style={{
+        //     backgroundColor: "rgba(0, 0, 0, 0.1)", // Adjust the opacity as needed
+        //     backdropFilter: "brightness(0.8)", // Adjust the brightness to darken the background
+        // }}
         >
-          {console.log("ggggg", state.ameneties)}
+
           <div className="relative w-[90%] block rounded-[25px] bg-white px-6 py-12 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-20 mx-10">
             <ProgressButton step={stepcount} />
           </div>
@@ -829,7 +832,6 @@ export default Dashboard;
 const handleChecked = (state, value) => {
   for (let i = 0; i < state.length; i++) {
     if (state[i]?.name === value) {
-      console.log("trello");
       return true;
     }
   }
