@@ -177,7 +177,12 @@ const PropertyDetails = ({
             <div className="lg:cols-span-1 sm:row-span-1 flex flex-col">
               <div className="flex justify-between">
                 <h3>City</h3>
-                {/* <p>{location?.location.split(",")[0]}</p> */}
+                {console.log("location?.location", location)}
+                <p>
+                  {location?.location
+                    ? location?.location?.split(",")[0]
+                    : "not defined"}
+                </p>
               </div>
               <div>
                 <hr />
@@ -186,7 +191,11 @@ const PropertyDetails = ({
             <div className="lg:cols-span-1 sm:row-span-1 flex flex-col">
               <div className="flex justify-between">
                 <h3>Country</h3>
-                {/* <p>{location?.location.split(",")[1]}</p> */}
+                <p>
+                  {location?.location
+                    ? location?.location?.split(",")[1]
+                    : "not defined"}
+                </p>
               </div>
               <div>
                 <hr />
@@ -445,109 +454,25 @@ const PropertyDetails = ({
             </div>
           </div>
           <div className="mb-5 mt-5 mx-auto">
-            <button
+            {/* <button
               type="button"
               data-te-ripple-init
               data-te-ripple-color="light"
               class="mb-[10vh] inline-block  rounded bg-primary px-6 pt-2.5 pb-2 text-xs font-bold uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]"
             >
               Send Message
-            </button>
-          </div>
-        </div>
-
-        <div className="rounded-lg bg-[hsla(0,0%,100%,0.8)] px-6 py-8 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] mb-[2vh] backdrop-blur-[30px] flex flex-col">
-          <div className="flex justify-between">
-            <h1 className="text-lg font-bold mb-[2vh]">
-              Property Owner Details
-            </h1>
-          </div>
-          <hr className="mb-[15px]" />
-          <div className="rounded-lg bg-[#d3d7da] border-2 border-gray-300 px-6 py-12 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] mb-[2vh] backdrop-blur-[30px] flex flex-col">
-            <div className="grid">
-              <div className="grid grid-rows-3 gap-3 lg:cols-span-1 sm:rows-span-1">
-                <div className="flex flex-col">
-                  <div className="flex justify-between">
-                    <h3 className="font-bold">Listing Owner</h3>
-                    <p>{listingOwner}</p>
-                  </div>
-                  <hr className="border-gray-500" />
-                </div>
-                <div className="flex flex-col">
-                  <div className="flex justify-between">
-                    <h3 className="font-bold">Contact Person</h3>
-                    <p>{contactPerson}</p>
-                  </div>
-                  <hr className="border-gray-500" />
-                </div>
-                <div className="flex flex-col">
-                  <div className="flex justify-between">
-                    <h3 className="font-bold">Email</h3>
-                    <p>{email}</p>
-                  </div>
-                  <hr className="border-gray-500" />
-                </div>
-                <div className="flex flex-col">
-                  <div className="flex justify-between">
-                    <h3 className="font-bold">Phone Number</h3>
-                    <p>{phone}</p>
-                  </div>
-                  <hr className="border-gray-500" />
-                </div>
-              </div>
-            </div>
+            </button> */}
           </div>
         </div>
       </div>
-      <div className="sm:row-span-1 lg:col-span-1 flex flex-col justify-center h-fit md:sticky top-11 mt-[25px]">
-        <div className="px-auto lg:w-full lg:mb-[30vh] mb-[40vh]">
-          <label className="themeSwitcherTwo shadow-card relative inline-flex cursor-pointer select-none items-center justify-center bg-ordinary p-1">
-            <input
-              type="checkbox"
-              className="sr-only"
-              checked={isChecked}
-              onChange={handleCheckboxChange}
-            />
-            <span
-              className={`flex items-center space-x-[6px] rounded py-2 px-[18px] text-sm font-medium ${
-                !isChecked ? "text-primary bg-white" : "text-body-color"
-              }`}
-            >
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                className="mr-[6px] fill-current"
-              >
-                <g clipPath="url(#clip0_3122_652)">
-                  <path fillRule="evenodd" clipRule="evenodd"></path>
-                </g>
-                <defs>
-                  <clipPath id="clip0_3122_652">
-                    <rect width="16" height="16" fill="white"></rect>
-                  </clipPath>
-                </defs>
-              </svg>
-              Schedule a Tour
-            </span>
-            <span
-              className={`flex items-center space-x-[6px] rounded py-2 px-[18px] text-sm font-medium ${
-                isChecked ? "text-primary bg-white" : "text-body-color"
-              }`}
-            >
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                className="mr-[6px] fill-current"
-              >
-                <path fillRule="evenodd" clipRule="evenodd"></path>
-              </svg>
-              Request Info
-            </span>
-          </label>
-        </div>
-        {isChecked ? <Message /> : <ScheduleTour />}
+      <div className="sm:row-span-1 lg:col-span-1 flex flex-col justify-center h-fit md:sticky top-11 ">
+        <div className="px-auto lg:w-full lg:mb-[30vh] mb-[20vh]"></div>
+        <Message
+          listingOwner={listingOwner}
+          contactPerson={contactPerson}
+          email={email}
+          phone={phone}
+        />
       </div>
     </div>
   );

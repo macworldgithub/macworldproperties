@@ -42,7 +42,7 @@ function Admin({ setIsloggedIn }) {
           text: "You are logged In Sucessfully",
           icon: "success",
         });
-        localStorage.setItem("token", response.data.data.token);
+        localStorage.setItem("token", JSON.stringify(response.data.data));
         localStorage.setItem(
           "userData",
           JSON.stringify(response.data.data.userData)

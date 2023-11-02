@@ -136,7 +136,7 @@ const PageOne = () => {
   });
 
   const { ref, autocompleteRef } = usePlacesWidget({
-    apiKey: "AIzaSyCN5_vVFCU-LZ2sQHmUzch_-fXkJq2THjA",
+    apiKey: "AIzaSyAdevDJNF9YHPT6jL0jypWJkWjFTv4dVpE",
     onPlaceSelected: (place) => {
       // console.log('yupyupyupyup', place);
       setKey("AIzaSyCN5_vVFCU-LZ2sQHmUzch_-fXkJq2THjA");
@@ -315,12 +315,12 @@ const PageOne = () => {
     if (!formData.referncenumber) {
       fieldErrors.referncenumber = "Reference number is imp";
     }
-    if (!formData.price) {
-      fieldErrors.price = "Price needed";
-    }
-    if (!formData.location) {
-      fieldErrors.price = "Location needed";
-    }
+    // if (!formData.price) {
+    //   fieldErrors.price = "Price needed";
+    // }
+    // if (!formData.location) {
+    //   fieldErrors.price = "Location needed";
+    // }
     // if (!catvalue) {
     //   fieldErrors.catvalue = "category is imp";
     // }

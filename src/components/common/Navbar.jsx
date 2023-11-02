@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useContext } from "react";
-import { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FiDelete, FiMoon, FiSun } from "react-icons/fi";
 import { FaSignOutAlt } from "react-icons/fa";
 import { BiSearch, BiMenu, BiUser, BiBuildingHouse } from "react-icons/bi";
@@ -31,6 +30,7 @@ const Navbar = ({ isloggedIn, setIsloggedIn }) => {
   // const [path, setPath] = useState(location.pathname);
   const { state, dispatch } = useContext(Store);
   const [name, setName] = useState("");
+  const [userData, setUserData] = useState(null);
   const [navBarColor, setNavBarColor] = useState(
     location.pathname == "/" || location.pathname == "/home"
       ? "transparent"
@@ -46,6 +46,15 @@ const Navbar = ({ isloggedIn, setIsloggedIn }) => {
   const dispatchRedux = useDispatch();
   const navigate = useNavigate();
   const currentRoute = location.pathname;
+
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem('token'));
+    setUserData(data)
+  }, [localStorage.getItem('token')])
+
+
+
+
   const getCurrentRoute = () => {
     if (currentRoute === "/" || currentRoute === "/home") {
       return true;
@@ -202,8 +211,9 @@ const Navbar = ({ isloggedIn, setIsloggedIn }) => {
 
             <div className="space-x-2 flex-align-center">
               {/*----------------------------- Profile Icon-------------------------------------------------- */}
-              {state.isAuthorize == false ? (
-                <div className=" h-full p-[10px] text-black font-bold  bg-primary hover:bg-primary/90">
+              
+              {userData?.token ==null ? (
+                <div className="h-full p-[10px] text-black font-bold  bg-primary hover:bg-primary/90">
                   <Link to="/login">Join Us</Link>
                 </div>
               ) : (
