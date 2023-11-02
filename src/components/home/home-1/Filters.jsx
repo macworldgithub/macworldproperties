@@ -37,9 +37,10 @@ const Filters = () => {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_SERVERURL}/lov/sub-category/${category}`)
-      .then((res) =>
+      .get(`${process.env.REACT_APP_SERVERURL}/lov/all-subCategory`)
+      .then((res) =>{
         setsubcatOptions([{ key: "All", value: "All" }, ...res.data.data])
+      }
       );
   }, [category]);
 
