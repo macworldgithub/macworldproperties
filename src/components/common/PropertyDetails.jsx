@@ -177,7 +177,7 @@ const PropertyDetails = ({
             <div className="lg:cols-span-1 sm:row-span-1 flex flex-col">
               <div className="flex justify-between">
                 <h3>City</h3>
-                <p>{location?.location.split(",")[0]}</p>
+                {/* <p>{location?.location.split(",")[0]}</p> */}
               </div>
               <div>
                 <hr />
@@ -186,7 +186,7 @@ const PropertyDetails = ({
             <div className="lg:cols-span-1 sm:row-span-1 flex flex-col">
               <div className="flex justify-between">
                 <h3>Country</h3>
-                <p>{location?.location.split(",")[1]}</p>
+                {/* <p>{location?.location.split(",")[1]}</p> */}
               </div>
               <div>
                 <hr />
