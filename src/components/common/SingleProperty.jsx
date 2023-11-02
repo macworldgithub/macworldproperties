@@ -181,9 +181,9 @@ const SingleProperty = ({
                           By submitting this form I agree to term of use
                         </label>
                       </div>
-                      <button className="bg-yellow-500 h-10  my-2 py-2">
+                      {/* <button className="bg-yellow-500 h-10  my-2 py-2">
                         <h4 className="text-white  font-bold ">Send Message</h4>
-                      </button>
+                      </button> */}
                       <button className="bg-white-500 h-10flex my-2 py-2 hover:bg-yellow-500 border-2 hover:text-white border-yellow-500">
                         {/* <AiOutlineWhatsApp color="yellow" /> */}
                         <h4 className="text-yellow-500  font-bold ">

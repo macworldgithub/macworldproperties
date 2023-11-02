@@ -22,7 +22,6 @@ import { Store } from "../../context/store";
 import LargeScreenWrapper from "../LargeScreenWrapper/LargeScreenWrapper";
 
 const Navbar = ({ isloggedIn, setIsloggedIn }) => {
-  // console.log(isloggedIn, "aaa");
   const location = useLocation();
   const rootDoc = document.querySelector(":root");
   const { darkMode, isSidebarOpen } = useSelector(uiStore);
@@ -136,7 +135,7 @@ const Navbar = ({ isloggedIn, setIsloggedIn }) => {
         className={`max-w-screen-2xl w-full h-[45px]  flex justify-center  `}
       >
         <div
-          className={`  h-[45px] fixed w-full max-w-screen-2xl z-40  bg-${navBarColor} text-${navBarTextColor}  top-0   flex-center-between   border-b backdrop-blur-sm dark:border-dark dark:bg-card-dark/60`}
+          className={`  h-[45px] fixed w-full max-w-screen-2xl z-40  bg-${navBarColor} text-${navBarTextColor}  top-0   flex-center-between   border-b  dark:border-dark dark:bg-card-dark/60`}
           onMouseOver={handleClose}
         >
           {/* <Link to="/" className="flex-align-center gap-x-1">
@@ -214,7 +213,7 @@ const Navbar = ({ isloggedIn, setIsloggedIn }) => {
               {/*----------------------------- Profile Icon-------------------------------------------------- */}
               
               {userData?.token ==null ? (
-                <div className=" border-2 text-black font-bold hover:text-primary bg-primary border-primary p-4 hover:bg-transparent">
+                <div className="h-full p-[10px] text-black font-bold  bg-primary hover:bg-primary/90">
                   <Link to="/login">Join Us</Link>
                 </div>
               ) : (

@@ -26,7 +26,7 @@ const Home = () => {
   return (
     <div>
       <Hero />
-      <Filters />
+      {/* <Filters /> */}
       <FeaturedSection />
       <Explore3 />
       <Explore2 />
