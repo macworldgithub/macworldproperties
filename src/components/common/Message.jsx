@@ -1,4 +1,5 @@
 import { Button } from "@mui/material";
+import { Avatar } from "antd";
 import React from "react";
 import { AiOutlineWhatsApp, AiOutlineMail } from "react-icons/ai";
 
@@ -16,11 +17,15 @@ const Message = ({ listingOwner, contactPerson, email, phone }) => {
               <h3 className="font-bold mb-4 text-center">Listing Owner </h3>
 
               <div className="flex lg:flex-row sm:flex-col gap-4 mb-[12px] ml-[-2vh] justify-center  items-center">
-                <div className="rounded-full  border-2 h-18 w-20 p-1 border-primary">
-                  <img
-                    className=" h-full w-full rounded-full"
-                    src="https://images.bayut.com/thumbnails/172555990-120x90.webp"
-                  />
+                <div className="rounded-full  border-2  p-1 border-primary">
+                  <Avatar
+                    size="large"
+                    style={{
+                      backgroundColor: "#f56a00",
+                    }}
+                  >
+                    {listingOwner ? listingOwner[0] : "A"}
+                  </Avatar>
                 </div>
                 <div>
                   <h2 className="font-bold text-xl">{listingOwner}</h2>
@@ -75,7 +80,6 @@ const Message = ({ listingOwner, contactPerson, email, phone }) => {
                     <AiOutlineMail size={26} className="mr-2" />
                     Email ME
                   </Button>
-                  
                 </a>
               </div>
             </div>

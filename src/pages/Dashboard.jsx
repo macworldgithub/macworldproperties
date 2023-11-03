@@ -13,23 +13,23 @@ const Dashboard = () => {
   // const [puposeArray, setPurposeArray] = useState([]);
   // const [purposeValue, setPurposeValue] = useState('');
   // const [rooms, setRooms] = useState(0);
-  const [elevatorBuilding, setElevatorBuilding] = useState(0);
-  const [totalFloors, setTotalFloor] = useState(0);
+  const [elevatorBuilding, setElevatorBuilding] = useState();
+  const [totalFloors, setTotalFloor] = useState();
   const [view, setView] = useState("");
   const [mainFeatures, setMainFeatures] = useState("");
-  const [floor, setFloor] = useState(0);
-  const [completionYear, setCompletionYear] = useState(0);
-  const [facilities, setFacilities] = useState(0);
-  const [landArea, setLandArea] = useState(0);
-  const [bathRooms, setBathRooms] = useState(0);
-  const [bedRooms, setBedRooms] = useState(0);
+  const [floor, setFloor] = useState();
+  const [completionYear, setCompletionYear] = useState();
+  const [facilities, setFacilities] = useState();
+  const [landArea, setLandArea] = useState();
+  const [bathRooms, setBathRooms] = useState();
+  const [bedRooms, setBedRooms] = useState();
   const [nearbySchool, setNearbySchool] = useState("");
   const [nearbyHospitals, setNearbyHospitals] = useState("");
   const [nearbyMalls, setNearbyMalls] = useState("");
-  const [distance, setDistance] = useState(0);
+  const [distance, setDistance] = useState();
   const [nearbyTransport, setNearbyTransport] = useState("");
   const [otherNearbyPlaces, setOtherNearbyPlaces] = useState("");
-  const [parkingSpaces, setParkingSpaces] = useState(0);
+  const [parkingSpaces, setParkingSpaces] = useState();
   const [petPolicy, setPolicy] = useState("");
   const [otherRooms, setOtherRooms] = useState("");
   const [stepcount, setStepcount] = useState(2);
@@ -52,7 +52,6 @@ const Dashboard = () => {
   // const [floorOptions, setFloorOptions] = useState([]);
 
   // const [petValue, setPetValue] = useState("option1");
-
 
   // const [formData, setFormData] = useState({
   //     building: "",
@@ -80,9 +79,9 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (state?.updatePropertyToggle) {
-      console.log('pppppppppp', state?.updateProperty?.amenities)
-      setAmeneties(state?.updateProperty?.amenities)
-      handleFormEdit()
+      console.log("pppppppppp", state?.updateProperty?.amenities);
+      setAmeneties(state?.updateProperty?.amenities);
+      handleFormEdit();
     } else {
       setAmeneties(state.form.amenities);
       handleFormPersist();
@@ -95,14 +94,14 @@ const Dashboard = () => {
 
   const handleChange = (e) => {
     const { value } = e.target;
-    console.log('new_busaine', value)
+    console.log("new_busaine", value);
     const amenitiesArrayClone = [...ameneties];
     if (amenitiesArrayClone.some((item) => item.value == value)) {
       const tempArray = amenitiesArrayClone.filter((ele) => ele.value != value);
       setAmeneties(tempArray);
       return;
     }
-    console.log('pqwpepqwepqe', { name: value, value: value })
+    console.log("pqwpepqwepqe", { name: value, value: value });
     setAmeneties([...ameneties, { name: value, value: value }]);
   };
 
@@ -351,27 +350,13 @@ const Dashboard = () => {
   };
   return (
     <Layout>
-      <div
-        className="bg-gradient-to-r from-gradient via-ordinary to-ordinary h-screen overflow-x-hidden"
-      // style={{
-      //     backgroundImage: "url('/images/info1.jpg')",
-      //     backgroundRepeat: "no-repeat",
-      //     backgroundSize: "cover",
-      // }}
-      >
-        <div
-          className="relative inset-0 p-10"
-        // style={{
-        //     backgroundColor: "rgba(0, 0, 0, 0.1)", // Adjust the opacity as needed
-        //     backdropFilter: "brightness(0.8)", // Adjust the brightness to darken the background
-        // }}
-        >
-
-          <div className="relative w-[90%] block rounded-[25px] bg-white px-6 py-12 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-20 mx-10">
+      <div className="bg-gradient-to-r bg-black from-gradient via-ordinary to-ordinary h-screen overflow-x-hidden">
+        <div className="relative inset-0 px-5 py-7">
+          <div className="relative w-[95%] block rounded-[25px] bg-white px-6 py-12 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-20 mx-10">
             <ProgressButton step={stepcount} />
           </div>
 
-          <div className="relative w-[90%] block rounded-[25px] bg-white px-6 py-12 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-20 mx-10">
+          <div className="relative w-[95%] block rounded-[25px] bg-white px-6 py-12 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-20 mx-10">
             <div className="absolute bg-yellow-400 rounded-[5px] mt-[-36px] ml-[-36px] mb-[40px]">
               <h1 className="text-black mx-5 text-lg">Recreation and Family</h1>
             </div>
@@ -400,12 +385,12 @@ const Dashboard = () => {
             </div>
           </div>
 
-          <div className="relative w-[90%] block rounded-[25px] bg-white px-6 py-12 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-20 mx-10">
+          <div className="relative w-[95%] block rounded-[25px] bg-white px-6 py-12 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-20 mx-10">
             <div className="absolute bg-yellow-400 rounded-[5px] mt-[-36px] ml-[-36px] mb-[40px]">
               <h1 className="text-black mx-5 text-lg">Health and Fitness</h1>
             </div>
 
-            <div className="grid grid-rows-7 gap-4 lg:grid-rows-3 lg:grid-cols-3 lg:grid-flow-row lg:gap-6lg: gap-x-10 mx-auto mt-6">
+            <div className="grid grid-rows-7 gap-4 lg:grid-rows-3 lg:grid-cols-3 lg:grid-flow-row lg:gap-6 lg:gap-x-10 mx-auto mt-6">
               <Customisedcheckbox
                 name="First Aid Medical Center"
                 value="First Aid Medical Center"
@@ -416,11 +401,7 @@ const Dashboard = () => {
                 value="Sauna"
                 handleChange={handleChange}
               />
-              <Customisedcheckbox
-                name="Facilities for Disabled"
-                value="Facilities for Disabled"
-                handleChange={handleChange}
-              />
+
               <Customisedcheckbox
                 name="Steam Room"
                 value="Steam Room"
@@ -436,6 +417,7 @@ const Dashboard = () => {
                 value="Swimming Pool"
                 handleChange={handleChange}
               />
+              <br />
               <Customisedcheckbox
                 name="Facilities for Disabled"
                 value="Facilities for Disabled"
@@ -444,7 +426,7 @@ const Dashboard = () => {
             </div>
           </div>
 
-          <div className="relative w-[90%]  block rounded-[25px] bg-white px-6 py-[80px] shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-20 mx-10">
+          <div className="relative w-[95%]  block rounded-[25px] bg-white px-6 py-[80px] shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-20 mx-10">
             <div className="absolute bg-yellow-400 rounded-[5px] mt-[-36px] ml-[-36px] mb-[40px]">
               <h1 className="text-black mx-5 text-lg ">Laundry and Kitchen</h1>
             </div>
@@ -467,7 +449,7 @@ const Dashboard = () => {
             </div>
           </div>
 
-          <div className="relative w-[90%] block rounded-[25px] bg-white px-6 py-12 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-20 mx-10">
+          <div className="relative w-[95%] block rounded-[25px] bg-white px-6 py-12 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-20 mx-10">
             <div className="absolute bg-yellow-400 rounded-[5px] mt-[-36px] ml-[-36px] mb-[40px]">
               <h1 className="text-black mx-5 text-lg">Building</h1>
             </div>
@@ -483,7 +465,7 @@ const Dashboard = () => {
                 handleChange={handleChange}
               />
               <Customisedcheckbox
-                name="Reception/Waiting Room"
+                name="Waiting Room"
                 value="Reception/Waiting room"
                 handleChange={handleChange}
               />
@@ -522,7 +504,7 @@ const Dashboard = () => {
             </div>
           </div>
 
-          <div className="relative w-[90%] block rounded-[25px] bg-white px-6 pt-12 pb-8 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-20 mx-10">
+          <div className="relative w-[95%] block rounded-[25px] bg-white px-6 pt-12 pb-8 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-20 mx-10">
             <div className="absolute bg-yellow-400 rounded-[5px] mt-[-36px] ml-[-36px] mb-[40px]">
               <h1 className="text-black mx-5 text-lg">Business and Security</h1>
             </div>
@@ -550,7 +532,7 @@ const Dashboard = () => {
             </div>
           </div>
 
-          <div className="relative w-[90%] block rounded-[25px] bg-white px-6 pt-12 pb-8 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-20 mx-10">
+          <div className="relative w-[95%] block rounded-[25px] bg-white px-6 pt-12 pb-8 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-20 mx-10">
             <div className="absolute bg-yellow-400 rounded-[5px] mt-[-36px] ml-[-36px] mb-[40px]">
               <h1 className="text-black mx-5 text-lg">Miscellaneous</h1>
             </div>
@@ -697,7 +679,7 @@ const Dashboard = () => {
             </div>
           </div>
 
-          <div className="relative w-[90%] block rounded-[25px] bg-white px-6 pt-12 pb-8 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-20 mx-10">
+          <div className="relative w-[95%] block rounded-[25px] bg-white px-6 pt-12 pb-8 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-20 mx-10">
             <div className="absolute bg-yellow-400 rounded-[5px] mt-[-36px] ml-[-36px] mb-[40px]">
               <h1 className="text-black mx-5 text-lg">Technology</h1>
             </div>
@@ -720,7 +702,7 @@ const Dashboard = () => {
             </div>
           </div>
 
-          <div className="relative w-[90%] block rounded-[25px] bg-white px-6 pt-12 pb-8 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-20 mx-10">
+          <div className="relative w-[95%] block rounded-[25px] bg-white px-6 pt-12 pb-8 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-20 mx-10">
             <div className="absolute bg-yellow-400 rounded-[5px] mt-[-36px] ml-[-36px] mb-[40px]">
               <h1 className="text-black mx-5 text-lg">Features</h1>
             </div>
@@ -736,8 +718,8 @@ const Dashboard = () => {
                 handleChange={handleChange}
               />
               <Customisedcheckbox
-                name="Central Heating"
-                value="Central Heating"
+                name="Furnished"
+                value="Furnished"
                 handleChange={handleChange}
               />
               <Customisedcheckbox
@@ -745,11 +727,7 @@ const Dashboard = () => {
                 value="Electricity Backup"
                 handleChange={handleChange}
               />
-              <Customisedcheckbox
-                name="Furnished"
-                value="Furnished"
-                handleChange={handleChange}
-              />
+
               <Customisedcheckbox
                 name="Storage Areas"
                 value="Storage Areas"
@@ -758,6 +736,11 @@ const Dashboard = () => {
               <Customisedcheckbox
                 name="Study Room"
                 value="Study Room"
+                handleChange={handleChange}
+              />
+              <Customisedcheckbox
+                name="Central Heating"
+                value="Central Heating"
                 handleChange={handleChange}
               />
               <CustomisedInput
@@ -771,13 +754,13 @@ const Dashboard = () => {
             </div>
           </div>
 
-          <div className="relative w-[90%] block rounded-[25px] bg-white px-6 pt-12 pb-8 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-20 mx-10">
+          <div className="relative w-[95%] block rounded-[25px] px-6 bg-white  pt-12 pb-8 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-20 mx-10">
             <div className="absolute bg-yellow-400 rounded-[5px] mt-[-36px] ml-[-36px] mb-[40px]">
               <h1 className="text-black mx-5 text-lg">
                 Cleaning and Maintenance
               </h1>
             </div>
-            <div className="grid grid-rows-3 gap-4 lg:grid-cols-3 lg:grid-rows-1 lg:grid-flow-row lg:gap-6 lg:gap-x-20 mx-auto">
+            <div className="grid grid-rows-3 gap-4 lg:grid-cols-3 lg:grid-rows-1 lg:grid-flow-row lg:gap-6 lg:gap-x-10 mx-auto">
               <Customisedcheckbox
                 name="Waste Disposal"
                 value="Waste Disposal"
@@ -845,14 +828,18 @@ export const Customisedcheckbox = ({ name, value, handleChange }) => {
   const { state, dispatch } = useContext(Store);
   return (
     <div className="mb-[0.15rem] block min-h-[1.5rem] pl-[0.5rem] ">
-      {console.log("customizedcheckbox", state.form.amenities)}
-      <label class="relative inline-flex items-center mb-5 cursor-pointer">
+      <label class="absolute inline-flex items-center mb-5 cursor-pointer">
         <input
           type="checkbox"
           value={value}
           onChange={handleChange}
           class="sr-only peer"
-          defaultChecked={handleChecked(state?.updatePropertyToggle ? state?.updateProperty?.amenities : state.form.amenities, value)}
+          defaultChecked={handleChecked(
+            state?.updatePropertyToggle
+              ? state?.updateProperty?.amenities
+              : state.form.amenities,
+            value
+          )}
         />
         <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-yellow-100 dark:peer-focus:ring-yellow-400 rounded-lg peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-lg after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-yellow-400"></div>
         <span class="ml-3 text-md font-medium text-gray-900 dark:text-gray-300">
@@ -862,7 +849,6 @@ export const Customisedcheckbox = ({ name, value, handleChange }) => {
     </div>
   );
 };
-
 
 const CustomisedSelect = ({
   label,
@@ -908,7 +894,6 @@ const CustomisedInput = ({
   onfocus,
   onblur,
 }) => {
-  
   return (
     <div>
       <label class="block mb-2 text-md font-medium text-gray-900 dark:text-white">

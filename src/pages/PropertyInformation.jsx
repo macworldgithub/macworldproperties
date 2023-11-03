@@ -21,6 +21,7 @@ const PropertyInformation = () => {
   return (
     <div className="bg-ordinary">
       <SingleProperty
+        phone={propertyDetails?.contactDetails?.phone}
         name={propertyDetails?.propertyDetails?.title}
         arabicName={propertyDetails?.propertyDetails?.titleArabic}
         location={propertyDetails?.locationAndAddress?.location}
@@ -44,10 +45,10 @@ const PropertyInformation = () => {
         subCategory={propertyDetails?.typesAndPurpose?.subCategory}
       />
       <PropertyDetails
-      listingOwner = {propertyDetails?.contactDetails?.ListingOwner}
-      contactPerson = {propertyDetails?.contactDetails?.contactPerson}
-      email = {propertyDetails?.contactDetails?.email}
-      phone = {propertyDetails?.contactDetails?.phone}
+        listingOwner={propertyDetails?.contactDetails?.ListingOwner}
+        contactPerson={propertyDetails?.contactDetails?.contactPerson}
+        email={propertyDetails?.contactDetails?.email}
+        phone={propertyDetails?.contactDetails?.phone}
         title={propertyDetails?.propertyDetails?.title}
         location={propertyDetails?.locationAndAddress}
         price={propertyDetails?.propertyDetails?.InclusivePrice}

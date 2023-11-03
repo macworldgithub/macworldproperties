@@ -13,10 +13,12 @@ import { useState } from "react";
 import Gallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 import { Link } from "react-router-dom";
-
+import { Button } from "@mui/material";
+import logo from "../../assets/logo/logo1.png";
 const SingleProperty = ({
   featured,
   name,
+  phone,
   location,
   price,
   status,
@@ -74,8 +76,8 @@ const SingleProperty = ({
                 {/* Modal header */}
                 <div className="flex justify-between p-4 border-b rounded-t bg-black dark:border-gray-600">
                   <img
-                    className=" w-[25%]"
-                    src="./images/logo1.png"
+                    className=" w-[25%] object-contain"
+                    src={logo}
                     alt="img"
                   />
                   <div className="flex gap-2">
@@ -115,20 +117,16 @@ const SingleProperty = ({
                 </div>
                 {/* Modal body */}
                 <div className="p-1">
-                  <div className=" mx-auto md:h-[18rem] lg:h-[30rem] grid grid-cols-8 grid-rows-6 p-6 gap-2">
-                    <div className="relative grid col-span-8 sm:col-span-5 row-span-6 bg-black ">
-                      {/* <img className="h-full" src={currentImg} alt="xxx" /> */}
-                      <div className="absolute inset-0 z-50 bg-black">
-                        <div className="container mx-auto h-screen p-4">
+                  <div className=" mx-auto p-3 gap-2">
+                    <div className="relative   ">
+                      <div className=" inset-0 z-50 ">
+                        <div className="container mx-auto  p-4">
                           <Gallery
                             items={image.map((element) => ({
                               original: element,
                               thumbnail: element,
                             }))}
                           />
-
-                          {/* <Gallery items={image.map((element) => ({ original: element, 
-            thumbnail: element }))} /> */}
                         </div>
                         <button
                           className="absolute top-4 right-4 text-white text-3xl cursor-pointer"
@@ -138,75 +136,6 @@ const SingleProperty = ({
                         </button>
                       </div>
                     </div>
-
-                    <div className="hidden sm:grid col-span-3 row-span-6">
-                      <input
-                        class="border mb-2 h-9 border-black placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500 px-2 py-2 hover:border-black"
-                        placeholder="Name"
-                      />
-                      <input
-                        class="border mb-2 h-9 border-black placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500 px-2  hover:border-black"
-                        placeholder="Phone"
-                      />
-                      <input
-                        class="border mb-1 h-9 border-black placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500 px-2 py-2 hover:border-black"
-                        placeholder="Email"
-                      />
-
-                      <textarea
-                        id="message"
-                        name="message"
-                        className="resize-none mb-2 h-28 border rounded-lg w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring focus:border-blue-300"
-                        placeholder="Hello, I am interested in [Canal Cove Frond G, Canal Cove, Palm Jumeirah, Dubai]"
-                        value={message}
-                        onChange={handleChange}
-                      ></textarea>
-                      <select className="block mb-2 appearance-none w-full bg-white h-12 border border-gray-300 hover:border-gray-800 px-4  pr-8  shadow leading-tight focus:outline-none focus:shadow-outline ">
-                        <option>All Cities..</option>
-                        <option>Option 2</option>
-                        <option>Option 3</option>
-                      </select>
-
-                      <div className="flex items-center">
-                        <input
-                          type="checkbox"
-                          className="mr-2 form-checkbox h-5 w-5 text-blue-600"
-                          checked={isChecked}
-                          onChange={handleCheckboxChange}
-                        />
-                        <label
-                          htmlFor="agree"
-                          className="text-gray-700 text-sm"
-                        >
-                          By submitting this form I agree to term of use
-                        </label>
-                      </div>
-                      {/* <button className="bg-yellow-500 h-10  my-2 py-2">
-                        <h4 className="text-white  font-bold ">Send Message</h4>
-                      </button> */}
-                      <button className="bg-white-500 h-10flex my-2 py-2 hover:bg-yellow-500 border-2 hover:text-white border-yellow-500">
-                        {/* <AiOutlineWhatsApp color="yellow" /> */}
-                        <h4 className="text-yellow-500  font-bold ">
-                          Whatsapp
-                        </h4>
-                      </button>
-                    </div>
-
-                    {/* {imgarr.map((item, index) => (
-                    <div
-                      key={index}
-                      className="grid bg-white col-span-2 sm:col-span-1  md:w-[5rem] "
-                    >
-                      <img
-                        className="w-full h-full object-cover"
-                        src={item.path}
-                        alt=""
-                        onClick={() => {
-                          setCurrentImg(item.path);
-                        }}
-                      />
-                    </div>
-                  ))} */}
                   </div>
                 </div>
               </div>
@@ -288,25 +217,16 @@ const SingleProperty = ({
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 w-full h-500">
           <div className="col-span-2" onClick={toggleModal}>
-            <img
-              className="w-full h-full object-cover"
-              src={image[0]}
-            ></img>
+            <img className="w-full h-full object-cover" src={image[0]}></img>
             {/* <img className='w-full h-full object-cover' src={image[0]}></img> */}
           </div>
           <div className="grid col-span-1 grid-rows-2 gap-3">
             <div className="row-span-1" onClick={toggleModal}>
-              <img
-                className="w-full h-full object-cover"
-                src={image[1]}
-              ></img>
+              <img className="w-full h-full object-cover" src={image[1]}></img>
             </div>
 
             <div className="relative row-span-1" onClick={toggleModal}>
-              <img
-                className="w-full h-full object-cover"
-                src={image[2]}
-              ></img>
+              <img className="w-full h-full object-cover" src={image[2]}></img>
               <div className="absolute inset-0 bg-black opacity-75 text-white flex justify-center items-center cursor-pointer">
                 <p className="text-4xl">{`+${image.length - 3} images`}</p>
               </div>
