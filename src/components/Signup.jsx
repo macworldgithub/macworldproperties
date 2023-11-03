@@ -82,7 +82,7 @@ function Signup() {
         console.log("SignUp Successful", response.data.message);
         localStorage.setItem("userId", response.data.data);
         if (response.data.message == "Success") {
-          // openPopup();
+          openPopup();
           // console.error("checkerror", error);
         }
         // navigate("/otp");
