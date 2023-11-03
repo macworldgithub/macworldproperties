@@ -1,5 +1,4 @@
 const reducer = (state, action) => {
-  console.log("from_reducer", action.payload);
   switch (action.type) {
     case "ADD_PROPERTY":
       return {
@@ -15,12 +14,11 @@ const reducer = (state, action) => {
         },
       };
     case "ADD_AMENITIES":
-      console.log('tttyryyry', action.payload)
       return {
         ...state,
         form: {
           ...state.form,
-          amenities: action.payload,
+          amenities: action.payload
         },
       };
     case "ADD_MEDIA":

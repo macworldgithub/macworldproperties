@@ -25,7 +25,7 @@ import Label from "../components/Dashboard/Label";
 import Input from "../components/Dashboard/Input";
 import SelectOption from "../components/Dashboard/selectOption";
 import LocationMarker from "../components/common/Marker";
-import Navbar from "../components/common/Navbar";
+
 import "leaflet/dist/leaflet.css";
 // make new leaflet element
 import {
@@ -136,10 +136,10 @@ const PageOne = () => {
   });
 
   const { ref, autocompleteRef } = usePlacesWidget({
-    apiKey: "AIzaSyAdevDJNF9YHPT6jL0jypWJkWjFTv4dVpE",
+    apiKey: "AIzaSyDYv87_3gRVr2EY3oxiU95MoREBfgFUYl8",
     onPlaceSelected: (place) => {
       // console.log('yupyupyupyup', place);
-      setKey("AIzaSyCN5_vVFCU-LZ2sQHmUzch_-fXkJq2THjA");
+      setKey("AIzaSyDYv87_3gRVr2EY3oxiU95MoREBfgFUYl8");
       setLanguage("en");
       setRegion("ae");
       console.log("now_wheat", place?.formatted_address);
@@ -580,7 +580,7 @@ const PageOne = () => {
     const data = await JSON.parse(email);
     setFormData((prevData) => ({
       ...prevData,
-      name: data.email,
+      name: data?.email,
     }));
   };
 
@@ -597,7 +597,7 @@ const PageOne = () => {
       // }}
       >
         {console.log(purpOptions, "purpose to check ....")}
-        <Navbar />
+        {/* <Navbar /> */}
         <div
           className="relative inset-0 p-10"
         // style={{

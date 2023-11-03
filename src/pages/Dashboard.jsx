@@ -831,7 +831,7 @@ export default Dashboard;
 
 const handleChecked = (state, value) => {
   for (let i = 0; i < state.length; i++) {
-    if (state[i]?.name === value) {
+    if (state[i]?.value === value) {
       return true;
     }
   }
@@ -852,7 +852,7 @@ export const Customisedcheckbox = ({ name, value, handleChange }) => {
           value={value}
           onChange={handleChange}
           class="sr-only peer"
-          defaultChecked={handleChecked(state?.updatePropertyToggle ? state?.updateProperty?.amenities : state.form.amenities, name)}
+          defaultChecked={handleChecked(state?.updatePropertyToggle ? state?.updateProperty?.amenities : state.form.amenities, value)}
         />
         <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-yellow-100 dark:peer-focus:ring-yellow-400 rounded-lg peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-lg after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-yellow-400"></div>
         <span class="ml-3 text-md font-medium text-gray-900 dark:text-gray-300">
@@ -862,6 +862,7 @@ export const Customisedcheckbox = ({ name, value, handleChange }) => {
     </div>
   );
 };
+
 
 const CustomisedSelect = ({
   label,

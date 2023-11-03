@@ -14,7 +14,7 @@ import { FaHome } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { Store } from '../../context/store';
 
-const Sidebar = (   ) => {
+const Sidebar = () => {
 
 
     const [submenuOpen1, setSubmenuOpen1] = useState(false);
@@ -51,16 +51,16 @@ const Sidebar = (   ) => {
                 { title: "Traffic", path: '/traffic' },
             ]
         },
-        {
-            title: "Insights",
-            icon: <AiOutlineBarChart className='hover:text-yellow-500 hover:animate-bounce duration-1000' />,
-            submenu3: true,
-            submenuItems: [
-                { title: "Listings", path: '/home' },
-                { title: "Market", path: '/home' },
-                { title: "Transactions", path: '/home' }
-            ]
-        },
+        // {
+        //     title: "Insights",
+        //     icon: <AiOutlineBarChart className='hover:text-yellow-500 hover:animate-bounce duration-1000' />,
+        //     submenu3: true,
+        //     submenuItems: [
+        //         { title: "Listings", path: '/home' },
+        //         { title: "Market", path: '/home' },
+        //         { title: "Transactions", path: '/home' }
+        //     ]
+        // },
 
     ];
 
@@ -72,7 +72,7 @@ const Sidebar = (   ) => {
                     // setOpen(state => !state)} 
                     dispatch({ type: 'TOGGLE_SIDEBAR' });
                 }}
-                    />
+                />
                 <div className='flex flex-col gap-5 justify-center items-center mb-5'>
                     <h1 className={`text-gray-300 font-medium text-2xl ${!state.open && "scale-0"}`}>Portfolio <span className='text-xs mb-5'>TM</span></h1>
                     <div className={`${!state.open && "hidden duration-50"}`}>
@@ -140,24 +140,32 @@ const Sidebar = (   ) => {
                     {Menus.map((menu, index) => (
                         <>
 
-                            <li key={index} className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 bg-footer3 hover:bg-footer transition duration-1000 ease-linear rounded-md ${menu.spacing ? "mt-9" : "mt-2"}`}>
-                                <Link to={menu.path}>
+                            <Link onClick={() => {
+                                if (index == 1) {
+                                    setSubmenuOpen1(!submenuOpen1)
+                                } else if (index == 2) {
+                                    setSubmenuOpen2(!submenuOpen2)
+                                } else if (index == 3) {
+                                    setSubmenuOpen3(!submenuOpen3)
+                                }
+                            }} key={index} className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 bg-footer3 hover:bg-footer transition duration-1000 ease-linear rounded-md ${menu.spacing ? "mt-9" : "mt-2"}`}>
+                                {/* < to={menu.path} > */}
                                     <span className='text-white text-2xl block float-left'>
                                         {menu.icon ? menu.icon : <RiDashboardFill className='hover:text-yellow-300 hover:animate-bounce duration-1000' />}
                                     </span>
                                     <span className={`text-base font-medium flex-1 duration-200 ${!state.open && "hidden"}`}>{menu.title}</span>
-                                </Link>
+                                
                                 {menu.submenu1 && state.open && (
-                                    <BsChevronDown className={`${submenuOpen1 && "rotate-180"}`} onClick={() => setSubmenuOpen1(!submenuOpen1)} />
+                                    <BsChevronDown className={`${submenuOpen1 && "rotate-180"}`} />
                                 )}
                                 {menu.submenu2 && state.open && (
-                                    <BsChevronDown className={`${submenuOpen2 && "rotate-180"}`} onClick={() => setSubmenuOpen2(!submenuOpen2)} />
+                                    <BsChevronDown className={`${submenuOpen2 && "rotate-180"}`} />
                                 )}
                                 {menu.submenu3 && state.open && (
-                                    <BsChevronDown className={`${submenuOpen3 && "rotate-180"}`} onClick={() => setSubmenuOpen3(!submenuOpen3)} />
+                                    <BsChevronDown className={`${submenuOpen3 && "rotate-180"}`} />
                                 )}
 
-                            </li>
+                            </Link>
                             {menu.submenu1 && submenuOpen1 && state.open && (
                                 <ul>
                                     {menu.submenuItems.map((submenuItem, index) => (

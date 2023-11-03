@@ -5,11 +5,31 @@ import swal from "sweetalert";
 import axios from "axios";
 import { storage } from "../../config/firebase";
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { type } from "@testing-library/user-event/dist/type";
 
-const Imageupload = ({ images, setImages, handleUpdateImage, handleFirebaseUpload }) => {
-  const { state } = useContext(Store);
+const Imageupload = ({ images, setImages, handleUpdateImage, handleFirebaseUpload, firebaseImagesLinks }) => {
+  const { state, dispatch } = useContext(Store);
   const [updateScreen, setUpdateScreen] = useState(false)
-  const [firebaseImages, setFirebaseImages] = useState([])
+  const [firebaseImages, setFirebaseImages] = useState([]);
+
+  // useEffect(() => {
+  //   console.log('ewrofskdmfsdk', state?.updateProperty?.upload?.images)
+  //   if (state?.updatePropertyToggle) {
+  //     setFirebaseImages(state?.updateProperty?.upload?.images);
+  //     // setFirebaseImages(state?.updateProperty?.upload?.images);
+  //     // setVideoLinks(state?.updateProperty?.upload?.videos);
+  //   } else {
+  //     // setFirebaseImages(state?.form?.upload?.images);
+  //     // setVideoLinks(state?.form?.upload?.videos);
+  //   }
+  //   console.log('vvvvvvv', state.form)
+  // }, [state?.updateProperty?.upload?.images]);
+
+  useEffect(() => {
+    if (state?.updatePropertyToggle) {
+      setFirebaseImages([...state?.updateProperty?.upload?.images]);
+    }
+  }, [state?.updateProperty?.upload?.images])
 
   const handleImageChange = (e) => {
     const selectedImages = Array.from(e.target.files);
@@ -38,6 +58,13 @@ const Imageupload = ({ images, setImages, handleUpdateImage, handleFirebaseUploa
     }
   }
 
+  const handleImageDisplay = (image) => {
+    if(typeof image == 'object'){
+      return URL?.createObjectURL(image)
+    }
+    return image 
+  }
+
   return (
     <div className="mt-2 mb-7">
       <form>
@@ -50,8 +77,21 @@ const Imageupload = ({ images, setImages, handleUpdateImage, handleFirebaseUploa
             //   ? handleUpdateImageChange
             //   : 
             (e) => {
+              console.log("wqeqweqweqwewqeqweqweqwe", typeof e.target.files[0])
               handleImageChange(e);
               handleFirebaseUpload(e.target.files);
+              if (state?.updatePropertyToggle) {
+                dispatch({
+                  type: "ADD_MEDIA",
+                  payload: { images: [...state?.updateProperty?.upload?.images, ...e.target.files], videos: [...state?.form?.upload?.videos] },
+                });
+              } 
+              // else {
+              //   dispatch({
+              //     type: "ADD_MEDIA",
+              //     payload: { images: e.target.files, videos: [...state?.form?.upload?.videos] },
+              //   });
+              // }
             }
 
           }
@@ -91,25 +131,14 @@ const Imageupload = ({ images, setImages, handleUpdateImage, handleFirebaseUploa
                 width={12}
               /> */}
               <img
-                src={URL?.createObjectURL(image)}
+                src={handleImageDisplay(image)}
                 alt={`Image ${index}`}
                 className="w-full h-auto"
               />
             </div>
           ))}
         </div>
-
       </div>
-      {/* )} */}
-      {/* <button
-        type="button"
-        data-te-ripple-init
-        data-te-ripple-color="light"
-        onClick={handleFirebaseUpload}
-        class="mt-10 font-bold mb-5 inline-block w-full rounded bg-primary px-6 pt-2.5 pb-2 text-lg leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] lg:mb-[5vh]"
-      >
-        Firebase Image Upload
-      </button> */}
     </div>
   );
 };

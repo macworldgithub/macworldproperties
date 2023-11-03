@@ -7,7 +7,9 @@ import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import "react-toastify/dist/ReactToastify.css";
 import Otp from "./Otp";
+import swal from "sweetalert";
 function Signup() {
+
   const [formData, setFormData] = useState({
     firstname: "",
     lastname: "",
@@ -19,7 +21,6 @@ function Signup() {
   });
 
   const navigate = useNavigate();
-
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const openPopup = () => {
@@ -77,19 +78,21 @@ function Signup() {
       });
     } else {
       try {
-        const response = await axios.post(
-          `${process.env.REACT_APP_SERVERURL}/users/register`,
-          formData
-        );
-        console.log("SignUp Successful", response.data);
+        const response = await axios.post(`${process.env.REACT_APP_SERVERURL}/users/register`,formData);
+        console.log("SignUp Successful", response.data.message);
         localStorage.setItem("userId", response.data.data);
         if (response.data.message == "Success") {
-          openPopup();
+          // openPopup();
+          // console.error("checkerror", error);
         }
-
         // navigate("/otp");
       } catch (error) {
-        console.error("Signup Failed", error.response.data);
+        // console.error(error?.response?.data?.message, "checkerror");
+        swal({
+          title: 'Error',
+          text: error?.response?.data?.message,
+          icon: "error",
+        });
       }
     }
   };

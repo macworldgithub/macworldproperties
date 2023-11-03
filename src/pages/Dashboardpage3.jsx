@@ -41,7 +41,7 @@ const Dashboardpage3 = () => {
     setIsChecked(!isChecked);
   };
 
-  const NavigateTo = useNavigate();
+  const navigate = useNavigate();
 
   const submitForm = () => {
     setStepcount(stepcount + 1);
@@ -53,7 +53,7 @@ const Dashboardpage3 = () => {
       payload: { images: images, videos: videoLinks },
     });
     setStepcount(stepcount - 1);
-    NavigateTo("/dashboard");
+    navigate("/dashboard");
   };
 
   const handleUpload = () => {
@@ -65,13 +65,10 @@ const Dashboardpage3 = () => {
         icon: "success",
       });
     }
-    dispatch({
-      type: "ADD_MEDIA",
-      payload: { images: firebaseImagesLinks, videos: videoLinks },
-    });
     const temp = JSON.stringify(state.form);
     const temp1 = JSON.parse(temp);
-    temp1.upload.images = firebaseImagesLinks
+    temp1.upload.images = firebaseImagesLinks;
+    temp1.upload.videos = videoLinks;
     // const formData = new FormData();
 
     // for (let i = 0; i < firebaseImagesLinks?.length; i++) {
@@ -93,7 +90,8 @@ const Dashboardpage3 = () => {
         dispatch({ type: "EMPTY_FORM" });
         setImages([]);
         setVideoLinks([]);
-        setFirebaseImagesLinks([])
+        setFirebaseImagesLinks([]);
+        navigate('/listing-inventory')
       });
   };
 
@@ -160,10 +158,17 @@ const Dashboardpage3 = () => {
         })
       setFirebaseImagesLinks(temp2)
     }
+
     setTimeout(() => {
       setLoading(false)
-    }, 8000)
+    }, 8000);
 
+    if (state?.updatePropertyToggle) {
+      dispatch({
+        type: "ADD_MEDIA",
+        payload: { images: [...state?.updateProperty?.upload.images, temp2], videos: [...state?.updateProperty?.upload?.videos] },
+      });
+    }
     // for (let i = 0; i < firebaseImages.length; i++) {
     //   let imgRef = ref(imageDB, `/files/${Date.now()}`);
     //   let imageUrl = uploadBytes(imgRef, firebaseImages[i]).then((snapshot) => {
@@ -178,10 +183,10 @@ const Dashboardpage3 = () => {
   }
 
   return (
-    <Layout style={{ position: 'relative', backgroundColor: 'blue', zIndex: 999, overFlow:'hidden' }}>
+    <Layout style={{ position: 'relative', backgroundColor: 'blue', zIndex: 999, overFlow: 'hidden' }}>
 
       {loading && (
-        <div className={`h-full ${state.open?"w-[80%]":"w-[95%]"} flex basis-full bg-transparent absolute z-40`}>
+        <div className={`h-full ${state.open ? "w-[80%]" : "w-[95%]"} flex basis-full bg-transparent absolute z-40`}>
           <div className="h-full w-full backdrop-blur-sm flex justify-center items-center flex-col text-center" >
             <ReactLoading type='balls' color='#facc15' width={100} />
             <h1 className="text-lg mt-7">Image Uploading ...</h1>
@@ -264,6 +269,7 @@ const Dashboardpage3 = () => {
                 setImages={setImages}
                 handleUpdateImage={handleUpdateImage}
                 handleFirebaseUpload={handleFirebaseUpload}
+                firebaseImagesLinks={firebaseImagesLinks}
               />
             )}
 

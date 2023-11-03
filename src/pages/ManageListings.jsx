@@ -4,6 +4,7 @@ import SelectOption from "../components/Dashboard/selectOption";
 import axios from "axios";
 import { Store } from "../context/store";
 import { useNavigate } from "react-router-dom";
+import swal from "sweetalert";
 
 const words = ["Sharjah", "Dubai", "Abu Dhabi", "UAE"];
 const options = ["forSale", "forRent"];
@@ -13,6 +14,7 @@ const ManageListings = () => {
   const [catvalue, setCatvalue] = useState();
   const [inputValue, setInputValue] = useState("");
   const [filteredProperty, setFilteredProperty] = useState([]);
+  const [updateScreen, setUpdateScreen] = useState(false)
 
   const navigate = useNavigate();
 
@@ -48,7 +50,7 @@ const ManageListings = () => {
       .get(`${process.env.REACT_APP_SERVERURL}/lov/category`)
       .then((res) => setCatOptions(res.data.data));
 
-    fetchData();
+    fetchData(setFilteredProperty);
     setFilteredProperty(userProperty);
   }, []);
 
@@ -66,9 +68,20 @@ const ManageListings = () => {
 
   useEffect(() => {
     applyFilters();
-  }, [inputValue, selectedOption, catvalue]);
+  }, [inputValue, selectedOption, catvalue, updateScreen]);
 
-  console.log("from context api?", userProperty);
+  const handleDeleteProperty = (ids) => {
+    axios.get(`${process.env.REACT_APP_SERVERURL}/property/delete-property/${ids}`).then(res => {
+      // setUpdateScreen(state => !state)
+      fetchData(setFilteredProperty);
+      swal({
+        title: "Success!",
+        text: "Property deleted successfully",
+        icon: "success",
+      });
+      window.location.reload();
+    })
+  }
 
   return (
     <Layout>
@@ -97,15 +110,12 @@ const ManageListings = () => {
                   <button
                     key={index}
                     onClick={() => handleOptionChange(option)}
-                    className={`${
-                      selectedOption === option
+                    className={`${selectedOption === option
                         ? "bg-green-500 text-white"
                         : "bg-white text-green-500"
-                    } ${index === 0 ? "rounded-l-lg " : ""} ${
-                      index === options.length - 1 ? "rounded-r-lg " : ""
-                    } ${
-                      index !== options.length - 1 ? "border-l border-r " : ""
-                    } } p-2 w-[100px] border border-green-500 hover:bg-green-500 hover:text-white focus:outline-none`}
+                      } ${index === 0 ? "rounded-l-lg " : ""} ${index === options.length - 1 ? "rounded-r-lg " : ""
+                      } ${index !== options.length - 1 ? "border-l border-r " : ""
+                      } } p-2 w-[100px] border border-green-500 hover:bg-green-500 hover:text-white focus:outline-none`}
                   >
                     {option}
                   </button>
@@ -172,7 +182,7 @@ const ManageListings = () => {
                           >
                             Edit
                           </button>
-                          <button class="ml-2 px-4 py-2 font-medium text-white bg-red-600 rounded-md hover:bg-red-500 focus:outline-none focus:shadow-outline-red active:bg-red-600 transition duration-150 ease-in-out">
+                          <button onClick={() => handleDeleteProperty(item._id)} class="ml-2 px-4 py-2 font-medium text-white bg-red-600 rounded-md hover:bg-red-500 focus:outline-none focus:shadow-outline-red active:bg-red-600 transition duration-150 ease-in-out">
                             Delete
                           </button>
                         </td>
