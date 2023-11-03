@@ -26,6 +26,8 @@ const PropertyInformation = () => {
         location={propertyDetails?.locationAndAddress?.location}
         status={propertyDetails?.typesAndPurpose?.purpose}
         price={propertyDetails?.propertyDetails?.InclusivePrice}
+        id={id}
+        description={propertyDetails?.propertyDetails?.description}
         number_of_beds={
           propertyDetails?.amenities?.filter(
             (item) => item.name == "bedRooms"

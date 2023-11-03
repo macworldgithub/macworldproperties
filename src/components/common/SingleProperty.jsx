@@ -13,6 +13,7 @@ import { useState } from "react";
 import Gallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 import { Link } from "react-router-dom";
+import Share from "../Share";
 
 const SingleProperty = ({
   featured,
@@ -28,6 +29,8 @@ const SingleProperty = ({
   arabicName,
   subCategory,
   category,
+  description,
+  id
 }) => {
   const images = [
     { path: "/images/property1.png" },
@@ -79,13 +82,14 @@ const SingleProperty = ({
                     alt="img"
                   />
                   <div className="flex gap-2">
-                    <span className="flex gap-1 text-white hover:text-gray-500">
+                    <span className="flex gap-1 text-white hover:text-gray-500 items-center">
                       <AiOutlineHeart className="m-1" />
                       Favorite
                     </span>
                     <span className="flex gap-1 text-white hover:text-gray-500">
-                      <BiShareAlt className="m-1" />
-                      Share
+                      {/* <BiShareAlt className="m-1" /> */}
+                      {/* Share */}
+                      <Share description={description} />
                     </span>
 
                     <button
