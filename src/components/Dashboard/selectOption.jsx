@@ -20,7 +20,7 @@ const SelectOption = ({ _options, _selectedValue, _onSelectChange, purpvalue, ty
             // (type === 'completion' && purpvalue !== 'forSale') && true
           }
         >
-          {opt.key}
+          {opt.value}
         </option>
       ))}
     </select>

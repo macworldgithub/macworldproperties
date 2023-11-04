@@ -41,7 +41,7 @@ const Message = ({ listingOwner, contactPerson, email, phone }) => {
               <div className="flex flex-col mt-4">
                 <div className="flex justify-between">
                   <h3 className="font-bold">Email</h3>
-                  <p>{email}</p>
+                  <p>{`${email.substring(0,15)}..`}</p>
                 </div>
                 <hr className="border-gray-500" />
               </div>
