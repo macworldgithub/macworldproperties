@@ -99,7 +99,7 @@ function Admin({ setIsloggedIn }) {
               <input
                 className="bg-bgdrop appearance-none rounded-[15px] border-2 border-bgdrop w-full py-2 px-4 text-black leading-tight focus:outline-none focus:bg-gray focus:border-yellow-500 placeholder:text-black"
                 id="inline-full-name"
-                type="text"
+                type="password"
                 placeholder=" Password"
                 value={password}
                 onChange={handlePassword}
