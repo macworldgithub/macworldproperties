@@ -2,8 +2,25 @@ import { Button } from "@mui/material";
 import { Avatar } from "antd";
 import React from "react";
 import { AiOutlineWhatsApp, AiOutlineMail } from "react-icons/ai";
+import axios from "axios";
 
-const Message = ({ listingOwner, contactPerson, email, phone }) => {
+const Message = ({ listingOwner, contactPerson, email, phone, propertyId }) => {
+
+  const handleLeads = () => {
+    const getData = localStorage.getItem(JSON.parse('userData'));
+    if (getData?._id) {
+      axios.get(`${process.env.REACT_APP_SERVERURL}/property/add-lead?userId=${getData?._id}&propertyId=${propertyId}`)
+        .then((res) => {
+          console.log("oooooooooooooooooooo", res);
+        });
+    } else {
+      axios.get(`${process.env.REACT_APP_SERVERURL}/property/add-lead?propertyId=${propertyId}`)
+        .then((res) => {
+          console.log("oooooooooooooooooooo", res);
+        });
+    }
+  }
+
   return (
     <div class="container mx-auto">
       <section class="mx-auto mb-32 lg:mt-[-25vh]">
@@ -41,7 +58,7 @@ const Message = ({ listingOwner, contactPerson, email, phone }) => {
               <div className="flex flex-col mt-4">
                 <div className="flex justify-between">
                   <h3 className="font-bold">Email</h3>
-                  <p>{email?.length > 15 ? `${email?.substring(0,15)}..`: email}</p>
+                  <p>{email?.length > 15 ? `${email?.substring(0, 15)}..` : email}</p>
                 </div>
                 <hr className="border-gray-500" />
               </div>
@@ -63,6 +80,7 @@ const Message = ({ listingOwner, contactPerson, email, phone }) => {
                   class="whatsapp_float"
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => handleLeads()}
                 >
                   <Button
                     sx={{ width: "170px" }}
@@ -75,7 +93,7 @@ const Message = ({ listingOwner, contactPerson, email, phone }) => {
                 </a>
               </div>
               <div className="mt-6 text-center ">
-                <a href={`mailto:${email}`}>
+                <a href={`mailto:${email}`} onClick={() => handleLeads()}>
                   <Button sx={{ width: "170px" }} variant="contained">
                     <AiOutlineMail size={26} className="mr-2" />
                     Email ME
