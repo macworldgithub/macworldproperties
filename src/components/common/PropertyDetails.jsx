@@ -9,6 +9,7 @@ import "../../App.css";
 import { IoIosCalendar } from "react-icons/io";
 import PieChart from "./PieChart";
 import ScheduleTour from "./ScheduleTour";
+import SelectOption from "../Dashboard/selectOption";
 
 import {
   FaBed,
@@ -84,9 +85,12 @@ const PropertyDetails = ({
   email,
   phone,
 }) => {
-  const position = [location?.longitude || 51.505, location?.latitude || -0.09];
+  const position = {lng:location?.longitude || 54.391164779663086, lat: location?.latitude || 24.4324592784219};
   const [language, setLanguage] = useState(true);
   const [isChecked, setIsChecked] = useState(false);
+  const [downPayment, setDownPayment] = useState(20);
+  const [interestRate, setInterestRate] = useState(0.25);
+  const [monthlyInstallment, setMonthlyInstallment] = useState(5);
 
   const chartData = {
     width: 500,
@@ -120,6 +124,16 @@ const PropertyDetails = ({
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
+  };
+
+  const handleMortgage = () => {
+    const percentageOfDownPayment = (price * downPayment) / 100;
+    const remainingValue = price - percentageOfDownPayment;
+    let interestRateCalculate = remainingValue * interestRate;
+    let remaining =
+      (remainingValue + interestRateCalculate) / (monthlyInstallment * 12);
+    console.log("retiiertkpeort", remaining);
+    return remaining || 0;
   };
 
   return (
@@ -350,9 +364,9 @@ const PropertyDetails = ({
             Mortgage Calculator
           </h1>
           <hr className="mb-[5vh]" />
-          <div className="flex justify-center mb-[4vh] w-full items-center">
+          {/* <div className="flex justify-center mb-[4vh] w-full items-center">
             <PieChart {...chartData} />
-          </div>
+          </div> */}
           <div className="grid grid-cols-3  gap-x-10">
             <div className="cols-span-1 mb-5 w-full">
               <label
@@ -364,8 +378,10 @@ const PropertyDetails = ({
               <input
                 class="shadow w-full appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="username"
-                type="text"
+                type="number"
                 placeholder="14000 AED"
+                value={price}
+                readOnly
               />
             </div>
             <div className="cols-span-1 mb-5">
@@ -373,13 +389,17 @@ const PropertyDetails = ({
                 class="block text-gray-700 text-sm font-bold mb-2"
                 for="DownPayment"
               >
-                Down Payment{" "}
+                Down Payment (In Percentage)
               </label>
               <input
                 class="shadow w-full appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="username"
-                type="text"
+                type="number"
                 placeholder="2100000 AED"
+                onChange={(e) => setDownPayment(e.target.value)}
+                value={downPayment}
+                max={80}
+                min={20}
               />
             </div>
             <div className="cols-span-1 mb-5">
@@ -392,8 +412,12 @@ const PropertyDetails = ({
               <input
                 class="shadow w-full appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="username"
-                type="text"
+                type="input"
                 placeholder="3.5%"
+                value={interestRate}
+                onChange={(e) => setInterestRate(e.target.value)}
+                max={10}
+                min={0.25}
               />
             </div>
             <div className="cols-span-1 mb-5">
@@ -403,14 +427,33 @@ const PropertyDetails = ({
               >
                 Loan Terms - Years
               </label>
-              <input
+              <select
+                value={monthlyInstallment}
+                // name={name}
+                onChange={(e) => setMonthlyInstallment(e.target.value)}
+                className="text-footer w-full border-2 bg-white border-grey shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]  rounded-lg p-3 bg-transparent hover:border-green-500 my-1"
+              >
+                <option value="" selected>
+                  5
+                </option>
+                {[
+                  5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
+                  22, 23, 24, 25,
+                ].map((opt, i) => (
+                  <option key={i} name="option" value={i}>
+                    {i}
+                  </option>
+                ))}
+              </select>
+
+              {/* <input
                 class="shadow w-full appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="username"
                 type="text"
                 placeholder="12"
-              />
+              /> */}
             </div>
-            <div className="cols-span-1 mb-5">
+            {/* <div className="cols-span-1 mb-5">
               <label
                 class="block text-gray-700 text-sm font-bold mb-2"
                 for="PropertyTax"
@@ -423,8 +466,8 @@ const PropertyDetails = ({
                 type="text"
                 placeholder="3000"
               />
-            </div>
-            <div className="cols-span-1 mb-5">
+            </div> */}
+            {/* <div className="cols-span-1 mb-5">
               <label
                 class="block text-gray-700 text-sm font-bold mb-2"
                 for="LoanTerms"
@@ -437,19 +480,21 @@ const PropertyDetails = ({
                 type="text"
                 placeholder="AED 1000"
               />
-            </div>
+            </div> */}
             <div className="cols-span-1 mb-5">
               <label
                 class="block  text-gray-700 text-sm font-bold mb-2"
                 for="PMI"
               >
-                PMI
+                Installment Per Month
               </label>
               <input
                 class="shadow w-full appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="username"
-                type="text"
-                placeholder="AED 1000"
+                type="number"
+                // placeholder="AED 1000"
+                value={handleMortgage()}
+                readOnly
               />
             </div>
           </div>

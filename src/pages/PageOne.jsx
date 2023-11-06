@@ -136,10 +136,9 @@ const PageOne = () => {
   });
 
   const { ref, autocompleteRef } = usePlacesWidget({
-    apiKey: "AIzaSyDYv87_3gRVr2EY3oxiU95MoREBfgFUYl8",
+    apiKey: "AIzaSyBmlfCX9N5NAKdGidMbSxMXkc4CNHcT6rQ",
     onPlaceSelected: (place) => {
-      // console.log('yupyupyupyup', place);
-      setKey("AIzaSyDYv87_3gRVr2EY3oxiU95MoREBfgFUYl8");
+      setKey("AIzaSyBmlfCX9N5NAKdGidMbSxMXkc4CNHcT6rQ");
       setLanguage("en");
       setRegion("ae");
       console.log("now_wheat", place?.formatted_address);
@@ -238,7 +237,8 @@ const PageOne = () => {
         contractperiod: state?.form?.rentalDetails?.minimumContractPeriod,
         vacatingperiod: state?.form?.rentalDetails?.noticePeriod,
         maintfee:
-          state?.form?.rentalDetails?.state?.form?.rentalDetails?.maintainanceFee,
+          state?.form?.rentalDetails?.state?.form?.rentalDetails
+            ?.maintainanceFee,
         paidby: state?.form?.rentalDetails?.paidBy,
         //  ================ New Values =============
         location: state?.form?.locationAndAddress?.location,
@@ -280,7 +280,6 @@ const PageOne = () => {
         .then((res) => setsubcatOptions(res.data.data));
     }
   }, [formData?.category]);
-
 
   const nextPage = () => {
     const data = JSON.parse(localStorage.getItem("userData"));
@@ -586,24 +585,23 @@ const PageOne = () => {
 
   return (
     <Layout>
-
       {/* {console.log(finalUrl, "my_hash ")} */}
       <div
         className="relative h-screen overflow-x-hidden bg-gradient-to-r from-gradient via-ordinary to-ordinary"
-      // style={{
-      //   backgroundImage: "url('/images/info1.jpg')",
-      //   backgroundRepeat: "no-repeat",
-      //   backgroundSize: "cover",
-      // }}
+        // style={{
+        //   backgroundImage: "url('/images/info1.jpg')",
+        //   backgroundRepeat: "no-repeat",
+        //   backgroundSize: "cover",
+        // }}
       >
         {console.log(purpOptions, "purpose to check ....")}
         {/* <Navbar /> */}
         <div
           className="relative inset-0 p-10"
-        // style={{
-        //   backgroundColor: "rgba(0, 0, 0, 0.1)", // Adjust the opacity as needed
-        //   backdropFilter: "brightness(0.8)", // Adjust the brightness to darken the background
-        // }}
+          // style={{
+          //   backgroundColor: "rgba(0, 0, 0, 0.1)", // Adjust the opacity as needed
+          //   backdropFilter: "brightness(0.8)", // Adjust the brightness to darken the background
+          // }}
         >
           <div className="relative block rounded-[25px] bg-white px-6 pt-4 pb-4 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-20 mx-10">
             <ProgressButton step={stepcount} />
@@ -796,8 +794,9 @@ const PageOne = () => {
                   onChange={handleDescChange}
                   onBlur={handleBlur}
                   onClick={clearError}
-                  className={` ${error.desc && "border-red-700"
-                    } border-2 border-grey shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]  placeholder-slate-40 rounded-lg  resize-both hover:border-green-600 overflow-auto`}
+                  className={` ${
+                    error.desc && "border-red-700"
+                  } border-2 border-grey shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]  placeholder-slate-40 rounded-lg  resize-both hover:border-green-600 overflow-auto`}
                 />
                 <div className="text-sm text-gray-500">
                   {formData?.desc?.length}/1000 characters
@@ -814,8 +813,9 @@ const PageOne = () => {
                   onChange={handleDescChange}
                   onBlur={handleBlur}
                   onClick={clearError}
-                  className={`${error.descArabic && "border-red-700"
-                    } border-2 border-grey shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] rounded-lg placeholder-slate-400 resize-both hover:border-green-600 overflow-auto`}
+                  className={`${
+                    error.descArabic && "border-red-700"
+                  } border-2 border-grey shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] rounded-lg placeholder-slate-400 resize-both hover:border-green-600 overflow-auto`}
                 />
                 <div className="text-sm text-gray-500">
                   {formData?.descArabic?.length}/1000 characters
@@ -857,7 +857,7 @@ const PageOne = () => {
                   _selectedValue={formData?.ownValue}
                   _onSelectChange={handleChange}
                   name="ownValue"
-                // purpvalue={purpvalue}
+                  // purpvalue={purpvalue}
                 />
               </div>
             </div>
@@ -887,7 +887,7 @@ const PageOne = () => {
                     _selectedValue={formData?.rentFrequency}
                     _onSelectChange={handleChange}
                     name="rentFrequency"
-                  // purpvalue={purpvalue}
+                    // purpvalue={purpvalue}
                   />
                 </div>
                 <div className="flex flex-col gap-[5px] mb-2">
@@ -933,7 +933,7 @@ const PageOne = () => {
                     _selectedValue={formData?.paidby}
                     _onSelectChange={handleChange}
                     name="paidby"
-                  // purpvalue={purpvalue}
+                    // purpvalue={purpvalue}
                   />
                 </div>
               </div>
