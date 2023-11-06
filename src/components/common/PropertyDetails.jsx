@@ -387,7 +387,7 @@ const PropertyDetails = ({
                 class="block text-gray-700 text-sm font-bold mb-2"
                 for="InterestRate"
               >
-                Interest Rate
+                Interest Rate ( In Percentage )
               </label>
               <input
                 class="shadow w-full appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
