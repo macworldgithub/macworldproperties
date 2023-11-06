@@ -588,20 +588,20 @@ const PageOne = () => {
       {/* {console.log(finalUrl, "my_hash ")} */}
       <div
         className="relative h-screen overflow-x-hidden bg-gradient-to-r from-gradient via-ordinary to-ordinary"
-        // style={{
-        //   backgroundImage: "url('/images/info1.jpg')",
-        //   backgroundRepeat: "no-repeat",
-        //   backgroundSize: "cover",
-        // }}
+      // style={{
+      //   backgroundImage: "url('/images/info1.jpg')",
+      //   backgroundRepeat: "no-repeat",
+      //   backgroundSize: "cover",
+      // }}
       >
         {console.log(purpOptions, "purpose to check ....")}
         {/* <Navbar /> */}
         <div
           className="relative inset-0 p-10"
-          // style={{
-          //   backgroundColor: "rgba(0, 0, 0, 0.1)", // Adjust the opacity as needed
-          //   backdropFilter: "brightness(0.8)", // Adjust the brightness to darken the background
-          // }}
+        // style={{
+        //   backgroundColor: "rgba(0, 0, 0, 0.1)", // Adjust the opacity as needed
+        //   backdropFilter: "brightness(0.8)", // Adjust the brightness to darken the background
+        // }}
         >
           <div className="relative block rounded-[25px] bg-white px-6 pt-4 pb-4 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-20 mx-10">
             <ProgressButton step={stepcount} />
@@ -618,6 +618,7 @@ const PageOne = () => {
                 purpvalue={formData?.purpose}
                 label="Category"
                 name="category"
+                type={"category"}
               />
 
               <SelectOption
@@ -627,6 +628,7 @@ const PageOne = () => {
                 purpvalue={formData?.purpose}
                 label="Sub Category"
                 name="subCategory"
+                type={"subCategory"}
               />
 
               <SelectOption
@@ -636,6 +638,7 @@ const PageOne = () => {
                 purpvalue={formData?.purpose}
                 label="Purpose"
                 name="purpose"
+                type={"purpose"}
               />
             </div>
           </div>
@@ -794,9 +797,8 @@ const PageOne = () => {
                   onChange={handleDescChange}
                   onBlur={handleBlur}
                   onClick={clearError}
-                  className={` ${
-                    error.desc && "border-red-700"
-                  } border-2 border-grey shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]  placeholder-slate-40 rounded-lg  resize-both hover:border-green-600 overflow-auto`}
+                  className={` ${error.desc && "border-red-700"
+                    } border-2 border-grey shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]  placeholder-slate-40 rounded-lg  resize-both hover:border-green-600 overflow-auto`}
                 />
                 <div className="text-sm text-gray-500">
                   {formData?.desc?.length}/1000 characters
@@ -813,9 +815,8 @@ const PageOne = () => {
                   onChange={handleDescChange}
                   onBlur={handleBlur}
                   onClick={clearError}
-                  className={`${
-                    error.descArabic && "border-red-700"
-                  } border-2 border-grey shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] rounded-lg placeholder-slate-400 resize-both hover:border-green-600 overflow-auto`}
+                  className={`${error.descArabic && "border-red-700"
+                    } border-2 border-grey shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] rounded-lg placeholder-slate-400 resize-both hover:border-green-600 overflow-auto`}
                 />
                 <div className="text-sm text-gray-500">
                   {formData?.descArabic?.length}/1000 characters
@@ -845,8 +846,8 @@ const PageOne = () => {
                   _selectedValue={formData?.completion}
                   _onSelectChange={handleChange}
                   purpvalue={formData?.purpose}
-                  type="completion"
-                  name="completion"
+                  type={formData?.purpose !== 'offPlan' && true}
+                  name={"completion"}
                 />
               </div>
 
@@ -857,7 +858,7 @@ const PageOne = () => {
                   _selectedValue={formData?.ownValue}
                   _onSelectChange={handleChange}
                   name="ownValue"
-                  // purpvalue={purpvalue}
+                // purpvalue={purpvalue}
                 />
               </div>
             </div>
@@ -887,7 +888,7 @@ const PageOne = () => {
                     _selectedValue={formData?.rentFrequency}
                     _onSelectChange={handleChange}
                     name="rentFrequency"
-                    // purpvalue={purpvalue}
+                  // purpvalue={purpvalue}
                   />
                 </div>
                 <div className="flex flex-col gap-[5px] mb-2">
@@ -933,7 +934,7 @@ const PageOne = () => {
                     _selectedValue={formData?.paidby}
                     _onSelectChange={handleChange}
                     name="paidby"
-                    // purpvalue={purpvalue}
+                  // purpvalue={purpvalue}
                   />
                 </div>
               </div>

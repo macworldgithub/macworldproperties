@@ -4,7 +4,7 @@ const Hero = () => {
   return (
     <div className="relative">
       <div className="relative w-screen h-screen flex items-center justify-center   overflow-hidden">
-        <video
+        {/* <video
           id="v"
           poster=""
           autoPlay={true}
@@ -20,19 +20,19 @@ const Hero = () => {
             src={video} // Use the imported video file as the source
             type="video/mp4"
           />
-        </video>
+        </video> */}
 
-        {/* <div
+        <div
         className="absolute inset-0 w-screen h-full"
         style={{
-          backgroundImage: "url('/images/bgimage3.png')",
+          backgroundImage: "url('/hero-banner.jpeg')",
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
         }}
       >
         <div
           className="inset-0 flex flex-col items-center h-full justify-center align-center mx-auto"
-          style={{ backgroundColor: "#050505", opacity: "0.6" }}
+          // style={{ }
         >
           <h1 className="justify-center heading-h1 align-center mx-auto lg:mt-[15vh] p-6 2xla:text-5xl">
             SAFEST WAY TO BUY, RENT & SELL YOUR PROPERTIES
@@ -42,7 +42,7 @@ const Hero = () => {
             properties!
           </h5>
         </div>
-      </div> */}
+      </div>
       </div>
       <div className="absolute bottom-10 w-full">
         <Filters />

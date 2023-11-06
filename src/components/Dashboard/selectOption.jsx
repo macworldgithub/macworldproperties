@@ -16,7 +16,7 @@ const SelectOption = ({ _options, _selectedValue, _onSelectChange, purpvalue, ty
           name="option"
           value={opt.key}
           disabled={
-            (type === 'completion' && purpvalue !== 'forSale') && true
+            (type === true) && true 
             // (type === 'completion' && purpvalue !== 'forSale') && true
           }
         >
