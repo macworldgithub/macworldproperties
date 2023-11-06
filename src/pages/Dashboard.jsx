@@ -485,6 +485,7 @@ const Dashboard = () => {
                 placeholder="Completion Year"
                 value={completionYear}
                 onChange={setCompletionYear}
+                label="Completion Year"
               />
               <CustomisedInput
                 type="number"
@@ -492,11 +493,13 @@ const Dashboard = () => {
                 placeholder="Total Floors"
                 value={totalFloors}
                 onChange={setTotalFloor}
+                label="Total Floors"
               />
               <CustomisedInput
                 type="number"
                 name="totalElevators"
                 placeholder="Total Elevators"
+                label="Total Elevators"
                 value={elevatorBuilding}
                 onChange={setElevatorBuilding}
               />
@@ -900,6 +903,7 @@ const CustomisedInput = ({
         {label}
       </label>
       <input
+        min={0}
         type={type}
         value={value}
         onFocus={onfocus}

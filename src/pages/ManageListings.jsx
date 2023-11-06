@@ -7,14 +7,13 @@ import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 
 const words = ["Sharjah", "Dubai", "Abu Dhabi", "UAE"];
-const options = ["forSale", "forRent"];
+const options = ["forSale", "forRent", "offPlan"];
 
 const ManageListings = () => {
   const [catOptions, setCatOptions] = useState([]);
   const [catvalue, setCatvalue] = useState();
   const [inputValue, setInputValue] = useState("");
   const [filteredProperty, setFilteredProperty] = useState([]);
-  const [updateScreen, setUpdateScreen] = useState(false)
 
   const navigate = useNavigate();
 
@@ -68,7 +67,7 @@ const ManageListings = () => {
 
   useEffect(() => {
     applyFilters();
-  }, [inputValue, selectedOption, catvalue, updateScreen]);
+  }, [inputValue, selectedOption, catvalue]);
 
   const handleDeleteProperty = (ids) => {
     axios.get(`${process.env.REACT_APP_SERVERURL}/property/delete-property/${ids}`).then(res => {
