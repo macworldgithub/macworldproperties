@@ -22,9 +22,26 @@ const initialState = {
     propertydataArr: [],
     ownerId: String,
   },
+  updateProperty: {
+    typesAndPurpose: null,
+    locationAndAddress: null,
+    propertyDetails: null,
+    rentalDetails: null,
+    contactDetails: null,
+    amenities: [],
+    upload: {
+      images: [],
+      videos: [],
+    },
+    isLoading: false,
+    isError: false,
+    featuredProperties: [],
+    propertyDetails: [],
+    propertydataArr: [],
+    ownerId: String,
+  },
   userProperty: [],
   isAuthorize: false,
-  updateProperty: null,
   updatePropertyToggle: false,
   open: true
 };

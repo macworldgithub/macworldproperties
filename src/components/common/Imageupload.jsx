@@ -25,11 +25,6 @@ const Imageupload = ({ images, setImages, handleUpdateImage, handleFirebaseUploa
   //   console.log('vvvvvvv', state.form)
   // }, [state?.updateProperty?.upload?.images]);
 
-  useEffect(() => {
-    if (state?.updatePropertyToggle) {
-      setFirebaseImages([...state?.updateProperty?.upload?.images]);
-    }
-  }, [state?.updateProperty?.upload?.images])
 
   const handleImageChange = (e) => {
     const selectedImages = Array.from(e.target.files);
@@ -58,12 +53,7 @@ const Imageupload = ({ images, setImages, handleUpdateImage, handleFirebaseUploa
     }
   }
 
-  const handleImageDisplay = (image) => {
-    if(typeof image == 'object'){
-      return URL?.createObjectURL(image)
-    }
-    return image 
-  }
+ 
 
   return (
     <div className="mt-2 mb-7">
@@ -77,15 +67,15 @@ const Imageupload = ({ images, setImages, handleUpdateImage, handleFirebaseUploa
             //   ? handleUpdateImageChange
             //   : 
             (e) => {
-              console.log("wqeqweqweqwewqeqweqweqwe", typeof e.target.files[0])
-              handleImageChange(e);
+              // console.log("wqeqweqweqwewqeqweqweqwe", typeof e.target.files[0])
+              // handleImageChange(e);
               handleFirebaseUpload(e.target.files);
-              if (state?.updatePropertyToggle) {
-                dispatch({
-                  type: "ADD_MEDIA",
-                  payload: { images: [...state?.updateProperty?.upload?.images, ...e.target.files], videos: [...state?.form?.upload?.videos] },
-                });
-              } 
+              // if (state?.updatePropertyToggle) {
+              //   dispatch({
+              //     type: "ADD_MEDIA",
+              //     payload: { images: [...state?.updateProperty?.upload?.images, ...e.target.files], videos: [...state?.form?.upload?.videos] },
+              //   });
+              // } 
               // else {
               //   dispatch({
               //     type: "ADD_MEDIA",
@@ -110,19 +100,19 @@ const Imageupload = ({ images, setImages, handleUpdateImage, handleFirebaseUploa
       <div className="mt-4">
         <h2>Selected Images:</h2>
         <div className="flex flex-wrap">
-          {firebaseImages.map((image, index) => (
+          {images?.length > 0 && images.map((image, index) => (
 
             <div
               key={index}
               className="w-1/4 p-2 relative"
-              onClick={() => {
-                if (state?.updatePropertyToggle) {
-                  handleRemoveImage(image || '')
-                }
-                const array = [...images];
-                array.splice(index, 1);
-                setImages(array);
-              }}
+              // onClick={() => {
+              //   if (state?.updatePropertyToggle) {
+              //     handleRemoveImage(image || '')
+              //   }
+              //   const array = [...images];
+              //   array.splice(index, 1);
+              //   setImages(array);
+              // }}
             >
               {/* {console.log('wouerwier', image)}
               <Cross
@@ -131,7 +121,7 @@ const Imageupload = ({ images, setImages, handleUpdateImage, handleFirebaseUploa
                 width={12}
               /> */}
               <img
-                src={handleImageDisplay(image)}
+                src={image}
                 alt={`Image ${index}`}
                 className="w-full h-auto"
               />

@@ -11,7 +11,7 @@ import { useState, useEffect } from 'react';
 import { RiDashboardFill } from "react-icons/ri";
 import { TbFileReport } from "react-icons/tb";
 import { FaHome } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Store } from '../../context/store';
 
 const Sidebar = () => {
@@ -21,7 +21,9 @@ const Sidebar = () => {
     const [submenuOpen2, setSubmenuOpen2] = useState(false);
     const [submenuOpen3, setSubmenuOpen3] = useState(false);
     const [isChecked, setIsChecked] = useState(false);
-    const [isChecked2, setIsChecked2] = useState(false)
+    const [isChecked2, setIsChecked2] = useState(false);
+
+    const navigate = useNavigate();
 
     const handleCheckboxChange = () => {
         setIsChecked(!isChecked)
@@ -150,11 +152,11 @@ const Sidebar = () => {
                                 }
                             }} key={index} className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 bg-footer3 hover:bg-footer transition duration-1000 ease-linear rounded-md ${menu.spacing ? "mt-9" : "mt-2"}`}>
                                 {/* < to={menu.path} > */}
-                                    <span className='text-white text-2xl block float-left'>
-                                        {menu.icon ? menu.icon : <RiDashboardFill className='hover:text-yellow-300 hover:animate-bounce duration-1000' />}
-                                    </span>
-                                    <span className={`text-base font-medium flex-1 duration-200 ${!state.open && "hidden"}`}>{menu.title}</span>
-                                
+                                <span className='text-white text-2xl block float-left'>
+                                    {menu.icon ? menu.icon : <RiDashboardFill className='hover:text-yellow-300 hover:animate-bounce duration-1000' />}
+                                </span>
+                                <span className={`text-base font-medium flex-1 duration-200 ${!state.open && "hidden"}`}>{menu.title}</span>
+
                                 {menu.submenu1 && state.open && (
                                     <BsChevronDown className={`${submenuOpen1 && "rotate-180"}`} />
                                 )}
@@ -202,7 +204,11 @@ const Sidebar = () => {
                         </>
                     ))}
                 </ul>
-                <Link to="/page-one">
+                <Link to="/page-one" onClick={() => {
+                    dispatch({ type: "UPDATE_TOGGLE", payload: false });
+                    navigate('/page-one');
+                    window.location.reload();
+                }}>
                     <button type="button" data-te-ripple-init data-te-ripple-color="light"
                         class={` ${!state.open && "hidden"} mt-10 font-bold mb-5 flex gap-7 w-full rounded bg-primary px-4 pt-2.5 pb-2 text-lg leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] lg:mb-[5vh] transform hover:scale-105`}>
                         <FaHome className='text-white w-10 h-7' />

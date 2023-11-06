@@ -28,10 +28,10 @@ const Dashboardpage3 = () => {
 
   useEffect(() => {
     if (state?.updatePropertyToggle) {
-      setImages(state?.updateProperty?.upload?.images);
+      setImages(state?.updateProperty?.upload?.images || []);
       setVideoLinks(state?.updateProperty?.upload?.videos);
     } else {
-      setImages(state?.form?.upload?.upload);
+      setImages(state?.form?.upload?.upload || []);
       setVideoLinks(state?.form?.upload?.videos);
     }
     console.log('vvvvvvv', state.form)
@@ -58,16 +58,17 @@ const Dashboardpage3 = () => {
 
   const handleUpload = () => {
 
-    if (firebaseImagesLinks?.length < 1) {
+    if (images?.length < 3) {
       swal({
         title: "Error",
-        text: "Retry",
+        text: "At least 3 images required",
         icon: "success",
       });
+      return
     }
     const temp = JSON.stringify(state.form);
     const temp1 = JSON.parse(temp);
-    temp1.upload.images = firebaseImagesLinks;
+    temp1.upload.images = images;
     temp1.upload.videos = videoLinks;
     // const formData = new FormData();
 
@@ -136,32 +137,30 @@ const Dashboardpage3 = () => {
       });
   }
 
-  const handleFirebaseUpload = (fileArray) => {
+  const getImage = async (bannerImage) => {
+    const storageRef = storage.ref(`/images/${Date.now()}`);
+    await storageRef.put(bannerImage);
+    // Get download URL
+    const url = await storageRef.getDownloadURL();
+    // const url = await storageRef.child(bannerImage).getDownloadURL();
+    return url;
+  }
+
+  const handleFirebaseUpload = async (fileArray) => {
     setLoading(true)
     const temp = [...fileArray];
-    const temp2 = [];
-    for (let i = 0; i < fileArray.length; i++) {
-      const imageName = Date.now();
-      storage.ref(`/images/${imageName + '.png'}`).put(fileArray[i])
-        .on('state_changed', alert('success'), alert, () => {
-
-          storage.ref('images').child(imageName + '.png').getDownloadURL().then((url) => {
-            console.log('trian', url);
-            // temp.map(item => {
-            //   if (item == url) {
-            //     return
-            //   }
-            temp2.push(url)
-            // setUpdateScreen(state => !state);
-            // })
-          })
-        })
-      setFirebaseImagesLinks(temp2)
+    console.log('irpwoeruweru', temp)
+    const temp2 = temp?.length > 0 && await Promise.all(temp.map(async (item) => {
+      return getImage(item)
+    }))
+    if (temp2?.length > 0 && images?.length < 1) {
+      setImages(temp2)
+    } else {
+      setImages([...images, temp2]);
     }
-
     setTimeout(() => {
-      setLoading(false)
-    }, 8000);
+      setLoading(false);
+    }, 5000);
 
     if (state?.updatePropertyToggle) {
       dispatch({
@@ -169,22 +168,58 @@ const Dashboardpage3 = () => {
         payload: { images: [...state?.updateProperty?.upload.images, temp2], videos: [...state?.updateProperty?.upload?.videos] },
       });
     }
-    // for (let i = 0; i < firebaseImages.length; i++) {
-    //   let imgRef = ref(imageDB, `/files/${Date.now()}`);
-    //   let imageUrl = uploadBytes(imgRef, firebaseImages[i]).then((snapshot) => {
-    //     console.log('Img')
-    //     snapshot.ref.getDownloadURL()
-    //       .then((url) => {
-    //         // Returns the Download URL from Firebase Storage.
-    //         console.log('erererreer', url)
-    //       })
-    //   })
-    // }
   }
+
+
+  // const handleFirebaseUpload = (fileArray) => {
+  //   setLoading(true)
+  //   const temp = [...fileArray];
+  //   const temp2 = [];
+  //   for (let i = 0; i < fileArray.length; i++) {
+  //     const imageName = Date.now();
+  //     storage.ref(`/images/${imageName + '.png'}`).put(fileArray[i])
+  //       .on('state_changed', alert('success'), alert, () => {
+
+  //         storage.ref('images').child(imageName + '.png').getDownloadURL().then((url) => {
+  //           console.log('trian', url);
+  //           // temp.map(item => {
+  //           //   if (item == url) {
+  //           //     return
+  //           //   }
+  //           temp2.push(url)
+  //           // setUpdateScreen(state => !state);
+  //           // })
+  //         })
+  //       })
+  //     setFirebaseImagesLinks(temp2)
+  //   }
+
+  //   setTimeout(() => {
+  //     setLoading(false)
+  //   }, 8000);
+
+  //   if (state?.updatePropertyToggle) {
+  //     dispatch({
+  //       type: "ADD_MEDIA",
+  //       payload: { images: [...state?.updateProperty?.upload.images, temp2], videos: [...state?.updateProperty?.upload?.videos] },
+  //     });
+  //   }
+  //   // for (let i = 0; i < firebaseImages.length; i++) {
+  //   //   let imgRef = ref(imageDB, `/files/${Date.now()}`);
+  //   //   let imageUrl = uploadBytes(imgRef, firebaseImages[i]).then((snapshot) => {
+  //   //     console.log('Img')
+  //   //     snapshot.ref.getDownloadURL()
+  //   //       .then((url) => {
+  //   //         // Returns the Download URL from Firebase Storage.
+  //   //         console.log('erererreer', url)
+  //   //       })
+  //   //   })
+  //   // }
+  // }
 
   return (
     <Layout style={{ position: 'relative', backgroundColor: 'blue', zIndex: 999, overFlow: 'hidden' }}>
-
+      {console.log('AAAAAAAAAAAAAA', images)}
       {loading && (
         <div className={`h-full ${state.open ? "w-[80%]" : "w-[95%]"} flex basis-full bg-transparent absolute z-40`}>
           <div className="h-full w-full backdrop-blur-sm flex justify-center items-center flex-col text-center" >
@@ -196,11 +231,7 @@ const Dashboardpage3 = () => {
 
       <div
         className="bg-gradient-to-r from-gradient via-ordinary to-ordinary h-screen overflow-x-hidden"
-      // style={{
-      //     backgroundImage: "url('/images/info1.jpg')",
-      //     backgroundRepeat: "no-repeat",
-      //     backgroundSize: "cover",
-      // }}
+
       >
 
         <div

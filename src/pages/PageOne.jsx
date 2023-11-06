@@ -446,76 +446,36 @@ const PageOne = () => {
       //   email: data?.email,
       //   phone: data?.phoneNumber,
       // }
-      dispatch({
-        type: "ADD_PROPERTY",
-        payload: {
-          propertyDetails: propertyDetailsObj,
-          typesAndPurpose: typesAndPurposeObj,
-          rentDetails: rentalDetails,
-          contactDetails: contactDetails,
-          locationAndAddress: locationAndAddress,
-          ownerId: data?._id,
-        },
-      });
-      // console.log('from_next_button', propertyDetailsObj);
-      // console.log('Next_Btn', formData, 'category', catvalue, 'sub-category', subcatvalue, 'purpose', purpvalue, 'completion-status', completionvalue, 'rent_frequency', rentfreqvalue, 'paidbyvalue', paidbyvalue, 'own_value', ownvalue)
+      if (state?.updatePropertyToggle) {
+        dispatch({
+          type: "UPDATE_PROPERTY",
+          payload: {
+            propertyDetails: propertyDetailsObj,
+            typesAndPurpose: typesAndPurposeObj,
+            rentDetails: rentalDetails,
+            contactDetails: contactDetails,
+            locationAndAddress: locationAndAddress,
+            ownerId: data?._id,
+          },
+        });
+      } else {
+        dispatch({
+          type: "ADD_PROPERTY",
+          payload: {
+            propertyDetails: propertyDetailsObj,
+            typesAndPurpose: typesAndPurposeObj,
+            rentDetails: rentalDetails,
+            contactDetails: contactDetails,
+            locationAndAddress: locationAndAddress,
+            ownerId: data?._id,
+          },
+        });
+      }
+
       setStepcount(stepcount + 1);
       NavigateTo("/dashboard");
     }
   };
-
-  // const nextPage = () => {
-  //   let propertyDetailsObj = {
-  //     refNo: formData?.referncenumber,
-  //     title: formData?.title,
-  //     titleArabic: formData?.arabicTitle,
-  //     description: formData?.desc,
-  //     descriptionArabic: formData?.descArabic,
-  //     areaSquare: formData?.area,
-  //     InclusivePrice: formData?.price,
-  //     PermitNumber: formData?.permitno,
-  //     // occupancyStatus,
-  //     completionStatus: completionvalue,
-  //     ownerShipStatus: ownvalue,
-  //     // bedRooms,
-  //     // bathRooms,
-  //     // financingAvailable,
-  //     // financingInstittionsName
-  //   }
-  //   const typesAndPurposeObj = {
-  //     category: catvalue,
-  //     subCategory: subcatvalue,
-  //     purpose: purpvalue,
-
-  //   }
-  //   const rentalDetails = {
-  //     rent: formData?.rentAED,
-  //     rentFrequency: rentfreqvalue,
-  //     minimumContractPeriod: formData?.contractperiod,
-  //     noticePeriod: formData?.vacatingperiod,
-  //     maintainanceFee: formData?.maintfee,
-  //     paidBy: paidbyvalue,
-  //   }
-  //   const contactDetails = {
-  //     ListingOwner: data?.name,
-  //     contactPerson: data?.name,
-  //     email: data?.email,
-  //     phone: data?.phoneNumber,
-  //   }
-  //   dispatch({ type: 'ADD_PROPERTY', payload: { propertyDetails: propertyDetailsObj, typesAndPurpose: typesAndPurposeObj, rentDetails: rentalDetails, contactDetails: contactDetails } })
-  //   console.log('from_next_button', propertyDetailsObj);
-  //   console.log('Next_Btn', formData, 'category', catvalue, 'sub-category', subcatvalue, 'purpose', purpvalue, 'completion-status', completionvalue, 'rent_frequency', rentfreqvalue, 'paidbyvalue', paidbyvalue, 'own_value', ownvalue)
-  //   setStepcount(stepcount + 1);
-  //   NavigateTo("/dashboard");
-  // }
-  // const catOptions = [
-  //     { label: "Option 1", value: "option1" },
-  //     { label: "Option 2", value: "option2" },
-  // ]
-
-  // const handleSelectChange = (value) => {
-  //   setSelectedValue(value);
-  // };
 
   const [error, setError] = useState({
     referncenumber: "", // Initialize the error state with empty strings for each field
