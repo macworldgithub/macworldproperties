@@ -146,29 +146,12 @@ const PageOne = () => {
         ...state,
         location: place?.formatted_address,
       }));
-      // Get latitude & longitude from place_id.
       fromPlaceId(place?.place_id)
         .then(({ results }) => {
           const { lat, lng } = results[0].geometry.location;
           setPosition({ lat: lat, lng: lng });
         })
         .catch(console.error);
-
-      // Set default response language and region (optional).
-      // This sets default values for language and region for geocoding requests.
-      // setDefaults({
-      //   key: "AIzaSyCN5_vVFCU-LZ2sQHmUzch_-fXkJq2THjA", // Your API key here.
-      //   language: "ae", // Default language for responses.
-      //   region: "ae", // Default region for responses.
-      // });
-
-      // geocode(
-      //   RequestType.ADDRESS,
-      //   "AIzaSyCN5_vVFCU-LZ2sQHmUzch_-fXkJq2THjA"
-      // ).then((res) => {
-      //   console.log("tuctuctuc", res);
-      // });
-      // console.log('tutuututc', placeIdResponse)
     },
     options: {
       types: ["(regions)"],
@@ -177,6 +160,7 @@ const PageOne = () => {
   });
 
   useEffect(() => {
+    console.log('ytuyrurt', state?.updateProperty?.rentDetails)
     if (state?.updatePropertyToggle) {
       setFormData({
         // propertyDetailsObj
@@ -199,12 +183,9 @@ const PageOne = () => {
         // rentalDetails
         rentAED: state?.updateProperty?.rentDetails?.rent,
         rentFrequency: state?.updateProperty?.rentDetails?.rentFrequency,
-        contractperiod:
-          state?.updateProperty?.rentDetails?.minimumContractPeriod,
+        contractperiod: state?.updateProperty?.rentDetails?.minimumContractPeriod,
         vacatingperiod: state?.updateProperty?.rentDetails?.noticePeriod,
-        maintfee:
-          state?.updateProperty?.rentDetails?.state?.updateProperty?.rentDetails
-            ?.maintainanceFee,
+        maintfee: state?.updateProperty?.rentDetails?.state?.updateProperty?.rentDetails?.maintainanceFee,
         paidby: state?.updateProperty?.rentDetails?.paidBy,
         //  ================ New Values =============
         location: state?.updateProperty?.locationAndAddress?.location,
@@ -287,32 +268,32 @@ const PageOne = () => {
     const fieldErrors = {};
 
     if (!formData.referncenumber) {
-      fieldErrors.referncenumber = "reference number is required";
+      return fieldErrors.referncenumber = "reference number is required";
     }
     if (!formData.title) {
-      fieldErrors.title = "Title is required";
+      return fieldErrors.title = "Title is required";
     }
     if (!formData.arabicTitle) {
-      fieldErrors.arabicTitle = "Arabic title is required";
+      return fieldErrors.arabicTitle = "Arabic title is required";
     }
     if (!formData.desc) {
-      fieldErrors.desc = "Descp is required";
+      return fieldErrors.desc = "Descp is required";
     }
     if (!formData.descArabic) {
-      fieldErrors.descArabic = "Arabic desc is required";
+      return fieldErrors.descArabic = "Arabic desc is required";
     }
     if (!formData.area) {
-      fieldErrors.area = "Area is needed";
+      return fieldErrors.area = "Area is needed";
     }
     if (!formData.permitNo) {
-      fieldErrors.permitNo = "permit no. is required";
+      return fieldErrors.permitNo = "permit no. is required";
     }
     if (!formData.address) {
-      fieldErrors.address = "Address is imp";
+      return fieldErrors.address = "Address is imp";
     }
 
     if (!formData.referncenumber) {
-      fieldErrors.referncenumber = "Reference number is imp";
+      return fieldErrors.referncenumber = "Reference number is imp";
     }
     // if (!formData.price) {
     //   fieldErrors.price = "Price needed";

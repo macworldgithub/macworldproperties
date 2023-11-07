@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { FiPlay } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 import LargeScreenWrapper from "../../LargeScreenWrapper/LargeScreenWrapper";
 const Explore3 = () => {
   const [shopCount, setshopCount] = useState(0);
@@ -9,6 +10,8 @@ const Explore3 = () => {
   const [residencyCount, setresidencyCount] = useState(0);
   const [villaCount, setvillaCount] = useState(0);
   const [penthouseCount, setpenthouseCount] = useState(0);
+
+  const navigate = useNavigate()
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_SERVERURL}/property/get-shops-count`)
@@ -68,7 +71,7 @@ const Explore3 = () => {
               backgroundPosition: "center",
             }}
           >
-            <div className="flex flex-col  h-[100%]  justify-between">
+            <div className="flex flex-col  h-[100%]  justify-between" onClick={() => navigate(`/property/forSale?category=all&subCategory=shop`)}>
               <div className="p-4 ">
                 <p className="text-white text-md text-bold font-sans">
                   {shopCount} Property
@@ -106,7 +109,7 @@ const Explore3 = () => {
               backgroundPosition: "center",
             }}
           >
-            <div className="flex flex-col  h-[100%]  justify-between">
+            <div className="flex flex-col  h-[100%]  justify-between" onClick={() => navigate(`/property/forSale?category=all&subCategory=office`)}>
               <div className="p-4 ">
                 <p className="text-white text-md text-bold font-sans">
                   {officeCount} Property
@@ -132,7 +135,7 @@ const Explore3 = () => {
               backgroundPosition: "center",
             }}
           >
-            <div className="flex flex-col  h-[100%]  justify-between">
+            <div className="flex flex-col  h-[100%]  justify-between" onClick={() => navigate(`/property/forSale?category=all&subCategory=warehouse`)}>
               <div className="p-4 ">
                 <p className="text-white text-md text-bold font-sans">
                   {warehouseCount} Property
@@ -157,7 +160,7 @@ const Explore3 = () => {
               backgroundPosition: "center",
             }}
           >
-            <div className="flex flex-col  h-[100%]  justify-between">
+            <div className="flex flex-col  h-[100%]  justify-between" onClick={() => navigate(`/property/forSale?category=all&subCategory=residentialBuilding`)}>
               <div className="p-4 ">
                 <p className="text-white text-md text-bold font-sans">
                   {residencyCount} Property
@@ -182,7 +185,7 @@ const Explore3 = () => {
               backgroundPosition: "center",
             }}
           >
-            <div className="flex flex-col  h-[100%]  justify-between">
+            <div className="flex flex-col  h-[100%]  justify-between" onClick={() => navigate(`/property/forSale?category=all&subCategory=villa`)}>
               <div className="p-4 ">
                 <p className="text-white text-md text-bold font-sans">
                   {villaCount} Property
@@ -207,7 +210,7 @@ const Explore3 = () => {
               backgroundPosition: "center",
             }}
           >
-            <div className="flex flex-col  h-[100%]  justify-between">
+            <div className="flex flex-col  h-[100%]  justify-between" onClick={() => navigate(`/property/forSale?category=all&subCategory=pentHouse`)}>
               <div className="p-4 ">
                 <p className="text-white text-md text-bold font-sans">
                   {penthouseCount} Property

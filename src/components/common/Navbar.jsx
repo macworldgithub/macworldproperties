@@ -17,6 +17,7 @@ import SingleLink from "./SingleLink";
 import logo1 from "../../logo/logo1.png";
 // import Dropdown from "./Dropdownnn";
 import logo2 from "../../logo/logoblack.png";
+import logo3 from "../../logo/logo3.png";
 import { navLinks } from "../../data/navLinks";
 import { Store } from "../../context/store";
 import LargeScreenWrapper from "../LargeScreenWrapper/LargeScreenWrapper";
@@ -74,10 +75,10 @@ const Navbar = ({ isloggedIn, setIsloggedIn }) => {
   const updateNavbarAppearance = () => {
     if (window.scrollY >= 180 && getCurrentRoute()) {
       setNavBarColor("white");
-      setNavBarLogo(logo2);
+      setNavBarLogo(logo1);
       setNavBarTextColor("black");
     } else if (getCurrentRoute()) {
-      setNavBarLogo(logo1);
+      setNavBarLogo(logo3);
       setNavBarColor("transparent");
       setNavBarTextColor("white");
     } else {
