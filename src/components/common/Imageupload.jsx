@@ -7,54 +7,7 @@ import { storage } from "../../config/firebase";
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { type } from "@testing-library/user-event/dist/type";
 
-const Imageupload = ({ images, setImages, handleUpdateImage, handleFirebaseUpload, firebaseImagesLinks }) => {
-  const { state, dispatch } = useContext(Store);
-  const [updateScreen, setUpdateScreen] = useState(false)
-  const [firebaseImages, setFirebaseImages] = useState([]);
-
-  // useEffect(() => {
-  //   console.log('ewrofskdmfsdk', state?.updateProperty?.upload?.images)
-  //   if (state?.updatePropertyToggle) {
-  //     setFirebaseImages(state?.updateProperty?.upload?.images);
-  //     // setFirebaseImages(state?.updateProperty?.upload?.images);
-  //     // setVideoLinks(state?.updateProperty?.upload?.videos);
-  //   } else {
-  //     // setFirebaseImages(state?.form?.upload?.images);
-  //     // setVideoLinks(state?.form?.upload?.videos);
-  //   }
-  //   console.log('vvvvvvv', state.form)
-  // }, [state?.updateProperty?.upload?.images]);
-
-
-  const handleImageChange = (e) => {
-    const selectedImages = Array.from(e.target.files);
-    setFirebaseImages([...firebaseImages, ...selectedImages]);
-  };
-
-  const handleUpdateImageChange = (e) => {
-    const selectedImages = Array.from(e.target.files);
-    setFirebaseImages(selectedImages);
-  };
-
-  const handleRemoveImage = async (imageUrl) => {
-    try {
-      await axios.get(`${process.env.REACT_APP_SERVERURL}/property/delete-photo/${imageUrl}`)
-      swal({
-        title: "Success",
-        text: "Image Deleted Successfully",
-        icon: "success",
-      });
-    } catch (error) {
-      swal({
-        title: "Error",
-        text: error,
-        icon: "error",
-      });
-    }
-  }
-
- 
-
+const Imageupload = ({ images, handleFirebaseUpload }) => {
   return (
     <div className="mt-2 mb-7">
       <form>
@@ -62,28 +15,7 @@ const Imageupload = ({ images, setImages, handleUpdateImage, handleFirebaseUploa
           type="file"
           multiple
           accept="image/*"
-          onChange={
-            // state?.updatePropertyToggle
-            //   ? handleUpdateImageChange
-            //   : 
-            (e) => {
-              // console.log("wqeqweqweqwewqeqweqweqwe", typeof e.target.files[0])
-              // handleImageChange(e);
-              handleFirebaseUpload(e.target.files);
-              // if (state?.updatePropertyToggle) {
-              //   dispatch({
-              //     type: "ADD_MEDIA",
-              //     payload: { images: [...state?.updateProperty?.upload?.images, ...e.target.files], videos: [...state?.form?.upload?.videos] },
-              //   });
-              // } 
-              // else {
-              //   dispatch({
-              //     type: "ADD_MEDIA",
-              //     payload: { images: e.target.files, videos: [...state?.form?.upload?.videos] },
-              //   });
-              // }
-            }
-
+          onChange={(e) => { handleFirebaseUpload(e.target.files); }
           }
           className="hidden"
           id="imageInput"
@@ -95,31 +27,13 @@ const Imageupload = ({ images, setImages, handleUpdateImage, handleFirebaseUploa
           Select Images
         </label>
       </form>
-
-      {/* {firebaseImagesLinks?.length > 0 && ( */}
       <div className="mt-4">
         <h2>Selected Images:</h2>
         <div className="flex flex-wrap">
           {images?.length > 0 && images.map((image, index) => (
-
             <div
               key={index}
-              className="w-1/4 p-2 relative"
-              // onClick={() => {
-              //   if (state?.updatePropertyToggle) {
-              //     handleRemoveImage(image || '')
-              //   }
-              //   const array = [...images];
-              //   array.splice(index, 1);
-              //   setImages(array);
-              // }}
-            >
-              {/* {console.log('wouerwier', image)}
-              <Cross
-                className="absolute right-0 rounded-full bg-slate-200"
-                height={12}
-                width={12}
-              /> */}
+              className="w-1/4 p-2 relative">
               <img
                 src={image}
                 alt={`Image ${index}`}

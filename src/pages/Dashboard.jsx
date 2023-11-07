@@ -79,7 +79,6 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (state?.updatePropertyToggle) {
-      console.log("pppppppppp", state?.updateProperty?.amenities);
       setAmeneties(state?.updateProperty?.amenities);
       handleFormEdit();
     } else {
@@ -189,10 +188,19 @@ const Dashboard = () => {
       { name: "floor", value: floor },
       { name: "petPolicy", value: petPolicy },
     ];
-    let temp = [...ameneties, ...tempArray];
+    let temp = [];
+    if (ameneties?.length > 0) {
+      temp = [...ameneties, ...tempArray];
+    } else {
+      temp = tempArray
+    }
 
     setAmeneties(temp);
-    dispatch({ type: "ADD_AMENITIES", payload: temp });
+    if (state?.updatePropertyToggle) {
+      dispatch({ type: "UPDATE_AMENITIES", payload: temp });
+    } else {
+      dispatch({ type: "ADD_AMENITIES", payload: temp });
+    }
     // axios.post('http://localhost:4000/property/upload', state.form).then(res => {
     //     console.log(res.data);
     // });
@@ -816,7 +824,7 @@ const Dashboard = () => {
 export default Dashboard;
 
 const handleChecked = (state, value) => {
-  for (let i = 0; i < state.length; i++) {
+  for (let i = 0; i < state?.length; i++) {
     if (state[i]?.value === value) {
       return true;
     }

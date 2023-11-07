@@ -9,11 +9,8 @@ import { Store } from "../context/store";
 import Layout from "../components/Layout";
 import Imageupload from "../components/common/Imageupload";
 import Videoupload from "../components/common/Videoupload";
-import Navbar from "../components/common/Navbar";
-import { stubTrue } from "lodash";
 import { storage } from "../config/firebase";
 import ReactLoading from 'react-loading';
-import Loading from "react-loading";
 
 const Dashboardpage3 = () => {
   const [stepcount, setStepcount] = useState(3);
@@ -28,13 +25,12 @@ const Dashboardpage3 = () => {
 
   useEffect(() => {
     if (state?.updatePropertyToggle) {
-      setImages(state?.updateProperty?.upload?.images || []);
+      setImages(state?.updateProperty?.upload?.images);
       setVideoLinks(state?.updateProperty?.upload?.videos);
     } else {
       setImages(state?.form?.upload?.upload || []);
       setVideoLinks(state?.form?.upload?.videos);
     }
-    console.log('vvvvvvv', state.form)
   }, []);
 
   const handleCheckboxChange = () => {
@@ -117,12 +113,26 @@ const Dashboardpage3 = () => {
   };
 
   const handleUpdateCompleteProperty = () => {
-    dispatch({
-      type: "UPDATE_PROPERTY_MEDIA",
-      payload: { images: images, videos: videoLinks },
-    });
+    let finalObject1 = JSON.stringify(state?.updateProperty);
+    let finalObject = JSON.parse(finalObject1);
+
+    console.log(finalObject.upload, finalObject.upload, 'wqwqwqwqw', images);
+    // dispatch({
+    //   type: "UPDATE_PROPERTY_MEDIA",
+    //   payload: { images: images, videos: videoLinks },
+    // });
+    console.log('new_wat', typeof finalObject.upload, finalObject.upload);
+    console.log('new_wat', finalObject);
+    if (finalObject?.upload?.images?.length > 0 || finalObject?.upload?.images != undefined) {
+
+      finalObject.upload = {
+        images: images,
+        videos: videoLinks,
+      }
+      // finalObject.upload.images = images;
+    }
     axios
-      .post(`${process.env.REACT_APP_SERVERURL}/property/update-property`, state?.updateProperty)
+      .post(`${process.env.REACT_APP_SERVERURL}/property/update-property`, finalObject)
       .then((res) => {
         console.log(res.data);
         swal({
@@ -149,77 +159,36 @@ const Dashboardpage3 = () => {
   const handleFirebaseUpload = async (fileArray) => {
     setLoading(true)
     const temp = [...fileArray];
-    console.log('irpwoeruweru', temp)
+
     const temp2 = temp?.length > 0 && await Promise.all(temp.map(async (item) => {
       return getImage(item)
     }))
     if (temp2?.length > 0 && images?.length < 1) {
       setImages(temp2)
     } else {
-      setImages([...images, temp2]);
+      setImages([...images, ...temp2]);
     }
     setTimeout(() => {
       setLoading(false);
     }, 5000);
 
     if (state?.updatePropertyToggle) {
-      dispatch({
-        type: "ADD_MEDIA",
-        payload: { images: [...state?.updateProperty?.upload.images, temp2], videos: [...state?.updateProperty?.upload?.videos] },
-      });
+      if (state?.updateProperty?.upload?.images?.length != undefined || state?.updateProperty?.upload?.images?.length < 1) {
+        dispatch({
+          type: "ADD_MEDIA",
+          payload: { images: temp2, videos: [...state?.updateProperty?.upload?.videos] },
+        });
+      } else {
+        dispatch({
+          type: "ADD_MEDIA",
+          payload: { images: [...state?.updateProperty?.upload?.images, ...temp2], videos: [...state?.updateProperty?.upload?.videos] },
+        });
+      }
     }
   }
 
-
-  // const handleFirebaseUpload = (fileArray) => {
-  //   setLoading(true)
-  //   const temp = [...fileArray];
-  //   const temp2 = [];
-  //   for (let i = 0; i < fileArray.length; i++) {
-  //     const imageName = Date.now();
-  //     storage.ref(`/images/${imageName + '.png'}`).put(fileArray[i])
-  //       .on('state_changed', alert('success'), alert, () => {
-
-  //         storage.ref('images').child(imageName + '.png').getDownloadURL().then((url) => {
-  //           console.log('trian', url);
-  //           // temp.map(item => {
-  //           //   if (item == url) {
-  //           //     return
-  //           //   }
-  //           temp2.push(url)
-  //           // setUpdateScreen(state => !state);
-  //           // })
-  //         })
-  //       })
-  //     setFirebaseImagesLinks(temp2)
-  //   }
-
-  //   setTimeout(() => {
-  //     setLoading(false)
-  //   }, 8000);
-
-  //   if (state?.updatePropertyToggle) {
-  //     dispatch({
-  //       type: "ADD_MEDIA",
-  //       payload: { images: [...state?.updateProperty?.upload.images, temp2], videos: [...state?.updateProperty?.upload?.videos] },
-  //     });
-  //   }
-  //   // for (let i = 0; i < firebaseImages.length; i++) {
-  //   //   let imgRef = ref(imageDB, `/files/${Date.now()}`);
-  //   //   let imageUrl = uploadBytes(imgRef, firebaseImages[i]).then((snapshot) => {
-  //   //     console.log('Img')
-  //   //     snapshot.ref.getDownloadURL()
-  //   //       .then((url) => {
-  //   //         // Returns the Download URL from Firebase Storage.
-  //   //         console.log('erererreer', url)
-  //   //       })
-  //   //   })
-  //   // }
-  // }
-
   return (
     <Layout style={{ position: 'relative', backgroundColor: 'blue', zIndex: 999, overFlow: 'hidden' }}>
-      {console.log('AAAAAAAAAAAAAA', images)}
       {loading && (
         <div className={`h-full ${state.open ? "w-[80%]" : "w-[95%]"} flex basis-full bg-transparent absolute z-40`}>
           <div className="h-full w-full backdrop-blur-sm flex justify-center items-center flex-col text-center" >
@@ -231,15 +200,9 @@ const Dashboardpage3 = () => {
 
       <div
         className="bg-gradient-to-r from-gradient via-ordinary to-ordinary h-screen overflow-x-hidden"
-
       >
-
         <div
           className="relative h-full inset-0 p-10"
-        // style={{
-        //     backgroundColor: "rgba(0, 0, 0, 0.1)",
-        //     backdropFilter: "brightness(0.8)",
-        // }}
         >
           <div className="relative block rounded-[25px] bg-white px-6 pt-4 pb-4 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-20 mx-10">
             <ProgressButton step={stepcount} />

@@ -545,7 +545,7 @@ const PageOne = () => {
 
   return (
     <Layout>
-      {/* {console.log(finalUrl, "my_hash ")} */}
+      {console.log(state?.updateProperty, "my_hash ")}
       <div
         className="relative h-screen overflow-x-hidden bg-gradient-to-r from-gradient via-ordinary to-ordinary"
       // style={{

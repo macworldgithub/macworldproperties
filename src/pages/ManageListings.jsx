@@ -35,8 +35,34 @@ const ManageListings = () => {
   const handleEditClick = (propertyId) => {
     const propertyToEdit = userProperty.find((item) => item._id === propertyId);
     if (propertyToEdit) {
-      console.log("Edit Property", propertyToEdit);
-      dispatch({ type: "UPDATE_PROPERTY", payload: propertyToEdit });
+
+      console.log("Edit_Property", {
+          _id: propertyToEdit._id,
+          images: propertyToEdit?.upload?.images,
+          videos: propertyToEdit?.upload?.videos,
+          typesAndPurpose: propertyToEdit?.typesAndPurpose,
+          locationAndAddress: propertyToEdit?.locationAndAddress,
+          propertyDetails: propertyToEdit?.propertyDetails,
+          rentalDetails: propertyToEdit?.rentalDetails,
+          contactDetails: propertyToEdit?.contactDetails,
+          amenities: propertyToEdit?.amenities,
+          ownerId: propertyToEdit?.ownerId
+        });
+      dispatch({
+        type: "SET_UPDATE_PROPERTY",
+        payload: {
+          _id: propertyToEdit._id,
+          images: propertyToEdit?.upload?.images,
+          videos: propertyToEdit?.upload?.videos,
+          typesAndPurpose: propertyToEdit?.typesAndPurpose,
+          locationAndAddress: propertyToEdit?.locationAndAddress,
+          propertyDetails: propertyToEdit?.propertyDetails,
+          rentalDetails: propertyToEdit?.rentalDetails,
+          contactDetails: propertyToEdit?.contactDetails,
+          amenities: propertyToEdit?.amenities,
+          ownerId: propertyToEdit?.ownerId
+        }
+      });
       dispatch({ type: "UPDATE_TOGGLE", payload: true });
       navigate("/page-one");
     } else {
@@ -110,8 +136,8 @@ const ManageListings = () => {
                     key={index}
                     onClick={() => handleOptionChange(option)}
                     className={`${selectedOption === option
-                        ? "bg-green-500 text-white"
-                        : "bg-white text-green-500"
+                      ? "bg-green-500 text-white"
+                      : "bg-white text-green-500"
                       } ${index === 0 ? "rounded-l-lg " : ""} ${index === options.length - 1 ? "rounded-r-lg " : ""
                       } ${index !== options.length - 1 ? "border-l border-r " : ""
                       } } p-2 w-[100px] border border-green-500 hover:bg-green-500 hover:text-white focus:outline-none`}

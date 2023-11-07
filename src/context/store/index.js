@@ -23,6 +23,7 @@ const initialState = {
     ownerId: String,
   },
   updateProperty: {
+    _id: '',
     typesAndPurpose: null,
     locationAndAddress: null,
     propertyDetails: null,
@@ -36,8 +37,6 @@ const initialState = {
     isLoading: false,
     isError: false,
     featuredProperties: [],
-    propertyDetails: [],
-    propertydataArr: [],
     ownerId: String,
   },
   userProperty: [],

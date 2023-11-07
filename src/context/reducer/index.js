@@ -21,6 +21,14 @@ const reducer = (state, action) => {
           amenities: action.payload
         },
       };
+    case "UPDATE_AMENITIES":
+      return {
+        ...state,
+        updateProperty: {
+          ...state.updateProperty,
+          amenities: action.payload
+        },
+      };
     case "ADD_MEDIA":
       return {
         ...state,
@@ -113,16 +121,34 @@ const reducer = (state, action) => {
       };
     case "AUTHORIZE_USER":
       return { ...state, isAuthorize: action.payload };
-    case "UPDATE_PROPERTY":
+      case "UPDATE_PROPERTY":
+        return {
+          ...state, updateProperty: {
+            ...state.updateProperty,
+            propertyDetails: action?.payload?.propertyDetails,
+            typesAndPurpose: action?.payload?.typesAndPurpose,
+            rentalDetails: action?.payload?.rentDetails,
+            contactDetails: action?.payload?.contactDetails,
+            locationAndAddress: action?.payload?.locationAndAddress,
+            ownerId: action?.payload?.ownerId
+          }
+        };
+    case "SET_UPDATE_PROPERTY":
       return {
         ...state, updateProperty: {
-          ...state.form,
+          ...state.updateProperty,
           propertyDetails: action?.payload?.propertyDetails,
           typesAndPurpose: action?.payload?.typesAndPurpose,
           rentalDetails: action?.payload?.rentDetails,
           contactDetails: action?.payload?.contactDetails,
           locationAndAddress: action?.payload?.locationAndAddress,
-          ownerId: action?.payload?.ownerId
+          ownerId: action?.payload?.ownerId,
+          _id: action?.payload?._id,
+          upload: {
+            images: action.payload.images,
+            videos: action.payload.videos,
+          },
+          amenities: action.payload.amenities
         }
       };
     case "UPDATE_PROPERTY_MEDIA":
