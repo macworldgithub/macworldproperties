@@ -82,9 +82,9 @@ const PageOne = () => {
   const [stepcount, setStepcount] = useState(1);
 
   // const [selectedValue, setSelectedValue] = useState("option1");
-  // const [catvalue, setCatvalue] = useState("");
-  // const [subcatvalue, setsubCatvalue] = useState("option1");
-  // const [purpvalue, setpurpvalue] = useState("option1");
+  const [catvalue, setCatvalue] = useState("");
+  const [subcatvalue, setsubCatvalue] = useState("option1");
+  const [purpvalue, setpurpvalue] = useState("option1");
   // const [completionvalue, setcompletionvalue] = useState("option1");
   // const [rentfreqvalue, setrentfreqnvalue] = useState("option1");
   // const [paidbyvalue, setpaidbyvalue] = useState("option1");
@@ -268,33 +268,33 @@ const PageOne = () => {
     const fieldErrors = {};
 
     if (!formData.referncenumber) {
-      return fieldErrors.referncenumber = "reference number is required";
+       fieldErrors.referncenumber = "reference number is required";
     }
     if (!formData.title) {
-      return fieldErrors.title = "Title is required";
+       fieldErrors.title = "Title is required";
     }
-    if (!formData.arabicTitle) {
-      return fieldErrors.arabicTitle = "Arabic title is required";
-    }
+    // if (!formData.arabicTitle) {
+    //   return fieldErrors.arabicTitle = "Arabic title is required";
+    // }
     if (!formData.desc) {
-      return fieldErrors.desc = "Descp is required";
+       fieldErrors.desc = "Descrption is required";
     }
-    if (!formData.descArabic) {
-      return fieldErrors.descArabic = "Arabic desc is required";
-    }
+    // if (!formData.descArabic) {
+    //   return fieldErrors.descArabic = "Arabic desc is required";
+    // }
     if (!formData.area) {
-      return fieldErrors.area = "Area is needed";
+       fieldErrors.area = "Area is needed";
     }
     if (!formData.permitNo) {
-      return fieldErrors.permitNo = "permit no. is required";
+       fieldErrors.permitNo = "permit no. is required";
     }
     if (!formData.address) {
-      return fieldErrors.address = "Address is imp";
+       fieldErrors.address = "Address is imp";
     }
 
-    if (!formData.referncenumber) {
-      return fieldErrors.referncenumber = "Reference number is imp";
-    }
+    // if (!formData.referncenumber) {
+    //   return fieldErrors.referncenumber = "Reference number is imp";
+    // }
     // if (!formData.price) {
     //   fieldErrors.price = "Price needed";
     // }
@@ -333,7 +333,8 @@ const PageOne = () => {
     // if (!paidbyvalue) {
     //   fieldErrors.paidbyvalue = "Paid by Value required";
     // }
-    if (Object.keys(fieldErrors).length > 0) {
+    console.log('opopiiuuh', fieldErrors)
+    if (Object.keys(fieldErrors)?.length > 0) {
       // There are errors, so you can handle them and display error messages
       const errorKeys = Object.keys(fieldErrors);
       // Scroll to the top of the page when the toast is closed
@@ -780,7 +781,7 @@ const PageOne = () => {
                 />
               </div>
 
-              <div className="flex flex-col gap-[5px] mb-2">
+              {/* <div className="flex flex-col gap-[5px] mb-2">
                 <Label text="Completion Status" />
                 <SelectOption
                   _options={completionOptions}
@@ -790,7 +791,7 @@ const PageOne = () => {
                   type={formData?.purpose !== 'offPlan' && true}
                   name={"completion"}
                 />
-              </div>
+              </div> */}
 
               <div className="flex flex-col gap-[5px] mb-2">
                 <Label text="Ownership Status" />

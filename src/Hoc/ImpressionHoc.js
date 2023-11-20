@@ -10,10 +10,14 @@ class ImpressionClickTrackerHOC extends Component {
         console.log("IMPRESSION", {
           ...event.target.dataset,
         });
-        axios.get(`${process.env.REACT_APP_SERVERURL}/property/add-impression/${this.props.userId}`)
-          .then((res) => {
-            console.log("oooooooooooooooooooo", res);
-          });
+        // axios.get(`${process.env.REACT_APP_SERVERURL}/property/add-impression/${this.props.userId}`)
+        //   .then((res) => {
+        //     console.log("oooooooooooooooooooo", res);
+        //   });
+        // axios.get(`${process.env.REACT_APP_SERVERURL}/property/add-impression/${this.props.userId}`)
+        //   .then((res) => {
+        //     console.log("oooooooooooooooooooo", res);
+        //   });
         /** Use this for only tracking once per mount **/
         if (event.isIntersecting) {
           unobserve();
@@ -26,13 +30,14 @@ class ImpressionClickTrackerHOC extends Component {
   };
   handleClick = (event) => {
     // Send logs to server
-    axios
-      .get(
-        `${process.env.REACT_APP_SERVERURL}/property/add-clicks/${this.props.userId}`
-      )
-      .then((res) => {
-        console.log("oooooooooooooooooooo", res);
-      });
+    // axios
+    //   .get(
+    //     `${process.env.REACT_APP_SERVERURL}/property/add-clicks/${this.props.userId}`
+    //   )
+    //   .then((res) => {
+    //     console.log("oooooooooooooooooooo", res);
+    //   });
+    axios.get(`${process.env.REACT_APP_SERVERURL}/property/add-clicks-on-click?propertyId=${this.props.propertyId}&userId=${this.props.userId}`).then((res) => { console.log("oooooooooooooooooooo", res); });
     console.log(this.props.clickEvent || "UNKNOWN_CLICK_EVENT", {
       ...event.currentTarget.dataset,
     });

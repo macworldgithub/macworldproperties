@@ -15,8 +15,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Store } from '../../context/store';
 
 const Sidebar = () => {
-
-
     const [submenuOpen1, setSubmenuOpen1] = useState(false);
     const [submenuOpen2, setSubmenuOpen2] = useState(false);
     const [submenuOpen3, setSubmenuOpen3] = useState(false);
@@ -65,7 +63,6 @@ const Sidebar = () => {
         // },
 
     ];
-
 
     return (
         <div>
@@ -142,7 +139,7 @@ const Sidebar = () => {
                     {Menus.map((menu, index) => (
                         <>
 
-                            <Link onClick={() => {
+                            <Link to='/graph' onClick={() => {
                                 if (index == 1) {
                                     setSubmenuOpen1(!submenuOpen1)
                                 } else if (index == 2) {

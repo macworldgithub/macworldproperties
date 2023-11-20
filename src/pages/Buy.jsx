@@ -189,7 +189,8 @@ const Buy = () => {
               <ImpressionClickTrackerHOC
                 clickEvent={`ADD-TO-CART`}
                 disableViewportTracking={false}
-                userId={item?._id}
+                propertyId={item?._id}
+                userId={item?.ownerId}
               >
                 <div className="col-span-1 h-[380px">
                   <SinglePropertyCard

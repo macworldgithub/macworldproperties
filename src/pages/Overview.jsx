@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Chart from 'react-apexcharts';
-import Layout from '../Layout';
 
 const ImpressionsGraph = ({ impression, click }) => {
     const [impressionsData, setImpressionsData] = useState([]);
@@ -50,20 +49,19 @@ const ImpressionsGraph = ({ impression, click }) => {
     };
 
     return (
-        <Layout>
-            <div className='p-5'>
-                <h2 className='font-bold text-2xl mt-[100px]'>Impressions and Clicks Over Time</h2>
-                <Chart
-                    options={options}
-                    series={[
-                        { name: 'Impressions', data: impressionsData },
-                        { name: 'Clicks', data: clicksData }
-                    ]}
-                    type="line"
-                    height={350}
-                />
-            </div>
-        </Layout>
+        <div>
+            <h2 className='font-bold text-2xl'>Impressions and Clicks Over Time</h2>
+
+            <Chart
+                options={options}
+                series={[
+                    { name: 'Impressions', data: impressionsData },
+                    { name: 'Clicks', data: clicksData },
+                ]}
+                type="line"
+                height={350}
+            />
+        </div>
 
     );
 };
