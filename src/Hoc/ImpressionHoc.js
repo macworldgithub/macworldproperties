@@ -14,10 +14,10 @@ class ImpressionClickTrackerHOC extends Component {
         //   .then((res) => {
         //     console.log("oooooooooooooooooooo", res);
         //   });
-        // axios.get(`${process.env.REACT_APP_SERVERURL}/property/add-impression/${this.props.userId}`)
-        //   .then((res) => {
-        //     console.log("oooooooooooooooooooo", res);
-        //   });
+        axios.get(`${process.env.REACT_APP_SERVERURL}/property/add-impressions-on-view?propertyId=${this.props.propertyId}&userId=${this.props.userId}`)
+          .then((res) => {
+            console.log("oooooooooooooooooooo", res);
+          });
         /** Use this for only tracking once per mount **/
         if (event.isIntersecting) {
           unobserve();

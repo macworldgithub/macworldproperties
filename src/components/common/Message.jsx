@@ -4,21 +4,23 @@ import React from "react";
 import { AiOutlineWhatsApp, AiOutlineMail } from "react-icons/ai";
 import axios from "axios";
 
-const Message = ({ listingOwner, contactPerson, email, phone, propertyId }) => {
+const Message = ({ listingOwner, contactPerson, email, phone, propertyId, ownerId }) => {
 
   const handleLeads = () => {
-    const getData = localStorage.getItem(JSON.parse('userData'));
-    if (getData?._id) {
-      axios.get(`${process.env.REACT_APP_SERVERURL}/property/add-lead?userId=${getData?._id}&propertyId=${propertyId}`)
+    // const getData = localStorage.getItem('userData');
+    // if (getData?._id) {
+     console.log(propertyId, 'ewuroiwueri', ownerId)
+      axios.get(`${process.env.REACT_APP_SERVERURL}/property/add-lead?userId=${ownerId}&propertyId=${propertyId}`)
         .then((res) => {
           console.log("oooooooooooooooooooo", res);
         });
-    } else {
-      axios.get(`${process.env.REACT_APP_SERVERURL}/property/add-lead?propertyId=${propertyId}`)
-        .then((res) => {
-          console.log("oooooooooooooooooooo", res);
-        });
-    }
+    // } 
+    // else {
+      // axios.get(`${process.env.REACT_APP_SERVERURL}/property/add-lead?propertyId=${propertyId}`)
+      //   .then((res) => {
+      //     console.log("oooooooooooooooooooo", res);
+      //   });
+    // }
   }
 
   return (

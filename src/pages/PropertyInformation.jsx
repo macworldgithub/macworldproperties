@@ -75,6 +75,7 @@ const PropertyInformation = () => {
         aracbiDescription={propertyDetails?.propertyDetails?.descriptionArabic}
         features={propertyDetails?.amenities}
         propertyId={id}
+        ownerId={state?.propertyDetails?.ownerId}
       />
     </div>
   );

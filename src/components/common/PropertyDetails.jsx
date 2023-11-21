@@ -84,7 +84,8 @@ const PropertyDetails = ({
   contactPerson,
   email,
   phone,
-  propertyId
+  propertyId,
+  ownerId
 }) => {
   const position = {lng:location?.longitude || 54.391164779663086, lat: location?.latitude || 24.4324592784219};
   const [language, setLanguage] = useState(true);
@@ -519,6 +520,7 @@ const PropertyDetails = ({
           email={email}
           phone={phone}
           propertyId={propertyId}
+          ownerId={ownerId}
         />
       </div>
     </div>

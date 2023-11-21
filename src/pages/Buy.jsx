@@ -95,6 +95,7 @@ const Buy = () => {
         category={selectedData}
         showPage={slug == "buy" ? "forSale" : slug}
       />
+      {console.log('paosdpaspdoasd', propertydataArr)}
       <div className="flex flex-row flex-center-between px-[80px] xl:px-[120px] pt-[25px]">
         <div>
           <p className=" mt-[20px]">
