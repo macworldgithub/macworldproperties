@@ -32,7 +32,7 @@ const Reports = () => {
           </div>
           <div className="border-2 bg-white border-grey shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] rounded-[15px] p-3 bg-transparent w-[200px] sm:w-[280px] lg:w-[350px] xl:w-[320px] xla:w-[400px] h-20 flex flex-col py-2 px-4 hover:border-yellow-400">
             <h1 className="text-lg font-light">Leads</h1>
-            <h1 className="text-xl font-bold">0</h1>
+            <h1 className="text-xl font-bold">{clickImp[0]?.leads || 0}</h1>
           </div>
         </div>
         <div className="bg-white relative rounded-[10px] px-6 pt-4 pb-4 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] flex flex-row gap-5 mx-6">
