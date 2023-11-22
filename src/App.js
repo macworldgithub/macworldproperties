@@ -14,6 +14,7 @@ import {
   Blog,
   Rent,
 } from "./pages";
+import ProtectedRoutes from "./Hoc/ProtectedRoutes";
 import { closeDropdown } from "./features/uiSlice";
 // import Dropdown from "./components/common/DropDown";
 // import NewsLetter from "./components/common/NewsLetter";
@@ -84,7 +85,7 @@ function App() {
   return (
     <StoreProvider>
       <div>
-        
+
         {showLoader && <Loader />}
         {route.pathname !== "/dashboard" &&
           route.pathname !== "/dashboard-page3" &&
@@ -105,8 +106,8 @@ function App() {
           )} */}
         <div className="min-h-screen">
           <Routes>
-            <Route path="/dashboard-page3" element={<Dashboardpage3 />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/dashboard-page3" element={<ProtectedRoutes><Dashboardpage3 /></ProtectedRoutes>} />
+            <Route path="/dashboard" element={<ProtectedRoutes><Dashboard /></ProtectedRoutes>} />
             <Route path="/" element={<Home />} />
             <Route path="/property/:slug" element={<Buy />} />
             <Route path="/home" element={<Home />} />
@@ -124,7 +125,7 @@ function App() {
             <Route path="/blog1" element={<Blog1 />} />
             <Route path="/blog2" element={<Blog2 />} />
             <Route path="/blog3" element={<Blog3 />} />
-            <Route path="/blog-detials" element={<BlogDetails/>} />
+            <Route path="/blog-detials" element={<BlogDetails />} />
             <Route path="/agents" element={<Agents />} />
             <Route
               path="/login"
@@ -135,12 +136,12 @@ function App() {
             <Route path="/agentinformation" element={<AgentInformation />} />
             <Route path="/otp" element={<Otp />} />
             <Route path="/agentdetails" element={<Agentdetails />} />
-            <Route path="/page-one" element={<PageOne />} />
+              <Route path="/page-one" element={<ProtectedRoutes><PageOne /></ProtectedRoutes>} />
             <Route path="/portfolio" element={<Portfolio />} />
-            <Route path="/listing-inventory" element={<ManageListings />} />
-            <Route path="/reports" element={<Reports />} />
-            <Route path="/traffic" element={<Traffic />} />
-            <Route path="/graph" element={<ImpressionsGraph/>} />
+            <Route path="/listing-inventory" element={<ProtectedRoutes><ManageListings /></ProtectedRoutes>} />
+            <Route path="/reports" element={<ProtectedRoutes><Reports /></ProtectedRoutes>} />
+            <Route path="/traffic" element={<ProtectedRoutes><Traffic /></ProtectedRoutes>} />
+            <Route path="/graph" element={<ProtectedRoutes><ImpressionsGraph /></ProtectedRoutes>} />
           </Routes>
         </div>
         {route.pathname !== "/dashboard" &&

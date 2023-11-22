@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -8,6 +8,7 @@ import PhoneInput from "react-phone-number-input";
 import "react-toastify/dist/ReactToastify.css";
 import Otp from "./Otp";
 import swal from "sweetalert";
+import '../App.css';
 function Signup() {
 
   const [formData, setFormData] = useState({
