@@ -17,7 +17,6 @@ function Admin({ setIsloggedIn }) {
   const { dispatch } = useContext(Store);
 
   const handleUserName = (e) => {
-    console.log(e.target.value);
     setEmail(e.target.value);
   };
 
@@ -27,7 +26,6 @@ function Admin({ setIsloggedIn }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(process.env.REACT_APP_SERVERURL);
     axios
 
       .post(`${process.env.REACT_APP_SERVERURL}/users/login`, {
@@ -35,7 +33,7 @@ function Admin({ setIsloggedIn }) {
         password: password,
       })
       .then((response) => {
-        console.log(response.data.data.token);
+
 
         swal({
           title: "Success!",
@@ -52,7 +50,6 @@ function Admin({ setIsloggedIn }) {
         navigate("/");
       })
       .catch((err) => {
-        console.log("error", err);
         console.log(err.response);
 
         swal({

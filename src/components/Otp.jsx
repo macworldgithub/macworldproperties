@@ -19,7 +19,6 @@ function Otp({ onClose }) {
     let newOtp = otp;
     newOtp =
       newOtp.substring(0, index) + newValue + newOtp.substring(index + 1);
-    console.log(newOtp);
     if(index != 4){
       document.getElementById(`form${index+1}`).focus();
     }
@@ -34,7 +33,6 @@ function Otp({ onClose }) {
         `${process.env.REACT_APP_SERVERURL}/users/verify-otp?otp=${otp}&userId=${userId}`
       );
 
-      console.log("OTP Verification Successful", response.data);
       // Handle the success response from your API here
       setUserData(response.data); // Store the fetched user data in state
       navigate(`/login`);
@@ -45,7 +43,6 @@ function Otp({ onClose }) {
         text: errorMsg,
         icon: "error",
       });
-      console.error("OTP Verification Failed", error.response.data, errorMsg);
       // Handle the error response from your API here
     }
   };

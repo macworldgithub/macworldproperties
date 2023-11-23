@@ -63,7 +63,6 @@ function Signup() {
       fieldErrors.accountType = "Account type is required";
     }
 
-    console.log(formData.phoneNumber, "Phone....")
 
 
 
@@ -80,7 +79,6 @@ function Signup() {
     } else {
       try {
         const response = await axios.post(`${process.env.REACT_APP_SERVERURL}/users/register`,formData);
-        console.log("SignUp Successful", response.data.message);
         localStorage.setItem("userId", response.data.data);
         if (response.data.message == "Success") {
           openPopup();
@@ -190,22 +188,12 @@ function Signup() {
                     placeholder="Enter phone number"
                     value={formData.phone}
                     onChange={(e) => {
-                      console.log(e);
+                      (e);
                       setFormData((state) => ({ ...state, phoneNumber: e }))
 
                     }
                     }
                   />
-                  {/* <input
-                    class="appearance-none bg-transparent border-b rounded w-full py-2 px-3 text-white
-"
-                    id="phone"
-                    type="tel"
-                    placeholder="Enter your phone no..."
-                    name="phoneNumber"
-                    value={formData.phone}
-                    onChange={handleChange}
-                  /> */}
                 </div>
                 <div class="mb-4">
                   <label class="block text-white text-sm font-bold mb-2">

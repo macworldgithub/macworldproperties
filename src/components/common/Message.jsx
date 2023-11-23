@@ -7,20 +7,11 @@ import axios from "axios";
 const Message = ({ listingOwner, contactPerson, email, phone, propertyId, ownerId }) => {
 
   const handleLeads = () => {
-    // const getData = localStorage.getItem('userData');
-    // if (getData?._id) {
-     console.log(propertyId, 'ewuroiwueri', ownerId)
-      axios.get(`${process.env.REACT_APP_SERVERURL}/property/add-lead?userId=${ownerId}&propertyId=${propertyId}`)
-        .then((res) => {
-          console.log("oooooooooooooooooooo", res);
-        });
-    // } 
-    // else {
-      // axios.get(`${process.env.REACT_APP_SERVERURL}/property/add-lead?propertyId=${propertyId}`)
-      //   .then((res) => {
-      //     console.log("oooooooooooooooooooo", res);
-      //   });
-    // }
+    console.log(propertyId, 'ewuroiwueri', ownerId)
+    axios.get(`${process.env.REACT_APP_SERVERURL}/property/add-lead?userId=${ownerId}&propertyId=${propertyId}`)
+      .then((res) => {
+        console.log("oooooooooooooooooooo", res);
+      });
   }
 
   return (

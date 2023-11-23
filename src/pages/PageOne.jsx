@@ -252,6 +252,7 @@ const PageOne = () => {
       .get(`${process.env.REACT_APP_SERVERURL}/lov/paid-by`)
       .then((res) => setpaidbyOptions(res.data.data));
   }, []);
+  
   useEffect(() => {
     if (formData?.category) {
       axios

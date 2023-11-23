@@ -40,6 +40,7 @@ import ImpressionsGraph from "./components/Dashboard/ImpressionsGraph";
 import Blog1 from './pages/Blog1';
 import Blog2 from './pages/Blog2';
 import Blog3 from './pages/Blog3';
+import Page1New from "./pages/Page1New";
 
 function App() {
   const [showButton, setShowButton] = useState(false);
@@ -53,7 +54,7 @@ function App() {
       setIsloggedIn(true);
     } else setIsloggedIn(false);
   }, []);
-  console.log(isloggedIn, "gyjg");
+
   const propertyImages = [
     { url: "/images/card1.png", alt: "Property Image 1" },
     { url: "/images/card2.png", alt: "Property Image 2" },
@@ -77,7 +78,6 @@ function App() {
     window.scrollTo(0, 0);
   }, [route]);
 
-  // Loader when page is loading
   window.addEventListener("load", () => {
     setShowLoader(false);
   });
@@ -132,6 +132,7 @@ function App() {
               element={<Login setIsloggedIn={setIsloggedIn} />}
             />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/Page1New" element={<Page1New />} />
             <Route path="rent" element={<Rent />} />
             <Route path="/agentinformation" element={<AgentInformation />} />
             <Route path="/otp" element={<Otp />} />
