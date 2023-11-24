@@ -741,19 +741,6 @@ const Page1New = () => {
                                     _onclick={clearError}
                                 />
                             </div>
-
-                            {/* <div className="flex flex-col gap-[5px] mb-2">
-                <Label text="Completion Status" />
-                <SelectOption
-                  _options={completionOptions}
-                  _selectedValue={formData?.completion}
-                  _onSelectChange={handleChange}
-                  purpvalue={formData?.purpose}
-                  type={formData?.purpose !== 'offPlan' && true}
-                  name={"completion"}
-                />
-              </div> */}
-
                             <div className="flex flex-col gap-[5px] mb-2">
                                 <Label text="Ownership Status" />
                                 <SelectOption
@@ -766,6 +753,117 @@ const Page1New = () => {
                             </div>
                         </div>
                     </section>
+                    {/* For Rent Section */}
+                    {/* formData?.purpose == "forRent" */}
+                    {true && (
+                        <section className="mt-8 pb-8">
+                            <span className="rounded text-white text-lg bg-yellow-500 py-2 px-4">Rental Details</span>
+                            <div className="grid lg:grid-cols-3 gap-5 mt-4">
+                                <div className="flex flex-col gap-[5px] mb-2">
+                                    <Label text="Rent(AED)" />
+                                    <Input
+                                        _name="rentAED"
+                                        _type="number"
+                                        _value={formData.rentAED}
+                                        _onchange={handleChange}
+                                        _onblur={handleBlur}
+                                        _onclick={clearError}
+                                    />
+                                </div>
+                                <div className="flex flex-col gap-[5px] mb-2">
+                                    <Label text="Rent Frequency" />
+                                    <SelectOption
+                                        _options={rentfreqOptions}
+                                        _selectedValue={formData?.rentFrequency}
+                                        _onSelectChange={handleChange}
+                                        name="rentFrequency"
+                                    // purpvalue={purpvalue}
+                                    />
+                                </div>
+                                <div className="flex flex-col gap-[5px] mb-2">
+                                    <Label text="Minimum Contract Period (Months)" />
+                                    <Input
+                                        _name="contractperiod"
+                                        _type="number"
+                                        _value={formData.contractperiod}
+                                        _onchange={handleChange}
+                                        _onblur={handleBlur}
+                                        _onclick={clearError}
+                                    />
+                                </div>
+                            </div>
+                            <div className="grid lg:grid-cols-3 gap-5 mt-4">
+                                <div className="flex flex-col gap-[5px] mb-2">
+                                    <Label text="Vacating Notice Period (Months)" />
+                                    <Input
+                                        _name="vacatingperiod"
+                                        _type="number"
+                                        _value={formData.vacatingperiod}
+                                        _onchange={handleChange}
+                                        _onblur={handleBlur}
+                                        _onclick={clearError}
+                                    />
+                                </div>
+                                <div className="flex flex-col gap-[5px] mb-2">
+                                    <Label text="Maintenance Fee (AED)" />
+                                    <Input
+                                        _name="maintfee"
+                                        _type="number"
+                                        _value={formData.maintfee}
+                                        _onchange={handleChange}
+                                        _onblur={handleBlur}
+                                        _onclick={clearError}
+                                    />
+                                </div>
+                                <div className="flex flex-col gap-[5px] mb-2">
+                                    <Label text="Paid By" />
+                                    <SelectOption
+                                        _options={paidbyOptions}
+                                        _selectedValue={formData?.paidby}
+                                        _onSelectChange={handleChange}
+                                        name="paidby"
+                                    // purpvalue={purpvalue}
+                                    />
+                                </div>
+                            </div>
+                            <button
+                                onClick={nextPage}
+                                type="button"
+                                data-te-ripple-init
+                                data-te-ripple-color="light"
+                                class="font-bold inline-block w-fit float-right rounded bg-primary px-6 pt-2.5 pb-2 text-lg leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]"
+                            >
+                                Next
+                            </button>
+                        </section>
+                    )}
+
+                    {/* <div className="relative block rounded-[25px] bg-white px-6 pt-12 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-20 mx-10">
+                        <div className="absolute bg-yellow-500 rounded-[5px] mt-[-36px] ml-[-36px]">
+                            <h1 className="text-white mx-5 text-lg">Contact Details</h1>
+                        </div>
+                        <div className="grid grid-rows-2 gap-5">
+                            <div className="flex flex-col gap-[5px] mb-2">
+                                <Label text="Listing Owner" />
+                                <Input
+                                    _name="listingOwner"
+                                    _type="text"
+                                    _value={formData.name}
+                                    _onchange={handleChange}
+                                    _onblur={handleBlur}
+                                    _onclick={clearError}
+                                    _placeholder="Zulfiqar Ali"
+                                    _disabled
+                                />
+                            </div>
+                            <div className="">
+                                
+                                <ToastContainer position="fixed" />
+                            </div>
+                        </div>
+                    </div> */}
+
+
                 </div>
             </div>
         </Layout>
