@@ -526,7 +526,7 @@ const PageOne = () => {
 
     return (
         <Layout>
-            <div className="h-screen overflow-x-hidden">
+            <div className="h-screen overflow-x-hidden bg-gradient-to-r from-gradient via-ordinary to-ordinary">
                 <div className="mx-10">
                     <section className="block rounded-[25px] bg-white px-6 pt-4 pb-4 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-20">
                         <ProgressButton step={1} />
