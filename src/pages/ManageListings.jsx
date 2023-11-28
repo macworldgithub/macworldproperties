@@ -76,7 +76,15 @@ const ManageListings = () => {
       .then((res) => setCatOptions(res.data.data));
 
     fetchData(setFilteredProperty);
-    setFilteredProperty(userProperty);
+    const newFilteredProperty = userProperty.filter(
+      (property) =>
+        (!inputValue ||
+          property.propertyDetails.title.toLowerCase().includes(inputValue)) &&
+        (selectedOption === "All" ||
+          property.typesAndPurpose.purpose === selectedOption) &&
+        (!catvalue || property.typesAndPurpose.category === catvalue)
+    );
+    setFilteredProperty(newFilteredProperty);
   }, []);
 
   const applyFilters = () => {

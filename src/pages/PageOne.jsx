@@ -269,36 +269,36 @@ const PageOne = () => {
             fieldErrors.referncenumber = "reference number is required";
         }
         if (!formData.title) {
-            fieldErrors.title = "Title is required";
+            fieldErrors.title = "title is required";
         }
         // if (!formData.arabicTitle) {
         //   return fieldErrors.arabicTitle = "Arabic title is required";
         // }
         if (!formData.desc) {
-            fieldErrors.desc = "Descrption is required";
+            fieldErrors.desc = "descrition is required";
         }
         // if (!formData.descArabic) {
         //   return fieldErrors.descArabic = "Arabic desc is required";
         // }
         if (!formData.area) {
-            fieldErrors.area = "Area is needed";
+            fieldErrors.area = "area is needed";
         }
         if (!formData.permitNo) {
             fieldErrors.permitNo = "permit no. is required";
         }
         if (!formData.address) {
-            fieldErrors.address = "Address is imp";
+            fieldErrors.address = "address is required.";
         }
 
         // if (!formData.referncenumber) {
         //   return fieldErrors.referncenumber = "Reference number is imp";
         // }
-        // if (!formData.price) {
-        //   fieldErrors.price = "Price needed";
-        // }
-        // if (!formData.location) {
-        //   fieldErrors.price = "Location needed";
-        // }
+        if (!formData.price) {
+          fieldErrors.price = "price is required";
+        }
+        if (!formData.location) {
+          fieldErrors.price = "location is required";
+        }
         // if (!catvalue) {
         //   fieldErrors.catvalue = "category is imp";
         // }
@@ -306,7 +306,7 @@ const PageOne = () => {
         //   fieldErrors.subcatvalue = "sub category is imp";
         // }
         // if (!purpvalue) {
-        //   fieldErrors.purpvalue = "purpose is imp";
+        //   fieldErrors.purpvalue = "purpose is reuired";
         // }
         // if (!ownvalue) {
         //   fieldErrors.ownvalue = "Ownership status needed";
@@ -334,14 +334,15 @@ const PageOne = () => {
         console.log('opopiiuuh', fieldErrors)
         if (Object.keys(fieldErrors)?.length > 0) {
             // There are errors, so you can handle them and display error messages
-            const errorKeys = Object.keys(fieldErrors);
+            // const errorKeys = Object.keys(fieldErrors);
+            const errorKeys = Object.values(fieldErrors)
             // Scroll to the top of the page when the toast is closed
             // Scroll to the top of the page when the toast is closed
             window.scroll({
                 top: 0,
                 behavior: "auto", // You can use 'auto' for instant scrolling
             }); // You can use 'auto' for instant scrolling
-
+            //  alert(errorKeys.join(", "))
             toast.error(errorKeys.join(", "), {
                 position: toast.POSITION.BOTTOM_CENTER,
             });
@@ -852,11 +853,12 @@ const PageOne = () => {
                             </div>
                             <div className="">
                                 
-                                <ToastContainer position="fixed" />
+                                
                             </div>
                         </div>
                     </div> */}
                     <section className="pb-10 mb-10">
+                    <ToastContainer position="fixed" />
                         <button
                             onClick={nextPage}
                             type="button"

@@ -28,7 +28,7 @@ const Dashboardpage3 = () => {
       setImages(state?.updateProperty?.upload?.images);
       setVideoLinks(state?.updateProperty?.upload?.videos);
     } else {
-      setImages(state?.form?.upload?.upload || []);
+      setImages(state?.form?.upload?.images || []);
       setVideoLinks(state?.form?.upload?.videos);
     }
   }, []);
@@ -58,7 +58,7 @@ const Dashboardpage3 = () => {
       swal({
         title: "Error",
         text: "At least 3 images required",
-        icon: "success",
+        icon: "error",
       });
       return
     }

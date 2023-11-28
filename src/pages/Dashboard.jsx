@@ -136,6 +136,40 @@ const Dashboard = () => {
   const NavigateTo = useNavigate();
 
   const prevPage = () => {
+    let tempArray = [
+      { name: "bedRooms", value: bedRooms },
+      { name: "bathRooms", value: bathRooms },
+      { name: "completionYear", value: completionYear },
+      { name: "elevatorBuilding", value: elevatorBuilding },
+      { name: "totalFloors", value: totalFloors },
+      { name: "otherRooms", value: otherRooms },
+      { name: "mainFeatures", value: mainFeatures },
+      { name: "facilities", value: facilities },
+      { name: "landArea", value: landArea },
+      { name: "nearbySchool", value: nearbySchool },
+      { name: "nearbyHospitals", value: nearbyHospitals },
+      { name: "nearbyMalls", value: nearbyMalls },
+      { name: "distance", value: distance },
+      { name: "nearbyTransport", value: nearbyTransport },
+      { name: "otherNearbyPlaces", value: otherNearbyPlaces },
+      { name: "parkingSpaces", value: parkingSpaces },
+      { name: "view", value: view },
+      { name: "floor", value: floor },
+      { name: "petPolicy", value: petPolicy },
+    ];
+    let temp = [];
+    if (ameneties?.length > 0) {
+      temp = [...ameneties, ...tempArray];
+    } else {
+      temp = tempArray
+    }
+
+    setAmeneties(temp);
+    if (state?.updatePropertyToggle) {
+      dispatch({ type: "UPDATE_AMENITIES", payload: temp });
+    } else {
+      dispatch({ type: "ADD_AMENITIES", payload: temp });
+    }
     NavigateTo("/page-one");
     setStepcount(stepcount - 1);
   };
