@@ -232,7 +232,8 @@ const PropertyDetails = ({
             >
               <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                // url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                url='https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png'
               />
 
               <Marker icon={iconPerson} position={position}>

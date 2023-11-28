@@ -525,7 +525,7 @@ const PageOne = () => {
 
     return (
         <Layout>
-            <div className="h-screen overflow-x-hidden pb-12">
+            <div className="h-screen overflow-x-hidden">
                 <div className="mx-10">
                     <section className="block rounded-[25px] bg-white px-6 pt-4 pb-4 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-20">
                         <ProgressButton step={1} />
@@ -575,8 +575,8 @@ const PageOne = () => {
                                     _name="location"
                                     _placeholder="Location"
                                     ref={ref}
-                                    // _onchange={handleChange}
-                                    // _value={formData.location}
+                                    _onchange={handleChange}
+                                    _value={formData.location}
                                 />
 
                                 <Input
@@ -596,7 +596,9 @@ const PageOne = () => {
                                     center={{ lat: 24.43214670001102, lng: 54.407007002975796 }}
                                 >
                                     <TileLayer
-                                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+
+                                        url='https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png'
+                                        // url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                                         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                                     />
                                     <LocationMarker
@@ -755,7 +757,7 @@ const PageOne = () => {
                     </section>
                     {/* For Rent Section */}
                     {/* formData?.purpose == "forRent" */}
-                    {true && (
+                    {formData?.purpose == "forRent" && (
                         <section className="mt-8 pb-8">
                             <span className="rounded text-white text-lg bg-yellow-500 py-2 px-4">Rental Details</span>
                             <div className="grid lg:grid-cols-3 gap-5 mt-4">
@@ -826,15 +828,7 @@ const PageOne = () => {
                                     />
                                 </div>
                             </div>
-                            <button
-                                onClick={nextPage}
-                                type="button"
-                                data-te-ripple-init
-                                data-te-ripple-color="light"
-                                class="font-bold inline-block w-fit float-right rounded bg-primary px-6 pt-2.5 pb-2 text-lg leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]"
-                            >
-                                Next
-                            </button>
+
                         </section>
                     )}
 
@@ -862,8 +856,17 @@ const PageOne = () => {
                             </div>
                         </div>
                     </div> */}
-
-
+                    <section className="pb-10 mb-10">
+                        <button
+                            onClick={nextPage}
+                            type="button"
+                            data-te-ripple-init
+                            data-te-ripple-color="light"
+                            class="font-bold inline-block w-fit float-right rounded bg-primary px-6 pt-2.5 pb-2 mb-10 text-lg leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]"
+                        >
+                            Next
+                        </button>
+                    </section>
                 </div>
             </div>
         </Layout>

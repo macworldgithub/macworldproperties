@@ -76,7 +76,7 @@ const ImpressionsGraph = ({ impression, click }) => {
                 },
 
                 title: {
-                    text: "Largest US Cities By Population",
+                    text: "Analytics",
                     align: "center",
                     margin: 20,
                     offsetY: 20,

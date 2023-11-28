@@ -188,7 +188,6 @@ function Signup() {
                     placeholder="Enter phone number"
                     value={formData.phone}
                     onChange={(e) => {
-                      (e);
                       setFormData((state) => ({ ...state, phoneNumber: e }))
 
                     }

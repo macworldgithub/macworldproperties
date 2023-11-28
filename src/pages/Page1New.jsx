@@ -826,17 +826,18 @@ const Page1New = () => {
                                     />
                                 </div>
                             </div>
-                            <button
-                                onClick={nextPage}
-                                type="button"
-                                data-te-ripple-init
-                                data-te-ripple-color="light"
-                                class="font-bold inline-block w-fit float-right rounded bg-primary px-6 pt-2.5 pb-2 text-lg leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]"
-                            >
-                                Next
-                            </button>
                         </section>
                     )}
+
+                    <button
+                        onClick={nextPage}
+                        type="button"
+                        data-te-ripple-init
+                        data-te-ripple-color="light"
+                        class="font-bold inline-block w-fit float-right rounded bg-primary px-6 pt-2.5 pb-2 text-lg leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]"
+                    >
+                        Next
+                    </button>
 
                     {/* <div className="relative block rounded-[25px] bg-white px-6 pt-12 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-20 mx-10">
                         <div className="absolute bg-yellow-500 rounded-[5px] mt-[-36px] ml-[-36px]">
