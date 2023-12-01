@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useLayoutEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import '../App.css'
 
 import { Store } from "../context/store";
 import Layout from "../components/Layout";
@@ -394,15 +393,17 @@ const Dashboard = () => {
   return (
     <Layout>
       <div className="bg-gradient-to-r bg-black from-gradient via-ordinary to-ordinary h-screen overflow-x-hidden">
-        <div className="mx-10 bg-white px-6 py-6 block rounded-[15px]">
-          <section className="block rounded-[25px] bg-white px-6 pt-4 pb-4 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-20">
-            <ProgressButton step={2} />
-          </section>
+        <div className="relative inset-0 px-5 py-7">
+          <div className="relative w-[95%] block rounded-[25px] bg-white px-6 py-12 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-20 mx-10">
+            <ProgressButton step={stepcount} />
+          </div>
 
-          <section className="mt-12">
-            <span className="rounded text-white text-lg bg-yellow-500 py-2 px-4">Recreation and Family</span>
-            <div className="grid grid-rows-5 md:grid-rows-3 lg:grid-rows-2 md:grid-cols-2 lg:grid-cols-3 lg:grid-flow-col lg:gap-1 lg:gap-x-20 mx-auto mt-5">
-              <Customisedcheckbox name="Barbeque Area" value="Barbeque" handleChange={handleChange} />
+          <div className="relative w-[95%] block rounded-[25px] bg-white px-6 py-12 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-20 mx-10">
+            <div className="absolute bg-yellow-400 rounded-[5px] mt-[-36px] ml-[-36px] mb-[40px]">
+              <h1 className="text-black mx-5 text-lg">Recreation and Family</h1>
+            </div>
+            <div className="grid grid-rows-5 gap-6 lg:grid-rows-2 lg:grid-cols-3 lg:grid-flow-col lg:gap-6 lg:gap-x-20 mx-auto mt-6">
+              {/* {/* <Customisedcheckbox name="Barbeque Area" value="Barbeque" handleChange={handleChange} /> */}
               <Customisedcheckbox
                 name="Lawn or Garden"
                 value="Garden"
@@ -424,11 +425,14 @@ const Dashboard = () => {
                 handleChange={handleChange}
               />
             </div>
-          </section>
+          </div>
 
-          <section className="mt-8">
-            <span className="rounded text-white text-lg bg-yellow-500 py-2 px-4">Health and Fitness</span>
-            <div className="grid grid-rows-5 lg:grid-rows-2 md:grid-rows-3 md:grid-cols-2 lg:grid-cols-3 lg:grid-flow-col lg:gap-1 lg:gap-x-20 mx-auto mt-5">
+          <div className="relative w-[95%] block rounded-[25px] bg-white px-6 py-12 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-20 mx-10">
+            <div className="absolute bg-yellow-400 rounded-[5px] mt-[-36px] ml-[-36px] mb-[40px]">
+              <h1 className="text-black mx-5 text-lg">Health and Fitness</h1>
+            </div>
+
+            <div className="grid grid-rows-7 gap-4 lg:grid-rows-3 lg:grid-cols-3 lg:grid-flow-row lg:gap-6 lg:gap-x-10 mx-auto mt-6">
               <Customisedcheckbox
                 name="First Aid Medical Center"
                 value="First Aid Medical Center"
@@ -455,17 +459,20 @@ const Dashboard = () => {
                 value="Swimming Pool"
                 handleChange={handleChange}
               />
+              <br />
               <Customisedcheckbox
                 name="Facilities for Disabled"
                 value="Facilities for Disabled"
                 handleChange={handleChange}
               />
             </div>
-          </section>
+          </div>
 
-          <section className="mt-8">
-            <span className="rounded text-white text-lg bg-yellow-500 py-2 px-4">Laundry and Kitchen</span>
-            <div className="grid grid-rows-5 lg:grid-rows-1 md:grid-rows-2 md:grid-cols-2 lg:grid-cols-3 lg:grid-flow-row lg:gap-1 lg:gap-x-20 mx-auto mt-5">
+          <div className="relative w-[95%]  block rounded-[25px] bg-white px-6 py-[80px] shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-20 mx-10">
+            <div className="absolute bg-yellow-400 rounded-[5px] mt-[-36px] ml-[-36px] mb-[40px]">
+              <h1 className="text-black mx-5 text-lg ">Laundry and Kitchen</h1>
+            </div>
+            <div className="grid grid-rows-3 gap-4 lg:grid-cols-3 lg:grid-rows-1 lg:grid-flow-row lg:gap-6 lg:gap-x-20 mx-auto mt-6">
               <Customisedcheckbox
                 name="Laundry Room"
                 value="Lanudry Room"
@@ -482,11 +489,13 @@ const Dashboard = () => {
                 handleChange={handleChange}
               />
             </div>
-          </section>
+          </div>
 
-          <section className="mt-8">
-            <span className="rounded text-white text-lg bg-yellow-500 py-2 px-4">Building</span>
-            <div className="grid grid-rows-5 lg:grid-rows-2 md:grid-rows-2 md:grid-cols-2 lg:grid-cols-3 lg:grid-flow-row lg:gap-1 md:gap-x-10  lg:gap-x-20 mx-auto mt-5">
+          <div className="relative w-[95%] block rounded-[25px] bg-white px-6 py-12 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-20 mx-10">
+            <div className="absolute bg-yellow-400 rounded-[5px] mt-[-36px] ml-[-36px] mb-[40px]">
+              <h1 className="text-black mx-5 text-lg">Building</h1>
+            </div>
+            <div className="grid grid-rows-3 gap-4 lg:grid-cols-3 lg:grid-flow-row lg:gap-6 lg:gap-x-20 mx-auto">
               <Customisedcheckbox
                 name="Prayer Room"
                 value="Prayer Room"
@@ -536,12 +545,15 @@ const Dashboard = () => {
                 value={elevatorBuilding}
                 onChange={setElevatorBuilding}
               />
+              {/* <CustomisedInput name="totalFloors" label="Total Floors" type="number" placeholder="" value={formData.totalFoors} onChange={handleInput} /> */}
             </div>
-          </section>
+          </div>
 
-          <section className="mt-10">
-            <span className="rounded text-white text-lg bg-yellow-500 py-2 px-4">Business and Security</span>
-            <div className="grid grid-rows-5 lg:grid-rows-2 md:grid-rows-2 md:grid-cols-2 lg:grid-cols-3 lg:grid-flow-row lg:gap-1 lg:gap-x-20 mx-auto mt-5">
+          <div className="relative w-[95%] block rounded-[25px] bg-white px-6 pt-12 pb-8 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-20 mx-10">
+            <div className="absolute bg-yellow-400 rounded-[5px] mt-[-36px] ml-[-36px] mb-[40px]">
+              <h1 className="text-black mx-5 text-lg">Business and Security</h1>
+            </div>
+            <div className="grid grid-rows-5 gap-4 lg:grid-rows-2 lg:grid-cols-3 lg:grid-flow-rows lg:gap-6 lg:gap-x-20 mx-auto my-6">
               <Customisedcheckbox
                 name="Business Center"
                 value="Business Center"
@@ -563,11 +575,14 @@ const Dashboard = () => {
                 handleChange={handleChange}
               />
             </div>
-          </section>
+          </div>
 
-          <section className="mt-8">
-            <span className="rounded text-white text-lg bg-yellow-500 py-2 px-4">Miscellaneous</span>
-            <div className="grid grid-rows-5 lg:grid-rows-2 md:grid-rows-2 md:grid-cols-2 lg:grid-cols-3 lg:grid-flow-row gap-3 lg:gap-x-20 mx-auto mt-5">
+          <div className="relative w-[95%] block rounded-[25px] bg-white px-6 pt-12 pb-8 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-20 mx-10">
+            <div className="absolute bg-yellow-400 rounded-[5px] mt-[-36px] ml-[-36px] mb-[40px]">
+              <h1 className="text-black mx-5 text-lg">Miscellaneous</h1>
+            </div>
+
+            <div className="grid grid-rows-3 gap-4 lg:grid-cols-3 lg:grid-rows-7 lg:grid-flow-row lg:gap-6 lg:gap-x-20 mx-auto">
               <CustomisedInput
                 name="view"
                 label="View"
@@ -707,11 +722,13 @@ const Dashboard = () => {
                 handleChange={handleChange}
               />
             </div>
-          </section>
+          </div>
 
-          <section className="mt-10">
-            <span className="rounded text-white text-lg bg-yellow-500 py-2 px-4">Technology</span>
-            <div className="grid grid-rows-5 lg:grid-rows-1 md:grid-rows-2 md:grid-cols-2 lg:grid-cols-3 lg:grid-flow-row gap-3 lg:gap-x-20 mx-auto mt-5">
+          <div className="relative w-[95%] block rounded-[25px] bg-white px-6 pt-12 pb-8 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-20 mx-10">
+            <div className="absolute bg-yellow-400 rounded-[5px] mt-[-36px] ml-[-36px] mb-[40px]">
+              <h1 className="text-black mx-5 text-lg">Technology</h1>
+            </div>
+            <div className="grid grid-rows-3 gap-4 lg:grid-cols-3 lg:grid-rows-1 lg:grid-flow-row lg:gap-6 lg:gap-x-20 mx-auto">
               <Customisedcheckbox
                 name="Broadband Internet"
                 value="Braodband Internet"
@@ -728,11 +745,13 @@ const Dashboard = () => {
                 handleChange={handleChange}
               />
             </div>
-          </section>
+          </div>
 
-          <section className="mt-8">
-            <span className="rounded text-white text-lg bg-yellow-500 py-2 px-4">Technology</span>
-            <div className="grid grid-rows-5 lg:grid-rows-2 md:grid-rows-2 md:grid-cols-2 lg:grid-cols-3 lg:grid-flow-row gap-3 lg:gap-x-20 mx-auto mt-5">
+          <div className="relative w-[95%] block rounded-[25px] bg-white px-6 pt-12 pb-8 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-20 mx-10">
+            <div className="absolute bg-yellow-400 rounded-[5px] mt-[-36px] ml-[-36px] mb-[40px]">
+              <h1 className="text-black mx-5 text-lg">Features</h1>
+            </div>
+            <div className="grid grid-rows-7 gap-4 lg:grid-rows-3 lg:grid-cols-3 lg:grid-flow-row lg:gap-6lg: gap-x-20 mx-auto">
               <Customisedcheckbox
                 name="Double Glazed Windows"
                 value="Double Glazed Windows"
@@ -778,12 +797,16 @@ const Dashboard = () => {
                 onChange={setParkingSpaces}
               />
             </div>
-          </section>
+          </div>
 
-          <section className="mt-8">
-            <span className="rounded text-white text-lg bg-yellow-500 py-2 px-4">Cleaning and Maintenance</span>
-             <div className="grid grid-rows-5 lg:grid-rows-2 md:grid-rows-2 md:grid-cols-2 lg:grid-cols-3 lg:grid-flow-row gap-3 lg:gap-x-20 mx-auto mt-5">
-             <Customisedcheckbox
+          <div className="relative w-[95%] block rounded-[25px] px-6 bg-white  pt-12 pb-8 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-20 mx-10">
+            <div className="absolute bg-yellow-400 rounded-[5px] mt-[-36px] ml-[-36px] mb-[40px]">
+              <h1 className="text-black mx-5 text-lg">
+                Cleaning and Maintenance
+              </h1>
+            </div>
+            <div className="grid grid-rows-3 gap-4 lg:grid-cols-3 lg:grid-rows-1 lg:grid-flow-row lg:gap-6 lg:gap-x-10 mx-auto">
+              <Customisedcheckbox
                 name="Waste Disposal"
                 value="Waste Disposal"
                 handleChange={handleChange}
@@ -798,8 +821,8 @@ const Dashboard = () => {
                 value="Cleaning Services"
                 handleChange={handleChange}
               />
-             </div>
-            </section>
+            </div>
+          </div>
 
           <div className="float-right mr-[10%]">
             <div className="flex justify-center items-center gap-4">
@@ -850,12 +873,12 @@ export const Customisedcheckbox = ({ name, value, handleChange }) => {
   const { state, dispatch } = useContext(Store);
   return (
     <div className="mb-[0.15rem] block min-h-[1.5rem] pl-[0.5rem] ">
-      <label className="inline-flex items-center mb-5 cursor-pointer checkbox-wrapper-2">
+      <label class="absolute inline-flex items-center mb-5 cursor-pointer">
         <input
           type="checkbox"
           value={value}
           onChange={handleChange}
-          className="sr-only peer sc-gJwTLC ikxBAC"
+          class="sr-only peer"
           defaultChecked={handleChecked(
             state?.updatePropertyToggle
               ? state?.updateProperty?.amenities
@@ -863,7 +886,7 @@ export const Customisedcheckbox = ({ name, value, handleChange }) => {
             value
           )}
         />
-        {/* <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-yellow-100 dark:peer-focus:ring-yellow-400 rounded-lg peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-lg after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-yellow-400"></div> */}
+        <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-yellow-100 dark:peer-focus:ring-yellow-400 rounded-lg peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-lg after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-yellow-400"></div>
         <span class="ml-3 text-md font-medium text-gray-900 dark:text-gray-300">
           {name}
         </span>
@@ -917,8 +940,8 @@ const CustomisedInput = ({
   onblur,
 }) => {
   return (
-    <div className="md:mb-5 lg:mb-0">
-      <label class="block mb-2 text-md font-medium text-gray-500 dark:text-white">
+    <div>
+      <label class="block mb-2 text-md font-medium text-gray-900 dark:text-white">
         {label}
       </label>
       <input
@@ -927,7 +950,7 @@ const CustomisedInput = ({
         value={value}
         onFocus={onfocus}
         onBlur={onblur}
-        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg placeholder:text-black placeholder:text-[15px] focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg placeholder:text-black placeholder:text-[15px] focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
         placeholder={placeholder}
         required
         name={name}
@@ -936,72 +959,3 @@ const CustomisedInput = ({
     </div>
   );
 };
-
-{/* <div class="checkbox-wrapper-2">
-  <input type="checkbox" class="sc-gJwTLC ikxBAC">
-</div>
-
-<style>
-  .checkbox-wrapper-2 .ikxBAC {
-    appearance: none;
-    background-color: #dfe1e4;
-    border-radius: 72px;
-    border-style: none;
-    flex-shrink: 0;
-    height: 20px;
-    margin: 0;
-    position: relative;
-    width: 30px;
-  }
-
-  .checkbox-wrapper-2 .ikxBAC::before {
-    bottom: -6px;
-    content: "";
-    left: -6px;
-    position: absolute;
-    right: -6px;
-    top: -6px;
-  }
-
-  .checkbox-wrapper-2 .ikxBAC,
-  .checkbox-wrapper-2 .ikxBAC::after {
-    transition: all 100ms ease-out;
-  }
-
-  .checkbox-wrapper-2 .ikxBAC::after {
-    background-color: #fff;
-    border-radius: 50%;
-    content: "";
-    height: 14px;
-    left: 3px;
-    position: absolute;
-    top: 3px;
-    width: 14px;
-  }
-
-  .checkbox-wrapper-2 input[type=checkbox] {
-    cursor: default;
-  }
-
-  .checkbox-wrapper-2 .ikxBAC:hover {
-    background-color: #c9cbcd;
-    transition-duration: 0s;
-  }
-
-  .checkbox-wrapper-2 .ikxBAC:checked {
-    background-color: #6e79d6;
-  }
-
-  .checkbox-wrapper-2 .ikxBAC:checked::after {
-    background-color: #fff;
-    left: 13px;
-  }
-
-  .checkbox-wrapper-2 :focus:not(.focus-visible) {
-    outline: 0;
-  }
-
-  .checkbox-wrapper-2 .ikxBAC:checked:hover {
-    background-color: #535db3;
-  }
-</style> */}
