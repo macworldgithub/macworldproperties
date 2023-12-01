@@ -152,7 +152,7 @@ const PageOne = () => {
                 .catch(console.error);
         },
         options: {
-            types: ["(regions)"],
+            types: ['geocode'],
             componentRestrictions: { country: "ae" },
         },
     });
