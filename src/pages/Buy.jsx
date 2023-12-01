@@ -86,7 +86,7 @@ const Buy = () => {
     }, position);
     return null;
   };
-  const position = [location?.longitude || 51.505, location?.latitude || -0.09];
+  const position = [location?.longitude || 25.26027, location?.latitude ||55.3094 ];
   const [layout, setLayout] = useState("grid");
 
   return (

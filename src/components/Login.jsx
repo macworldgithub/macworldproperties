@@ -47,7 +47,7 @@ function Admin({ setIsloggedIn }) {
         );
         setIsloggedIn(true);
         dispatch({ type: "AUTHORIZE_USER", payload: true });
-        navigate("/");
+        navigate("/", { replace: true });
       })
       .catch((err) => {
         console.log(err.response);

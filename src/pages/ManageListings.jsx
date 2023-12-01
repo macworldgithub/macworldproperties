@@ -75,16 +75,7 @@ const ManageListings = () => {
       .get(`${process.env.REACT_APP_SERVERURL}/lov/category`)
       .then((res) => setCatOptions(res.data.data));
 
-    fetchData(setFilteredProperty);
-    const newFilteredProperty = userProperty.filter(
-      (property) =>
-        (!inputValue ||
-          property.propertyDetails.title.toLowerCase().includes(inputValue)) &&
-        (selectedOption === "All" ||
-          property.typesAndPurpose.purpose === selectedOption) &&
-        (!catvalue || property.typesAndPurpose.category === catvalue)
-    );
-    setFilteredProperty(newFilteredProperty);
+    fetchData( );
   }, []);
 
   const applyFilters = () => {
