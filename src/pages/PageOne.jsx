@@ -113,7 +113,7 @@ const PageOne = () => {
         contractperiod: 0,
         maintfee: 0,
         vacatingperiod: 0,
-        price: 1000,
+        price: 0,
         bedRooms: 0,
         bathRooms: 0,
         //  ================ New Values =============
@@ -262,7 +262,7 @@ const PageOne = () => {
 
     const nextPage = () => {
         const data = JSON.parse(localStorage.getItem("userData"));
-
+        console.log('qwer', formData);
         const fieldErrors = {};
 
         if (!formData.referncenumber) {
@@ -476,7 +476,7 @@ const PageOne = () => {
     const handleDescChange = (e) => {
         const { name, value } = e.target;
 
-        if (value.length <= 1000) {
+        if (value.length <= 2000) {
             setFormData((prevData) => ({
                 ...prevData,
                 [name]: value,
@@ -650,6 +650,7 @@ const PageOne = () => {
                             <div className="flex flex-col gap-[5px] mb-2">
                                 <Label text="Inclusive Price" />
                                 <Input
+                                _placeholder="1000"
                                     _name="price"
                                     _type="number"
                                     _value={formData.price}
@@ -707,7 +708,7 @@ const PageOne = () => {
                                         } border-2 border-grey shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]  placeholder-slate-40 rounded-lg  resize-both hover:border-green-600 overflow-auto`}
                                 />
                                 <div className="text-sm text-gray-500">
-                                    {formData?.desc?.length}/1000 characters
+                                    {formData?.desc?.length}/2000 characters
                                 </div>
                                 <div className="text-red-800">{error.desc}</div>
                             </div>
