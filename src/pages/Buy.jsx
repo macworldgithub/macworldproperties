@@ -181,11 +181,11 @@ const Buy = () => {
       </div>
       <div
         className={`grid my-20 h-full ${layout === "grid" && "lg:grid-cols-4 gap-x-20"
-          } ${layout === "list" && "lg:grid-cols-3 gap-10"} px-20`}
+          } ${layout === "list" && "lg:grid-cols-3 gap-10"} px-3`}
       >
         {layout === "grid" ? (
           // <div className="flex flex-wrap h-full w-full col-span-3 gap-10">
-          <div className="grid col-span-3 grid-cols-2 grid-rows-grid gap-x-10">
+          <div className="grid col-span-3 grid-cols-1 gap-y-8 md:grid-cols-2 content-center gap-x-10">
             {propertydataArr?.length > 0 ? propertydataArr?.map((item) => (
               <ImpressionClickTrackerHOC
                 clickEvent={`ADD-TO-CART`}
@@ -193,7 +193,7 @@ const Buy = () => {
                 propertyId={item?._id}
                 userId={item?.ownerId}
               >
-                <div className="col-span-1 h-[380px]">
+                <div className="col-span-1">
                   <SinglePropertyCard
                     propIds={item?._id}
                     name={item?.propertyDetails.title}

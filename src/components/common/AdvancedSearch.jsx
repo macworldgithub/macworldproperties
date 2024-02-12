@@ -117,7 +117,7 @@ const AdvancedSearch = ({ category, showPage }) => {
     <>
       <div className="px-12 py-4 bg-white lg:sticky lg:top-0 lg:z-50 w-full border-b-2 border-grey">
         <div className="w-full xl:w-1/5 mb-2 flex flex-col justify-center items-center mx-auto">
-          <h1 className="font-bold  text-footer tracking-wider text-lg xl:text-3xl text-center">
+          <h1 className="font-bold  text-footer tracking-wider text-lg xl:text-2xl text-center">
             Advanced Search
           </h1>
           <h1 className="font-semibold text-primary tracking-wider text-sm xl:text-lg text-center">

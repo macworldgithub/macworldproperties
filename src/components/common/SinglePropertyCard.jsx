@@ -17,14 +17,14 @@ const SingleProductCard = ({
 }) => {
   return (
     <div
-      className={`basis-[45%] shadow-light border rounded-lg h-[370px]  overflow-hidden relative group`}
+      className={`basis-[45%] shadow-light border rounded-lg md:h-[370px] overflow-hidden relative group`}
     >
       <div className="group !opacity-100 overflow-hidden relative">
         <Link to={`/property-information/${propIds}`} className="!opacity-100">
           <img
             src={image}
             alt={name}
-            className="w-full h-fit md:h-[250px] object-cover group-hover:scale-125 transition-a"
+            className="w-full h-[190px] md:h-[250px] object-cover group-hover:scale-125 transition-a"
           />
         </Link>
         <CardHoverIcons />
@@ -43,7 +43,7 @@ const SingleProductCard = ({
         >
           <h1 className="text-lg font-bold capitalize ">{name}</h1>
         </Link>
-        <div className="flex justify-between mt-3">
+        <div className="flex justify-between flex-col md:flex-row mt-3">
           <div className="flex-align-center gap-x-2">
             <div className="icon-box !w-7 !h-7 bg-primary/20 hover:!bg-primary/40 text-primary">
               <BiBed />
