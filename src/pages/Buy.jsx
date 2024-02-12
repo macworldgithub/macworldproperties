@@ -130,7 +130,7 @@ const Buy = () => {
           </div>
         </div>
       </div>
-      <div className="flex justify-cente">
+      <div className="flex justify-center">
         <div className=" w-[90%] justify-start flex-align-center mt-2 mb-2">
           <label className="themeSwitcherTwo shadow-card relative inline-flex cursor-pointer select-none items-center justify-center p-1 flex-col md:flex-row">
             <input

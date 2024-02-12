@@ -46,7 +46,7 @@ const ListPropertyCard = ({
             <p>{location.address}</p>
           </div>
           <p className="mt-2">{desc}</p>
-          <div className="flex justify-between mt-3">
+          <div className="flex justify-between flex-wrap gap-1 items-center justify-center mt-3">
             <div className="flex-align-center gap-x-2">
               <div className="icon-box !w-7 !h-7 bg-primary/20 hover:!bg-primary/40 text-primary">
                 <BiBed />
@@ -66,7 +66,7 @@ const ListPropertyCard = ({
               <p className="text-sm">{category}</p>
             </div>
           </div>
-          <div className="grid grid-cols-3 gap-[2rem] col-span-3 mt-10 mb-5">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-[2rem] col-span-3 mt-10 mb-5">
             <button className="btn !rounded-[2px] text-white bg-footer3 !py-2">
               Payment Plan
             </button>

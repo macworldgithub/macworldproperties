@@ -252,7 +252,7 @@ const PropertyDetails = ({
             </div>
           </div>
           <hr className="mb-[15px]" />
-          <div className="rounded-lg bg-slate-200 bg-[#c8e1f0] border-2 border-gray-300 px-6 py-12 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] mb-[2vh] backdrop-blur-[30px] flex flex-col">
+          <div className="rounded-lg bg-slate-200  border-2 border-gray-300 px-6 py-12 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] mb-[2vh] backdrop-blur-[30px] flex flex-col">
             <div className="grid md:grid-cols-2 gap-8">
               <div className="grid grid-rows-3 gap-3 lg:cols-span-1 sm:rows-span-1">
                 <div className="flex flex-col">
