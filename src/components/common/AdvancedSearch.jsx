@@ -1,3 +1,4 @@
+import './AdvanceSearch.css'
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useContext } from "react";
@@ -82,7 +83,7 @@ const AdvancedSearch = ({ category, showPage }) => {
       bedrooms,
       bathrooms,
       price,
-      showPage == "rent" ? "forRent" : showPage 
+      showPage == "rent" ? "forRent" : showPage
     );
   };
   useEffect(() => {
@@ -102,18 +103,7 @@ const AdvancedSearch = ({ category, showPage }) => {
     category,
     showPage,
   ]);
-  // if I want to clear all the filters on category change
-  // useEffect(() => {
-  //   handleSearchClick(
-  //     category || "",
-  //     "",
-  //     area || "",
-  //     bedrooms || "",
-  //     bathrooms || "",
-  //     price || "",
-  //     showPage
-  //   );
-  // }, [category]);
+
   const bathRoomsData = [
     { key: "All", value: "All" },
     { key: 1, value: 1 },
@@ -134,7 +124,7 @@ const AdvancedSearch = ({ category, showPage }) => {
             Find Your Dream Property!
           </h1>
         </div>
-        <div className="flex justify-center flex-row flex-wrap lg:flex-nowrap px-12 gap-x-8 py-2 w-full ">
+        <div className="flex justify-center flex-row flex-wrap items-center lg:flex-wrap px-0 gap-x-8 py-2 w-full custom-input">
           <Box sx={{ minWidth: 180 }}>
             <FormControl fullWidth size="small">
               <InputLabel id="demo-simple-select-label" className="bg-white">
@@ -177,21 +167,6 @@ const AdvancedSearch = ({ category, showPage }) => {
             maxPriceFn={setMaxPriceSelected}
             setValueFn={setPrice}
           />
-          {/* <div className="w-full xl:w-1/5 text-sm mb-2">
-            <select
-              name=""
-              id=""
-              onChange={(e) => setprice(e.target.value)}
-              className="filter rounded-lg border-2 border-grey shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] bg-transparent hover:border-2 hover:border-yellow-400 placeholder-footer bg-white uppercase"
-            >
-              <option value="">Price Range</option>
-              <option value={450000}>AED 450000</option>
-              <option value={500000}>AED 500000</option>
-              <option value={5450000}>AED 5450000</option>
-              <option value={78000}>AED 78000</option>
-              <option value={559999}>AED 559999</option>
-            </select>
-          </div> */}
 
           <PriceAreaRangeField
             typePrice={false}
@@ -203,7 +178,7 @@ const AdvancedSearch = ({ category, showPage }) => {
           />
           <Box sx={{ minWidth: 180 }}>
             <FormControl fullWidth size="small">
-              <InputLabel id="demo-simple-select-label" className="bg-white">
+              <InputLabel id="demo-simple-select-label" className="bg-white mb-4">
                 Bathrooms
               </InputLabel>
               <Select

@@ -130,9 +130,9 @@ const Buy = () => {
           </div>
         </div>
       </div>
-      <div className="flex justify-center">
+      <div className="flex justify-cente">
         <div className=" w-[90%] justify-start flex-align-center mt-2 mb-2">
-          <label className="themeSwitcherTwo shadow-card relative inline-flex cursor-pointer select-none items-center justify-center p-1">
+          <label className="themeSwitcherTwo shadow-card relative inline-flex cursor-pointer select-none items-center justify-center p-1 flex-col md:flex-row">
             <input
               type="checkbox"
               className="sr-only"
@@ -193,7 +193,7 @@ const Buy = () => {
                 propertyId={item?._id}
                 userId={item?.ownerId}
               >
-                <div className="col-span-1 h-[380px">
+                <div className="col-span-1 h-[380px]">
                   <SinglePropertyCard
                     propIds={item?._id}
                     name={item?.propertyDetails.title}
