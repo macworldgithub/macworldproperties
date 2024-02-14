@@ -4,7 +4,7 @@ import { FiCheck } from 'react-icons/fi';
 
 const PropertyIntroTwo = () => {
     return (
-        <div className="pt-16 pb-20">
+        <div className="pt-16 md:pb-20">
             <div className="flex flex-wrap gap-24">
                 <div className="relative flex-1 basis-[18rem] border mx-5">
                     <img
@@ -18,7 +18,7 @@ const PropertyIntroTwo = () => {
                         className="absolute object-cover w-48 h-64 border-4 border-white rounded-lg sm:w-72 sm:h-80 dark:border-dark -bottom-20 -right-2 md:-right-20"
                     />
                 </div>
-                <div className="relative flex-1 basis-[22rem]">
+                <div className="relative flex-1 basis-[22rem] p-3 lg:p-0">
                     <h1 className="heading">No Matter Where You Are,
                         Your Property Is In Safe Hands</h1>
                     <div className="mt-4">

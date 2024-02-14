@@ -49,8 +49,8 @@ const Explore3 = () => {
       }}
     >
       <LargeScreenWrapper>
-        <div className="grid gap-4 gap-y-6 xla:grid-cols-3 xla:grid-rows-3 lg:grid-cols-3 lg:grid-rows-3 md:grid-cols-3 md:grid-rows-3 sm:grid-cols-1 lg:grid-flow-col md:mt-[5vh] h-[80%] lg:w-[97%] sma:w-screen sma2:w-screen sma3:w-screen sma2:p-6 md:w-[95%] md:mx-auto md:p-0 xla:w-[80%] 2xla:w-[100%]  p-4">
-          <div className=" h-[260px] md:col-span-1   ">
+        <div className="grid gap-4 gap-y-6 xla:grid-cols-3 xla:grid-rows-3 lg:grid-cols-3 lg:grid-rows-3 md:grid-cols-3 sm:grid-cols-1 lg:grid-flow-col md:mt-[5vh] h-[80%] lg:w-[97%] sma:w-screen sma2:w-screen sma3:w-screen sma2:p-6 md:w-[95%] md:mx-auto md:p-0 xla:w-[80%] 2xla:w-[100%]  p-4">
+          <div className=" md:h-[260px] md:mb-2 md:col-span-1   ">
             <div className="flex flex-col justify-center  ml-4 h-full sma2:items-start sma2:ml-0">
               <h1 className="text-black-500 text-2xl text-bold mb-4">
                 Residential

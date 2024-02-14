@@ -16,7 +16,7 @@ const SingleLink = ({ id, linkText, url, subLinks }) => {
         to={url}
         end
         key={id}
-        className="relative w-full px-3 font-semibold py-[0.6rem] lg:px-4 flex-align-center gap-x-1 link"
+        className="relative w-full px-3 font-semibold py-[0.6rem] flex-align-center gap-x-1 link"
         onMouseOver={handleDropDown}
       >
         {linkText}

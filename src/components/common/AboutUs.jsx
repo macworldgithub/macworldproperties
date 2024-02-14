@@ -13,7 +13,7 @@ const AboutUs = () => {
           <img
             src="/images/About2.jpg"
             alt=""
-            className="absolute object-cover w-48 h-64 border-4 border-white rounded-lg sm:w-72 sm:h-80 dark:border-dark -bottom-20 -right-2 md:-right-20"
+            className="absolute object-cover w-48 h-64 border-4 border-white rounded-lg sm:w-72 sm:h-80 dark:border-dark -bottom-20 -right-2 lg:-right-20"
           />
         </div>
         <div className="relative flex-1 basis-[22rem]">

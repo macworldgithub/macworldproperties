@@ -68,10 +68,10 @@ const Footer = () => {
             <div className="justify-center my-3 flex-align-center">
               <input
                 type="text"
-                className="px-4 py-[0.35rem] card-bordered dark:shadow-none outline-none bg-transparent rounded-lg border-dark"
+                className="px-4 py-[0.35rem] card-bordered dark:shadow-none outline-none bg-transparent rounded-lg border-dark !border-r-0"
                 placeholder="Email Address.."
               />
-              <button className="-ml-2 btn bg-yellow-500">subscribe</button>
+              <button className="-ml-2 text-sm btn bg-yellow-500 !p-2">subscribe</button>
             </div>
           </div>
         </div>

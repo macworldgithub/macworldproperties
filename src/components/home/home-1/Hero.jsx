@@ -44,7 +44,7 @@ const Hero = () => {
         </div>
       </div>
       </div>
-      <div className="absolute bottom-10 w-full">
+      <div className="my-10 lg:my-0 lg:absolute  lg:bottom-10 w-full">
         <Filters />
       </div>
     </div>

@@ -3,6 +3,7 @@ import { BiBriefcase, BiBuildings, BiMap, BiMoney } from "react-icons/bi";
 import { AiFillStar } from "react-icons/ai";
 import { agent } from "../../data/dummyData";
 import { Link } from 'react-router-dom';
+import UserImg from '../../assets/agents/img11.png'
 
 
 
@@ -10,9 +11,9 @@ const Agents = () => {
   return (
     <div className="bg-zinc-200 pt-8">
 
-    
+
       {/* ////////////////////////////////////////SEARCHBAR */}
-      <div className="mdr:max-w-[90%] w-full mx-auto relative my-2">
+      <div className="mdr:max-w-[90%] w-full mx-auto relative my-2 hidden">
         <div
           className="flex-col bg-white gap-x-4 flex-center-between mdr:gap-y-0 mdr:flex-row card card-shadow dark:shadow-none mt-6"
           style={{ marginTop: "4rem" }}
@@ -44,60 +45,62 @@ const Agents = () => {
         </div>
         <div className="w-4/5 mx-auto bg-zinc-200 flex flex-col xl:flex-row ">
           <div className="w-full bg-zinc-200 xl:w-3/4 ">
-            {agent.map((item)=>(
+            {agent.map((item) => (
 
-             
+
               <Link to="/agentdetails" >
-              <div className="p-3   shadow-gray-200 mdr:mb-0 mb-[15rem]">
-              <div className=" w-full lg:w-full xs:flex lg:flex h-[17rem] rounded-[2rem]">
-                <div
-                  className="h-48 lg:h-auto lg:w-[14rem] flex-none bg-cover rounded-l-2xl text-center overflow-hidden"
-                  style={{ backgroundImage: "url('/images/img11.png')" }}
-                  />
-                <div className=" bg-white rounded-b  lg:rounded-r p-4 flex flex-col justify-between  ">
-                  <div className="">
-                    <div className="text-gray-900 font-bold text-xl mb-1 w-45 flex gap-x-1 ">
-                  
-                      {item.name} <AiFillStar color="orange" />{" "}
-                      <AiFillStar color="orange" />{" "}
-                      <AiFillStar color="orange" />{" "}
-                      <AiFillStar color="orange" />{" "}
-                      <AiFillStar color="orange" />{" "}
+                <div className="p-3 shadow-gray-200 mdr:mb-0">
+                  <div className=" w-full lg:w-full xs:flex lg:flex rounded-[2rem]">
+                    <div
+                      className="h-48 lg:h-auto lg:w-[14rem] bg-white md:w-full justify-center items-center flex py-3 flex-none bg-cover rounded-t-2xl md:rounded-l-2xl text-center overflow-hidden"
+                    >
+                      <img height={200} width={200} src={UserImg} alt="" />
                     </div>
-                    <p className="text-black-700 text-base">
-                     {item.task}
-                    </p>
-                    <div className="h-50 w-[18rem] smr:w-[33rem] mt-1">
-                      <div className="flex w-full justify-between  border-b-2 border-gray-600 my-2">
-                        <p className="font-bold text-1xl text-black">office</p>
-                        <p className="font-bold text-1xl text-gray-700">
-                          {item.Office}
+
+                    <div className=" bg-white rounded-b  lg:rounded-r p-4 flex flex-col justify-between  ">
+                      <div>
+                        <div className="text-gray-900 font-bold text-xl mb-1 w-45 flex gap-x-1 ">
+
+                          {item.name} <AiFillStar color="orange" />{" "}
+                          <AiFillStar color="orange" />{" "}
+                          <AiFillStar color="orange" />{" "}
+                          <AiFillStar color="orange" />{" "}
+                          <AiFillStar color="orange" />{" "}
+                        </div>
+                        <p className="text-black-700 text-base">
+                          {item.task}
                         </p>
-                      </div>
-                      <div className="flex w-full justify-between  border-b-2 border-gray-600 my-3">
-                        <p className="font-bold text-1xl text-black">Mobile</p>
-                        <p className="font-bold text-1xl text-gray-700 ">
-                        {item.Mobile}
-                        </p>
-                      </div>
-                      <div className="flex w-full justify-between  border-b-2 border-gray-600 my-3">
-                        <p className="font-bold text-1xl text-black">Fax</p>
-                        <p className="font-bold text-1xl  text-gray-700 ">
-                        {item.Fax}
-                        </p>
-                      </div>
-                      <div className="flex w-full justify-between my-3  ">
-                        <p className="font-bold text-1xl text-black">Email</p>
-                        <p className="font-bold text-1xl  text-gray-700 ">
-                         {item.Email}
-                        </p>
+                        <div className="h-50 sm:w-[13rem] md:w-[33rem] lg:w-[18rem] text-sm md:text-lg smr:w-[33rem] mt-1">
+                          <div className="flex w-full justify-between  border-b-2 border-gray-600 my-2">
+                            <p className="font-bold text-1xl text-black">office</p>
+                            <p className="font-bold text-1xl text-gray-700">
+                              {item.Office}
+                            </p>
+                          </div>
+                          <div className="flex w-full justify-between  border-b-2 border-gray-600 my-3">
+                            <p className="font-bold text-1xl text-black">Mobile</p>
+                            <p className="font-bold text-1xl text-gray-700 ">
+                              {item.Mobile}
+                            </p>
+                          </div>
+                          <div className="flex w-full justify-between  border-b-2 border-gray-600 my-3">
+                            <p className="font-bold text-1xl text-black">Fax</p>
+                            <p className="font-bold text-1xl  text-gray-700 ">
+                              {item.Fax}
+                            </p>
+                          </div>
+                          <div className="flex w-full justify-between flex-wrap my-3">
+                            <p className="font-bold text-1xl text-black">Email</p>
+                            <p className="font-bold text-1xl  text-gray-700 ">
+                              {item.Email}
+                            </p>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-            </Link>
+              </Link>
 
             ))}
           </div>
@@ -125,7 +128,7 @@ const Agents = () => {
           </div>
         </div>
       </div>
-      </div>
+    </div >
   );
 };
 export default Agents;

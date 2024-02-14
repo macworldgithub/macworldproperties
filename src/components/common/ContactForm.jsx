@@ -81,7 +81,7 @@ const ContactForm = () => {
                           </svg>
                         </div>
                       </div>
-                      <div class="ml-6 grow">
+                      <div class="md:ml-6 grow text-sm md:text-lg">
                         <p class="mb-4 font-bold dark:text-white">
                           For inquiries contact:
                         </p>
@@ -111,7 +111,7 @@ const ContactForm = () => {
                           </svg>
                         </div>
                       </div>
-                      <div class="ml-6 grow">
+                      <div class="md:ml-6 grow text-sm md:text-lg">
                         <p class="mb-4 font-bold dark:text-white">
                           Corporate Headquarters
                         </p>
