@@ -40,7 +40,7 @@ const Explore3 = () => {
 
   return (
     <div
-      className="relative h-full w-screen min-h-screen overflow-hidden lg:h-auto 2xla:h-[700px] 2xla:w-screen mt-0 flex flex-col  p-4 items-center "
+      className="relative h-full w-screen min-h-[70vh] overflow-hidden lg:h-auto 2xla:h-[700px] 2xla:w-screen mt-0 flex flex-col  p-4 items-center "
       style={{
         backgroundImage: "url('/images/Explore.png')",
         backgroundRepeat: "no-repeat",

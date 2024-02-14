@@ -70,7 +70,7 @@ const Agents = () => {
                         <p className="text-black-700 text-base">
                           {item.task}
                         </p>
-                        <div className="h-50 sm:w-[13rem] md:w-[36rem] lg:w-[18rem] text-sm md:text-lg smr:w-[33rem] mt-1">
+                        <div className="h-50 sm:w-[13rem] md:w-[36rem] lg:w-[25rem] text-sm md:text-lg smr:w-[33rem] mt-1">
                           <div className="flex w-full justify-between  border-b-2 border-gray-600 my-2">
                             <p className="font-bold text-1xl text-black">office</p>
                             <p className="font-bold text-1xl text-gray-700">
