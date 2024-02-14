@@ -49,7 +49,7 @@ const Agents = () => {
 
 
               <Link to="/agentdetails" >
-                <div className="p-3 shadow-gray-200 mdr:mb-0 sm:w-80 lg:w-56">
+                <div className="p-3 shadow-gray-200 mdr:mb-0 sm:w-[40rem] lg:w-56">
                   <div className=" w-full lg:w-full xs:flex lg:flex rounded-[2rem]">
                     <div
                       className="h-48 lg:h-auto lg:w-[14rem] bg-white md:w-full justify-center items-center flex py-3 flex-none bg-cover rounded-t-2xl md:rounded-l-2xl text-center overflow-hidden"
@@ -70,7 +70,7 @@ const Agents = () => {
                         <p className="text-black-700 text-base">
                           {item.task}
                         </p>
-                        <div className="h-50 sm:w-[13rem] md:w-64 lg:w-[18rem] text-sm md:text-lg smr:w-[33rem] mt-1">
+                        <div className="h-50 sm:w-[13rem] md:w-[36rem] lg:w-[18rem] text-sm md:text-lg smr:w-[33rem] mt-1">
                           <div className="flex w-full justify-between  border-b-2 border-gray-600 my-2">
                             <p className="font-bold text-1xl text-black">office</p>
                             <p className="font-bold text-1xl text-gray-700">
