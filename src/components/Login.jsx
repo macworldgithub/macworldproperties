@@ -65,7 +65,7 @@ function Admin({ setIsloggedIn }) {
     <div className="w-screen min-h-screen flex items-center justify-center">
       <form onSubmit={handleSubmit}>
         <div
-          class="w-screen min-h-screen py-32"
+          class="w-screen min-h-screen py-[5rem] md:py-32"
           style={{
             backgroundImage: "url('/images/loginbg.png')",
             backgroundRepeat: "no-repeat",
@@ -76,13 +76,13 @@ function Admin({ setIsloggedIn }) {
             <img src="/images/logo1.png" className="w-36 h-12 mb-5"></img>
           </div>
           <hr className="w-[50%] mx-auto mb-10" />
-          <div className=" w-[50%] mx-auto bg-bgdrop rounded-[25px] shadow-lg bg-opacity-25 backdrop-filter backdrop-blur-lg flex flex-col justify-center items-center p-10">
+          <div className=" w-[90%] sm:w-[50%] md:w-[70] lg:w-[50%] mx-auto bg-bgdrop rounded-[25px] shadow-lg bg-opacity-25 backdrop-filter backdrop-blur-lg flex flex-col justify-center items-center p-10">
             <h1 className="text-white uppercase text-[30px] font-bold mb-5">
               Welcome
             </h1>
             <hr className="w-[75%] mx-auto mb-5" />
 
-            <div className="md:w-[50%] mb-10 ">
+            <div className="mb-10 ">
               <input
                 className="bg-bgdrop appearance-none rounded-[15px] border-2 border-bgdrop w-full py-2 px-4 text-black leading-tight focus:outline-none focus:bg-gray focus:border-yellow-500 placeholder:text-black"
                 id="inline-full-name"
@@ -92,7 +92,7 @@ function Admin({ setIsloggedIn }) {
                 onChange={handleUserName}
               />
             </div>
-            <div className="md:w-[50%] mb-10">
+            <div className="mb-10">
               <input
                 className="bg-bgdrop appearance-none rounded-[15px] border-2 border-bgdrop w-full py-2 px-4 text-black leading-tight focus:outline-none focus:bg-gray focus:border-yellow-500 placeholder:text-black"
                 id="inline-full-name"
@@ -113,10 +113,10 @@ function Admin({ setIsloggedIn }) {
               </button>
             </div>
 
-            <div className="flex flex-column justify-center items-center mx-auto gap-2 w-[400px] mb-2">
-              <hr className="text-white w-[25%] mt-3" />
+            <div className="flex flex-column justify-center items-center mx-auto gap-2 w-[220px] sm:w-[330px] lg:w-[400px] mb-2">
+              <hr className="text-white w-[18%] mt-3" />
               <h5 className="text-white">Or continue with</h5>
-              <hr className="text-white w-[25%] mt-3" />
+              <hr className="text-white w-[18%] mt-3" />
             </div>
 
             <div className="flex flex-column justify-center items-center gap-2 w-[300px]">
@@ -137,7 +137,7 @@ function Admin({ setIsloggedIn }) {
             <hr className="text-white w-[20%] mt-3" />
           </div>
 
-          <div className="w-[50%] mx-auto flex justify-center items-center py-2 px-[30px]">
+          <div className="w-[100%] md:w-[50%]mx-auto flex justify-center items-center py-2 px-[30px]">
             <p className="text-lg text-white">
               A house is made of bricks & beams. A home is made of hopes and
               dreams. We’ll help you find your home.

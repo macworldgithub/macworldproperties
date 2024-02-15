@@ -178,7 +178,7 @@ const SingleProperty = ({
           </h1>
           <h1 className="text-[34px] font-bold">{price} AED</h1>
         </div>
-        <div className="mb-3 flex gap-3">
+        <div className="mb-3 flex gap-3 flex-wrap">
           {featured === "true" && (
             <button
               type="button"
