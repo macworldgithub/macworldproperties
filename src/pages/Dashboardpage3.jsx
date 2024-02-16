@@ -54,6 +54,10 @@ const Dashboardpage3 = () => {
 
   const handleUpload = () => {
 
+
+    const temp55 = JSON.parse(localStorage.getItem('userData'))
+    // return
+
     if (images?.length < 3) {
       swal({
         title: "Error",
@@ -66,6 +70,7 @@ const Dashboardpage3 = () => {
     const temp1 = JSON.parse(temp);
     temp1.upload.images = images;
     temp1.upload.videos = videoLinks;
+    temp1.ownerId = temp55?._id;
     // const formData = new FormData();
 
     // for (let i = 0; i < firebaseImagesLinks?.length; i++) {
@@ -74,7 +79,7 @@ const Dashboardpage3 = () => {
     // const check = { ...state.form.upload }
     // check.images = firebaseImagesLinks
     // formData.append("bodyOfData", );
-    console.log("imagesss", state.form.upload);
+    
     axios
       .post(`${process.env.REACT_APP_SERVERURL}/property/upload`, temp1)
       .then((res) => {
@@ -116,13 +121,11 @@ const Dashboardpage3 = () => {
     let finalObject1 = JSON.stringify(state?.updateProperty);
     let finalObject = JSON.parse(finalObject1);
 
-    console.log(finalObject.upload, finalObject.upload, 'wqwqwqwqw', images);
     // dispatch({
     //   type: "UPDATE_PROPERTY_MEDIA",
     //   payload: { images: images, videos: videoLinks },
     // });
-    console.log('new_wat', typeof finalObject.upload, finalObject.upload);
-    console.log('new_wat', finalObject);
+    
     if (finalObject?.upload?.images?.length > 0 || finalObject?.upload?.images != undefined) {
 
       finalObject.upload = {
@@ -131,6 +134,7 @@ const Dashboardpage3 = () => {
       }
       // finalObject.upload.images = images;
     }
+    
     axios
       .post(`${process.env.REACT_APP_SERVERURL}/property/update-property`, finalObject)
       .then((res) => {
