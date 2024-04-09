@@ -26,12 +26,12 @@ const Home = () => {
   return (
     <div>
       <Hero />
-      {/* <Filters /> */}
       <FeaturedSection />
       <Explore3 />
       <Explore2 />
       <OurAgents />
       <Testimonials />
+      {/* not in use <Filters /> */}
     </div>
   );
 };

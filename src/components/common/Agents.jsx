@@ -9,13 +9,13 @@ import UserImg from '../../assets/agents/img11.png'
 
 const Agents = () => {
   return (
-    <div className="bg-zinc-200 pt-8">
+    <div className="pb-20 bg-zinc-200">
 
 
       {/* ////////////////////////////////////////SEARCHBAR */}
       <div className="mdr:max-w-[90%] w-full mx-auto relative my-2 hidden">
         <div
-          className="flex-col bg-white gap-x-4 flex-center-between mdr:gap-y-0 mdr:flex-row card card-shadow dark:shadow-none mt-6"
+          className=" flex-col bg-white gap-x-4 flex-center-between mdr:gap-y-0 mdr:flex-row card card-shadow dark:shadow-none mt-6"
           style={{ marginTop: "4rem" }}
         >
           {/* <div className="flex-col flex-1 w-full flex-align-center gap-x-4 mdr:w-fit smr:flex-row gap-y-4 smr:gap-y-0"> */}
@@ -39,20 +39,21 @@ const Agents = () => {
 
       {/* ///////////////////////////////left side  */}
 
-      <div className="w-full  bg-zinc-200 h-full ">
+      {/*     box-shadow: -1px 1px 3px gray; */}
+
+      <div className="w-full  bg-zinc-200 h-full">
         <div className="w-4/5 mx-auto">
           <h2 className="font-bold text-5xl my-6 mx-2 ">Agents</h2>
         </div>
-        <div className="w-4/5 mx-auto bg-zinc-200 flex flex-col xl:flex-row ">
-          <div className="w-full bg-zinc-200 xl:w-3/4 ">
+        <div className="w-4/5 mx-auto bg-zinc-200 flex flex-col xl:flex-row" style={{ maxWidth: '1100px' }}>
+          <div className="w-full bg-zinc-200 xl:w-3/4" >
             {agent.map((item) => (
-
-
-              <Link to="/agentdetails" >
-                <div className="p-3 shadow-gray-200 mdr:mb-0 sm:w-[40rem] lg:w-56">
-                  <div className=" w-full lg:w-full xs:flex lg:flex rounded-[2rem]">
+              <Link to="/agentdetails">
+                {/* p-3  */}
+                <div className="shadow-md mdr:mb-0 sm:w-[40rem] lg:w-56 mb-3 hover:shadow-lg">
+                  <div className=" w-full lg:w-full xs:flex lg:flex rounded-[2rem]" style={{ boxShadow: '-2px 3px 14px gray'}}>
                     <div
-                      className="h-48 lg:h-auto lg:w-[14rem] bg-white md:w-full justify-center items-center flex py-3 flex-none bg-cover rounded-t-2xl md:rounded-l-2xl text-center overflow-hidden"
+                      className="h-48 lg:rounded-none lg:h-auto lg:w-[14rem] bg-white md:w-full justify-center items-center flex py-3 flex-none bg-cover rounded-t-2xl md:rounded-l-2xl text-center overflow-hidden"
                     >
                       <img height={200} width={200} src={UserImg} alt="" />
                     </div>
@@ -121,7 +122,7 @@ const Agents = () => {
                 <option>Option 2</option>
                 <option>Option 3</option>
               </select>
-              <button className="bg-yellow-600 text-black rounded-2xl my-2 py-2 hover:bg-yellow-300 border-2 border-gray-500">
+              <button className="hover:bg-yellow-600 text-black rounded-2xl my-2 py-2 bg-yellow-300 border-2 border-gray-500">
                 <h4 className="text-black  font-bold ">Search Agent</h4>
               </button>
             </div>

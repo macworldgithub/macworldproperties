@@ -5,13 +5,13 @@ const Testimonials = () => {
 
 
     return (
-        <div className="relative h-auto w-screen mb-4  p-8 flex flex-col gap-y-10  mt-[4%] sma3:p-0  ">
+        <div className="relative h-auto mb-4  p-8 flex flex-col gap-y-10  mt-[4%] sma3:p-0  ">
             <div className="flex flex-col justify-center items-center gap-2">
                 <h1 className="text-4xl mt-4">Testimonials</h1>
                 <p className="subheading-h1">Our Passion is People. What<span>'</span>s Yours?</p>
             </div>
             {/* <div class="container  bg-red-500  "> */}
-            <div class=" flex md:flex-row md:flex-wrap sma3:w-screen sma3:flex-col md:w-screen  sma3:justify-center items-center my-0  sma3:mx-1 gap-4 ">
+            <div class=" flex md:flex-row md:flex-wrap sma3:flex-col sma3:justify-center items-center my-0  sma3:mx-1 gap-4 ">
                 {/* <div class="lg:w- sm:w-1/2 md:w-1/2 xl:w-1/4 flex flex-row justify-center items-center bg-yellow-500 "> */}
                 {
                     testimonials.map((item) => (

@@ -3,7 +3,7 @@ import Filters from "./Filters";
 const Hero = () => {
   return (
     <div className="relative">
-      <div className="relative w-screen h-screen flex items-center justify-center   overflow-hidden">
+      <div className="relative h-screen flex items-center justify-center   overflow-hidden">
         {/* <video
           id="v"
           poster=""
@@ -23,7 +23,7 @@ const Hero = () => {
         </video> */}
 
         <div
-        className="absolute inset-0 w-screen h-full"
+        className="absolute inset-0 h-full"
         style={{
           backgroundImage: "url('/hero-banner.jpeg')",
           backgroundRepeat: "no-repeat",

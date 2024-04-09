@@ -20,6 +20,7 @@ import logo2 from "../../logo/logoblack.png";
 import logo3 from "../../logo/logo3.png";
 import { navLinks } from "../../data/navLinks";
 import { Store } from "../../context/store";
+import '../../App.css'
 import LargeScreenWrapper from "../LargeScreenWrapper/LargeScreenWrapper";
 
 const Navbar = ({ isloggedIn, setIsloggedIn }) => {
@@ -34,8 +35,7 @@ const Navbar = ({ isloggedIn, setIsloggedIn }) => {
   const [userData, setUserData] = useState(null);
   const [navBarColor, setNavBarColor] = useState(
     location.pathname == "/" || location.pathname == "/home"
-      ? "transparent"
-      : "white"
+    && "white"
   );
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [navBarTextColor, setNavBarTextColor] = useState(
@@ -75,13 +75,13 @@ const Navbar = ({ isloggedIn, setIsloggedIn }) => {
   const updateNavbarAppearance = () => {
     if (window.scrollY >= 180 && getCurrentRoute()) {
       setNavBarColor("white");
-      setNavBarLogo(logo1);
+
       setNavBarTextColor("black");
-    } else if (getCurrentRoute()) {
+    }
+    else if (getCurrentRoute()) {
       setNavBarLogo(logo3);
       setNavBarColor("transparent");
       setNavBarTextColor("white");
-    } else {
       setNavBarColor("white");
       setNavBarLogo(logo2);
       setNavBarTextColor("black");
@@ -90,11 +90,12 @@ const Navbar = ({ isloggedIn, setIsloggedIn }) => {
 
   useEffect(() => {
     fetchName();
-
+    setNavBarLogo(logo3);
+    setNavBarTextColor("white");
     getCurrentRoute();
-    updateNavbarAppearance();
+    // updateNavbarAppearance();
   }, [currentRoute]);
-  window.addEventListener("scroll", updateNavbarAppearance);
+  // window.addEventListener("scroll", updateNavbarAppearance);
 
   const handleClose = (e) => {
     if (!e.target.classList.contains("link")) {
@@ -130,110 +131,105 @@ const Navbar = ({ isloggedIn, setIsloggedIn }) => {
   ];
   return (
     <div
-      className={` w-screen flex  fixed top-0 justify-center z-10  bg-${navBarColor}`}
+      className={`bg-${navBarColor}`}
     >
       <div
-        className={`max-w-screen-2xl w-full h-[45px]  flex justify-center  `}
+        className={`navbar_background_color fixed z-40  bg-${navBarColor} text-${navBarTextColor}  top-0   flex-center-between   border-b  dark:border-dark dark:bg-card-dark/60`}
+        onMouseOver={handleClose}
       >
-        <div
-          className={`  h-[45px] px-4 fixed w-full max-w-screen-2xl z-40  bg-${navBarColor} text-${navBarTextColor}  top-0   flex-center-between   border-b  dark:border-dark dark:bg-card-dark/60`}
-          onMouseOver={handleClose}
-        >
-          {/* <Link to="/" className="flex-align-center gap-x-1">
+        {/* <Link to="/" className="flex-align-center gap-x-1">
        <img className="h-7 w-13" src="./images/logo1.png"/>
       </Link> */}
-          <Link to="/" className="flex-align-center gap-x-1">
-            {location.pathname === "/" ? (
-              <img className="h-7 w-13" src={navBarLogo} />
-            ) : (
-              <img className="h-7 w-13" src={logo2} />
-            )}
-          </Link>
+        <Link to="/" className="flex-align-center gap-x-1">
+          {location.pathname === "/" ? (
+            <img className="h-7 :w-10 md:h-8 md:w-15" src={navBarLogo} />
+          ) : (
+            <img className="h-7 :w-10 md:h-8 md:w-15" src={navBarLogo} />
+          )}
+        </Link>
 
-          <div className="flex-align-center gap-x-4">
-            {/*-------------------------------------- Desktop Menu------------------------------------- */}
+        <div className="flex-align-center gap-x-4">
+          {/*-------------------------------------- Desktop Menu------------------------------------- */}
+          <ul
+            className={`hidden lg:flex-align-center 
+              ${showSearchBar && "!hidden"
+              }
+              `}
+          >
+            {navLinks.map((link) => (
+              <SingleLink {...link} key={link.id} />
+            ))}
+          </ul>
+
+          {/*---------------------------------------- Mobile Menu------------------------------------- */}
+          <div
+            className={`lg:hidden mobile-modal fixed w-screen h-screen top-0 left-0 bg-black/50 z-50 opacity-0 pointer-events-none transition-a text-black  ${isSidebarOpen && "open"
+              }`}
+            onClick={handleCloseSidebar}
+          >
             <ul
-              className={`hidden lg:flex-align-center ${
-                showSearchBar && "!hidden"
-              }`}
-            >
-              {navLinks.map((link) => (
-                <SingleLink {...link} key={link.id} />
-              ))}
-            </ul>
-
-            {/*---------------------------------------- Mobile Menu------------------------------------- */}
-            <div
-              className={`lg:hidden mobile-modal fixed w-screen h-screen top-0 left-0 bg-black/50 z-50 opacity-0 pointer-events-none transition-a text-black  ${
-                isSidebarOpen && "open"
-              }`}
-              onClick={handleCloseSidebar}
-            >
-              <ul
-                className={`mobile-dialog overflow-auto absolute flex flex-col space-y-4 p-3 bg-white dark:bg-card-dark h-screen max-w-[300px] w-full -translate-x-[500px] transition-a ${
-                  isSidebarOpen && "open"
+              className={`mobile-dialog overflow-auto absolute flex flex-col space-y-4 p-3 bg-white dark:bg-card-dark h-screen max-w-[300px] w-full -translate-x-[500px] transition-a ${isSidebarOpen && "open"
                 }`}
-              >
-                <div className="border-b flex-center-between dark:border-slate-800">
-                  <p className="uppercase">menu</p>
-                  <div
-                    className="icon-box lg:hidden"
+            >
+              <div className="border-b flex-center-between dark:border-slate-800">
+                <p className="uppercase">menu</p>
+                <div
+                  className="icon-box lg:hidden"
+                  onClick={() => dispatchRedux(closeSidebar())}
+                >
+                  <FiDelete />
+                </div>
+              </div>
+              {navLinks?.map(({ id, linkText, url, subLinks }) => (
+                <ul key={id}>
+                  <NavLink
+                    to={url}
+                    end
+                    className="w-fit before:!hidden"
                     onClick={() => dispatchRedux(closeSidebar())}
                   >
-                    <FiDelete />
-                  </div>
-                </div>
-                {navLinks?.map(({ id, linkText, url, subLinks }) => (
-                  <ul key={id}>
-                    <NavLink
-                      to={url}
-                      end
-                      className="w-fit before:!hidden"
-                      onClick={() => dispatchRedux(closeSidebar())}
-                    >
-                      {linkText}
-                    </NavLink>
-                    {subLinks?.map(({ id, linkText, url }) => (
-                      <ul key={id} className="mt-2">
-                        <NavLink
-                          to={url}
-                          end
-                          className="relative ml-8 text-sm before:hidden w-fit after:absolute after:w-2 after:h-2 after:rounded-full after:border-2 after:top-1/2 after:-translate-y-1/2 after:-left-4 dark:after:opacity-50"
-                          onClick={() => dispatchRedux(closeSidebar())}
-                        >
-                          {linkText}
-                        </NavLink>
-                      </ul>
-                    ))}
-                  </ul>
-                ))}
-              </ul>
-            </div>
+                    {linkText}
+                  </NavLink>
+                  {subLinks?.map(({ id, linkText, url }) => (
+                    <ul key={id} className="mt-2">
+                      <NavLink
+                        to={url}
+                        end
+                        className="relative ml-8 text-sm before:hidden w-fit after:absolute after:w-2 after:h-2 after:rounded-full after:border-2 after:top-1/2 after:-translate-y-1/2 after:-left-4 dark:after:opacity-50"
+                        onClick={() => dispatchRedux(closeSidebar())}
+                      >
+                        {linkText}
+                      </NavLink>
+                    </ul>
+                  ))}
+                </ul>
+              ))}
+            </ul>
+          </div>
 
-            <div className="space-x-2 flex-align-center">
-              {/*----------------------------- Profile Icon-------------------------------------------------- */}
-              
-              {userData?.token ==null ? (
-                <div className="h-full p-[10px] text-black font-bold  bg-primary hover:bg-primary/90">
-                  <Link to="/login">Join Us</Link>
-                </div>
-              ) : (
-                <Dropdown menu={{ items }} className="hover:cursor-pointer">
-                  <a onClick={(e) => e.preventDefault()}>
-                    <Space>
-                      <BiUser size="20" />
-                    </Space>
-                  </a>
-                </Dropdown>
-              )}
+          <div className="space-x-2 flex-align-center">
+            {/*----------------------------- Profile Icon-------------------------------------------------- */}
 
-              {/*------------------------------- Mobile Menu Toogle------------------------- */}
-              <div
-                className="icon-box lg:hidden"
-                onClick={() => dispatchRedux(openSidebar())}
-              >
-                <BiMenu className={`text-${navBarTextColor}`} />
+            {userData?.token == null ? (
+              <div className="h-full p-[10px] text-black font-bold  bg-primary hover:bg-primary/90">
+                <Link to="/login">Join Us</Link>
               </div>
+            ) : (
+              <Dropdown menu={{ items }} className="hover:cursor-pointer">
+                <a onClick={(e) => e.preventDefault()}>
+                  <Space>
+                    <BiUser size="20" />
+                  </Space>
+                </a>
+              </Dropdown>
+            )}
+
+            {/*------------------------------- Mobile Menu Toogle------------------------- */}
+            <div
+              className="icon-box lg:hidden"
+              onClick={() => dispatchRedux(openSidebar())}
+            >
+              <BiMenu className={`text-${navBarTextColor}`} />
             </div>
           </div>
         </div>

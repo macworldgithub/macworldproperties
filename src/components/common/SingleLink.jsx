@@ -18,6 +18,7 @@ const SingleLink = ({ id, linkText, url, subLinks }) => {
         key={id}
         className="relative w-full px-3 font-semibold py-[0.6rem] flex-align-center gap-x-1 link"
         onMouseOver={handleDropDown}
+        style={{ paddingTop: '20px', paddingBottom: '20px' }}
       >
         {linkText}
         {subLinks && <BiChevronDown className="link" />}

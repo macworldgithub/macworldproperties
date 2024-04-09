@@ -4,7 +4,7 @@ import LargeScreenWrapper from "../../LargeScreenWrapper/LargeScreenWrapper";
 const Explore2 = () => {
   return (
     <div
-      className="relative  w-screen min-h-screen overflow-hidden lg:h-[400px]  p-4 "
+      className="relative min-h-screen overflow-hidden lg:h-[400px]  p-4 "
       style={{
         backgroundImage: "url('/images/Explore.png')",
         backgroundRepeat: "no-repeat",
