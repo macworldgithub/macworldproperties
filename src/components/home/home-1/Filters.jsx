@@ -141,6 +141,9 @@ const Filters = () => {
 
   return (
     <div className="xl:w-[1200px] mx-auto relative px-4 md:px-8">
+      <div className="inline-block bg-blue-200">Buy</div>
+      <div className="inline-block bg-blue-200">Off-Plan</div>
+      <div className="inline-block bg-blue-200">Rent</div>
       <div className="flex-col rounded-xl card gap-x-4 flex-center-between gap-y-4  md:flex-row card card-shadow dark:shadow-none  w-[100%]  ">
         <div className="lg:sticky lg:top-20 w-full ">
           <div className="flex justify-center  flex-row flex-wrap lg:flex-nowrap px-4 xl:px-12 gap-8 py-2 w-full ">

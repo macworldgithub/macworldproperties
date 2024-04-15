@@ -23,26 +23,28 @@ const Hero = () => {
         </video> */}
 
         <div
-        className="absolute inset-0 h-full"
-        style={{
-          backgroundImage: "url('/hero-banner.jpeg')",
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-        }}
-      >
-        <div
-          className="inset-0 flex flex-col items-center h-full justify-center align-center mx-auto"
-          // style={{ }
+          className="absolute inset-0 h-full"
+          style={{
+            backgroundImage: "url('/hero-banner.jpg')",
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
+          }}
         >
-          <h1 className="justify-center heading-h1 align-center mx-auto lg:mt-[15vh] p-6 2xla:text-5xl">
-            SAFEST WAY TO BUY, RENT & SELL YOUR PROPERTIES
-          </h1>
-          <h5 className="justify-center sub-heading1 align-center mx-auto pl-6 2xla:text-3xl">
-            Indulge in extravagance with our opulent and luxurious real estate
-            properties!
-          </h5>
+          <div
+            className="inset-0 flex flex-col items-center h-full justify-center align-center mx-auto"
+          // style={{ }
+          >
+            <div className="mx-auto lg:mt-[15vh] backdrop-blur-[3px] p-6">
+              <h1 className="text-center heading-h1 2xla:text-5xl">
+                SAFEST WAY TO BUY, RENT & SELL YOUR PROPERTIES
+              </h1>
+              <h5 className="justify-center text-center	 sub-heading1 align-center mx-auto 2xla:text-3xl pb-1">
+                Indulge in extravagance with our opulent and luxurious real estate
+                properties!
+              </h5>
+            </div>
+          </div>
         </div>
-      </div>
       </div>
       <div className="my-10 lg:my-0 lg:absolute  lg:bottom-10 w-full">
         <Filters />
