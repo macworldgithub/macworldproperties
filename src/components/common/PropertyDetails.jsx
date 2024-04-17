@@ -29,7 +29,7 @@ import {
   FaCamera,
   FaAddressBook,
   FaHandsWash,
-  FaBatteryQuarter,
+  FaBatteryQuarter
 } from "react-icons/fa";
 
 const featureIcons = {
@@ -87,7 +87,7 @@ const PropertyDetails = ({
   propertyId,
   ownerId
 }) => {
-  const position = {lng:location?.longitude || 54.391164779663086, lat: location?.latitude || 24.4324592784219};
+  const position = { lng: location?.longitude || 54.391164779663086, lat: location?.latitude || 24.4324592784219 };
   const [language, setLanguage] = useState(true);
   const [isChecked, setIsChecked] = useState(false);
   const [downPayment, setDownPayment] = useState(20);
@@ -162,8 +162,8 @@ const PropertyDetails = ({
               <button
                 className={
                   !language
-                    ? `h-full  w-full text-white bg-primary  p-1`
-                    : `h-full  w-full   p-1`
+                    ? `h-full w-full text-white bg-primary  p-1`
+                    : `h-full w-full p-1`
                 }
                 onClick={() => setLanguage(false)}
               >
@@ -175,193 +175,8 @@ const PropertyDetails = ({
           <hr className="mb-[2vh]" />
           {language ? <p>{description}</p> : <p>{aracbiDescription}</p>}
         </div>
-        <div className="rounded-lg bg-[hsla(0,0%,100%,0.8)] px-6 py-8 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] mb-[2vh]  backdrop-blur-[30px] flex flex-col">
-          <div className="flex justify-between">
-            <h1 className="text-lg font-bold">Address</h1>
-          </div>
-          <hr className="mt-5" />
-          <div className="grid lg:grid-cols-2 sm:grid-rows-3 gap-3 mt-5">
-            <div className="lg:cols-span-1 sm:row-span-1 flex flex-col">
-              <div className="flex justify-between">
-                <h3>Street Address</h3>
-                <p>{location?.address}</p>
-              </div>
-              <div>
-                <hr />
-              </div>
-            </div>
-            <div className="lg:cols-span-1 sm:row-span-1 flex flex-col">
-              <div className="flex justify-between">
-                <h3>City</h3>
-                {console.log("location?.location", location)}
-                <p>
-                  {location?.location
-                    ? location?.location?.split(",")[0]
-                    : "not defined"}
-                </p>
-              </div>
-              <div>
-                <hr />
-              </div>
-            </div>
-            <div className="lg:cols-span-1 sm:row-span-1 flex flex-col">
-              <div className="flex justify-between">
-                <h3>Country</h3>
-                <p>
-                  {location?.location
-                    ? location?.location?.split(",")[1]
-                    : "not defined"}
-                </p>
-              </div>
-              <div>
-                <hr />
-              </div>
-            </div>
-          </div>
-          <div className="px-auto lg:h-[400px]">
-            <MapContainer
-              center={position}
-              zoom={12}
-              attributionControl={true}
-              zoomControl={false}
-              doubleClickZoom={true}
-              scrollWheelZoom={true}
-              dragging={true}
-              animate={true}
-              easeLinearity={0.35}
-            >
-              <TileLayer
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                // url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                url='https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png'
-              />
 
-              <Marker icon={iconPerson} position={position}>
-                <Popup>{title}</Popup>
-              </Marker>
-              <RecenterAutomatically position={position} />
-            </MapContainer>
-          </div>
-        </div>
-        <div className="rounded-lg bg-[hsla(0,0%,100%,0.8)] px-6 py-8 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] mb-[2vh] backdrop-blur-[30px] flex flex-col">
-          <div className="flex justify-between">
-            <h1 className="text-lg font-bold mb-[2vh]">Details</h1>
-            <div className="flex flex-row">
-              <IoIosCalendar size={20} color="gray" />
-              <p>Updated on {updatedAt}</p>
-            </div>
-          </div>
-          <hr className="mb-[15px]" />
-          <div className="rounded-lg bg-slate-200  border-2 border-gray-300 px-6 py-12 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] mb-[2vh] backdrop-blur-[30px] flex flex-col">
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="grid grid-rows-3 gap-3 lg:cols-span-1 sm:rows-span-1">
-                <div className="flex flex-col">
-                  <div className="flex justify-between">
-                    <h3 className="font-bold">Price:</h3>
-                    <p>{price}</p>
-                  </div>
-                  <hr className="border-gray-500" />
-                </div>
-                <div className="flex flex-col">
-                  <div className="flex justify-between">
-                    <h3 className="font-bold">Property Size:</h3>
-                    <p>{area}</p>
-                  </div>
-                  <hr className="border-gray-500" />
-                </div>
-                <div className="flex flex-col">
-                  <div className="flex justify-between">
-                    <h3 className="font-bold">Bedrooms:</h3>
-                    <p>{number_of_beds}</p>
-                  </div>
-                  <hr className="border-gray-500" />
-                </div>
-                <div className="flex flex-col">
-                  <div className="flex justify-between">
-                    <h3 className="font-bold">Parking Space</h3>
-                    <p>{parkingSpace}</p>
-                  </div>
-                  <hr className="border-gray-500" />
-                </div>
-              </div>
-              <div className="grid grid-rows-3 gap-3 lg:cols-span-1 sm:rows-span-1">
-                <div className="flex flex-col">
-                  <div className="flex justify-between">
-                    <h3 className="font-bold">Bathrooms:</h3>
-                    <p>{number_of_bathrooms}</p>
-                  </div>
-                  <hr className="border-gray-500" />
-                </div>
-                <div className="flex flex-col">
-                  <div className="flex justify-between">
-                    <h3 className="font-bold">Garage:</h3>
-                    <p>{number_of_garage}</p>
-                  </div>
-                  <hr className="border-gray-500" />
-                </div>
-                <div className="flex flex-col">
-                  <div className="flex justify-between">
-                    <h3 className="font-bold">Property Type:</h3>
-                    <p>{category}</p>
-                  </div>
-                  <hr className="border-gray-500" />
-                </div>
-                <div className="flex flex-col">
-                  <div className="flex justify-between">
-                    <h3 className="font-bold">Property Status:</h3>
-                    <p>{status}</p>
-                  </div>
-                  <hr className="border-gray-500" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* <div className="rounded-lg bg-[hsla(0,0%,100%,0.8)] px-6 py-8 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] mb-[2vh] backdrop-blur-[30px] flex flex-col">
-          <h1 className="text-lg font-bold mb-[2vh]">Features</h1>
-          <hr className="mb-[5vh]" />
-          <div className="flex gap-12 flex-wrap">
-            {features?.map((e, i) => {
-              if (e.name !== "bathRooms" && e.name !== "bedRooms") {
-                const displayText = e.value && !isNaN(e.value) ? `${e.name} : ${e.value}` : e.name;
-                return (
-                  <div
-                    className="h-20 w-32 flex justify-center items-center p-4"
-                    key={i}
-                  >
-                    {displayText}
-                  </div>
-                );
-              }
-            })}
-          </div>
-        </div> */}
-        <div className="rounded-lg bg-[hsla(0,0%,100%,0.8)] px-6 py-8 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] mb-[2vh] backdrop-blur-[30px] flex flex-col">
-          <h1 className="text-lg font-bold mb-[2vh]">Features</h1>
-          <hr className="mb-[5vh]" />
-          <div className="flex flex-wrap justify-between">
-            {features?.map((e, i) => {
-              if (e.name !== "bathRooms" && e.name !== "bedRooms") {
-                const Icon = featureIcons[e.name];
-                const displayText =
-                  e.value && !isNaN(e.value)
-                    ? `${e.name} : ${e.value}`
-                    : e.name;
-                return (
-                  <li
-                    style={{ listStyle: "none" }}
-                    key={i}
-                    className="flex flex-row gap-2 w-[50%] md:w-1/3 xl:w-[25%] mb-6"
-                  >
-                    {Icon && <Icon color="green" />}
-                    {displayText}
-                  </li>
-                );
-              }
-            })}
-          </div>
-        </div>
-
+        {/* Mortgage Calculator Section Starts */}
         <div className="rounded-lg bg-[hsla(0,0%,100%,0.8)] px-6 py-8 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] mb-[2vh] backdrop-blur-[30px] flex flex-col">
           <h1 className="text-lg font-semibold mb-[2vh]">
             Mortgage Calculator
@@ -512,6 +327,201 @@ const PropertyDetails = ({
             </button> */}
           </div>
         </div>
+        {/* Mortgage Calculator Section Ends */}
+
+        <div className="rounded-lg bg-[hsla(0,0%,100%,0.8)] px-6 py-8 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] mb-[2vh] backdrop-blur-[30px] flex flex-col">
+          <div className="flex justify-between">
+            <h1 className="text-lg font-bold mb-[2vh]">Details</h1>
+            <div className="flex flex-row">
+              <IoIosCalendar size={20} color="gray" />
+              <p>Updated on {updatedAt}</p>
+            </div>
+          </div>
+          <hr className="mb-[15px]" />
+          <div className="rounded-lg bg-slate-200  border-2 border-gray-300 px-6 py-12 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] mb-[2vh] backdrop-blur-[30px] flex flex-col">
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className="grid grid-rows-3 gap-3 lg:cols-span-1 sm:rows-span-1">
+                <div className="flex flex-col">
+                  <div className="flex justify-between">
+                    <h3 className="font-bold">Price:</h3>
+                    <p>{price}</p>
+                  </div>
+                  <hr className="border-gray-500" />
+                </div>
+                <div className="flex flex-col">
+                  <div className="flex justify-between">
+                    <h3 className="font-bold">Property Size:</h3>
+                    <p>{area}</p>
+                  </div>
+                  <hr className="border-gray-500" />
+                </div>
+                <div className="flex flex-col">
+                  <div className="flex justify-between">
+                    <h3 className="font-bold">Bedrooms:</h3>
+                    <p>{number_of_beds}</p>
+                  </div>
+                  <hr className="border-gray-500" />
+                </div>
+                <div className="flex flex-col">
+                  <div className="flex justify-between">
+                    <h3 className="font-bold">Parking Space</h3>
+                    <p>{parkingSpace}</p>
+                  </div>
+                  <hr className="border-gray-500" />
+                </div>
+              </div>
+              <div className="grid grid-rows-3 gap-3 lg:cols-span-1 sm:rows-span-1">
+                <div className="flex flex-col">
+                  <div className="flex justify-between">
+                    <h3 className="font-bold">Bathrooms:</h3>
+                    <p>{number_of_bathrooms}</p>
+                  </div>
+                  <hr className="border-gray-500" />
+                </div>
+                <div className="flex flex-col">
+                  <div className="flex justify-between">
+                    <h3 className="font-bold">Garage:</h3>
+                    <p>{number_of_garage}</p>
+                  </div>
+                  <hr className="border-gray-500" />
+                </div>
+                <div className="flex flex-col">
+                  <div className="flex justify-between">
+                    <h3 className="font-bold">Property Type:</h3>
+                    <p>{category}</p>
+                  </div>
+                  <hr className="border-gray-500" />
+                </div>
+                <div className="flex flex-col">
+                  <div className="flex justify-between">
+                    <h3 className="font-bold">Property Status:</h3>
+                    <p>{status}</p>
+                  </div>
+                  <hr className="border-gray-500" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="rounded-lg bg-[hsla(0,0%,100%,0.8)] px-6 py-8 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] mb-[2vh] backdrop-blur-[30px] flex flex-col">
+          <h1 className="text-lg font-bold mb-[2vh]">Features</h1>
+          <hr className="mb-[5vh]" />
+          <div className="flex flex-wrap justify-between">
+            {features?.map((e, i) => {
+              if (e.name !== "bathRooms" && e.name !== "bedRooms") {
+                const Icon = featureIcons[e.name];
+                const displayText =
+                  e.value && !isNaN(e.value)
+                    ? `${e.name} : ${e.value}`
+                    : e.name;
+                return (
+                  <li
+                    style={{ listStyle: "none" }}
+                    key={i}
+                    className="flex flex-row gap-2 w-[50%] md:w-1/3 xl:w-[25%] mb-6"
+                  >
+                    {Icon && <Icon color="green" />}
+                    {displayText}
+                  </li>
+                );
+              }
+            })}
+          </div>
+        </div>
+
+
+
+        <div className="rounded-lg bg-[hsla(0,0%,100%,0.8)] px-6 py-8 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] mb-[2vh]  backdrop-blur-[30px] flex flex-col">
+          <div className="flex justify-between">
+            <h1 className="text-lg font-bold">Location</h1>
+          </div>
+          <hr className="mt-5" />
+          <div className="grid lg:grid-cols-2 sm:grid-rows-3 gap-3 mt-5">
+            <div className="lg:cols-span-1 sm:row-span-1 flex flex-col">
+              <div className="flex justify-between">
+                <h3>Street Address</h3>
+                <p>{location?.address}</p>
+              </div>
+              <div>
+                <hr />
+              </div>
+            </div>
+            <div className="lg:cols-span-1 sm:row-span-1 flex flex-col">
+              <div className="flex justify-between">
+                <h3>City</h3>
+                {console.log("location?.location", location)}
+                <p>
+                  {location?.location
+                    ? location?.location?.split(",")[0]
+                    : "not defined"}
+                </p>
+              </div>
+              <div>
+                <hr />
+              </div>
+            </div>
+            <div className="lg:cols-span-1 sm:row-span-1 flex flex-col">
+              <div className="flex justify-between">
+                <h3>Country</h3>
+                <p>
+                  {location?.location
+                    ? location?.location?.split(",")[1]
+                    : "not defined"}
+                </p>
+              </div>
+              <div>
+                <hr />
+              </div>
+            </div>
+          </div>
+          <div className="px-auto lg:h-[400px]">
+            <MapContainer
+              center={position}
+              zoom={12}
+              attributionControl={true}
+              zoomControl={false}
+              doubleClickZoom={true}
+              scrollWheelZoom={true}
+              dragging={true}
+              animate={true}
+              easeLinearity={0.35}
+            >
+              <TileLayer
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                // url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                url='https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png'
+              />
+
+              <Marker icon={iconPerson} position={position}>
+                <Popup>{title}</Popup>
+              </Marker>
+              <RecenterAutomatically position={position} />
+            </MapContainer>
+          </div>
+        </div>
+        
+        {/* <div className="rounded-lg bg-[hsla(0,0%,100%,0.8)] px-6 py-8 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] mb-[2vh] backdrop-blur-[30px] flex flex-col">
+          <h1 className="text-lg font-bold mb-[2vh]">Features</h1>
+          <hr className="mb-[5vh]" />
+          <div className="flex gap-12 flex-wrap">
+            {features?.map((e, i) => {
+              if (e.name !== "bathRooms" && e.name !== "bedRooms") {
+                const displayText = e.value && !isNaN(e.value) ? `${e.name} : ${e.value}` : e.name;
+                return (
+                  <div
+                    className="h-20 w-32 flex justify-center items-center p-4"
+                    key={i}
+                  >
+                    {displayText}
+                  </div>
+                );
+              }
+            })}
+          </div>
+        </div> */}
+
+
       </div>
       <div className="sm:row-span-1 lg:col-span-1 flex flex-col justify-center h-fit md:sticky top-11 ">
         <div className="px-auto lg:w-full lg:mb-[30vh] mb-[20vh]"></div>

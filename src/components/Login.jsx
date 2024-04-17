@@ -3,6 +3,7 @@ import { FiMail, FiLock } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
+import {ReactComponent as LogoSvg} from "../logo/logo5.svg";
 
 import { FaApple, FaFacebook, FaGoogle } from "react-icons/fa";
 import { IoLogoApple, IoLogoFacebook, IoLogoGoogle } from "react-icons/io";
@@ -73,7 +74,8 @@ function Admin({ setIsloggedIn }) {
           }}
         >
           <div className="flex justify-center items-center">
-            <img src="/images/logo1.png" className="w-36 h-12 mb-5"></img>
+            <LogoSvg height={60} style={{marginBottom: 20}} />
+            {/* <img src="/images/logo1.png" className="w-36 h-12 mb-5"></img> */}
           </div>
           <hr className="w-[50%] mx-auto mb-10" />
           <div className=" w-[90%] sm:w-[50%] md:w-[70] lg:w-[50%] mx-auto bg-bgdrop rounded-[25px] shadow-lg bg-opacity-25 backdrop-filter backdrop-blur-lg flex flex-col justify-center items-center p-10">

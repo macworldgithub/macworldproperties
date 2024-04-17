@@ -11,11 +11,12 @@ import Select from "@mui/material/Select";
 import { InputLabel, TextField } from "@mui/material";
 import { usePlacesWidget } from "react-google-autocomplete";
 import { Button } from "antd";
+import '../../../App.css'
 
 const Filters = () => {
   const category = "residential";
   const [locationData, setLocationData] = useState("");
-
+  const [visitedColor, setVisitedColor] = useState(1)
   const [searchArray, setSearchArray] = useState([]);
 
   const [MyURL] = useSearchParams();
@@ -38,7 +39,7 @@ const Filters = () => {
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_SERVERURL}/lov/all-subCategory`)
-      .then((res) =>{
+      .then((res) => {
         setsubcatOptions([{ key: "All", value: "All" }, ...res.data.data])
       }
       );
@@ -141,213 +142,214 @@ const Filters = () => {
 
   return (
     <div className="xl:w-[1200px] mx-auto relative px-4 md:px-8">
-      <div className="inline-block bg-blue-200">Buy</div>
-      <div className="inline-block bg-blue-200">Off-Plan</div>
-      <div className="inline-block bg-blue-200">Rent</div>
-      <div className="flex-col rounded-xl card gap-x-4 flex-center-between gap-y-4  md:flex-row card card-shadow dark:shadow-none  w-[100%]  ">
-        <div className="lg:sticky lg:top-20 w-full ">
-          <div className="flex justify-center  flex-row flex-wrap lg:flex-nowrap px-4 xl:px-12 gap-8 py-2 w-full ">
-            <Box sx={{ minWidth: 160 }}>
-              <FormControl fullWidth size="small">
-                <InputLabel id="demo-simple-select-label" className="bg-white">
-                  Category
-                </InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={subcatvalue}
-                  label="category"
-                  MenuProps={{ PaperProps: { style: { maxHeight: "40vh" } } }}
-                  sx={{
-                    "&:before": {
-                      borderColor: "yellow !important",
-                    },
-                    "&:after": {
-                      borderColor: "yellow !important",
-                    },
-                  }}
-                  onChange={(e) => {
-                    setsubcatvalue(e.target.value);
-                    // params.append('subCategory', e.target.value);
-                    setSearchArray((state) => {
-                      if (state.some((item) => item.key == "subCategory")) {
-                        const temp = [...state];
-                        const temp2 = temp.filter(
-                          (e) => e.key !== "subCategory"
-                        );
-                        temp2.push({
-                          key: "subCategory",
-                          value: e.target.value,
-                        });
-                        console.log("ppopopiokp", temp2);
-                        return temp2;
-                      }
-                      return [
-                        ...state,
-                        { key: "subCategory", value: e.target.value },
-                      ];
-                    });
-                  }}
-                >
-                  {subcatOptions?.map((opt, i) => (
-                    <MenuItem
-                      key={i}
-                      selected={opt.key == subcatvalue ? true : false}
-                      value={opt.key == "All" ? "" : opt.key}
-                      name={opt.key}
-                    >
-                      {opt.value}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </Box>
-            <Box sx={{ minWidth: 160 }}>
-              <FormControl fullWidth size="small">
-                <InputLabel id="demo-simple-select-label" className="bg-white">
-                  Bathrooms
-                </InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={bathrooms}
-                  label="category"
-                  MenuProps={{ PaperProps: { style: { maxHeight: "40vh" } } }}
-                  sx={{
-                    "&:before": {
-                      borderColor: "yellow !important",
-                    },
-                    "&:after": {
-                      borderColor: "yellow !important",
-                    },
-                  }}
-                  onChange={(e) => {
-                    setBathrooms(e.target.value);
-                    // params.append('bathRooms', e.target.value);
-                    // if (state.some(item => item.key == 'bathRooms')) {
-                    //   const temp = [...state];
-                    //   const temp2 = temp.filter(e => e.key !== 'bathRooms');
-                    //   temp2.push({ key: 'bathRooms', value: e.target.value })
-                    //   console.log('ppopopiokp', temp2);
-                    //   return temp2;
-                    // }
-                    setSearchArray((state) => {
-                      if (state.some((item) => item.key == "bedRooms")) {
-                        const temp = [...state];
-                        const temp2 = temp.filter((e) => e.key !== "bedRooms");
-                        temp2.push({ key: "bedRooms", value: e.target.value });
-                        console.log("ppopopiokp", temp2);
-                        return temp2;
-                      }
-                      return [
-                        ...state,
-                        { key: "bathRooms", value: e.target.value },
-                      ];
-                    });
-                  }}
-                >
-                  {bathRoomsData?.map((opt, i) => (
-                    <MenuItem
-                      key={i}
-                      selected={opt.key == bathrooms ? true : false}
-                      value={opt.key == "All" ? "" : opt.key}
-                      name={opt.key}
-                    >
-                      {opt.value}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </Box>
+      <div className="floating-forms">
+        <div onClick={() => setVisitedColor(1)} style={visitedColor == 1 ? { backgroundColor: '#ffffff' } : { backgroundColor: "rgb(252 203 0 / 0.75)" }} className="inline-block bg-blue-200 px-5 py-2 border-top-left-radius cursor-pointer visited:text-purple-600">Buy</div>
+        <div onClick={() => setVisitedColor(2)} style={visitedColor == 2 ? { backgroundColor: '#ffffff' } : { backgroundColor: "rgb(252 203 0 / 0.75)" }} className="inline-block bg-blue-200 px-5 py-2 cursor-pointer">Off-Plan</div>
+        <div onClick={() => setVisitedColor(3)} style={visitedColor == 3 ? { backgroundColor: '#ffffff' } : { backgroundColor: "rgb(252 203 0 / 0.75)" }} className="inline-block bg-blue-200 px-5 py-2 border-top-right-radius cursor-pointer">Rent</div>
+        <div className="border-white flex-col rounded-xl border-top-left-radius-none card gap-x-4 flex-center-between gap-y-4  md:flex-row card card-shadow dark:shadow-none  w-[100%]  ">
+          <div className="lg:sticky lg:top-20 w-full">
+            <div className="flex justify-center  flex-row flex-wrap px-4 xl:px-12 sm:gap-4 md:gap-7 gap-2 py-2 w-full ">
+              <Box sx={{ minWidth: 160 }}>
+                <FormControl fullWidth size="small">
+                  <InputLabel id="demo-simple-select-label" className="bg-white">
+                    Category
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={subcatvalue}
+                    label="category"
+                    MenuProps={{ PaperProps: { style: { maxHeight: "40vh" } } }}
+                    sx={{
+                      "&:before": {
+                        borderColor: "yellow !important",
+                      },
+                      "&:after": {
+                        borderColor: "yellow !important",
+                      },
+                    }}
+                    onChange={(e) => {
+                      setsubcatvalue(e.target.value);
+                      // params.append('subCategory', e.target.value);
+                      setSearchArray((state) => {
+                        if (state.some((item) => item.key == "subCategory")) {
+                          const temp = [...state];
+                          const temp2 = temp.filter(
+                            (e) => e.key !== "subCategory"
+                          );
+                          temp2.push({
+                            key: "subCategory",
+                            value: e.target.value,
+                          });
+                          console.log("ppopopiokp", temp2);
+                          return temp2;
+                        }
+                        return [
+                          ...state,
+                          { key: "subCategory", value: e.target.value },
+                        ];
+                      });
+                    }}
+                  >
+                    {subcatOptions?.map((opt, i) => (
+                      <MenuItem
+                        key={i}
+                        selected={opt.key == subcatvalue ? true : false}
+                        value={opt.key == "All" ? "" : opt.key}
+                        name={opt.key}
+                      >
+                        {opt.value}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Box>
+              <Box sx={{ minWidth: 160 }}>
+                <FormControl fullWidth size="small">
+                  <InputLabel id="demo-simple-select-label" className="bg-white">
+                    Bathrooms
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={bathrooms}
+                    label="category"
+                    MenuProps={{ PaperProps: { style: { maxHeight: "40vh" } } }}
+                    sx={{
+                      "&:before": {
+                        borderColor: "yellow !important",
+                      },
+                      "&:after": {
+                        borderColor: "yellow !important",
+                      },
+                    }}
+                    onChange={(e) => {
+                      setBathrooms(e.target.value);
+                      // params.append('bathRooms', e.target.value);
+                      // if (state.some(item => item.key == 'bathRooms')) {
+                      //   const temp = [...state];
+                      //   const temp2 = temp.filter(e => e.key !== 'bathRooms');
+                      //   temp2.push({ key: 'bathRooms', value: e.target.value })
+                      //   console.log('ppopopiokp', temp2);
+                      //   return temp2;
+                      // }
+                      setSearchArray((state) => {
+                        if (state.some((item) => item.key == "bedRooms")) {
+                          const temp = [...state];
+                          const temp2 = temp.filter((e) => e.key !== "bedRooms");
+                          temp2.push({ key: "bedRooms", value: e.target.value });
+                          console.log("ppopopiokp", temp2);
+                          return temp2;
+                        }
+                        return [
+                          ...state,
+                          { key: "bathRooms", value: e.target.value },
+                        ];
+                      });
+                    }}
+                  >
+                    {bathRoomsData?.map((opt, i) => (
+                      <MenuItem
+                        key={i}
+                        selected={opt.key == bathrooms ? true : false}
+                        value={opt.key == "All" ? "" : opt.key}
+                        name={opt.key}
+                      >
+                        {opt.value}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Box>
 
-            <Box sx={{ minWidth: 160 }}>
-              <FormControl fullWidth size="small">
-                <InputLabel id="demo-simple-select-label" className="bg-white">
-                  Bed Rooms
-                </InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={bedrooms}
-                  label="category"
-                  MenuProps={{ PaperProps: { style: { maxHeight: "40vh" } } }}
-                  sx={{
-                    "&:before": {
-                      borderColor: "yellow !important",
-                    },
-                    "&:after": {
-                      borderColor: "yellow !important",
-                    },
-                  }}
-                  onChange={(e) => {
-                    setBedrooms(e.target.value);
-                    // params.append('bedRooms', e.target.value);
+              <Box sx={{ minWidth: 190 }}>
+                <FormControl fullWidth size="small">
+                  <InputLabel id="demo-simple-select-label" className="bg-white">
+                    Bed Rooms
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={bedrooms}
+                    label="category"
+                    MenuProps={{ PaperProps: { style: { maxHeight: "40vh" } } }}
+                    sx={{
+                      "&:before": {
+                        borderColor: "yellow !important",
+                      },
+                      "&:after": {
+                        borderColor: "yellow !important",
+                      },
+                    }}
+                    onChange={(e) => {
+                      setBedrooms(e.target.value);
+                      // params.append('bedRooms', e.target.value);
 
-                    setSearchArray((state) => {
-                      if (state.some((item) => item.key == "bedRooms")) {
-                        const temp = [...state];
-                        const temp2 = temp.filter((e) => e.key !== "bedRooms");
-                        temp2.push({ key: "bedRooms", value: e.target.value });
-                        console.log("ppopopiokp", temp2);
-                        return temp2;
-                      }
-                      return [
-                        ...state,
-                        { key: "bedRooms", value: e.target.value },
-                      ];
-                    });
+                      setSearchArray((state) => {
+                        if (state.some((item) => item.key == "bedRooms")) {
+                          const temp = [...state];
+                          const temp2 = temp.filter((e) => e.key !== "bedRooms");
+                          temp2.push({ key: "bedRooms", value: e.target.value });
+                          console.log("ppopopiokp", temp2);
+                          return temp2;
+                        }
+                        return [
+                          ...state,
+                          { key: "bedRooms", value: e.target.value },
+                        ];
+                      });
+                    }}
+                  >
+                    {bathRoomsData?.map((opt, i) => (
+                      <MenuItem
+                        key={i}
+                        selected={opt.key == bedrooms ? true : false}
+                        value={opt.key == "All" ? "" : opt.key}
+                        name={opt.key}
+                      >
+                        {opt.value}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Box>
+              <Box sx={{ minWidth: 190 }}>
+                <FormControl fullWidth size="small">
+                  <TextField
+                    size="small"
+                    name="location"
+                    value={locationData}
+                    ref={ref}
+                    onChange={(e) => setLocationData(e.target.value)}
+                    placeholder="Please enter your location"
+                    className={`border-2 border-grey shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]  rounded-lg p-6 bg-transparent hover:border-green-500 placeholder-footer h-4 w-full bg-white`}
+                  />
+                </FormControl>
+              </Box>
+              <Box sx={{ minWidth: 190 }} className="floating-button-margin-top">
+                <Button
+                  onClick={async () => {
+                    const params = new URLSearchParams();
+                    searchArray.length > 0 &&
+                      searchArray.map((item) => {
+                        params.append(item.key, item.value);
+                      });
+                    const response = await axios.get(
+                      `${process.env.REACT_APP_SERVERURL
+                      }/property/get-property?find=check&category=all&${params.toString()}`
+                    );
+                    navigate(
+                      `/property/forSale?category=all&${params.toString()}`
+                    );
+                    dispatch({ type: "FORSALE_SCREEN_TOGGLE", payload: true });
                   }}
+                  size="large"
+                  className="bg-primary border-0 hover:text-white text-white text-lg tracking-widest  hover:bg-primary/75 rounded-md"
                 >
-                  {bathRoomsData?.map((opt, i) => (
-                    <MenuItem
-                      key={i}
-                      selected={opt.key == bedrooms ? true : false}
-                      value={opt.key == "All" ? "" : opt.key}
-                      name={opt.key}
-                    >
-                      {opt.value}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </Box>
-            <Box sx={{ minWidth: 160 }}>
-              <FormControl fullWidth size="small">
-                <TextField
-                  size="small"
-                  name="location"
-                  value={locationData}
-                  ref={ref}
-                  onChange={(e) => setLocationData(e.target.value)}
-                  placeholder="Please enter your location"
-                  className={`border-2 border-grey shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]  rounded-lg p-6 bg-transparent hover:border-green-500 placeholder-footer h-4 w-full bg-white`}
-                />
-              </FormControl>
-            </Box>
-            <Box sx={{ minWidth: 160 }}>
-              <Button
-                onClick={async () => {
-                  const params = new URLSearchParams();
-                  searchArray.length > 0 &&
-                    searchArray.map((item) => {
-                      params.append(item.key, item.value);
-                    });
-                  const response = await axios.get(
-                    `${
-                      process.env.REACT_APP_SERVERURL
-                    }/property/get-property?find=check&category=all&${params.toString()}`
-                  );
-                  navigate(
-                    `/property/forSale?category=all&${params.toString()}`
-                  );
-                  dispatch({ type: "FORSALE_SCREEN_TOGGLE", payload: true });
-                }}
-                size="large"
-                className="bg-primary border-0 hover:text-white text-white text-lg tracking-widest  hover:bg-primary/75 rounded-md"
-              >
-                search property
-              </Button>
-            </Box>
+                  search property
+                </Button>
+              </Box>
+            </div>
           </div>
         </div>
       </div>

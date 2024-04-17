@@ -11,7 +11,7 @@ const reducer = (state, action) => {
           contactDetails: action?.payload?.contactDetails,
           locationAndAddress: action?.payload?.locationAndAddress,
           ownerId: action?.payload?.ownerId
-        },
+        }
       };
     case "ADD_AMENITIES":
       return {
@@ -20,7 +20,7 @@ const reducer = (state, action) => {
           ...state.form,
           amenities: action.payload
         },
-      };
+      }
     case "UPDATE_AMENITIES":
       return {
         ...state,

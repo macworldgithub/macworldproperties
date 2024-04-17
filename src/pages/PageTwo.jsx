@@ -75,7 +75,7 @@ const Search = (props) => {
 };
 // =================================  =================================
 
-const PageOne = () => {
+const PageTwo = () => {
     const { state, dispatch } = useContext(Store);
     const [stepcount, setStepcount] = useState(1);
 
@@ -159,39 +159,39 @@ const PageOne = () => {
 
     useEffect(() => {
         console.log('ytuyrurt', state?.updateProperty?.rentDetails)
-        if (state?.updatePropertyToggle) {
-            setFormData({
-                // propertyDetailsObj
-                referncenumber: state?.updateProperty?.propertyDetails?.refNo,
-                title: state?.updateProperty?.propertyDetails?.title,
-                arabicTitle: state?.updateProperty?.propertyDetails?.titleArabic,
-                desc: state?.updateProperty?.propertyDetails?.description,
-                descArabic: state?.updateProperty?.propertyDetails?.descriptionArabic,
-                area: state?.updateProperty?.propertyDetails?.areaSquare,
-                price: state?.updateProperty?.propertyDetails?.InclusivePrice,
-                permitNo: state?.updateProperty?.propertyDetails?.PermitNumber,
-                completion: state?.updateProperty?.propertyDetails?.completionStatus,
-                ownValue: state?.updateProperty?.propertyDetails?.ownerShipStatus,
-                bedRooms: 0,
-                bathRooms: 0,
-                // typesAndPurposeObj
-                category: state?.updateProperty?.typesAndPurpose?.category,
-                subCategory: state?.updateProperty?.typesAndPurpose?.subCategory,
-                purpose: state?.updateProperty?.typesAndPurpose?.purpose,
-                // rentalDetails
-                rentAED: state?.updateProperty?.rentDetails?.rent,
-                rentFrequency: state?.updateProperty?.rentDetails?.rentFrequency,
-                contractperiod: state?.updateProperty?.rentDetails?.minimumContractPeriod,
-                vacatingperiod: state?.updateProperty?.rentDetails?.noticePeriod,
-                maintfee: state?.updateProperty?.rentDetails?.state?.updateProperty?.rentDetails?.maintainanceFee,
-                paidby: state?.updateProperty?.rentDetails?.paidBy,
-                //  ================ New Values =============
-                location: state?.updateProperty?.locationAndAddress?.location,
-                longitude: state?.updateProperty?.locationAndAddress?.longitude,
-                latitude: state?.updateProperty?.locationAndAddress?.latitude,
-                address: state?.updateProperty?.locationAndAddress?.address,
-            });
-        } else {
+        // if (state?.updatePropertyToggle) {
+        //     setFormData({
+        //         // propertyDetailsObj
+        //         referncenumber: state?.updateProperty?.propertyDetails?.refNo,
+        //         title: state?.updateProperty?.propertyDetails?.title,
+        //         arabicTitle: state?.updateProperty?.propertyDetails?.titleArabic,
+        //         desc: state?.updateProperty?.propertyDetails?.description,
+        //         descArabic: state?.updateProperty?.propertyDetails?.descriptionArabic,
+        //         area: state?.updateProperty?.propertyDetails?.areaSquare,
+        //         price: state?.updateProperty?.propertyDetails?.InclusivePrice,
+        //         permitNo: state?.updateProperty?.propertyDetails?.PermitNumber,
+        //         completion: state?.updateProperty?.propertyDetails?.completionStatus,
+        //         ownValue: state?.updateProperty?.propertyDetails?.ownerShipStatus,
+        //         bedRooms: 0,
+        //         bathRooms: 0,
+        //         // typesAndPurposeObj
+        //         category: state?.updateProperty?.typesAndPurpose?.category,
+        //         subCategory: state?.updateProperty?.typesAndPurpose?.subCategory,
+        //         purpose: state?.updateProperty?.typesAndPurpose?.purpose,
+        //         // rentalDetails
+        //         rentAED: state?.updateProperty?.rentDetails?.rent,
+        //         rentFrequency: state?.updateProperty?.rentDetails?.rentFrequency,
+        //         contractperiod: state?.updateProperty?.rentDetails?.minimumContractPeriod,
+        //         vacatingperiod: state?.updateProperty?.rentDetails?.noticePeriod,
+        //         maintfee: state?.updateProperty?.rentDetails?.state?.updateProperty?.rentDetails?.maintainanceFee,
+        //         paidby: state?.updateProperty?.rentDetails?.paidBy,
+        //         //  ================ New Values =============
+        //         location: state?.updateProperty?.locationAndAddress?.location,
+        //         longitude: state?.updateProperty?.locationAndAddress?.longitude,
+        //         latitude: state?.updateProperty?.locationAndAddress?.latitude,
+        //         address: state?.updateProperty?.locationAndAddress?.address,
+        //     });
+        // } else {
             setFormData({
                 // propertyDetailsObj
                 referncenumber: state?.form?.propertyDetails?.refNo,
@@ -225,7 +225,7 @@ const PageOne = () => {
                 latitude: state?.form?.locationAndAddress?.latitude,
                 address: state?.form?.locationAndAddress?.address,
             });
-        }
+        // }
     }, []);
 
     useEffect(() => {
@@ -250,6 +250,7 @@ const PageOne = () => {
             .get(`${process.env.REACT_APP_SERVERURL}/lov/paid-by`)
             .then((res) => setpaidbyOptions(res.data.data));
     }, []);
+
     useEffect(() => {
         if (formData?.category) {
             axios
@@ -427,19 +428,19 @@ const PageOne = () => {
             //   email: data?.email,
             //   phone: data?.phoneNumber,
             // }
-            if (state?.updatePropertyToggle) {
-                dispatch({
-                    type: "UPDATE_PROPERTY",
-                    payload: {
-                        propertyDetails: propertyDetailsObj,
-                        typesAndPurpose: typesAndPurposeObj,
-                        rentDetails: rentalDetails,
-                        contactDetails: contactDetails,
-                        locationAndAddress: locationAndAddress,
-                        ownerId: data?._id,
-                    },
-                });
-            } else {
+            // if (state?.updatePropertyToggle) {
+            //     dispatch({
+            //         type: "UPDATE_PROPERTY",
+            //         payload: {
+            //             propertyDetails: propertyDetailsObj,
+            //             typesAndPurpose: typesAndPurposeObj,
+            //             rentDetails: rentalDetails,
+            //             contactDetails: contactDetails,
+            //             locationAndAddress: locationAndAddress,
+            //             ownerId: data?._id,
+            //         },
+            //     });
+            // } else {
                 dispatch({
                     type: "ADD_PROPERTY",
                     payload: {
@@ -449,13 +450,13 @@ const PageOne = () => {
                         contactDetails: contactDetails,
                         locationAndAddress: locationAndAddress,
                         ownerId: data?._id,
-                    },
+                    }
                 });
             }
 
             setStepcount(stepcount + 1);
             NavigateTo("/dashboard");
-        }
+        // }
     };
 
     const [error, setError] = useState({
@@ -528,7 +529,7 @@ const PageOne = () => {
         <Layout>
             <div className="h-screen overflow-x-hidden bg-gradient-to-r from-gradient via-ordinary to-ordinary">
                 <div className="mx-10">
-                    <section className="block rounded-[25px] bg-white px-6 py-3 sm:py-4 md:py-5 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-20">
+                    <section className="block rounded-[25px] bg-white px-6 pt-4 pb-4 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-20">
                         <ProgressButton step={1} />
                     </section>
                     <section className="mt-12">
@@ -876,4 +877,4 @@ const PageOne = () => {
     );
 };
 
-export default PageOne;
+export default PageTwo;

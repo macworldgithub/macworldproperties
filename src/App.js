@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useDispatch } from "react-redux";
 import { Routes, Route, useLocation } from "react-router-dom";
 // import BackToTopButton from "./components/common/BackToTopButton";
@@ -29,6 +29,7 @@ import Agentdetails from "./pages/Agentdetails";
 import Dashboard from "./pages/Dashboard";
 import Dashboardpage3 from "./pages/Dashboardpage3";
 import PageOne from "./pages/PageOne";
+import PageTwo from "./pages/PageTwo";
 import { StoreProvider } from "./context/store";
 import PropertyGallery from "./pages/PropertyGallery";
 import ManageListings from "./pages/ManageListings";
@@ -138,6 +139,7 @@ function App() {
             <Route path="/otp" element={<Otp />} />
             <Route path="/agentdetails" element={<Agentdetails />} />
               <Route path="/page-one" element={<ProtectedRoutes><PageOne /></ProtectedRoutes>} />
+              <Route path="/page-two" element={<ProtectedRoutes><PageTwo /></ProtectedRoutes>} />
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/listing-inventory" element={<ProtectedRoutes><ManageListings /></ProtectedRoutes>} />
             <Route path="/reports" element={<ProtectedRoutes><Reports /></ProtectedRoutes>} />

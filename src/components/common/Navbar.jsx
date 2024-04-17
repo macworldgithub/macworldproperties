@@ -18,6 +18,7 @@ import logo1 from "../../logo/logo1.png";
 // import Dropdown from "./Dropdownnn";
 import logo2 from "../../logo/logoblack.png";
 import logo3 from "../../logo/logo3.png";
+import {ReactComponent as LogoSvg} from "../../logo/logo5.svg";
 import { navLinks } from "../../data/navLinks";
 import { Store } from "../../context/store";
 import '../../App.css'
@@ -142,7 +143,8 @@ const Navbar = ({ isloggedIn, setIsloggedIn }) => {
       </Link> */}
         <Link to="/" className="flex-align-center gap-x-1">
           {location.pathname === "/" ? (
-            <img className="h-7 :w-10 md:h-8 md:w-15" src={navBarLogo} />
+            <LogoSvg height={43}/>
+            // <img className="h-7 :w-10 md:h-8 md:w-15" src={navBarLogo} />
           ) : (
             <img className="h-7 :w-10 md:h-8 md:w-15" src={navBarLogo} />
           )}

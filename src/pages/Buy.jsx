@@ -96,20 +96,20 @@ const Buy = () => {
         showPage={slug == "buy" ? "forSale" : slug}
       />
       {console.log('paosdpaspdoasd', propertydataArr)}
-      <div className="flex flex-row flex-center-between px-[80px] xl:px-[120px] pt-[25px]">
+      <div className="flex flex-row flex-center-between px-8 sm:px-[80px] xl:px-[120px] pt-[25px]">
         <div>
           <p className=" mt-[20px]">
-            <Link to={"/"}>Home</Link>
+            <Link to={"/"} className="text-lg uppercase">Home</Link>
             <span> &gt; </span>
-            <Link to={`/property/${slug}?category=all`}>{slug}</Link>
+            <Link to={`/property/${slug}?category=resident`} className="text-lg uppercase">{slug}</Link>
             <span> &gt; </span>
-            <Link to={`/property/${slug}?category=${myParam}`}>
+            <Link to={`/property/${slug}?category=${myParam}`} className="text-lg uppercase">
               {myParam == "all" ? "" : myParam}
             </Link>
           </p>
-          <h1 className=" mt-[5px] text-xl font-bold">
+          {/* <h1 className="mt-[5px] text-xl font-bold">
             {slug[0].toUpperCase() + slug.slice(1, slug.length)}
-          </h1>
+          </h1> */}
         </div>
         <div>
           <div className="gap-2 flex-align-center">
@@ -130,7 +130,7 @@ const Buy = () => {
           </div>
         </div>
       </div>
-      <div className="flex justify-center">
+      {/* <div className="flex justify-center">
         <div className=" w-[90%] justify-start flex-align-center mt-2 mb-2">
           <label className="themeSwitcherTwo shadow-card relative inline-flex cursor-pointer select-none items-center justify-center p-1 flex-wrap md:flex-row">
             <input
@@ -178,14 +178,15 @@ const Buy = () => {
             </button>
           </label>
         </div>
-      </div>
+      </div> */}
       <div
+      style={{padding: '0px 40px'}}
         className={`grid my-20 h-full ${layout === "grid" && "lg:grid-cols-6 gap-x-20"
           } ${layout === "list" && "lg:grid-cols-3 gap-10"} px-3 gap-y-6`}
       >
         {layout === "grid" ? (
-          // <div className="flex flex-wrap h-full w-full col-span-3 gap-10">
-          <div className="grid lg:col-span-4 col-span-1 grid-cols-1 gap-y-8 md:grid-cols-2 content-center gap-x-10">
+          // <div className="flex flex-wrap h-full w-full col-span-3 gap-10">  content-center
+          <div className="grid lg:col-span-4 col-span-1 grid-cols-1 gap-y-8 md:grid-cols-2  gap-x-10"> 
             {propertydataArr?.length > 0 ? propertydataArr?.map((item) => (
               <ImpressionClickTrackerHOC
                 clickEvent={`ADD-TO-CART`}
