@@ -26,6 +26,7 @@ import Input from "../components/Dashboard/Input";
 import SelectOption from "../components/Dashboard/selectOption";
 import LocationMarker from "../components/common/Marker";
 
+
 import "leaflet/dist/leaflet.css";
 // make new leaflet element
 import {
@@ -107,15 +108,15 @@ const PageOne = () => {
         arabicTitle: "",
         desc: "",
         descArabic: "",
-        area: 0,
-        permitNo: 0,
-        rentAED: 0,
-        contractperiod: 0,
-        maintfee: 0,
-        vacatingperiod: 0,
-        price: 0,
-        bedRooms: 0,
-        bathRooms: 0,
+        area: '',
+        permitNo: '',
+        rentAED: '',
+        contractperiod: '',
+        maintfee: '',
+        vacatingperiod: '',
+        price: '',
+        bedRooms: '',
+        bathRooms: '',
         //  ================ New Values =============
 
         category: "",
@@ -294,10 +295,10 @@ const PageOne = () => {
         //   return fieldErrors.referncenumber = "Reference number is imp";
         // }
         if (!formData.price) {
-          fieldErrors.price = "price is required";
+            fieldErrors.price = "price is required";
         }
         if (!formData.location) {
-          fieldErrors.price = "location is required";
+            fieldErrors.price = "location is required";
         }
         // if (!catvalue) {
         //   fieldErrors.catvalue = "category is imp";
@@ -526,14 +527,21 @@ const PageOne = () => {
 
     return (
         <Layout>
-            <div className="h-screen overflow-x-hidden bg-gradient-to-r from-gradient via-ordinary to-ordinary">
+            <div className="h-screen overflow-x-hidden
+            // bg-gradient-to-r from-gradient via-ordinary to-ordinary"
+            // style={{
+            //     backgroundImage: "url('/addPropertyBgImg.jpg')",
+            //     backgroundRepeat: "no-repeat",
+            //     backgroundSize: "cover",
+            //   }}
+            >
                 <div className="mx-10">
                     <section className="block rounded-[25px] bg-white px-6 py-3 sm:py-4 md:py-5 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-20">
                         <ProgressButton step={1} />
                     </section>
-                    <section className="mt-12">
-                        <span className="rounded text-white text-lg bg-yellow-500 py-2 px-4">Property Type</span>
-                        <div className="flex flex-col lg:flex-row gap-11 mt-4">
+                    <section className="mt-12 bg-white pb-8 pt-6 px-8 rounded rounded-lg">
+                        <span className="rounded text-white text-lg bg-yellow-500 py-2 px-4" style={{marginLeft: '-50px'}}>Property Type</span>
+                        <div className="flex flex-col lg:flex-row gap-3 mt-4">
                             <SelectOption
                                 _options={catOptions}
                                 _selectedValue={formData.category}
@@ -565,103 +573,75 @@ const PageOne = () => {
                             />
                         </div>
                     </section>
-                    {/* Location And Address */}
 
-                    <section className="mt-8">
-                        <span className="rounded text-white text-lg bg-yellow-500 py-2 px-4">Location and Address</span>
-                        <div className="flex flex-col gap-2 mt-4">
-                            <div className="flex flex-col lg:flex-row gap-x-2">
 
+                    {/* Title & Arabic Title Start */}
+                    {/* <div className="grid lg:grid-cols-2 gap-16 mt-4">
+                        
+                    </div> */}
+                    {/* Title & Arabic Title End */}
+
+                    {/* Property Details */}
+                    <section className="mt-8 bg-white pb-8 pt-6 px-8 rounded rounded-lg">
+                        <span className="rounded text-white text-lg bg-yellow-500 py-2 px-4" style={{marginLeft: '-50px'}}>Property Details</span>
+                        <div className="grid lg:grid-cols-3 gap-3 mt-4">
+                            <div className="flex flex-col gap-[5px] mb-2">
+                                {/* <Label text="Permit Number" /> */}
                                 <Input
-                                    _name="location"
-                                    _placeholder="Location"
-                                    ref={ref}
+                                    _name="permitNo"
+                                    _type="number"
+                                    _value={formData.permitNo}
                                     _onchange={handleChange}
-                                    _value={formData.location}
-                                />
-
-                                <Input
-                                    _type="text"
-                                    _onchange={handleChange}
-                                    _value={formData.address}
-                                    _name="address"
-                                    _placeholder="Address"
+                                    _onblur={handleBlur}
+                                    _onclick={clearError}
+                                    _placeholder={"Permit Number"}
                                 />
                             </div>
-                            {/* <hr className="text-black" /> */}
-                            <div className="lg:h-[300px] mt-4">
-                                <MapContainer
-                                    zoom={8}
-                                    doubleClickZoom={true}
-                                    scrollWheelZoom={true}
-                                    center={{ lat: 24.43214670001102, lng: 54.407007002975796 }}
-                                >
-                                    <TileLayer
 
-                                        url='https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png'
-                                        // url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                                        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                                    />
-                                    <LocationMarker
-                                        position={position}
-                                        setPosition={setPosition}
-                                        setFormData={setFormData}
-                                    />
-                                </MapContainer>
+                            <div className="flex flex-col gap-[5px] mb-2">
+                                {/* <Label text="Title" /> */}
+                                <Input
+                                    _name="title"
+                                    _type="text"
+                                    _value={formData.title}
+                                    _onchange={handleChange}
+                                    _onblur={handleBlur}
+                                    _onclick={clearError}
+                                    _errortext={error.title}
+                                    _placeholder={"Title"}
+                                />
+                                {/* <div className="text-sm text-gray-500">
+                                    {formData?.title?.length}/150 characters
+                                </div> */}
+                            </div>
+                            <div className="flex flex-col gap-[5px] mb-2">
+                                {/* <Label text="Title ( Arabic )" /> */}
+                                <Input
+                                    _name="arabicTitle"
+                                    _type="text"
+                                    _value={formData.arabicTitle}
+                                    _onchange={handleChange}
+                                    _onblur={handleBlur}
+                                    _onclick={clearError}
+                                    _placeholder={"Title (Arabic)"}
+                                />
+                                {/* <div className="text-sm text-gray-500">
+                                    {formData?.arabicTitle?.length}/150 characters
+                                </div> */}
                             </div>
                         </div>
-                    </section>
 
-                    {/* Prperty Details */}
-                    <section className="mt-8">
-                        <span className="rounded text-white text-lg bg-yellow-500 py-2 px-4">Property Details</span>
-
-                        <div className="grid lg:grid-cols-3 gap-10 mt-4">
+                        {/* <div className="grid lg:grid-cols-3 gap-10 mt-4">
                             <div className="flex flex-col gap-2">
                                 <button onClick={autoGenerate} className="text-[16px] ">
                                     Auto Generate
                                 </button>
-                                <Input
-                                    _name="referncenumber"
-                                    _type="text"
-                                    _value={formData.referncenumber}
-                                    _onchange={handleChange}
-                                    _onblur={handleBlur}
-                                    _onclick={clearError}
-                                    _errortext={error.referncenumber}
-                                    _placeholder="Reference Number"
-                                />
+                                
                             </div>
-                            <div className="flex flex-col gap-[5px] mb-2">
-                                <Label text="Area (Square Feet)" />
-                                <Input
-                                    _name="area"
-                                    _type="number"
-                                    _value={formData.area}
-                                    _onchange={handleChange}
-                                    _onblur={handleBlur}
-                                    _onclick={clearError}
-                                />
-                                <div className="text-sm text-gray-500">
-                                    {(formData.area * 0.092903).toFixed(3)} Square Meters /{" "}
-                                    {(formData.area / 9).toFixed(3)} Square Yards
-                                </div>
-                            </div>
-                            <div className="flex flex-col gap-[5px] mb-2">
-                                <Label text="Inclusive Price" />
-                                <Input
-                                _placeholder="1000"
-                                    _name="price"
-                                    _type="number"
-                                    _value={formData.price}
-                                    _onchange={handleChange}
-                                    _onblur={handleBlur}
-                                    _onclick={clearError}
-                                />
-                            </div>
-                        </div>
+
+                        </div> */}
                         {/* <hr className="text-black mx-20 my-3" /> */}
-                        <div className="grid lg:grid-cols-2 gap-16 mt-4">
+                        {/* <div className="grid lg:grid-cols-2 gap-16 mt-4">
                             <div className="flex flex-col gap-[5px] mb-2">
                                 <Label text="Title" />
                                 <Input
@@ -691,61 +671,97 @@ const PageOne = () => {
                                     {formData?.arabicTitle?.length}/150 characters
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                         {/* <hr className="text-black mx-20 my-3" /> */}
-                        <div className="grid lg:grid-cols-2 gap-10 mt-4">
-                            <div className="flex flex-col gap-[5px] mb-2">
-                                <Label text="Description" />
+                        <div className="grid lg:grid-cols-2 gap-4 mt-4">
+                            <div className="flex flex-col gap-[5px]">
+                                {/* <Label text="Description" /> */}
                                 <textarea
-                                    rows="4"
+                                    rows="10"
                                     cols="20"
                                     name="desc"
                                     value={formData.desc}
                                     onChange={handleDescChange}
                                     onBlur={handleBlur}
                                     onClick={clearError}
+                                    placeholder="Description"
                                     className={` ${error.desc && "border-red-700"
-                                        } border-2 border-grey shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]  placeholder-slate-40 rounded-lg  resize-both hover:border-green-600 overflow-auto`}
+                                        } px-3 py-4 border-2 border-grey shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]  placeholder-slate-40 rounded-lg  resize-both hover:border-green-600 overflow-auto`}
                                 />
-                                <div className="text-sm text-gray-500">
+                                {/* <div className="text-sm text-gray-500">
                                     {formData?.desc?.length}/2000 characters
-                                </div>
+                                </div> */}
                                 <div className="text-red-800">{error.desc}</div>
                             </div>
-                            <div className="flex flex-col gap-[5px] mb-2">
-                                <Label text="Description (Arabic)" />
+                            <div className="flex flex-col gap-[5px]">
+                                {/* <Label text="Description (Arabic)" /> */}
                                 <textarea
-                                    rows="4"
+                                    rows="10"
                                     cols="20"
                                     name="descArabic"
                                     value={formData.descArabic}
                                     onChange={handleDescChange}
                                     onBlur={handleBlur}
                                     onClick={clearError}
+                                    placeholder="Description (Arabic)"
                                     className={`${error.descArabic && "border-red-700"
-                                        } border-2 border-grey shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] rounded-lg placeholder-slate-400 resize-both hover:border-green-600 overflow-auto`}
+                                        } px-3 py-4 border-2 border-grey shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] rounded-lg placeholder-slate-400 resize-both hover:border-green-600 overflow-auto`}
                                 />
-                                <div className="text-sm text-gray-500">
+                                {/* <div className="text-sm text-gray-500">
                                     {formData?.descArabic?.length}/1000 characters
-                                </div>
+                                </div> */}
                                 <div className="text-red-800">{error.descArabic}</div>
                             </div>
                         </div>
                         {/* <hr className="text-black mx-20 my-3" />     */}
 
-                        <div className="grid lg:grid-cols-3 gap-5">
-                            <div className="flex flex-col gap-[5px] mb-2">
-                                <Label text="Permit Number" />
+                        <div className="grid lg:grid-cols-3 gap-3 mt-4">
+
+                        <div className="flex flex-col gap-[5px] mb-2">
+                                {/* <Label text="Area (Square Feet)" /> */}
                                 <Input
-                                    _name="permitNo"
+                                    _name="area"
                                     _type="number"
-                                    _value={formData.permitNo}
+                                    _value={formData.area}
                                     _onchange={handleChange}
                                     _onblur={handleBlur}
                                     _onclick={clearError}
+                                    _placeholder="Area (Sq.Ft)"
+                                />
+                                {/* <div className="text-sm text-gray-500">
+                                    {(formData.area * 0.092903).toFixed(3)} Square Meters /{" "}
+                                    {(formData.area / 9).toFixed(3)} Square Yards
+                                </div> */}
+                            </div>
+
+                            <div className="flex flex-col gap-[5px] mb-2">
+                            <Input
+                                    _name="referncenumber"
+                                    _type="text"
+                                    _value={formData.referncenumber}
+                                    _onchange={handleChange}
+                                    _onblur={handleBlur}
+                                    _onclick={clearError}
+                                    _errortext={error.referncenumber}
+                                    _placeholder="Reference Number"
+                                />
+                          </div>
+
+
+                            <div className="flex flex-col gap-[5px] mb-2">
+                                {/* <Label text="Inclusive Price" /> */}
+                                <Input
+                                    // _placeholder="1000"
+                                    _name="price"
+                                    _type="number"
+                                    _value={formData.price}
+                                    _onchange={handleChange}
+                                    _onblur={handleBlur}
+                                    _onclick={clearError}
+                                    _placeholder="Price"
                                 />
                             </div>
-                            <div className="flex flex-col gap-[5px] mb-2">
+                            {/* <div className="flex flex-col gap-[5px] mb-2">
                                 <Label text="Ownership Status" />
                                 <SelectOption
                                     _options={ownOptions}
@@ -754,17 +770,17 @@ const PageOne = () => {
                                     name="ownValue"
                                 // purpvalue={purpvalue}
                                 />
-                            </div>
+                            </div> */}
                         </div>
                     </section>
                     {/* For Rent Section */}
                     {/* formData?.purpose == "forRent" */}
                     {formData?.purpose == "forRent" && (
-                        <section className="mt-8 pb-8">
-                            <span className="rounded text-white text-lg bg-yellow-500 py-2 px-4">Rental Details</span>
-                            <div className="grid lg:grid-cols-3 gap-5 mt-4">
+                        <section className="mt-8 pb-8 bg-white pb-8 pt-6 px-8 rounded rounded-lg">
+                            <span className="rounded text-white text-lg bg-yellow-500 py-2 px-4" style={{marginLeft: '-50px'}}>Rental Details</span>
+                            <div className="grid lg:grid-cols-3 gap-3 mt-4">
                                 <div className="flex flex-col gap-[5px] mb-2">
-                                    <Label text="Rent(AED)" />
+                                    {/* <Label text="Rent(AED)" /> */}
                                     <Input
                                         _name="rentAED"
                                         _type="number"
@@ -772,20 +788,23 @@ const PageOne = () => {
                                         _onchange={handleChange}
                                         _onblur={handleBlur}
                                         _onclick={clearError}
+                                        _placeholder="Rent(AED)"
+                                        
                                     />
                                 </div>
                                 <div className="flex flex-col gap-[5px] mb-2">
-                                    <Label text="Rent Frequency" />
+                                    {/* <Label text="Rent Frequency" /> */}
                                     <SelectOption
                                         _options={rentfreqOptions}
                                         _selectedValue={formData?.rentFrequency}
                                         _onSelectChange={handleChange}
                                         name="rentFrequency"
+                                        label="Rent Frequency"
                                     // purpvalue={purpvalue}
                                     />
                                 </div>
                                 <div className="flex flex-col gap-[5px] mb-2">
-                                    <Label text="Minimum Contract Period (Months)" />
+                                    {/* <Label text="Minimum Contract Period (Months)" /> */}
                                     <Input
                                         _name="contractperiod"
                                         _type="number"
@@ -793,12 +812,13 @@ const PageOne = () => {
                                         _onchange={handleChange}
                                         _onblur={handleBlur}
                                         _onclick={clearError}
+                                        _placeholder="Minimum Contract Period (Months)"
                                     />
                                 </div>
                             </div>
-                            <div className="grid lg:grid-cols-3 gap-5 mt-4">
+                            <div className="grid lg:grid-cols-3 gap-3 mt-4">
                                 <div className="flex flex-col gap-[5px] mb-2">
-                                    <Label text="Vacating Notice Period (Months)" />
+                                    {/* <Label text="Vacating Notice Period (Months)" /> */}
                                     <Input
                                         _name="vacatingperiod"
                                         _type="number"
@@ -806,10 +826,11 @@ const PageOne = () => {
                                         _onchange={handleChange}
                                         _onblur={handleBlur}
                                         _onclick={clearError}
+                                        _placeholder="Vacating Notice Period (Months)"
                                     />
                                 </div>
                                 <div className="flex flex-col gap-[5px] mb-2">
-                                    <Label text="Maintenance Fee (AED)" />
+                                    {/* <Label text="Maintenance Fee (AED)" /> */}
                                     <Input
                                         _name="maintfee"
                                         _type="number"
@@ -817,15 +838,17 @@ const PageOne = () => {
                                         _onchange={handleChange}
                                         _onblur={handleBlur}
                                         _onclick={clearError}
+                                        _placeholder="Maintenance Fee (AED)"
                                     />
                                 </div>
                                 <div className="flex flex-col gap-[5px] mb-2">
-                                    <Label text="Paid By" />
+                                    {/* <Label text="Paid By" /> */}
                                     <SelectOption
                                         _options={paidbyOptions}
                                         _selectedValue={formData?.paidby}
                                         _onSelectChange={handleChange}
                                         name="paidby"
+                                        label="Paid By"
                                     // purpvalue={purpvalue}
                                     />
                                 </div>
@@ -858,8 +881,62 @@ const PageOne = () => {
                             </div>
                         </div>
                     </div> */}
-                    <section className="pb-10 mb-10">
-                    <ToastContainer position="fixed" />
+
+                    {/* Location And Address */}
+
+                    <section className="mt-8 bg-white pb-8 pt-6 px-8 rounded rounded-lg">
+                        <span className="rounded text-white text-lg bg-yellow-500 py-2 px-4" style={{marginLeft: '-50px'}}>Location and Address</span>
+                        <div className="flex flex-col gap-2 mt-4">
+                            <div className="grid lg:grid-cols-2 gap-3 mt-4">
+                            <div className="flex flex-col gap-[5px] mb-2">
+                                <Input
+                                    _name="location"
+                                    _placeholder="Location"
+                                    ref={ref}
+                                    _onchange={handleChange}
+                                    _value={formData.location}
+                                />
+                                
+                            </div>
+                            <div className="flex flex-col gap-[5px] mb-2">
+
+                                <Input
+                                    _type="text"
+                                    _onchange={handleChange}
+                                    _value={formData.address}
+                                    _name="address"
+                                    _placeholder="Address"
+                                />
+                            </div>
+
+                            </div>
+                            {/* <hr className="text-black" /> */}
+                            <div className="lg:h-[300px] mt-4">
+                                <MapContainer
+                                    zoom={8}
+                                    doubleClickZoom={true}
+                                    scrollWheelZoom={true}
+                                    center={{ lat: 24.43214670001102, lng: 54.407007002975796 }}
+                                >
+                                    <TileLayer
+
+                                        url='https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png'
+                                        // url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                                    />
+                                    <LocationMarker
+                                        position={position}
+                                        setPosition={setPosition}
+                                        setFormData={setFormData}
+                                    />
+                                </MapContainer>
+                            </div>
+                        </div>
+                    </section>
+
+
+                    <section className="pb-10 my-10">
+                        <ToastContainer position="fixed" />
                         <button
                             onClick={nextPage}
                             type="button"

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useLayoutEffect } from 'react';
 import {
     BsArrowLeftShort, BsSearch, BsChevronDown,
 } from "react-icons/bs";
@@ -6,6 +6,7 @@ import {
     AiOutlineBarChart,
     AiFillPieChart
 } from "react-icons/ai";
+import {ReactComponent as LogoSvg} from '../../propertyfinder.svg'
 import { ImList2 } from "react-icons/im";
 import { useState, useEffect } from 'react';
 import { RiDashboardFill } from "react-icons/ri";
@@ -20,6 +21,9 @@ const Sidebar = () => {
     const [submenuOpen3, setSubmenuOpen3] = useState(false);
     const [isChecked, setIsChecked] = useState(false);
     const [isChecked2, setIsChecked2] = useState(false);
+    const [toggleMobileOpen, setToggleMobileOpen] = useState(false);
+    const [screenWidth, setScreenWidth] = useState('laptop');
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth)
 
     const navigate = useNavigate();
 
@@ -31,6 +35,28 @@ const Sidebar = () => {
     }
 
     const { state, dispatch } = useContext(Store);
+
+    useLayoutEffect(() => {
+     
+    }, [window.innerWidth]);
+
+
+    useEffect(() => {
+        function reportWindowSize() {
+            if(window.innerWidth > 1000) {
+                setToggleMobileOpen(true);
+             } else {
+                setToggleMobileOpen(false);
+             }
+            setWindowWidth(window.innerWidth)
+            // console.log(window.innerHeight, window.innerWidth)
+        }
+        // Trigger this function on resize
+        window.addEventListener('resize', reportWindowSize)
+        //  Cleanup for componentWillUnmount
+        return () => window.removeEventListener('resize', reportWindowSize)
+    }, []);
+
 
     const Menus = [
         { title: "Overview", icon: <AiFillPieChart className='hover:text-yellow-500 hover:animate-bounce duration-1000' />, path: '/portfolio' },
@@ -65,77 +91,65 @@ const Sidebar = () => {
     ];
 
     return (
-        <div>
-            <div className={`bg-footer2 h-screen p-5 pt-8 ${state.open ? "w-72" : "w-20"} duration-300 relative`}>
-                <BsArrowLeftShort className={`bg-ordinary text-footer text-3xl rounded-full absolute -right-3 z-50 top-9 border border-footer cursor-pointer ${!state.open && "rotate-180"}`} onClick={() => {
+        <div className='absolute lg:relative left-0 top-0 z-50 lg:z-50'>
+            <div className={`bg-footer2 h-screen pt-8 ${state.open ? "lg:w-72 p-5" : "lg:w-20"} ${toggleMobileOpen ? "w-72 p-5" : "w-0 p-0"} duration-300 relative`}>
+                <BsArrowLeftShort className={`hidden lg:block bg-ordinary text-footer text-3xl rounded-full absolute -right-3 z-50 top-9 border border-footer cursor-pointer ${!state.open && "rotate-180"}`} onClick={() => {
                     // setOpen(state => !state)} 
                     dispatch({ type: 'TOGGLE_SIDEBAR' });
                 }}
                 />
-                <div className='flex flex-col gap-5 justify-center items-center mb-5'>
-                    <h1 className={`text-gray-300 font-medium text-2xl ${!state.open && "scale-0"}`}>Portfolio <span className='text-xs mb-5'>TM</span></h1>
-                    <div className={`${!state.open && "hidden duration-50"}`}>
-                        <label className='themeSwitcherTwo shadow-card relative inline-flex cursor-pointer select-none items-center justify-center bg-ordinary ml-[15px] rounded-md duration-75'>
-                            <input
-                                type='checkbox'
-                                className='sr-only'
-                                checked={isChecked}
-                                onChange={handleCheckboxChange}
-                            />
-                            <span
-                                className={`flex items-center space-x-[6px] rounded py-2 pr-[18px] text-sm font-medium ${!isChecked ? 'text-primary bg-white' : 'text-body-color'
-                                    }`}
-                            >
-                                <Link to="/home">
+                <BsArrowLeftShort className={`${toggleMobileOpen ? "left-[300px]" : "left-4"} block lg:hidden bg-ordinary text-footer text-3xl rounded-full absolute z-50 top-9 border border-footer cursor-pointer ${true&& "rotate-180"}`} onClick={() => {
+                    setToggleMobileOpen(state => !state);
+                    // dispatch({ type: 'TOGGLE_SIDEBAR' });
+                }}
+                />
+                <div className={`${toggleMobileOpen ? "flex": "hidden" } flex flex-col gap-5 justify-center items-center mb-5`}>
+                        <h1 className={`text-gray-300 font-medium text-2xl ${!state.open && "scale-0"}`}>Portfolio <span className='text-xs mb-5'>TM</span></h1>
+                        <div className={`${!state.open && "hidden duration-50"}`}>
+                            <label className='themeSwitcherTwo shadow-card relative inline-flex cursor-pointer select-none items-center justify-center bg-ordinary ml-[15px] rounded-md duration-75'>
+                                <input
+                                    type='checkbox'
+                                    className='sr-only'
+                                    checked={isChecked}
+                                    onChange={handleCheckboxChange}
+                                />
+                                <span
+                                    className={`flex items-center space-x-[6px] rounded py-2 px-4 text-sm font-medium ${!isChecked ? 'text-primary bg-white' : 'text-body-color'
+                                        }`}
+                                >
+                                    <Link to="/home">
+                                        <LogoSvg width={90} height={40} />
+                                    </Link>
+                                </span>
+                                <span
+                                    className={`flex items-center space-x-[6px] rounded py-2 px-[18px] text-md font-medium ${isChecked ? 'text-primary bg-white' : 'text-body-color'
+                                        }`}
+                                >
                                     <svg
                                         width='16'
-                                        height='2'
+                                        height='16'
                                         viewBox='0 0 16 16'
                                         className='mr-[6px] fill-current'
                                     >
-                                        <g clipPath='url(#clip0_3122_652)'>
-                                            <path
-                                                fillRule='evenodd'
-                                                clipRule='evenodd'
-
-                                            ></path>
-                                        </g>
-                                        <defs>
-                                            <clipPath id='clip0_3122_652'>
-                                                <rect width='16' height='16' fill='white'></rect>
-                                            </clipPath>
-                                        </defs>
+                                        <path
+                                            fillRule='evenodd'
+                                            clipRule='evenodd'
+                                        ></path>
                                     </svg>
-                                    <img src='/images/logoblack.png' className='w-15 h-7 ml-2' />
-                                </Link>
-                            </span>
-                            <span
-                                className={`flex items-center space-x-[6px] rounded py-2 px-[18px] text-md font-medium ${isChecked ? 'text-primary bg-white' : 'text-body-color'
-                                    }`}
-                            >
-                                <svg
-                                    width='16'
-                                    height='16'
-                                    viewBox='0 0 16 16'
-                                    className='mr-[6px] fill-current'
-                                >
-                                    <path
-                                        fillRule='evenodd'
-                                        clipRule='evenodd'
-                                    ></path>
-                                </svg>
-                                Dubizzle
-                            </span>
-                        </label>
-                    </div>
-
-
+                                    Dubizzle
+                                </span>
+                            </label>
+                        </div>
+    
+    
                 </div>
+                
                 {/* <div className={`flex items-center rounded-md bg-gray-400 mt-6 px-4 py-2 ${!open ? "px-2.5" : "px-4"}`}>
                 <BsSearch className={`text-white text-lg block float-left cursor-pointer ${open && "mr-2"}`} />
                 <input type={"search"} placeholder="Search..." className={`text-base bg-transparent w-full text-white focus:outline-none ${!open && "hidden"}`} />
             </div> */}
-                <ul className='pt-2'>
+            
+                <ul className={`pt-2 ${toggleMobileOpen ? "flex flex-col": "hidden" }`}>
                     {Menus.map((menu, index) => (
                         <>
 
@@ -147,7 +161,8 @@ const Sidebar = () => {
                                 } else if (index == 3) {
                                     setSubmenuOpen3(!submenuOpen3)
                                 }
-                            }} key={index} className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 bg-footer3 hover:bg-footer transition duration-1000 ease-linear rounded-md ${menu.spacing ? "mt-9" : "mt-2"}`}>
+                                // transition duration-1000 ease-linear
+                            }} key={index} className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 bg-footer3 hover:bg-footer rounded-md ${menu.spacing ? "mt-9" : "mt-2"}`}>
                                 {/* < to={menu.path} > */}
                                 <span className='text-white text-2xl block float-left'>
                                     {menu.icon ? menu.icon : <RiDashboardFill className='hover:text-yellow-300 hover:animate-bounce duration-1000' />}
@@ -201,19 +216,21 @@ const Sidebar = () => {
                         </>
                     ))}
                 </ul>
-                <Link to="/page-one" onClick={() => {
+                 {console.log('pakola', toggleMobileOpen)}
+                
+                <Link className={`${toggleMobileOpen ? "hidden" : "flex"}`} to="/page-one" onClick={() => {
                     dispatch({ type: "UPDATE_TOGGLE", payload: false });
                     navigate('/page-one');
                     window.location.reload();
                 }}>
                     <button type="button" data-te-ripple-init data-te-ripple-color="light"
-                        class={` ${!state.open && "hidden"} mt-10 font-bold mb-5 flex gap-7 w-full rounded bg-primary px-4 pt-2.5 pb-2 text-lg leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] lg:mb-[5vh] transform hover:scale-105`}>
+                        class={`${toggleMobileOpen ? "block": "hidden" } ${!state.open && "hidden"} mt-10 font-bold mb-5 flex gap-7 w-full rounded bg-primary px-4 pt-2.5 pb-2 text-lg leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] lg:mb-[5vh] transform hover:scale-105`}>
                         <FaHome className='text-white w-10 h-7' />
                         Add property
                     </button>
                 </Link>
 
-                <div className={`${!state.open && "hidden duration-50"} absolute bottom-10`}>
+                 <div className={`${!state.open && "hidden duration-50"} bottom-10 ${toggleMobileOpen ? "flex": "hidden" }`}>
                     <label className='themeSwitcherTwo shadow-card relative inline-flex cursor-pointer select-none items-center justify-center border-2 border-white bg-footer2  ml-[15px] rounded-lg duration-75'>
                         <input
                             type='checkbox'
@@ -267,7 +284,7 @@ const Sidebar = () => {
                 </div>
 
             </div>
-        </div >
+        </div>
     )
 }
 

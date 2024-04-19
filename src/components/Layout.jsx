@@ -3,9 +3,9 @@ import Sidebar from './common/Sidebar';
 
 const Layout = ({children}) => {
   return (
-    <div className='flex w-screen layout overflow-hidden'>
+    <div className='flex w-screen layout overflow-hidden relative'>
         <Sidebar />
-        <main className='w-full h-screen' >
+        <main className='w-full h-screen'>
             {children}
         </main>
 </div>

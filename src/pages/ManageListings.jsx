@@ -5,6 +5,7 @@ import axios from "axios";
 import { Store } from "../context/store";
 import { useNavigate } from "react-router-dom";
 import swal from "sweetalert";
+import '../App.css'
 
 const words = ["Sharjah", "Dubai", "Abu Dhabi", "UAE"];
 const options = ["forSale", "forRent", "offPlan"];
@@ -37,17 +38,17 @@ const ManageListings = () => {
     if (propertyToEdit) {
 
       console.log("Edit_Property", {
-          _id: propertyToEdit._id,
-          images: propertyToEdit?.upload?.images,
-          videos: propertyToEdit?.upload?.videos,
-          typesAndPurpose: propertyToEdit?.typesAndPurpose,
-          locationAndAddress: propertyToEdit?.locationAndAddress,
-          propertyDetails: propertyToEdit?.propertyDetails,
-          rentalDetails: propertyToEdit?.rentalDetails,
-          contactDetails: propertyToEdit?.contactDetails,
-          amenities: propertyToEdit?.amenities,
-          ownerId: propertyToEdit?.ownerId
-        });
+        _id: propertyToEdit._id,
+        images: propertyToEdit?.upload?.images,
+        videos: propertyToEdit?.upload?.videos,
+        typesAndPurpose: propertyToEdit?.typesAndPurpose,
+        locationAndAddress: propertyToEdit?.locationAndAddress,
+        propertyDetails: propertyToEdit?.propertyDetails,
+        rentalDetails: propertyToEdit?.rentalDetails,
+        contactDetails: propertyToEdit?.contactDetails,
+        amenities: propertyToEdit?.amenities,
+        ownerId: propertyToEdit?.ownerId
+      });
       dispatch({
         type: "SET_UPDATE_PROPERTY",
         payload: {
@@ -75,7 +76,7 @@ const ManageListings = () => {
       .get(`${process.env.REACT_APP_SERVERURL}/lov/category`)
       .then((res) => setCatOptions(res.data.data));
 
-    fetchData( );
+    fetchData();
   }, []);
 
   const applyFilters = () => {
@@ -110,10 +111,10 @@ const ManageListings = () => {
   return (
     <Layout>
       <div className="relative h-screen overflow-x-hidden bg-ordinary px-6">
-        <div className="relative block rounded-[15px] bg-white px-6 pt-4 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-10 mx-6 sma2:h-auto sma2:mx-0 sma3:h-auto sma3:mx-0 h-full py-10">
-          <div className="flex flex-row items-center gap-4">
-            <button className="text-lg m-4">Active Properties</button>
-            <button className="text-lg m-4">Inactive Properties</button>
+        <div className="relative block rounded-[15px] bg-white px-6 pt-4 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-20 mx-6 sma2:h-auto sma2:mx-0 sma3:h-auto sma3:mx-0 h-full py-10">
+          <div className="flex flex-row justify-center gap-4 pt-6 pb-8">
+            <button className="text-lg py-2 px-3 button-style-progress-button rounded rounded-lg">Active Properties</button>
+            <button className="text-lg py-2 px-3 button-style-progress-button rounded rounded-lg">Inactive Properties</button>
           </div>
           <hr />
           <div flex flex-col>
@@ -157,8 +158,37 @@ const ManageListings = () => {
                 />
               </div>
             </div>
+            {/* <div className="max-w-2xl overflow-auto rounded-lg">
+              <table class="w-full">
+                <thead>
+                  <tr>
+                    <th>Song</th>
+                    <th>Artist</th>
+                    <th>Year</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>The Sliding Mr. Bones (Next Stop, Pottersville)</td>
+                    <td>Malcolm Lockyer</td>
+                    <td>1961</td>
+                  </tr>
+                  <tr>
+                    <td>Witchy Woman</td>
+                    <td>The Eagles</td>
+                    <td>1972</td>
+                  </tr>
+                  <tr>
+                    <td>Shining Star</td>
+                    <td>Earth, Wind, and Fire</td>
+                    <td>1975</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div> */}
             <div className="relative block bg-white px-2 pt-4 justify-center items-center mt-10 mx-6 sma3:w-full sma3:mx-0 sma:px-0 sma:mx-0 sma2:px-0 sma2:mx-0 ssma3:px-0 h-full">
               <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                
                 <table class="text-md text-left text-gray-500 dark:text-gray-400 w-full h-full">
                   <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
                     <tr>

@@ -436,7 +436,7 @@ const Page1New = () => {
                         contactDetails: contactDetails,
                         locationAndAddress: locationAndAddress,
                         ownerId: data?._id,
-                    },
+                    }
                 });
             } else {
                 dispatch({

@@ -19,7 +19,10 @@ function Signup() {
     phoneNumber: "",
     password: "",
     accountType: "",
+    borkerId: "",
+    nationalId: "",
   });
+  const [toggleAgentForm, setAgentForm] = useState(false);
 
   const navigate = useNavigate();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -34,6 +37,13 @@ function Signup() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    console.log('new_vales', value);
+    if(value =='agent'){
+      setAgentForm(true);
+    }  else {
+      
+      setAgentForm(false);
+    }
     setFormData({ ...formData, [name]: value });
   };
 
@@ -78,7 +88,7 @@ function Signup() {
       });
     } else {
       try {
-        const response = await axios.post(`${process.env.REACT_APP_SERVERURL}/users/register`,formData);
+        const response = await axios.post(`${process.env.REACT_APP_SERVERURL}/users/register`, formData);
         localStorage.setItem("userId", response.data.data);
         if (response.data.message == "Success") {
           openPopup();
@@ -113,11 +123,11 @@ function Signup() {
         <form onSubmit={handleSubmit}>
           <div class="container mx-auto h-full pt-[13.5rem] pb-[6.5rem]">
             <div class="w-5/6 h-1/2 lg:h-1/2 lg:w-1/2 mx-auto bg-slate-600 rounded shadow-lg bg-opacity-80 backdrop-filter backdrop-blur-lg mt-10 ">
-              <div class="py-4 px-8 text-yellow-500 text-2xl font-bold border-b border-grey-lighter">
+              <div class="py-8 px-8 text-yellow-500 text-2xl font-bold border-b border-grey-lighter">
                 Register for a free account
               </div>
 
-              <div class="py-4 px-8">
+              <div class="py-8 px-8">
                 <div class="flex mb-4">
                   <div class="w-1/2 mr-1">
                     <label class="block text-white text-sm font-bold mb-2">
@@ -209,6 +219,39 @@ function Signup() {
                   />
                   <p class="text-white text-xs mt-1">At least 6 characters</p>
                 </div>
+                {/* ==================================== Agent Form Start ======================== */}
+                {toggleAgentForm && <div class="flex mb-4">
+                  <div class="w-1/2 mr-1">
+                    <label class="block text-white text-sm font-bold mb-2">
+                      Broker Id
+                    </label>
+                    <input
+                      class="appearance-none bg-transparent border-b rounded w-full py-2 px-3 text-white
+"
+                      name="brokerId"
+                      type="text"
+                      placeholder="Your Broker id"
+                      value={formData.brokerId}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div class="w-1/2 ml-1">
+                    <label class="block text-white text-sm font-bold mb-2">
+                      National Id
+                    </label>
+                    <input
+                      class="appearance-none bg-transparent border-b rounded w-full py-2 px-3 text-white
+"
+                      id="nationalId"
+                      type="text"
+                      placeholder="Your National id"
+                      name="nationalId"
+                      value={formData.nationalId}
+                      onChange={handleChange}
+                    />
+                  </div>
+                </div>}
+                {/* ==================================== Agent Form End ======================== */}
                 <div class="mb-4">
                   <label class="block text-white text-sm font-bold mb-2">
                     Choose an Account Type
@@ -222,10 +265,10 @@ function Signup() {
                     onChange={handleChange}
                   >
                     <option value="">select your account type</option>
-                    <option value="agent">Agent</option>
-                    <option value="checking">Agency</option>
-                    <option value="credit">Owner</option>
-                    <option value="loan">Buyer</option>
+                    <option name="agent" value="agent">Agent</option>
+                    {/* <option name="checking" value="checking">Agency</option> */}
+                    <option name="credit" value="credit">Owner</option>
+                    <option name="loan" value="loan">Buyer</option>
                   </select>
                 </div>
                 <div class="flex items-center justify-center mt-8  ">
