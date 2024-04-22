@@ -527,16 +527,15 @@ const PageOne = () => {
 
     return (
         <Layout>
-            <div className="h-screen overflow-x-hidden
-            // bg-gradient-to-r from-gradient via-ordinary to-ordinary"
+            <div className="bg-gradient-to-r from-gradient via-ordinary to-ordinary"
             // style={{
             //     backgroundImage: "url('/addPropertyBgImg.jpg')",
             //     backgroundRepeat: "no-repeat",
             //     backgroundSize: "cover",
             //   }}
             >
-                <div className="mx-10">
-                    <section className="block rounded-[25px] bg-white px-6 py-3 sm:py-4 md:py-5 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-20">
+                <div className="mx-10 py-10">
+                    <section className="block rounded-[25px] bg-white px-6 py-3 sm:py-4 md:py-5 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-10">
                         <ProgressButton step={1} />
                     </section>
                     <section className="mt-12 bg-white pb-8 pt-6 px-8 rounded rounded-lg">

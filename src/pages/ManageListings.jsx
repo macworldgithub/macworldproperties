@@ -14,6 +14,7 @@ const ManageListings = () => {
   const [catOptions, setCatOptions] = useState([]);
   const [catvalue, setCatvalue] = useState();
   const [inputValue, setInputValue] = useState("");
+  const [activeProperty, setActiveProperty] = useState(true);
   const [filteredProperty, setFilteredProperty] = useState([]);
 
   const navigate = useNavigate();
@@ -113,8 +114,8 @@ const ManageListings = () => {
       <div className="relative h-screen overflow-x-hidden bg-ordinary px-6">
         <div className="relative block rounded-[15px] bg-white px-6 pt-4 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-20 mx-6 sma2:h-auto sma2:mx-0 sma3:h-auto sma3:mx-0 h-full py-10">
           <div className="flex flex-row justify-center gap-4 pt-6 pb-8">
-            <button className="text-lg py-2 px-3 button-style-progress-button rounded rounded-lg">Active Properties</button>
-            <button className="text-lg py-2 px-3 button-style-progress-button rounded rounded-lg">Inactive Properties</button>
+            <button className={`text-lg py-2 px-3 button-style-progress-button rounded rounded-lg ${activeProperty == true ? 'bg-primary button-style-inset': 'text-slate-400 button-style-outset' }`} onClick={() => setActiveProperty(true)}>Active Properties</button>
+            <button className={`text-lg py-2 px-3 button-style-progress-button rounded rounded-lg ${activeProperty == false ? 'bg-primary button-style-inset': 'text-slate-400 button-style-outset'}`} onClick={() => setActiveProperty(false)}>Inactive Properties</button>
           </div>
           <hr />
           <div flex flex-col>

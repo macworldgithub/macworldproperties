@@ -105,7 +105,7 @@ function App() {
           (
             <Navbar isloggedIn={isloggedIn} setIsloggedIn={setIsloggedIn} />
           )} */}
-        <div className="min-h-screen">
+        <div className="h-screen">
           <Routes>
             <Route path="/dashboard-page3" element={<ProtectedRoutes><Dashboardpage3 /></ProtectedRoutes>} />
             <Route path="/dashboard" element={<ProtectedRoutes><Dashboard /></ProtectedRoutes>} />
@@ -138,11 +138,11 @@ function App() {
             <Route path="/agentinformation" element={<AgentInformation />} />
             <Route path="/otp" element={<Otp />} />
             <Route path="/agentdetails" element={<Agentdetails />} />
-              <Route path="/page-one" element={<ProtectedRoutes><PageOne /></ProtectedRoutes>} />
+              <Route path="/page-one" element={<PageOne />} />
               <Route path="/page-two" element={<ProtectedRoutes><PageTwo /></ProtectedRoutes>} />
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/listing-inventory" element={<ProtectedRoutes><ManageListings /></ProtectedRoutes>} />
-            <Route path="/reports" element={<ProtectedRoutes><Reports /></ProtectedRoutes>} />
+            <Route path="/reports" element={<Reports />} />
             <Route path="/traffic" element={<ProtectedRoutes><Traffic /></ProtectedRoutes>} />
             <Route path="/graph" element={<ProtectedRoutes><ImpressionsGraph /></ProtectedRoutes>} />
           </Routes>

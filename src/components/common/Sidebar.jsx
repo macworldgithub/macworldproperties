@@ -15,13 +15,13 @@ import { FaHome } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import { Store } from '../../context/store';
 
-const Sidebar = () => {
+const Sidebar = ({toggleMobileOpen, setToggleMobileOpen}) => {
     const [submenuOpen1, setSubmenuOpen1] = useState(false);
     const [submenuOpen2, setSubmenuOpen2] = useState(false);
     const [submenuOpen3, setSubmenuOpen3] = useState(false);
     const [isChecked, setIsChecked] = useState(false);
     const [isChecked2, setIsChecked2] = useState(false);
-    const [toggleMobileOpen, setToggleMobileOpen] = useState(false);
+    
     const [screenWidth, setScreenWidth] = useState('laptop');
     const [windowWidth, setWindowWidth] = useState(window.innerWidth)
 
@@ -37,13 +37,13 @@ const Sidebar = () => {
     const { state, dispatch } = useContext(Store);
 
     useLayoutEffect(() => {
-     
+    
     }, [window.innerWidth]);
 
 
     useEffect(() => {
         function reportWindowSize() {
-            if(window.innerWidth > 1000) {
+            if(window.innerWidth > 1024) {
                 setToggleMobileOpen(true);
              } else {
                 setToggleMobileOpen(false);
@@ -52,7 +52,8 @@ const Sidebar = () => {
             // console.log(window.innerHeight, window.innerWidth)
         }
         // Trigger this function on resize
-        window.addEventListener('resize', reportWindowSize)
+        window.addEventListener('resize', reportWindowSize);
+        reportWindowSize();
         //  Cleanup for componentWillUnmount
         return () => window.removeEventListener('resize', reportWindowSize)
     }, []);
@@ -91,8 +92,8 @@ const Sidebar = () => {
     ];
 
     return (
-        <div className='absolute lg:relative left-0 top-0 z-50 lg:z-50'>
-            <div className={`bg-footer2 h-screen pt-8 ${state.open ? "lg:w-72 p-5" : "lg:w-20"} ${toggleMobileOpen ? "w-72 p-5" : "w-0 p-0"} duration-300 relative`}>
+        // <div className='lg:relative left-0 top-0 z-50 lg:z-50 min-h-dvh'>
+            <div className={`bg-footer2 h-screen pt-8 fixed ${state.open ? "lg:w-72" : "lg:w-20"} ${toggleMobileOpen ? "w-72 p-5" : "w-0"} duration-300`} style={{maxHeight: '100%', overflowY: 'hidden'}}>
                 <BsArrowLeftShort className={`hidden lg:block bg-ordinary text-footer text-3xl rounded-full absolute -right-3 z-50 top-9 border border-footer cursor-pointer ${!state.open && "rotate-180"}`} onClick={() => {
                     // setOpen(state => !state)} 
                     dispatch({ type: 'TOGGLE_SIDEBAR' });
@@ -218,7 +219,7 @@ const Sidebar = () => {
                 </ul>
                  {console.log('pakola', toggleMobileOpen)}
                 
-                <Link className={`${toggleMobileOpen ? "hidden" : "flex"}`} to="/page-one" onClick={() => {
+                <Link className={`${toggleMobileOpen ? "block": "hidden" }`} to="/page-one" onClick={() => {
                     dispatch({ type: "UPDATE_TOGGLE", payload: false });
                     navigate('/page-one');
                     window.location.reload();
@@ -230,8 +231,8 @@ const Sidebar = () => {
                     </button>
                 </Link>
 
-                 <div className={`${!state.open && "hidden duration-50"} bottom-10 ${toggleMobileOpen ? "flex": "hidden" }`}>
-                    <label className='themeSwitcherTwo shadow-card relative inline-flex cursor-pointer select-none items-center justify-center border-2 border-white bg-footer2  ml-[15px] rounded-lg duration-75'>
+                 <div className={`absolute bottom-10 false${state.open ? "block" : "hidden duration-50"} bottom-10`}>
+                    <label className={`${state.open ? "block": "hidden" } themeSwitcherTwo shadow-card relative inline-flex cursor-pointer select-none items-center justify-center border-2 border-white bg-footer2  ml-[15px] rounded-lg duration-75`}>
                         <input
                             type='checkbox'
                             className='sr-only'
@@ -239,10 +240,10 @@ const Sidebar = () => {
                             onChange={handleCheckboxChange2}
                         />
                         <span
-                            className={`flex items-center space-x-[6px] rounded py-2 px-[18px] text-sm font-medium border-r border-white ${!isChecked2 ? 'text-white bg-footer' : 'text-white bg-footer3'
+                            className={` ${state.open ? "block": "hidden" } justify-center flex items-start justify-center rounded py-2 px-8 text-sm font-medium border-r border-white ${!isChecked2 ? 'text-white bg-footer' : 'text-white bg-footer3'
                                 }`}
                         >
-                            <svg
+                            {/* <svg
                                 width='16'
                                 height='16'
                                 viewBox='0 0 16 16'
@@ -260,14 +261,14 @@ const Sidebar = () => {
                                         <rect width='16' height='16' fill='white'></rect>
                                     </clipPath>
                                 </defs>
-                            </svg>
+                            </svg> */}
                             English
                         </span>
                         <span
-                            className={`flex items-center space-x-[6px] rounded py-2 px-[18px] text-sm font-medium ${isChecked2 ? 'text-white bg-footer2' : 'text-white bg-footer3'
+                            className={`${state.open ? "block": "hidden" } flex justify-center items-start rounded py-2 px-8 text-sm font-medium ${isChecked2 ? 'text-white bg-footer2' : 'text-white bg-footer3'
                                 }`}
                         >
-                            <svg
+                            {/* <svg
                                 width='16'
                                 height='16'
                                 viewBox='0 0 16 16'
@@ -277,14 +278,14 @@ const Sidebar = () => {
                                     fillRule='evenodd'
                                     clipRule='evenodd'
                                 ></path>
-                            </svg>
+                            </svg> */}
                             العربية
                         </span>
                     </label>
                 </div>
 
             </div>
-        </div>
+        // </div>
     )
 }
 
