@@ -435,17 +435,17 @@ const PageOne = () => {
             //   phone: data?.phoneNumber,
             // }
             if (state?.updatePropertyToggle) {
-                dispatch({
-                    type: "UPDATE_PROPERTY",
-                    payload: {
-                        propertyDetails: propertyDetailsObj,
-                        typesAndPurpose: typesAndPurposeObj,
-                        rentDetails: rentalDetails,
-                        contactDetails: contactDetails,
-                        locationAndAddress: locationAndAddress,
-                        ownerId: data?._id,
-                    },
-                });
+                // dispatch({
+                //     type: "UPDATE_PROPERTY",
+                //     payload: {
+                //         propertyDetails: propertyDetailsObj,
+                //         typesAndPurpose: typesAndPurposeObj,
+                //         rentDetails: rentalDetails,
+                //         contactDetails: contactDetails,
+                //         locationAndAddress: locationAndAddress,
+                //         ownerId: data?._id,
+                //     },
+                // });
             } else {
                 reduxDispatch(propertyDetails({
                     propertyDetails: propertyDetailsObj,
