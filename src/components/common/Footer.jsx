@@ -39,7 +39,7 @@ const Footer = () => {
               </Link>
             </ul>
           </div>
-             {/* lg:mt-[75px] */}
+          {/* lg:mt-[75px] */}
           <div className="flex-1 basis-[10rem]">
             <h2 className="text-xl font-semibold">Contact Us</h2>
             <ul>

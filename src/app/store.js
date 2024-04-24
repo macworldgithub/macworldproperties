@@ -1,12 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import dataReducer from "../features/dataSlice";
 import uiReducer from "../features/uiSlice";
-import { propertySlice } from "./slices/Poperty";
+import propertyReducer from "./slices/PopertySlice";
 
 export default configureStore({
   reducer: {
     ui: uiReducer,
     data: dataReducer,
-    property: propertySlice
+    property: propertyReducer
   }
 });

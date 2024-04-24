@@ -45,7 +45,7 @@ const initialState = {
 
 export const propertySlice = createSlice({
     name: 'property',
-    initialState: initialState,
+    initialState,
     reducers: {
         propertyDetails: (state, action) => {
                 state.form.propertyDetails = action?.payload?.propertyDetails;
@@ -53,13 +53,16 @@ export const propertySlice = createSlice({
                 state.form.rentalDetails = action?.payload?.rentDetails;
                 state.form.contactDetails = action?.payload?.contactDetails;
                 state.form.locationAndAddress = action?.payload?.locationAndAddress;
-                state.form.ownerId = action?.payload?.ownerId
+                state.form.ownerId = action?.payload?.ownerId;
+        },
+        addAmenities: (state, action) => {
+                state.form.amenities = action.payload;
         }
     }
 });
 
 // this is for dispatch
-export const { propertyDetails } = propertySlice.actions;
+export const { propertyDetails, addAmenities } = propertySlice.actions;
 
 // this is for configureStore
 export default propertySlice.reducer;

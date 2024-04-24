@@ -1,13 +1,15 @@
 import React, { useContext, useEffect, useLayoutEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux';
 import axios from "axios";
-import '../App.css'
 
+import '../App.css'
 import { Store } from "../context/store";
 import Layout from "../components/Layout";
 import ProgressButton from "../components/Dashboard/progressButton";
 import Navbar from "../components/common/Navbar";
+import { addAmenities } from '../app/slices/PopertySlice';
 
 const Dashboard = () => {
   const [ameneties, setAmeneties] = useState([]);
@@ -36,7 +38,9 @@ const Dashboard = () => {
   const [stepcount, setStepcount] = useState(2);
   const [petOptions, setPetOptions] = useState([]);
 
-  const { state, dispatch } = useContext(Store);
+  // const { state, dispatch } = useContext(Store);
+  const reduxDispatch = useDispatch();
+  const state = useSelector(state => state.property.form);
   // const handleChange = (e) => {
   //     const selectedValue = e.target.value;
 
@@ -83,7 +87,7 @@ const Dashboard = () => {
       setAmeneties(state?.updateProperty?.amenities);
       handleFormEdit();
     } else {
-      setAmeneties(state.form.amenities);
+      setAmeneties(state.amenities);
       handleFormPersist();
     }
 
@@ -93,16 +97,16 @@ const Dashboard = () => {
   }, []);
 
   const handleChange = (e) => {
-    const { value } = e.target;
-    console.log("new_busaine", value);
-    const amenitiesArrayClone = [...ameneties];
-    if (amenitiesArrayClone.some((item) => item.value == value)) {
-      const tempArray = amenitiesArrayClone.filter((ele) => ele.value != value);
-      setAmeneties(tempArray);
-      return;
-    }
-    console.log("pqwpepqwepqe", { name: value, value: value });
-    setAmeneties([...ameneties, { name: value, value: value }]);
+    // const { value } = e.target;
+    // console.log("new_busaine", value);
+    // const amenitiesArrayClone = [...ameneties];
+    // if (amenitiesArrayClone.some((item) => item.value == value)) {
+    //   const tempArray = amenitiesArrayClone.filter((ele) => ele.value != value);
+    //   setAmeneties(tempArray);
+    //   return;
+    // }
+    // console.log("pqwpepqwepqe", { name: value, value: value });
+    // setAmeneties([...ameneties, { name: value, value: value }]);
   };
 
   // const handleChange = (e) => {
@@ -167,9 +171,10 @@ const Dashboard = () => {
 
     setAmeneties(temp);
     if (state?.updatePropertyToggle) {
-      dispatch({ type: "UPDATE_AMENITIES", payload: temp });
+      // dispatch({ type: "UPDATE_AMENITIES", payload: temp });
     } else {
-      dispatch({ type: "ADD_AMENITIES", payload: temp });
+      reduxDispatch(addAmenities(temp))
+      // dispatch({ type: "ADD_AMENITIES", payload: temp });
     }
     NavigateTo("/page-one");
     setStepcount(stepcount - 1);
@@ -232,9 +237,10 @@ const Dashboard = () => {
 
     setAmeneties(temp);
     if (state?.updatePropertyToggle) {
-      dispatch({ type: "UPDATE_AMENITIES", payload: temp });
+      // dispatch({ type: "UPDATE_AMENITIES", payload: temp });
     } else {
-      dispatch({ type: "ADD_AMENITIES", payload: temp });
+      reduxDispatch(addAmenities(temp))
+      // dispatch({ type: "ADD_AMENITIES", payload: temp });
     }
     // axios.post('http://localhost:4000/property/upload', state.form).then(res => {
     //     console.log(res.data);
@@ -268,7 +274,7 @@ const Dashboard = () => {
   //     NavigateTo("/dashboard-page3");
   // }
   const handleFormPersist = () => {
-    state?.form?.amenities?.map((item) => {
+    state?.amenities?.map((item) => {
       // console.log('up and running', item?.name, item?.value)
       if (item?.name == "bedRooms") {
         setBedRooms(item.value);
@@ -395,14 +401,14 @@ const Dashboard = () => {
     <Layout>
       <div className="bg-gradient-to-r bg-black from-gradient via-ordinary to-ordinary h-screen overflow-x-hidden">
         <div className="mx-10 bg-white px-6 py-6 block rounded-[15px]">
-          <section className="block rounded-[25px] bg-white px-6 pt-4 pb-4 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-20">
+          <section className="block rounded-[15px] bg-white px-6 pt-4 pb-4 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-20">
             <ProgressButton step={2} />
           </section>
 
           <section className="mt-12">
             <span className="rounded text-white text-lg bg-yellow-500 py-2 px-4">Recreation and Family</span>
             <div className="grid grid-rows-5 md:grid-rows-3 lg:grid-rows-2 md:grid-cols-2 lg:grid-cols-3 lg:grid-flow-col lg:gap-1 lg:gap-x-20 mx-auto mt-5">
-              <Customisedcheckbox name="Barbeque Area" value="Barbeque" handleChange={handleChange} />
+              <Customisedcheckbox name="Barbeque" value="Barbeque" handleChange={handleChange} />
               <Customisedcheckbox
                 name="Lawn or Garden"
                 value="Garden"
@@ -465,7 +471,7 @@ const Dashboard = () => {
 
           <section className="mt-8">
             <span className="rounded text-white text-lg bg-yellow-500 py-2 px-4">Laundry and Kitchen</span>
-            <div className="grid grid-rows-5 lg:grid-rows-1 md:grid-rows-2 md:grid-cols-2 lg:grid-cols-3 lg:grid-flow-row lg:gap-1 lg:gap-x-20 mx-auto mt-5">
+            <div className="grid grid-rows-3 lg:grid-rows-1 md:grid-rows-2 md:grid-cols-2 lg:grid-cols-3 lg:grid-flow-row lg:gap-1 lg:gap-x-20 mx-auto mt-5">
               <Customisedcheckbox
                 name="Laundry Room"
                 value="Lanudry Room"
@@ -782,8 +788,8 @@ const Dashboard = () => {
 
           <section className="mt-8">
             <span className="rounded text-white text-lg bg-yellow-500 py-2 px-4">Cleaning and Maintenance</span>
-             <div className="grid grid-rows-5 lg:grid-rows-2 md:grid-rows-2 md:grid-cols-2 lg:grid-cols-3 lg:grid-flow-row gap-3 lg:gap-x-20 mx-auto mt-5">
-             <Customisedcheckbox
+            <div className="grid grid-rows-5 lg:grid-rows-2 md:grid-rows-2 md:grid-cols-2 lg:grid-cols-3 lg:grid-flow-row gap-3 lg:gap-x-20 mx-auto mt-5">
+              <Customisedcheckbox
                 name="Waste Disposal"
                 value="Waste Disposal"
                 handleChange={handleChange}
@@ -798,8 +804,8 @@ const Dashboard = () => {
                 value="Cleaning Services"
                 handleChange={handleChange}
               />
-             </div>
-            </section>
+            </div>
+          </section>
 
           <div className="float-right mr-[10%]">
             <div className="flex justify-center items-center gap-4">
@@ -827,6 +833,7 @@ const Dashboard = () => {
           <div></div>
         </div>
       </div>
+      {console.log('lays_layout', state.amenities)}
       {/* </div> */}
     </Layout>
   );
@@ -834,34 +841,42 @@ const Dashboard = () => {
 
 export default Dashboard;
 
-const handleChecked = (state, value) => {
-  for (let i = 0; i < state?.length; i++) {
-    if (state[i]?.value === value) {
-      return true;
-    }
-  }
-  // if (state.form.amenities.name.includes(value)) {
-  //     return true
-  // }
-  return false;
-};
 
 export const Customisedcheckbox = ({ name, value, handleChange }) => {
-  const { state, dispatch } = useContext(Store);
+  const [toggle, setToggle] = useState(false);
+  const state = useSelector(state => state.property.form);
+
+  useEffect(() => {
+
+  }, [state.amenities])
+
+  const handleChecked = (value) => {
+
+    // for (let i = 0; i < state.amenities; i++) {
+    //   if (state.amenities[i]?.name == value) {
+
+    //   }  
+    // }
+    console.log(state.amenities, 'check_now_if',state.amenities.some(ele =>  ele?.name == value))
+    if (state.amenities.some(ele =>  ele?.name == value)) {
+      console.log('check_if')
+        return true
+    }
+  };
   return (
     <div className="mb-[0.15rem] block min-h-[1.5rem] pl-[0.5rem] ">
       <label className="inline-flex items-center mb-5 cursor-pointer checkbox-wrapper-2">
+        {console.log('check_amenities', toggle)}
+
         <input
           type="checkbox"
           value={value}
           onChange={handleChange}
           className="sr-only peer sc-gJwTLC ikxBAC"
-          defaultChecked={handleChecked(
-            state?.updatePropertyToggle
-              ? state?.updateProperty?.amenities
-              : state.form.amenities,
-            value
-          )}
+          defaultChecked={
+            handleChecked(state.amenities,
+              value)
+          }
         />
         {/* <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-yellow-100 dark:peer-focus:ring-yellow-400 rounded-lg peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-lg after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-yellow-400"></div> */}
         <span class="ml-3 text-md font-medium text-gray-900 dark:text-gray-300">

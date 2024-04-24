@@ -25,6 +25,8 @@ import Label from "../components/Dashboard/Label";
 import Input from "../components/Dashboard/Input";
 import SelectOption from "../components/Dashboard/selectOption";
 import LocationMarker from "../components/common/Marker";
+import { propertyDetails } from '../app/slices/PopertySlice';
+import { useSelector, useDispatch } from 'react-redux';
 
 
 import "leaflet/dist/leaflet.css";
@@ -44,6 +46,7 @@ import {
 const Search = (props) => {
     const map = useMap(); // access to leaflet map
     const { provider } = props;
+    const reduxDispatch = useDispatch();
 
     // const form = document.querySelector('form');
     // const input = form.querySelector('input[type="text"]');
@@ -77,8 +80,11 @@ const Search = (props) => {
 // =================================  =================================
 
 const PageOne = () => {
-    const { state, dispatch } = useContext(Store);
+    // const { state, dispatch } = useContext(Store);
     const [stepcount, setStepcount] = useState(1);
+
+    const state = useSelector(state => state.property.form);
+    const reduxDispatch = useDispatch();
 
     // const [selectedValue, setSelectedValue] = useState("option1");
     const [catvalue, setCatvalue] = useState("");
@@ -195,36 +201,36 @@ const PageOne = () => {
         } else {
             setFormData({
                 // propertyDetailsObj
-                referncenumber: state?.form?.propertyDetails?.refNo,
-                title: state?.form?.propertyDetails?.title,
-                arabicTitle: state?.form?.propertyDetails?.titleArabic,
-                desc: state?.form?.propertyDetails?.description,
-                descArabic: state?.form?.propertyDetails?.descriptionArabic,
-                area: state?.form?.propertyDetails?.areaSquare,
-                price: state?.form?.propertyDetails?.InclusivePrice,
-                permitNo: state?.form?.propertyDetails?.PermitNumber,
-                completion: state?.form?.propertyDetails?.completionStatus,
-                ownValue: state?.form?.propertyDetails?.ownerShipStatus,
+                referncenumber: state?.propertyDetails?.refNo,
+                title: state?.propertyDetails?.title,
+                arabicTitle: state?.propertyDetails?.titleArabic,
+                desc: state?.propertyDetails?.description,
+                descArabic: state?.propertyDetails?.descriptionArabic,
+                area: state?.propertyDetails?.areaSquare,
+                price: state?.propertyDetails?.InclusivePrice,
+                permitNo: state?.propertyDetails?.PermitNumber,
+                completion: state?.propertyDetails?.completionStatus,
+                ownValue: state?.propertyDetails?.ownerShipStatus,
                 bedRooms: 0,
                 bathRooms: 0,
                 // typesAndPurposeObj
-                category: state?.form?.typesAndPurpose?.category,
-                subCategory: state?.form?.typesAndPurpose?.subCategory,
-                purpose: state?.form?.typesAndPurpose?.purpose,
+                category: state?.typesAndPurpose?.category,
+                subCategory: state?.typesAndPurpose?.subCategory,
+                purpose: state?.typesAndPurpose?.purpose,
                 // rentalDetails
-                rentAED: state?.form?.rentalDetails?.rent,
-                rentFrequency: state?.form?.rentalDetails?.rentFrequency,
-                contractperiod: state?.form?.rentalDetails?.minimumContractPeriod,
-                vacatingperiod: state?.form?.rentalDetails?.noticePeriod,
+                rentAED: state?.rentalDetails?.rent,
+                rentFrequency: state?.rentalDetails?.rentFrequency,
+                contractperiod: state?.rentalDetails?.minimumContractPeriod,
+                vacatingperiod: state?.rentalDetails?.noticePeriod,
                 maintfee:
-                    state?.form?.rentalDetails?.state?.form?.rentalDetails
+                    state?.rentalDetails?.state?.rentalDetails
                         ?.maintainanceFee,
-                paidby: state?.form?.rentalDetails?.paidBy,
+                paidby: state?.rentalDetails?.paidBy,
                 //  ================ New Values =============
-                location: state?.form?.locationAndAddress?.location,
-                longitude: state?.form?.locationAndAddress?.longitude,
-                latitude: state?.form?.locationAndAddress?.latitude,
-                address: state?.form?.locationAndAddress?.address,
+                location: state?.locationAndAddress?.location,
+                longitude: state?.locationAndAddress?.longitude,
+                latitude: state?.locationAndAddress?.latitude,
+                address: state?.locationAndAddress?.address,
             });
         }
     }, []);
@@ -441,17 +447,25 @@ const PageOne = () => {
                     },
                 });
             } else {
-                dispatch({
-                    type: "ADD_PROPERTY",
-                    payload: {
-                        propertyDetails: propertyDetailsObj,
-                        typesAndPurpose: typesAndPurposeObj,
-                        rentDetails: rentalDetails,
-                        contactDetails: contactDetails,
-                        locationAndAddress: locationAndAddress,
-                        ownerId: data?._id,
-                    },
-                });
+                reduxDispatch(propertyDetails({
+                    propertyDetails: propertyDetailsObj,
+                    typesAndPurpose: typesAndPurposeObj,
+                    rentDetails: rentalDetails,
+                    contactDetails: contactDetails,
+                    locationAndAddress: locationAndAddress,
+                    ownerId: data?._id,
+                }))
+                // dispatch({
+                //     type: "ADD_PROPERTY",
+                //     payload: {
+                //         propertyDetails: propertyDetailsObj,
+                //         typesAndPurpose: typesAndPurposeObj,
+                //         rentDetails: rentalDetails,
+                //         contactDetails: contactDetails,
+                //         locationAndAddress: locationAndAddress,
+                //         ownerId: data?._id,
+                //     },
+                // });
             }
 
             setStepcount(stepcount + 1);
@@ -534,12 +548,12 @@ const PageOne = () => {
             //     backgroundSize: "cover",
             //   }}
             >
-                <div className="mx-10 py-10">
-                    <section className="block rounded-[25px] bg-white px-6 py-3 sm:py-4 md:py-5 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-10">
+                <div className="md:mx-10 mx-6 py-10">
+                    <section className="block rounded-[15px] bg-white px-6 py-3 sm:py-4 md:py-5 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-10">
                         <ProgressButton step={1} />
                     </section>
-                    <section className="mt-12 bg-white pb-8 pt-6 px-8 rounded rounded-lg">
-                        <span className="rounded text-white text-lg bg-yellow-500 py-2 px-4" style={{marginLeft: '-50px'}}>Property Type</span>
+                    <section className="mt-12 bg-white pb-8 pt-6 md:px-8 px-6 rounded rounded-lg">
+                        <span className="rounded text-white text-lg bg-yellow-500 py-2 px-2 sm:px-4 -ml-10 sm:-ml-12">Property Type</span>
                         <div className="flex flex-col lg:flex-row gap-3 mt-4">
                             <SelectOption
                                 _options={catOptions}
@@ -581,8 +595,8 @@ const PageOne = () => {
                     {/* Title & Arabic Title End */}
 
                     {/* Property Details */}
-                    <section className="mt-8 bg-white pb-8 pt-6 px-8 rounded rounded-lg">
-                        <span className="rounded text-white text-lg bg-yellow-500 py-2 px-4" style={{marginLeft: '-50px'}}>Property Details</span>
+                    <section className="mt-8 bg-white pb-8 pt-6 px-6 md:px-8 rounded rounded-lg">
+                        <span className="rounded text-white text-lg bg-yellow-500 py-2 px-2 sm:px-4 -ml-10 sm:-ml-12">Property Details</span>
                         <div className="grid lg:grid-cols-3 gap-3 mt-4">
                             <div className="flex flex-col gap-[5px] mb-2">
                                 {/* <Label text="Permit Number" /> */}
@@ -716,7 +730,7 @@ const PageOne = () => {
 
                         <div className="grid lg:grid-cols-3 gap-3 mt-4">
 
-                        <div className="flex flex-col gap-[5px] mb-2">
+                            <div className="flex flex-col gap-[5px] mb-2">
                                 {/* <Label text="Area (Square Feet)" /> */}
                                 <Input
                                     _name="area"
@@ -734,7 +748,7 @@ const PageOne = () => {
                             </div>
 
                             <div className="flex flex-col gap-[5px] mb-2">
-                            <Input
+                                <Input
                                     _name="referncenumber"
                                     _type="text"
                                     _value={formData.referncenumber}
@@ -744,7 +758,7 @@ const PageOne = () => {
                                     _errortext={error.referncenumber}
                                     _placeholder="Reference Number"
                                 />
-                          </div>
+                            </div>
 
 
                             <div className="flex flex-col gap-[5px] mb-2">
@@ -775,8 +789,8 @@ const PageOne = () => {
                     {/* For Rent Section */}
                     {/* formData?.purpose == "forRent" */}
                     {formData?.purpose == "forRent" && (
-                        <section className="mt-8 pb-8 bg-white pb-8 pt-6 px-8 rounded rounded-lg">
-                            <span className="rounded text-white text-lg bg-yellow-500 py-2 px-4" style={{marginLeft: '-50px'}}>Rental Details</span>
+                        <section className="mt-8 pb-8 bg-white pb-8 pt-6 px-3 px-6 md:px-8 rounded rounded-lg">
+                            <span className="rounded text-white text-lg bg-yellow-500 py-2 px-2 sm:px-4 -ml-10 sm:-ml-12">Rental Details</span>
                             <div className="grid lg:grid-cols-3 gap-3 mt-4">
                                 <div className="flex flex-col gap-[5px] mb-2">
                                     {/* <Label text="Rent(AED)" /> */}
@@ -788,7 +802,7 @@ const PageOne = () => {
                                         _onblur={handleBlur}
                                         _onclick={clearError}
                                         _placeholder="Rent(AED)"
-                                        
+
                                     />
                                 </div>
                                 <div className="flex flex-col gap-[5px] mb-2">
@@ -883,30 +897,31 @@ const PageOne = () => {
 
                     {/* Location And Address */}
 
-                    <section className="mt-8 bg-white pb-8 pt-6 px-8 rounded rounded-lg">
-                        <span className="rounded text-white text-lg bg-yellow-500 py-2 px-4" style={{marginLeft: '-50px'}}>Location and Address</span>
+                    <section className="mt-8 bg-white pb-8 pt-6 px-6 md:px-8 rounded rounded-lg">\
+                        {/* style={{marginLeft: '-50px'}} */}
+                        <span className="rounded text-white text-lg bg-yellow-500 py-2 px-2 sm:px-4 -ml-10 sm:-ml-12">Location and Address</span>
                         <div className="flex flex-col gap-2 mt-4">
                             <div className="grid lg:grid-cols-2 gap-3 mt-4">
-                            <div className="flex flex-col gap-[5px] mb-2">
-                                <Input
-                                    _name="location"
-                                    _placeholder="Location"
-                                    ref={ref}
-                                    _onchange={handleChange}
-                                    _value={formData.location}
-                                />
-                                
-                            </div>
-                            <div className="flex flex-col gap-[5px] mb-2">
+                                <div className="flex flex-col gap-[5px] mb-2">
+                                    <Input
+                                        _name="location"
+                                        _placeholder="Location"
+                                        ref={ref}
+                                        _onchange={handleChange}
+                                        _value={formData.location}
+                                    />
 
-                                <Input
-                                    _type="text"
-                                    _onchange={handleChange}
-                                    _value={formData.address}
-                                    _name="address"
-                                    _placeholder="Address"
-                                />
-                            </div>
+                                </div>
+                                <div className="flex flex-col gap-[5px] mb-2">
+
+                                    <Input
+                                        _type="text"
+                                        _onchange={handleChange}
+                                        _value={formData.address}
+                                        _name="address"
+                                        _placeholder="Address"
+                                    />
+                                </div>
 
                             </div>
                             {/* <hr className="text-black" /> */}

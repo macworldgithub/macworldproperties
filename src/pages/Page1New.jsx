@@ -25,6 +25,8 @@ import Label from "../components/Dashboard/Label";
 import Input from "../components/Dashboard/Input";
 import SelectOption from "../components/Dashboard/selectOption";
 import LocationMarker from "../components/common/Marker";
+import { propertyDetails } from '../app/slices/PopertySlice';
+import {useSelector, useDispatch} from 'react-redux'
 
 import "leaflet/dist/leaflet.css";
 // make new leaflet element
@@ -100,6 +102,7 @@ const Page1New = () => {
         lat: 24.43214670001102,
         lng: 54.407007002975796,
     });
+    const reduxDispatch = useDispatch();
 
     const [formData, setFormData] = useState({
         referncenumber: "",
@@ -427,29 +430,37 @@ const Page1New = () => {
             //   phone: data?.phoneNumber,
             // }
             if (state?.updatePropertyToggle) {
-                dispatch({
-                    type: "UPDATE_PROPERTY",
-                    payload: {
-                        propertyDetails: propertyDetailsObj,
-                        typesAndPurpose: typesAndPurposeObj,
-                        rentDetails: rentalDetails,
-                        contactDetails: contactDetails,
-                        locationAndAddress: locationAndAddress,
-                        ownerId: data?._id,
-                    }
-                });
+                // dispatch({
+                //     type: "UPDATE_PROPERTY",
+                //     payload: {
+                //         propertyDetails: propertyDetailsObj,
+                //         typesAndPurpose: typesAndPurposeObj,
+                //         rentDetails: rentalDetails,
+                //         contactDetails: contactDetails,
+                //         locationAndAddress: locationAndAddress,
+                //         ownerId: data?._id,
+                //     }
+                // });
             } else {
-                dispatch({
-                    type: "ADD_PROPERTY",
-                    payload: {
-                        propertyDetails: propertyDetailsObj,
-                        typesAndPurpose: typesAndPurposeObj,
-                        rentDetails: rentalDetails,
-                        contactDetails: contactDetails,
-                        locationAndAddress: locationAndAddress,
-                        ownerId: data?._id,
-                    },
-                });
+                reduxDispatch(propertyDetails({
+                    propertyDetails: propertyDetailsObj,
+                    typesAndPurpose: typesAndPurposeObj,
+                    rentDetails: rentalDetails,
+                    contactDetails: contactDetails,
+                    locationAndAddress: locationAndAddress,
+                    ownerId: data?._id,
+                }))
+                // dispatch({
+                //     type: "ADD_PROPERTY",
+                //     payload: {
+                //         propertyDetails: propertyDetailsObj,
+                //         typesAndPurpose: typesAndPurposeObj,
+                //         rentDetails: rentalDetails,
+                //         contactDetails: contactDetails,
+                //         locationAndAddress: locationAndAddress,
+                //         ownerId: data?._id,
+                //     },
+                // });
             }
 
             setStepcount(stepcount + 1);
@@ -519,7 +530,7 @@ const Page1New = () => {
         const data = await JSON.parse(email);
         setFormData((prevData) => ({
             ...prevData,
-            name: data?.email,
+            name: data?.email
         }));
     };
 
@@ -527,7 +538,7 @@ const Page1New = () => {
         <Layout>
             <div className="h-screen overflow-x-hidden">
                 <div className="mx-10">
-                    <section className="block rounded-[25px] bg-white px-6 pt-4 pb-4 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-20">
+                    <section className="block rounded-[15px] bg-white px-6 pt-4 pb-4 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-20">
                         <ProgressButton step={1} />
                     </section>
                     <section className="mt-12">
