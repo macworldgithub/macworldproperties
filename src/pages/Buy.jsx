@@ -29,6 +29,7 @@ import L from "leaflet";
 import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import "../App.css";
+import { Footer } from "../components/common";
 
 const Buy = () => {
   const { state, onCategoryChange, BuyData } = useContext(Store);
@@ -57,7 +58,7 @@ const Buy = () => {
   useEffect(() => {
     BuyData(slug == "buy" ? "forSale" : slug == "rent" ? "forRent" : slug, selectedData);
     // if(MyURL.get('find') === 'check'){
-      
+
     // }
   }, [myParam, selectedData, slug]);
 
@@ -86,7 +87,7 @@ const Buy = () => {
     }, position);
     return null;
   };
-  const position = [location?.longitude || 25.26027, location?.latitude ||55.3094 ];
+  const position = [location?.longitude || 25.26027, location?.latitude || 55.3094];
   const [layout, setLayout] = useState("grid");
 
   return (
@@ -95,7 +96,6 @@ const Buy = () => {
         category={selectedData}
         showPage={slug == "buy" ? "forSale" : slug}
       />
-      {console.log('paosdpaspdoasd', propertydataArr)}
       <div className="flex flex-row flex-center-between px-8 sm:px-[80px] xl:px-[120px] pt-[25px]">
         <div>
           <p className=" mt-[20px]">
@@ -180,13 +180,13 @@ const Buy = () => {
         </div>
       </div> */}
       <div
-      style={{padding: '0px 40px'}}
+        style={{ padding: '0px 40px' }}
         className={`grid my-20 h-full ${layout === "grid" && "lg:grid-cols-6 gap-x-20"
           } ${layout === "list" && "lg:grid-cols-3 gap-10"} px-3 gap-y-6`}
       >
         {layout === "grid" ? (
           // <div className="flex flex-wrap h-full w-full col-span-3 gap-10">  content-center
-          <div className="grid lg:col-span-4 col-span-1 grid-cols-1 gap-y-8 md:grid-cols-2  gap-x-10"> 
+          <div className="grid lg:col-span-4 col-span-1 grid-cols-1 gap-y-8 md:grid-cols-2  gap-x-10">
             {propertydataArr?.length > 0 ? propertydataArr?.map((item) => (
               <ImpressionClickTrackerHOC
                 clickEvent={`ADD-TO-CART`}
@@ -262,6 +262,11 @@ const Buy = () => {
             </Marker>
             <RecenterAutomatically position={position} />
           </MapContainer>
+        </div>
+      </div>
+      <div className="px-[2%] md:px-[6%] bg-footer border border-footer">
+        <div className="mt-20">
+          <Footer />
         </div>
       </div>
     </div>

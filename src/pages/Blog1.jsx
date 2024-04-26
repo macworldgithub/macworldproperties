@@ -1,12 +1,12 @@
-import React from 'react'
+import React from 'react';
 import LargeScreenWrapper from '../components/LargeScreenWrapper/LargeScreenWrapper';
-import ChevronRightIcon from '../assets/svgs/chevron-right.svg'
+import ChevronRightIcon from '../assets/svgs/chevron-right.svg';
 
 export default function Blog1() {
     return (
         <LargeScreenWrapper>
             <div className="grid grid-cols-12 max-w-full">
-                <div className="max-w-7xl col-span-12 md:col-span-9 mx-auto bg-white scrollbar-hide-class" style={{ maxHeight: '100vh', overflowY: 'scroll' }}>
+                <div className="max-w-7xl col-span-12 md:col-span-9 mx-auto bg-white scrollbar-hide-class">
                     <h1 className="text-4xl leading-tight mt-14" style={{ textAlign: "start" }}>
                         Tips For International/Overseas Investors In
                         Dubai
@@ -225,7 +225,12 @@ export default function Blog1() {
                         <div style={{ textAlign: "start" }} className="font-semibold text-sm flex items-center"><img src={ChevronRightIcon} width='8px' height='8px' className='mx-3' /> <span>March 2016</span></div>
                     </section>
                 </div>
-            </div>
+                {/* <div className="px-[2%] md:px-[6%] bg-footer border border-footer">
+                    <div className="mt-20">
+                        <Footer />
+                    </div>
+                </div> */}
+                </div>
         </LargeScreenWrapper>
     )
 }

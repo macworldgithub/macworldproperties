@@ -1,8 +1,10 @@
 import React, { useContext, useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux';
 import swal from "sweetalert";
 import axios from "axios";
+import ReactLoading from 'react-loading';
 
 import ProgressButton from "../components/Dashboard/progressButton";
 import { Store } from "../context/store";
@@ -10,7 +12,7 @@ import Layout from "../components/Layout";
 import Imageupload from "../components/common/Imageupload";
 import Videoupload from "../components/common/Videoupload";
 import { storage } from "../config/firebase";
-import ReactLoading from 'react-loading';
+import { uploadMedia, resetForm } from '../app/slices/PopertySlice';
 
 const Dashboardpage3 = () => {
   const [stepcount, setStepcount] = useState(3);
@@ -21,15 +23,18 @@ const Dashboardpage3 = () => {
 
   const [videoLinks, setVideoLinks] = useState([]);
 
-  const { state, dispatch } = useContext(Store);
+  // const { state, dispatch } = useContext(Store);
+  const reduxDispatch = useDispatch();
+  const state = useSelector(state => state.property.form);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (state?.updatePropertyToggle) {
-      setImages(state?.updateProperty?.upload?.images);
-      setVideoLinks(state?.updateProperty?.upload?.videos);
-    } else {
-      setImages(state?.form?.upload?.images || []);
-      setVideoLinks(state?.form?.upload?.videos);
+    if (state?.upload?.images) {
+      //   setImages(state?.updateProperty?.upload?.images);
+      //   setVideoLinks(state?.updateProperty?.upload?.videos);
+      // } else {
+      setImages(state?.upload?.images || []);
+      setVideoLinks(state?.upload?.videos);
     }
   }, []);
 
@@ -37,25 +42,23 @@ const Dashboardpage3 = () => {
     setIsChecked(!isChecked);
   };
 
-  const navigate = useNavigate();
 
   const submitForm = () => {
     setStepcount(stepcount + 1);
   };
 
   const prevPage = () => {
-    dispatch({
-      type: "ADD_MEDIA",
-      payload: { images: images, videos: videoLinks },
-    });
+    // dispatch({
+    //   type: "ADD_MEDIA",
+    //   payload: { images: images, videos: videoLinks },
+    // });
+    reduxDispatch(uploadMedia({ images: images, videos: videoLinks }));
     setStepcount(stepcount - 1);
     navigate("/dashboard");
   };
 
   const handleUpload = () => {
-
-
-    const temp55 = JSON.parse(localStorage.getItem('userData'))
+    const temp55 = JSON.parse(localStorage.getItem('userData'));
     // return
 
     if (images?.length < 3) {
@@ -66,7 +69,7 @@ const Dashboardpage3 = () => {
       });
       return
     }
-    const temp = JSON.stringify(state.form);
+    const temp = JSON.stringify(state);
     const temp1 = JSON.parse(temp);
     temp1.upload.images = images;
     temp1.upload.videos = videoLinks;
@@ -79,7 +82,7 @@ const Dashboardpage3 = () => {
     // const check = { ...state.form.upload }
     // check.images = firebaseImagesLinks
     // formData.append("bodyOfData", );
-    
+
     axios
       .post(`${process.env.REACT_APP_SERVERURL}/property/upload`, temp1)
       .then((res) => {
@@ -89,7 +92,8 @@ const Dashboardpage3 = () => {
           text: res?.data?.message,
           icon: "success",
         });
-        dispatch({ type: "EMPTY_FORM" });
+        // reduxDispatch(resetForm());
+        // dispatch({ type: "EMPTY_FORM" });
         setImages([]);
         setVideoLinks([]);
         setFirebaseImagesLinks([]);
@@ -98,7 +102,6 @@ const Dashboardpage3 = () => {
   };
 
   const handleUpdateImage = async (newImages) => {
-
     const formData = new FormData();
     for (let i = 0; i < newImages.length; i++) {
       formData.append("photos", newImages[i]);
@@ -111,10 +114,10 @@ const Dashboardpage3 = () => {
     setImages((state) => [...state, ...res.data.data]);
     const temp = [...state?.updateProperty?.upload?.images, ...res.data.data];
     console.log('lqwerqwe', temp)
-    dispatch({
-      type: "UPDATE_PROPERTY_MEDIA",
-      payload: { images: temp, videos: videoLinks },
-    });
+    // dispatch({
+    //   type: "UPDATE_PROPERTY_MEDIA",
+    //   payload: { images: temp, videos: videoLinks },
+    // });
   };
 
   const handleUpdateCompleteProperty = () => {
@@ -125,16 +128,15 @@ const Dashboardpage3 = () => {
     //   type: "UPDATE_PROPERTY_MEDIA",
     //   payload: { images: images, videos: videoLinks },
     // });
-    
-    if (finalObject?.upload?.images?.length > 0 || finalObject?.upload?.images != undefined) {
 
+    if (finalObject?.upload?.images?.length > 0 || finalObject?.upload?.images != undefined) {
       finalObject.upload = {
         images: images,
         videos: videoLinks,
       }
       // finalObject.upload.images = images;
     }
-    
+
     axios
       .post(`${process.env.REACT_APP_SERVERURL}/property/update-property`, finalObject)
       .then((res) => {
@@ -144,8 +146,9 @@ const Dashboardpage3 = () => {
           text: res?.data?.message,
           icon: "success",
         });
-        dispatch({ type: "UPDATE_TOGGLE", payload: false });
-        dispatch({ type: "EMPTY_UPDATE_FORM" });
+        // dispatch({ type: "UPDATE_TOGGLE", payload: false });
+        // dispatch({ type: "EMPTY_UPDATE_FORM" });
+        // reduxDispatch(resetForm());
         setImages([]);
         setVideoLinks([]);
       });
@@ -176,19 +179,22 @@ const Dashboardpage3 = () => {
       setLoading(false);
     }, 5000);
 
-    if (state?.updatePropertyToggle) {
-      if (state?.updateProperty?.upload?.images?.length != undefined || state?.updateProperty?.upload?.images?.length < 1) {
-        dispatch({
-          type: "ADD_MEDIA",
-          payload: { images: temp2, videos: [...state?.updateProperty?.upload?.videos] },
-        });
-      } else {
-        dispatch({
-          type: "ADD_MEDIA",
-          payload: { images: [...state?.updateProperty?.upload?.images, ...temp2], videos: [...state?.updateProperty?.upload?.videos] },
-        });
-      }
-    }
+    // const tempforRedux = {images: temp2, videos: [...state?.updateProperty?.upload?.videos]}
+
+    reduxDispatch(uploadMedia({images: temp2, videos: videoLinks}));
+    // if (state?.updatePropertyToggle) {
+    //   if (state?.updateProperty?.upload?.images?.length != undefined || state?.updateProperty?.upload?.images?.length < 1) {
+    //     dispatch({
+    //       type: "ADD_MEDIA",
+    //       payload: { images: temp2, videos: [...state?.updateProperty?.upload?.videos] },
+    //     });
+    //   } else {
+    //     dispatch({
+    //       type: "ADD_MEDIA",
+    //       payload: { images: [...state?.updateProperty?.upload?.images, ...temp2], videos: [...state?.updateProperty?.upload?.videos] },
+    //     });
+    //   }
+    // }
   }
 
   return (

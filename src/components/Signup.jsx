@@ -9,6 +9,8 @@ import "react-toastify/dist/ReactToastify.css";
 import Otp from "./Otp";
 import swal from "sweetalert";
 import '../App.css';
+
+import { ContactForm, Footer } from '../components/common';
 function Signup() {
 
   const [formData, setFormData] = useState({
@@ -38,10 +40,10 @@ function Signup() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     console.log('new_vales', value);
-    if(value =='agent'){
+    if (value == 'agent') {
       setAgentForm(true);
-    }  else {
-      
+    } else {
+
       setAgentForm(false);
     }
     setFormData({ ...formData, [name]: value });
@@ -107,12 +109,10 @@ function Signup() {
   };
 
   return (
-    <div
-      class="font-sans antialiased w-screen min-h-screen flex items-center justify-center md:mt-[-10vh] overflow-hidden"
-      style={{ backgroundColor: "#050505" }}
+    <div className='w-screen h-screen overflow-y-scroll'
     >
       <div
-        class="w-full h-full sma3:h-auto "
+        class="font-sans antialiased min-h-screen flex items-center justify-center md:mt-[-10vh] overflow-hidden"
         style={{
           paddingTop: "4rem",
           backgroundImage: "url('/images/bgimage3.png')",
@@ -120,182 +120,192 @@ function Signup() {
           backgroundSize: "cover",
         }}
       >
-        <form onSubmit={handleSubmit}>
-          <div class="container mx-auto h-full pt-[13.5rem] pb-[6.5rem]">
-            <div class="w-5/6 h-1/2 lg:h-1/2 lg:w-1/2 mx-auto bg-slate-600 rounded shadow-lg bg-opacity-80 backdrop-filter backdrop-blur-lg mt-10 ">
-              <div class="py-8 px-8 text-yellow-500 text-2xl font-bold border-b border-grey-lighter">
-                Register for a free account
-              </div>
+        <div
+          class="h-full sma3:h-auto"
 
-              <div class="py-8 px-8">
-                <div class="flex mb-4">
-                  <div class="w-1/2 mr-1">
-                    <label class="block text-white text-sm font-bold mb-2">
-                      First Name
-                    </label>
-                    <input
-                      class="appearance-none bg-transparent border-b rounded w-full py-2 px-3 text-white
-"
-                      name="firstname"
-                      type="text"
-                      placeholder="Your first name"
-                      value={formData.firstname}
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div class="w-1/2 ml-1">
-                    <label class="block text-white text-sm font-bold mb-2">
-                      Last Name
-                    </label>
-                    <input
-                      class="appearance-none bg-transparent border-b rounded w-full py-2 px-3 text-white
-"
-                      id="last_name"
-                      type="text"
-                      placeholder="Your last name"
-                      name="lastname"
-                      value={formData.lastname}
-                      onChange={handleChange}
-                    />
-                  </div>
+        >
+          <form onSubmit={handleSubmit}>
+            <div class="container mx-auto h-full md:pt-[13.5rem] pb-[6.5rem] max-w-64">
+              <div class="h-1/2 lg:h-1/2 mx-auto bg-slate-600 rounded shadow-lg bg-opacity-80 backdrop-filter backdrop-blur-lg mt-10 ">
+                <div class="py-8 px-8 text-yellow-500 text-2xl font-bold border-b border-grey-lighter">
+                  Register for a free account
                 </div>
-                <div class="mb-4">
-                  <label class="block text-white text-sm font-bold mb-2">
-                    Username
-                  </label>
-                  <input
-                    class="appearance-none bg-transparent border-b rounded w-full py-2 px-3 text-white
-"
-                    id="user_name"
-                    type="text"
-                    placeholder="Your user name"
-                    name="name"
-                    value={formData.username}
-                    onChange={handleChange}
-                  />
-                </div>
-                <div class="mb-4">
-                  <label class="block text-white text-sm font-bold mb-2">
-                    Email Address
-                  </label>
-                  <input
-                    class="appearance-none bg-transparent border-b rounded w-full py-2 px-3 text-white
-"
-                    id="email"
-                    type="email"
-                    placeholder="Your email address"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                  />
-                </div>
-                <div class="mb-4">
-                  <label class="block text-white text-sm font-bold mb-2">
-                    Phone
-                  </label>
-                  <PhoneInput
-                    className="appearance-none border-b rounded w-full py-2 px-3 text-white"
-                    placeholder="Enter phone number"
-                    value={formData.phone}
-                    onChange={(e) => {
-                      setFormData((state) => ({ ...state, phoneNumber: e }))
 
-                    }
-                    }
-                  />
-                </div>
-                <div class="mb-4">
-                  <label class="block text-white text-sm font-bold mb-2">
-                    Password
-                  </label>
-                  <input
-                    class="appearance-none bg-transparent border-b rounded w-full py-2 px-3 text-white"
-                    id="password"
-                    type="password"
-                    placeholder="Your secure password"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                  />
-                  <p class="text-white text-xs mt-1">At least 6 characters</p>
-                </div>
-                {/* ==================================== Agent Form Start ======================== */}
-                {toggleAgentForm && <div class="flex mb-4">
-                  <div class="w-1/2 mr-1">
+                <div class="py-8 px-8">
+                  <div class="flex mb-4">
+                    <div class="w-1/2 mr-1">
+                      <label class="block text-white text-sm font-bold mb-2">
+                        First Name
+                      </label>
+                      <input
+                        class="appearance-none bg-transparent border-b rounded w-full py-2 px-3 text-white
+"
+                        name="firstname"
+                        type="text"
+                        placeholder="Your first name"
+                        value={formData.firstname}
+                        onChange={handleChange}
+                      />
+                    </div>
+                    <div class="w-1/2 ml-1">
+                      <label class="block text-white text-sm font-bold mb-2">
+                        Last Name
+                      </label>
+                      <input
+                        class="appearance-none bg-transparent border-b rounded w-full py-2 px-3 text-white
+"
+                        id="last_name"
+                        type="text"
+                        placeholder="Your last name"
+                        name="lastname"
+                        value={formData.lastname}
+                        onChange={handleChange}
+                      />
+                    </div>
+                  </div>
+                  <div class="mb-4">
                     <label class="block text-white text-sm font-bold mb-2">
-                      Broker Id
+                      Username
                     </label>
                     <input
                       class="appearance-none bg-transparent border-b rounded w-full py-2 px-3 text-white
 "
-                      name="brokerId"
+                      id="user_name"
                       type="text"
-                      placeholder="Your Broker id"
-                      value={formData.brokerId}
+                      placeholder="Your user name"
+                      name="name"
+                      value={formData.username}
                       onChange={handleChange}
                     />
                   </div>
-                  <div class="w-1/2 ml-1">
+                  <div class="mb-4">
                     <label class="block text-white text-sm font-bold mb-2">
-                      National Id
+                      Email Address
                     </label>
                     <input
                       class="appearance-none bg-transparent border-b rounded w-full py-2 px-3 text-white
 "
-                      id="nationalId"
-                      type="text"
-                      placeholder="Your National id"
-                      name="nationalId"
-                      value={formData.nationalId}
+                      id="email"
+                      type="email"
+                      placeholder="Your email address"
+                      name="email"
+                      value={formData.email}
                       onChange={handleChange}
                     />
                   </div>
-                </div>}
-                {/* ==================================== Agent Form End ======================== */}
-                <div class="mb-4">
-                  <label class="block text-white text-sm font-bold mb-2">
-                    Choose an Account Type
-                  </label>
-                  <select
-                    class="appearance-none bg-transparent border-b rounded w-full py-2 px-3 text-black
+                  <div class="mb-4">
+                    <label class="block text-white text-sm font-bold mb-2">
+                      Phone
+                    </label>
+                    <PhoneInput
+                      className="appearance-none border-b rounded w-full py-2 px-3 text-white"
+                      placeholder="Enter phone number"
+                      value={formData.phone}
+                      onChange={(e) => {
+                        setFormData((state) => ({ ...state, phoneNumber: e }))
+
+                      }
+                      }
+                    />
+                  </div>
+                  <div class="mb-4">
+                    <label class="block text-white text-sm font-bold mb-2">
+                      Password
+                    </label>
+                    <input
+                      class="appearance-none bg-transparent border-b rounded w-full py-2 px-3 text-white"
+                      id="password"
+                      type="password"
+                      placeholder="Your secure password"
+                      name="password"
+                      value={formData.password}
+                      onChange={handleChange}
+                    />
+                    <p class="text-white text-xs mt-1">At least 6 characters</p>
+                  </div>
+                  {/* ==================================== Agent Form Start ======================== */}
+                  {toggleAgentForm && <div class="flex mb-4">
+                    <div class="w-1/2 mr-1">
+                      <label class="block text-white text-sm font-bold mb-2">
+                        Broker Id
+                      </label>
+                      <input
+                        class="appearance-none bg-transparent border-b rounded w-full py-2 px-3 text-white
 "
-                    id="account_type"
-                    name="accountType"
-                    value={formData.chooseaccount}
-                    onChange={handleChange}
-                  >
-                    <option value="">select your account type</option>
-                    <option name="agent" value="agent">Agent</option>
-                    {/* <option name="checking" value="checking">Agency</option> */}
-                    <option name="credit" value="credit">Owner</option>
-                    <option name="loan" value="loan">Buyer</option>
-                  </select>
+                        name="brokerId"
+                        type="text"
+                        placeholder="Your Broker id"
+                        value={formData.brokerId}
+                        onChange={handleChange}
+                      />
+                    </div>
+                    <div class="w-1/2 ml-1">
+                      <label class="block text-white text-sm font-bold mb-2">
+                        National Id
+                      </label>
+                      <input
+                        class="appearance-none bg-transparent border-b rounded w-full py-2 px-3 text-white
+"
+                        id="nationalId"
+                        type="text"
+                        placeholder="Your National id"
+                        name="nationalId"
+                        value={formData.nationalId}
+                        onChange={handleChange}
+                      />
+                    </div>
+                  </div>}
+                  {/* ==================================== Agent Form End ======================== */}
+                  <div class="mb-4">
+                    <label class="block text-white text-sm font-bold mb-2">
+                      Choose an Account Type
+                    </label>
+                    <select
+                      class="appearance-none bg-transparent border-b rounded w-full py-2 px-3 text-black
+"
+                      id="account_type"
+                      name="accountType"
+                      value={formData.chooseaccount}
+                      onChange={handleChange}
+                    >
+                      <option value="">select your account type</option>
+                      <option name="agent" value="agent">Agent</option>
+                      {/* <option name="checking" value="checking">Agency</option> */}
+                      <option name="credit" value="credit">Owner</option>
+                      <option name="loan" value="loan">Buyer</option>
+                    </select>
+                  </div>
+                  <div class="flex items-center justify-center mt-8  ">
+                    <button
+                      class="bg-yellow-600 w-[500px] hover:bg-blue-dark text-white font-bold py-2 px-4 rounded"
+                      type="submit"
+                    >
+                      Sign Up
+                    </button>
+                  </div>
+                  <div className="mt-4  font-semibold 2xla:text-3xl text-sm text-black text-center md:text-left lg:text-center">
+                    Already have an account?
+                    <a
+                      className="text-yellow-600 ml-2 hover:underline hover:underline-offset-4 2xla:text-3xl"
+                      href="/login"
+                    >
+                      SignIn
+                    </a>
+                    {""}
+                  </div>
+                  <ToastContainer position="fixed" />
                 </div>
-                <div class="flex items-center justify-center mt-8  ">
-                  <button
-                    class="bg-yellow-600 w-[500px] hover:bg-blue-dark text-white font-bold py-2 px-4 rounded"
-                    type="submit"
-                  >
-                    Sign Up
-                  </button>
-                </div>
-                <div className="mt-4  font-semibold 2xla:text-3xl text-sm text-black text-center md:text-left lg:text-center">
-                  Already have an account?
-                  <a
-                    className="text-yellow-600 ml-2 hover:underline hover:underline-offset-4 2xla:text-3xl"
-                    href="/login"
-                  >
-                    SignIn
-                  </a>
-                  {""}
-                </div>
-                <ToastContainer position="fixed" />
               </div>
             </div>
-          </div>
-        </form>
+          </form>
+        </div>
+        {isPopupOpen && <Otp onClose={closePopup} />}
       </div>
-      {isPopupOpen && <Otp onClose={closePopup} />}
+      <div className="px-[2%] md:px-[6%] bg-footer border border-footer">
+        <div className="mt-20">
+          <Footer />
+        </div>
+      </div>
     </div>
   );
 }

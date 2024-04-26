@@ -4,6 +4,7 @@ import { property } from "../data/dummyData";
 import { useParams } from "react-router-dom";
 import { useContext } from "react";
 import { Store } from "../context/store";
+import { Footer } from "../components/common";
 
 const property1 = property[0];
 
@@ -19,7 +20,7 @@ const PropertyInformation = () => {
   }, [propertyDetails, id]);
 
   return (
-    <div className="bg-ordinary">
+    <div className="bg-ordinary h-screen overflow-y-scroll">
       <SingleProperty
         phone={propertyDetails?.contactDetails?.phone}
         name={propertyDetails?.propertyDetails?.title}
@@ -77,6 +78,11 @@ const PropertyInformation = () => {
         propertyId={id}
         ownerId={state?.propertyDetails?.ownerId}
       />
+      <div className="px-[2%] md:px-[6%] bg-footer border border-footer">
+        <div className="mt-20">
+          <Footer />
+        </div>
+      </div>
     </div>
   );
 };

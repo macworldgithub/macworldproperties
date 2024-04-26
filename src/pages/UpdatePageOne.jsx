@@ -25,7 +25,7 @@ import Label from "../components/Dashboard/Label";
 import Input from "../components/Dashboard/Input";
 import SelectOption from "../components/Dashboard/selectOption";
 import LocationMarker from "../components/common/Marker";
-import { propertyDetails } from '../app/slices/PopertySlice';
+import { propertyDetails, updatePropertyDetails } from '../app/slices/PopertySlice';
 import { useSelector, useDispatch } from 'react-redux';
 
 
@@ -79,11 +79,11 @@ const Search = (props) => {
 };
 // =================================  =================================
 
-const PageOne = () => {
+export default function UpdatePageOne() {
     // const { state, dispatch } = useContext(Store);
     const [stepcount, setStepcount] = useState(1);
 
-    const state = useSelector(state => state.property.form);
+    const state = useSelector(state => state.property.updateProperty);
     const reduxDispatch = useDispatch();
 
     // const [selectedValue, setSelectedValue] = useState("option1");
@@ -160,45 +160,13 @@ const PageOne = () => {
         },
         options: {
             types: ['geocode'],
-            componentRestrictions: { country: "ae" },
-        },
+            componentRestrictions: { country: "ae" }
+        }
     });
 
     useEffect(() => {
-        console.log('ytuyrurt', state?.updateProperty?.rentDetails)
-        if (state?.updatePropertyToggle) {
-            setFormData({
-                // propertyDetailsObj
-                referncenumber: state?.updateProperty?.propertyDetails?.refNo,
-                title: state?.updateProperty?.propertyDetails?.title,
-                arabicTitle: state?.updateProperty?.propertyDetails?.titleArabic,
-                desc: state?.updateProperty?.propertyDetails?.description,
-                descArabic: state?.updateProperty?.propertyDetails?.descriptionArabic,
-                area: state?.updateProperty?.propertyDetails?.areaSquare,
-                price: state?.updateProperty?.propertyDetails?.InclusivePrice,
-                permitNo: state?.updateProperty?.propertyDetails?.PermitNumber,
-                completion: state?.updateProperty?.propertyDetails?.completionStatus,
-                ownValue: state?.updateProperty?.propertyDetails?.ownerShipStatus,
-                bedRooms: 0,
-                bathRooms: 0,
-                // typesAndPurposeObj
-                category: state?.updateProperty?.typesAndPurpose?.category,
-                subCategory: state?.updateProperty?.typesAndPurpose?.subCategory,
-                purpose: state?.updateProperty?.typesAndPurpose?.purpose,
-                // rentalDetails
-                rentAED: state?.updateProperty?.rentDetails?.rent,
-                rentFrequency: state?.updateProperty?.rentDetails?.rentFrequency,
-                contractperiod: state?.updateProperty?.rentDetails?.minimumContractPeriod,
-                vacatingperiod: state?.updateProperty?.rentDetails?.noticePeriod,
-                maintfee: state?.updateProperty?.rentDetails?.state?.updateProperty?.rentDetails?.maintainanceFee,
-                paidby: state?.updateProperty?.rentDetails?.paidBy,
-                //  ================ New Values =============
-                location: state?.updateProperty?.locationAndAddress?.location,
-                longitude: state?.updateProperty?.locationAndAddress?.longitude,
-                latitude: state?.updateProperty?.locationAndAddress?.latitude,
-                address: state?.updateProperty?.locationAndAddress?.address,
-            });
-        } else {
+        // if (state?.propertyDetails?.PermitNumber !== null ) {
+            console.log(state, 'PermitNumber', state?.propertyDetails?.PermitNumber)
             setFormData({
                 // propertyDetailsObj
                 referncenumber: state?.propertyDetails?.refNo,
@@ -218,22 +186,55 @@ const PageOne = () => {
                 subCategory: state?.typesAndPurpose?.subCategory,
                 purpose: state?.typesAndPurpose?.purpose,
                 // rentalDetails
-                rentAED: state?.rentalDetails?.rent,
-                rentFrequency: state?.rentalDetails?.rentFrequency,
-                contractperiod: state?.rentalDetails?.minimumContractPeriod,
-                vacatingperiod: state?.rentalDetails?.noticePeriod,
-                maintfee:
-                    state?.rentalDetails?.state?.rentalDetails
-                        ?.maintainanceFee,
-                paidby: state?.rentalDetails?.paidBy,
+                rentAED: state?.rentDetails?.rent,
+                rentFrequency: state?.rentDetails?.rentFrequency,
+                contractperiod: state?.rentDetails?.minimumContractPeriod,
+                vacatingperiod: state?.rentDetails?.noticePeriod,
+                maintfee: state?.rentDetails?.state?.rentDetails?.maintainanceFee,
+                paidby: state?.rentDetails?.paidBy,
                 //  ================ New Values =============
                 location: state?.locationAndAddress?.location,
                 longitude: state?.locationAndAddress?.longitude,
                 latitude: state?.locationAndAddress?.latitude,
                 address: state?.locationAndAddress?.address,
             });
-        }
-    }, []);
+        // }
+        // else {
+        //     setFormData({
+        //         // propertyDetailsObj
+        //         referncenumber: state?.propertyDetails?.refNo,
+        //         title: state?.propertyDetails?.title,
+        //         arabicTitle: state?.propertyDetails?.titleArabic,
+        //         desc: state?.propertyDetails?.description,
+        //         descArabic: state?.propertyDetails?.descriptionArabic,
+        //         area: state?.propertyDetails?.areaSquare,
+        //         price: state?.propertyDetails?.InclusivePrice,
+        //         permitNo: state?.propertyDetails?.PermitNumber,
+        //         completion: state?.propertyDetails?.completionStatus,
+        //         ownValue: state?.propertyDetails?.ownerShipStatus,
+        //         bedRooms: 0,
+        //         bathRooms: 0,
+        //         // typesAndPurposeObj
+        //         category: state?.typesAndPurpose?.category,
+        //         subCategory: state?.typesAndPurpose?.subCategory,
+        //         purpose: state?.typesAndPurpose?.purpose,
+        //         // rentalDetails
+        //         rentAED: state?.rentalDetails?.rent,
+        //         rentFrequency: state?.rentalDetails?.rentFrequency,
+        //         contractperiod: state?.rentalDetails?.minimumContractPeriod,
+        //         vacatingperiod: state?.rentalDetails?.noticePeriod,
+        //         maintfee:
+        //             state?.rentalDetails?.state?.rentalDetails
+        //                 ?.maintainanceFee,
+        //         paidby: state?.rentalDetails?.paidBy,
+        //         //  ================ New Values =============
+        //         location: state?.locationAndAddress?.location,
+        //         longitude: state?.locationAndAddress?.longitude,
+        //         latitude: state?.locationAndAddress?.latitude,
+        //         address: state?.locationAndAddress?.address,
+        //     });
+        // }
+    }, [state?.propertyDetails?.PermitNumber]);
 
     useEffect(() => {
         fetchName();
@@ -338,7 +339,6 @@ const PageOne = () => {
         // if (!paidbyvalue) {
         //   fieldErrors.paidbyvalue = "Paid by Value required";
         // }
-        console.log('opopiiuuh', fieldErrors)
         if (Object.keys(fieldErrors)?.length > 0) {
             // There are errors, so you can handle them and display error messages
             // const errorKeys = Object.keys(fieldErrors);
@@ -434,43 +434,44 @@ const PageOne = () => {
             //   email: data?.email,
             //   phone: data?.phoneNumber,
             // }
-            if (state?.updatePropertyToggle) {
-                // dispatch({
-                //     type: "UPDATE_PROPERTY",
-                //     payload: {
-                //         propertyDetails: propertyDetailsObj,
-                //         typesAndPurpose: typesAndPurposeObj,
-                //         rentDetails: rentalDetails,
-                //         contactDetails: contactDetails,
-                //         locationAndAddress: locationAndAddress,
-                //         ownerId: data?._id,
-                //     },
-                // });
-            } else {
-                reduxDispatch(propertyDetails({
-                    propertyDetails: propertyDetailsObj,
-                    typesAndPurpose: typesAndPurposeObj,
-                    rentDetails: rentalDetails,
-                    contactDetails: contactDetails,
-                    locationAndAddress: locationAndAddress,
-                    ownerId: data?._id,
-                }))
-                // dispatch({
-                //     type: "ADD_PROPERTY",
-                //     payload: {
-                //         propertyDetails: propertyDetailsObj,
-                //         typesAndPurpose: typesAndPurposeObj,
-                //         rentDetails: rentalDetails,
-                //         contactDetails: contactDetails,
-                //         locationAndAddress: locationAndAddress,
-                //         ownerId: data?._id,
-                //     },
-                // });
-            }
-
-            setStepcount(stepcount + 1);
-            NavigateTo("/dashboard");
+            // if (state?.updatePropertyToggle) {
+            // dispatch({
+            //     type: "UPDATE_PROPERTY",
+            //     payload: {
+            //         propertyDetails: propertyDetailsObj,
+            //         typesAndPurpose: typesAndPurposeObj,
+            //         rentDetails: rentalDetails,
+            //         contactDetails: contactDetails,
+            //         locationAndAddress: locationAndAddress,
+            //         ownerId: data?._id,
+            //     },
+            // });
+            // } else {
+            console.log('check_click')
+            reduxDispatch(updatePropertyDetails({
+                propertyDetails: propertyDetailsObj,
+                typesAndPurpose: typesAndPurposeObj,
+                rentDetails: rentalDetails,
+                contactDetails: contactDetails,
+                locationAndAddress: locationAndAddress,
+                ownerId: data?._id,
+            }))
+            // dispatch({
+            //     type: "ADD_PROPERTY",
+            //     payload: {
+            //         propertyDetails: propertyDetailsObj,
+            //         typesAndPurpose: typesAndPurposeObj,
+            //         rentDetails: rentalDetails,
+            //         contactDetails: contactDetails,
+            //         locationAndAddress: locationAndAddress,
+            //         ownerId: data?._id,
+            //     },
+            // });
         }
+
+        setStepcount(stepcount + 1);
+        NavigateTo("/update-dashboard");
+        // }
     };
 
     const [error, setError] = useState({
@@ -538,7 +539,6 @@ const PageOne = () => {
             name: data?.email,
         }));
     };
-
     return (
         <Layout>
             <div className="bg-gradient-to-r from-gradient via-ordinary to-ordinary"
@@ -960,6 +960,4 @@ const PageOne = () => {
             </div>
         </Layout>
     );
-};
-
-export default PageOne;
+}

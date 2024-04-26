@@ -96,7 +96,7 @@ const Sidebar = ({ toggleMobileOpen, setToggleMobileOpen }) => {
 
     return (
         // <div className='lg:relative left-0 top-0 z-50 lg:z-50 min-h-dvh'>
-        <div className={`bg-footer2 h-screen pt-8 absolute lg:relative ${state.open ? "lg:w-72" : "lg:w-20"} ${toggleMobileOpen ? "w-72 p-5" : "w-0"} duration-300`} style={{ maxHeight: '100%', overflowY: 'hidden' }}>
+        <div className={`z-50 bg-footer2 h-screen pt-8 absolute lg:relative ${state.open ? "lg:w-72" : "lg:w-20"} ${toggleMobileOpen ? "w-72 p-5" : "w-0"} duration-300`} style={{ maxHeight: '100%', overflowY: 'hidden' }}>
             <BsArrowLeftShort className={`hidden z-50 lg:block bg-ordinary text-footer text-3xl rounded-full absolute -right-0 z-50 top-16 border border-footer cursor-pointer ${!state.open && "rotate-180"}`} onClick={() => {
                 // setOpen(state => !state)} 
                 dispatch({ type: 'TOGGLE_SIDEBAR' });
@@ -216,14 +216,14 @@ const Sidebar = ({ toggleMobileOpen, setToggleMobileOpen }) => {
                 ))}
             </ul>
 
-            <section className='flex gap-x-2 w-[250px] justify-between items-center rounded-full border mx-auto mt-5 bg-[#EFEFEF]'>
-                <a href='https://www.bayut.com/' target='_blank' className='inline-block h-10'>
+            {state.open && <section className='flex gap-x-2 w-[250px] justify-between items-center rounded-full border mx-auto mt-5 bg-[#EFEFEF]'>
+                <a href='https://www.propertyfinder.ae/' target='_blank' className='inline-block h-10'>
                     <PropertyFinder className='h-full px-3 py-1' />
                 </a>
-                <a href='https://www.propertyfinder.ae/' target='_blank' className='inline-block rounded-full border h-10 bg-[#E0E0E0]'>
+                <a href='https://www.bayut.com/' target='_blank' className='inline-block rounded-full border h-10 bg-[#E0E0E0]'>
                     <Bayut className='h-full px-3 py-1' />
                 </a>
-            </section>
+            </section>}
 
             <Link className={`${toggleMobileOpen ? "block" : "hidden"}`} to="/page-one" onClick={() => {
                 dispatch({ type: "UPDATE_TOGGLE", payload: false });

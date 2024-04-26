@@ -7,7 +7,7 @@ export default function Blog2() {
     return (
         <LargeScreenWrapper>
         <div className="grid grid-cols-12 max-w-full">
-            <div className="max-w-7xl col-span-12 md:col-span-9 mx-auto bg-white scrollbar-hide-class" style={{ maxHeight: '100vh', overflowY: 'scroll' }}>
+            <div className="max-w-7xl col-span-12 md:col-span-9 mx-auto bg-white scrollbar-hide-class">
                 <h1 className="text-4xl leading-tight mt-14" style={{ textAlign: "start" }}>
                     Top Residential Areas in Dubai: Where to Find Your Dream Home
                 </h1>

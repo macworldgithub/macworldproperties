@@ -9,7 +9,6 @@ export default function Blog3() {
       <div className="grid grid-cols-12 max-w-full">
         <div
           className="max-w-7xl col-span-12 md:col-span-9 mx-auto bg-white scrollbar-hide-class"
-          style={{ maxHeight: "100vh", overflowY: "scroll" }}
         >
           <h1
             className="text-4xl leading-tight mt-14"

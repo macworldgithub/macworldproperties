@@ -2,16 +2,13 @@ import React, { useContext, useEffect, useLayoutEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
-import axios from "axios";
 
 import '../App.css'
-import { Store } from "../context/store";
 import Layout from "../components/Layout";
 import ProgressButton from "../components/Dashboard/progressButton";
-import Navbar from "../components/common/Navbar";
-import { addAmenities } from '../app/slices/PopertySlice';
+import { updateAmenities } from '../app/slices/PopertySlice';
 
-const Dashboard = () => {
+const UpdateDashboard = () => {
   const [ameneties, setAmeneties] = useState([]);
   // const [puposeArray, setPurposeArray] = useState([]);
   // const [purposeValue, setPurposeValue] = useState('');
@@ -40,7 +37,7 @@ const Dashboard = () => {
 
   // const { state, dispatch } = useContext(Store);
   const reduxDispatch = useDispatch();
-  const state = useSelector(state => state.property.form);
+  const state = useSelector(state => state.property.updateProperty);
   // const handleChange = (e) => {
   //     const selectedValue = e.target.value;
 
@@ -84,6 +81,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (state?.amenities) {
+      console.log('new_temper', state.amenities);
       setAmeneties(state.amenities);
       handleFormPersist();
     }
@@ -174,14 +172,14 @@ const Dashboard = () => {
     }
 
     setAmeneties(temp);
-    if (state?.updatePropertyToggle) {
-      // dispatch({ type: "UPDATE_AMENITIES", payload: temp });
-    } else {
-      reduxDispatch(addAmenities(temp))
+    // if (state?.updatePropertyToggle) {
+    //   // dispatch({ type: "UPDATE_AMENITIES", payload: temp });
+    // } else {
+      reduxDispatch(updateAmenities(temp));
       // dispatch({ type: "ADD_AMENITIES", payload: temp });
-    }
-    NavigateTo("/page-one");
-    setStepcount(stepcount - 1);
+    // }
+    NavigateTo("/update-page-one");
+    // setStepcount(stepcount - 1);
   };
 
   const nextPage = () => {
@@ -240,17 +238,14 @@ const Dashboard = () => {
     }
 
     setAmeneties(temp);
-    if (state?.updatePropertyToggle) {
-      // dispatch({ type: "UPDATE_AMENITIES", payload: temp });
-    } else {
-      reduxDispatch(addAmenities(temp))
-      // dispatch({ type: "ADD_AMENITIES", payload: temp });
-    }
+    reduxDispatch(updateAmenities(temp));
+    NavigateTo('/update-dashboard-page3');
+    // dispatch({ type: "ADD_AMENITIES", payload: temp });
     // axios.post('http://localhost:4000/property/upload', state.form).then(res => {
     //     console.log(res.data);
     // });
-    setStepcount(stepcount + 1);
-    NavigateTo("/dashboard-page3");
+    // setStepcount(stepcount + 1);
+    // NavigateTo("/dashboard-page3");
     // NavigateTo("/dashboard-page3");
     // 1. purposeValue (select)
     // 2. completionYear
@@ -840,16 +835,10 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
-
+export default UpdateDashboard;
 
 export const Customisedcheckbox = ({ name, value, handleChange }) => {
-  const [toggle, setToggle] = useState(false);
-  const state = useSelector(state => state.property.form);
-
-  useEffect(() => {
-
-  }, [state.amenities])
+  const state = useSelector(state => state.property.updateProperty);
 
   const handleChecked = (value) => {
     if (state.amenities.some(ele => ele?.name == value)) {
@@ -1011,3 +1000,4 @@ const CustomisedInput = ({
     background-color: #535db3;
   }
 </style> */}
+

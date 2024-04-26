@@ -24,6 +24,7 @@ const Videoupload = ({ videoLinks, setVideoLinks }) => {
 
   return (
     <div className="container mx-auto p-4">
+      {console.log('video_player', videoLinks)}
       <h1 className="text-3xl font-semibold text-center mb-4">Video Uploader</h1>
       <div className="flex mb-4">
         <input

@@ -41,7 +41,10 @@ import ImpressionsGraph from "./components/Dashboard/ImpressionsGraph";
 import Blog1 from './pages/Blog1';
 import Blog2 from './pages/Blog2';
 import Blog3 from './pages/Blog3';
+import UpdatePageOne from "./pages/UpdatePageOne";
+import UpdateDashboard from "./pages/UpdateDashboard";
 import Page1New from "./pages/Page1New";
+import UpdateDashboardPage3 from "./pages/UpdateDashboardPage3";
 
 function App() {
   const [showButton, setShowButton] = useState(false);
@@ -138,8 +141,11 @@ function App() {
             <Route path="/agentinformation" element={<AgentInformation />} />
             <Route path="/otp" element={<Otp />} />
             <Route path="/agentdetails" element={<Agentdetails />} />
-              <Route path="/page-one" element={<PageOne />} />
-              <Route path="/page-two" element={<ProtectedRoutes><PageTwo /></ProtectedRoutes>} />
+            <Route path="/page-one" element={<ProtectedRoutes><PageOne /></ProtectedRoutes>} />
+            <Route path="/update-page-one" element={<ProtectedRoutes><UpdatePageOne /></ProtectedRoutes>} />
+            <Route path="/update-dashboard" element={<ProtectedRoutes><UpdateDashboard /></ProtectedRoutes>} />
+            <Route path="/update-dashboard-page3" element={<ProtectedRoutes><UpdateDashboardPage3 /></ProtectedRoutes>} />
+            <Route path="/page-two" element={<ProtectedRoutes><PageTwo /></ProtectedRoutes>} />
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/listing-inventory" element={<ProtectedRoutes><ManageListings /></ProtectedRoutes>} />
             <Route path="/reports" element={<Reports />} />
@@ -147,19 +153,22 @@ function App() {
             <Route path="/graph" element={<ProtectedRoutes><ImpressionsGraph /></ProtectedRoutes>} />
           </Routes>
         </div>
-        {route.pathname !== "/dashboard" &&
+        {/* {route.pathname !== "/dashboard" &&
           route.pathname !== "/dashboard-page3" &&
           route.pathname !== "/page-one" &&
           route.pathname !== "/portfolio" &&
           route.pathname !== "/listing-inventory" &&
           route.pathname !== "/reports" &&
+          route.pathname !== "/update-page-one" &&
+          route.pathname !== "/update-dashboard" &&
+          route.pathname !== "/update-dashboard-page3" &&
           route.pathname !== "/traffic" && (
             <div className="px-[2%] md:px-[6%] bg-footer border border-footer">
               <div className="mt-20">
                 <Footer />
               </div>
             </div>
-          )}
+          )} */}
       </div>
     </StoreProvider>
   );

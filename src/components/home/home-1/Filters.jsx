@@ -336,10 +336,10 @@ const Filters = () => {
                       });
                     const response = await axios.get(
                       `${process.env.REACT_APP_SERVERURL
-                      }/property/get-property?find=check&category=all&${params.toString()}`
+                      }/property/get-property?find=check&category=residential&${params.toString()}`
                     );
                     navigate(
-                      `/property/forSale?category=all&${params.toString()}`
+                      `/property/forSale?category=residential&${params.toString()}`
                     );
                     dispatch({ type: "FORSALE_SCREEN_TOGGLE", payload: true });
                   }}

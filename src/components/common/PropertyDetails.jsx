@@ -350,14 +350,14 @@ const PropertyDetails = ({
                 </div>
                 <div className="flex flex-col">
                   <div className="flex justify-between">
-                    <h3 className="font-bold">Property Size:</h3>
+                    <h3 className="font-bold">Property Size</h3>
                     <p>{area}</p>
                   </div>
                   <hr className="border-gray-500" />
                 </div>
                 <div className="flex flex-col">
                   <div className="flex justify-between">
-                    <h3 className="font-bold">Bedrooms:</h3>
+                    <h3 className="font-bold">Bedrooms</h3>
                     <p>{number_of_beds}</p>
                   </div>
                   <hr className="border-gray-500" />
@@ -373,28 +373,28 @@ const PropertyDetails = ({
               <div className="grid grid-rows-3 gap-3 lg:cols-span-1 sm:rows-span-1">
                 <div className="flex flex-col">
                   <div className="flex justify-between">
-                    <h3 className="font-bold">Bathrooms:</h3>
+                    <h3 className="font-bold">Bathrooms</h3>
                     <p>{number_of_bathrooms}</p>
                   </div>
                   <hr className="border-gray-500" />
                 </div>
                 <div className="flex flex-col">
                   <div className="flex justify-between">
-                    <h3 className="font-bold">Garage:</h3>
+                    <h3 className="font-bold">Garage</h3>
                     <p>{number_of_garage}</p>
                   </div>
                   <hr className="border-gray-500" />
                 </div>
                 <div className="flex flex-col">
                   <div className="flex justify-between">
-                    <h3 className="font-bold">Property Type:</h3>
+                    <h3 className="font-bold">Property Type</h3>
                     <p>{category}</p>
                   </div>
                   <hr className="border-gray-500" />
                 </div>
                 <div className="flex flex-col">
                   <div className="flex justify-between">
-                    <h3 className="font-bold">Property Status:</h3>
+                    <h3 className="font-bold">Property Status</h3>
                     <p>{status}</p>
                   </div>
                   <hr className="border-gray-500" />

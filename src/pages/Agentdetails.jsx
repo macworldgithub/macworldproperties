@@ -1,24 +1,27 @@
 import { AiFillStar } from "react-icons/ai";
 import Layout from "../components/Layout";
+import { Footer } from "../components/common";
+
 const Agentdetails = () => {
-  const agentdetails={
-    name:"Abdullah",
-    reviewno:5,
-    detail:" Company Agent at Modern House Real Estate ",
-    agentLicense:"090-0348-8346",
-    taxNumber:"HGT-92384-3434",
-    serviceArea:"Dubai",
-    specialities:"Property management, Real estate development, Real estate appraising, Retail leasing, Apartment brokerage ",
-    about:"Lorem ipsum dolor sit amet consectetur adipisicing elitPerferendis, nemo. lorem20 Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi, perferendis lorem",
-    office:"34864534590",
-    mobile:"34864534590",
-    FAX:"34864534590",
-    email:"macworld@technology.com",
-    website:"macworld@technology.com"
+  const agentdetails = {
+    name: "Abdullah",
+    reviewno: 5,
+    detail: " Company Agent at Modern House Real Estate ",
+    agentLicense: "090-0348-8346",
+    taxNumber: "HGT-92384-3434",
+    serviceArea: "Dubai",
+    specialities: "Property management, Real estate development, Real estate appraising, Retail leasing, Apartment brokerage ",
+    about: "Lorem ipsum dolor sit amet consectetur adipisicing elitPerferendis, nemo. lorem20 Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi, perferendis lorem",
+    office: "34864534590",
+    mobile: "34864534590",
+    FAX: "34864534590",
+    email: "macworld@technology.com",
+    website: "macworld@technology.com"
 
   }
   return (
-    <Layout>
+    // <Layout>
+    <div className="h-screen overflow-y-scroll">
       <div className=" w-full h-auto flex justify-center item-center bg-slate-100">
         <div className="w-[80%]  h-auto sm3:w-[70%] bg-slate-100 mt-20 ">
           <div className="w-full bg-white h-[50rem] flex flex-col   sm3:flex-row   sm3:h-[33rem]   rounded-2xl                ">
@@ -47,7 +50,7 @@ const Agentdetails = () => {
                 </div>
                 <span className="m-1">
                   {agentdetails.detail}
-                 
+
                 </span>
               </div>
 
@@ -252,7 +255,13 @@ const Agentdetails = () => {
           </div>
         </div>
       </div>
-    </Layout>
+      {/* </Layout> */}
+      <div className="px-[2%] md:px-[6%] bg-footer border border-footer">
+        <div className="mt-20">
+          <Footer />
+        </div>
+      </div>
+    </div>
   );
 };
 

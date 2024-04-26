@@ -23,6 +23,8 @@ const AdvancedSearch = ({ category, showPage }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const { slug } = useParams();
+  const url = window.location.href;
+
   const [subcatvalue, setsubcatvalue] = useState(
     MyURL.get("subCategory") ? MyURL.get("subCategory") : ""
   );
@@ -84,11 +86,12 @@ const AdvancedSearch = ({ category, showPage }) => {
         params.append(element.key, element.value);
       }
     });
-    if (params.toString()) {
-      navigate(`/property/${showPage}?category=${category}&${params.toString()}`);
-    } else {
+    // if (params.toString()) {
+    //   console.log('advance_search_new', params.toString())
+    //   navigate(`/property/${showPage}?category=${category}&${params.toString()}`);
+    // } else {
       navigate(`/property/${showPage}?category=${category}`);
-    }
+    // }
     getPropertyData(
       category,
       subcatvalue,
@@ -128,7 +131,7 @@ const AdvancedSearch = ({ category, showPage }) => {
 
   return (
     <>
-      <div className="px-12 py-4 bg-white   lg:z-50 w-full border-b-2 border-grey">
+      <div className="px-12 py-4 bg-white lg:z-50 w-full border-b-2 border-grey">
         <div className="w-full xl:w-1/5 mb-4 mt-7 flex flex-col justify-center items-center mx-auto gap-2">
           <h1 className="font-bold text-primary tracking-wider text-2xl xl:text-2xl text-center" style={{color: 'black'}}>
             Advanced Search

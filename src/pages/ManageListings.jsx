@@ -1,10 +1,13 @@
 import React, { useEffect, useState, useContext } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux';
+import swal from "sweetalert";
+
+import { Store } from "../context/store";
 import Layout from "../components/Layout";
 import SelectOption from "../components/Dashboard/selectOption";
-import axios from "axios";
-import { Store } from "../context/store";
-import { useNavigate } from "react-router-dom";
-import swal from "sweetalert";
+import { updatePropertyData } from '../app/slices/PopertySlice';
 import '../App.css'
 
 const words = ["Sharjah", "Dubai", "Abu Dhabi", "UAE"];
@@ -18,6 +21,7 @@ const ManageListings = () => {
   const [filteredProperty, setFilteredProperty] = useState([]);
 
   const navigate = useNavigate();
+  const reduxDispatch = useDispatch();
 
   const [selectedOption, setSelectedOption] = useState(options[0]);
 
@@ -49,24 +53,38 @@ const ManageListings = () => {
         contactDetails: propertyToEdit?.contactDetails,
         amenities: propertyToEdit?.amenities,
         ownerId: propertyToEdit?.ownerId
-      });
-      dispatch({
-        type: "SET_UPDATE_PROPERTY",
-        payload: {
-          _id: propertyToEdit._id,
-          images: propertyToEdit?.upload?.images,
-          videos: propertyToEdit?.upload?.videos,
-          typesAndPurpose: propertyToEdit?.typesAndPurpose,
-          locationAndAddress: propertyToEdit?.locationAndAddress,
-          propertyDetails: propertyToEdit?.propertyDetails,
-          rentalDetails: propertyToEdit?.rentalDetails,
-          contactDetails: propertyToEdit?.contactDetails,
-          amenities: propertyToEdit?.amenities,
-          ownerId: propertyToEdit?.ownerId
-        }
-      });
-      dispatch({ type: "UPDATE_TOGGLE", payload: true });
-      navigate("/page-one");
+      }); 
+
+      reduxDispatch(updatePropertyData({
+        _id: propertyToEdit._id,
+        images: propertyToEdit?.upload?.images,
+        videos: propertyToEdit?.upload?.videos,
+        typesAndPurpose: propertyToEdit?.typesAndPurpose,
+        locationAndAddress: propertyToEdit?.locationAndAddress,
+        propertyDetails: propertyToEdit?.propertyDetails,
+        rentalDetails: propertyToEdit?.rentalDetails,
+        contactDetails: propertyToEdit?.contactDetails,
+        amenities: propertyToEdit?.amenities,
+        ownerId: propertyToEdit?.ownerId
+      }))
+      
+      // dispatch({
+      //   type: "SET_UPDATE_PROPERTY",
+      //   payload: {
+      //     _id: propertyToEdit._id,
+      //     images: propertyToEdit?.upload?.images,
+      //     videos: propertyToEdit?.upload?.videos,
+      //     typesAndPurpose: propertyToEdit?.typesAndPurpose,
+      //     locationAndAddress: propertyToEdit?.locationAndAddress,
+      //     propertyDetails: propertyToEdit?.propertyDetails,
+      //     rentalDetails: propertyToEdit?.rentalDetails,
+      //     contactDetails: propertyToEdit?.contactDetails,
+      //     amenities: propertyToEdit?.amenities,
+      //     ownerId: propertyToEdit?.ownerId
+      //   }
+      // });
+      // dispatch({ type: "UPDATE_TOGGLE", payload: true });
+      navigate("/update-page-one");
     } else {
       console.log("Property nae arhi", propertyId);
     }
@@ -111,8 +129,8 @@ const ManageListings = () => {
 
   return (
     <Layout>
-      <div className="relative h-screen overflow-x-hidden bg-ordinary px-6">
-        <div className="relative block rounded-[15px] bg-white px-6 pt-4 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-20 mx-6 sma2:h-auto sma2:mx-0 sma3:h-auto sma3:mx-0 h-full py-10">
+      <div className="h-screen overflow-x-hidden bg-ordinary px-6">
+        <div className="block rounded-[15px] bg-white px-6 pt-4 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-20 mx-6 sma2:h-auto sma2:mx-0 sma3:h-auto sma3:mx-0 h-full py-10">
           <div className="flex flex-row justify-center gap-4 pt-6 pb-8">
             <button className={`text-lg py-2 px-3 button-style-progress-button rounded rounded-lg ${activeProperty == true ? 'bg-primary button-style-inset': 'text-slate-400 button-style-outset' }`} onClick={() => setActiveProperty(true)}>Active Properties</button>
             <button className={`text-lg py-2 px-3 button-style-progress-button rounded rounded-lg ${activeProperty == false ? 'bg-primary button-style-inset': 'text-slate-400 button-style-outset'}`} onClick={() => setActiveProperty(false)}>Inactive Properties</button>
@@ -187,8 +205,8 @@ const ManageListings = () => {
                 </tbody>
               </table>
             </div> */}
-            <div className="relative block bg-white px-2 pt-4 justify-center items-center mt-10 mx-6 sma3:w-full sma3:mx-0 sma:px-0 sma:mx-0 sma2:px-0 sma2:mx-0 ssma3:px-0 h-full">
-              <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <div className="block bg-white px-2 pt-4 justify-center items-center mt-10 mx-6 sma3:w-full sma3:mx-0 sma:px-0 sma:mx-0 sma2:px-0 sma2:mx-0 ssma3:px-0 h-full">
+              <div class="overflow-x-auto shadow-md sm:rounded-lg">
                 
                 <table class="text-md text-left text-gray-500 dark:text-gray-400 w-full h-full">
                   <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
