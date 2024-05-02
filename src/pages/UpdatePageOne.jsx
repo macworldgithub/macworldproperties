@@ -141,12 +141,11 @@ export default function UpdatePageOne() {
     });
 
     const { ref, autocompleteRef } = usePlacesWidget({
-        apiKey: "AIzaSyBmlfCX9N5NAKdGidMbSxMXkc4CNHcT6rQ",
+        apiKey: "AIzaSyDNtTiWsqgeSv0IdENvpBY1d0vhqcl5epM",
         onPlaceSelected: (place) => {
-            setKey("AIzaSyBmlfCX9N5NAKdGidMbSxMXkc4CNHcT6rQ");
+            setKey("AIzaSyDNtTiWsqgeSv0IdENvpBY1d0vhqcl5epM");
             setLanguage("en");
             setRegion("ae");
-            console.log("now_wheat", place?.formatted_address);
             setFormData((state) => ({
                 ...state,
                 location: place?.formatted_address,

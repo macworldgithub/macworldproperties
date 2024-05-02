@@ -90,7 +90,7 @@ export const StoreProvider = ({ children }) => {
         { key: "area", value: area },
         { key: "bedRooms", value: bedrooms },
         { key: "bathRooms", value: bathRooms },
-        { key: "price", value: price },
+        { key: "price", value: price }
         // { key: "purpose", value: "forSale" },
       ];
       filterarr.map((element) => {
@@ -101,8 +101,7 @@ export const StoreProvider = ({ children }) => {
           // element.value !== 0 ||
           // element.value != undefined
         ) {
-          console.log(element.key, element.value, "..");
-
+          console.log(element.value, "from_Context_store", showPage);
           params.append(element.key, element.value);
         }
       });
@@ -241,7 +240,7 @@ export const StoreProvider = ({ children }) => {
         BuyData,
         getPropertyData,
         onCategoryChange,
-        fetchData,
+        fetchData
       }}
     >
       {children}

@@ -20,13 +20,14 @@ const AdvancedSearch = ({ category, showPage }) => {
   const [maxAreaSelected, setMaxAreaSelected] = useState("");
 
   const [MyURL] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
   const navigate = useNavigate();
   const { slug } = useParams();
   const url = window.location.href;
 
   const [subcatvalue, setsubcatvalue] = useState(
-    MyURL.get("subCategory") ? MyURL.get("subCategory") : ""
+    MyURL.get("subCategory") && MyURL.get("subCategory")
   );
   const [subcatOptions, setsubcatOptions] = useState([]);
 
@@ -41,13 +42,14 @@ const AdvancedSearch = ({ category, showPage }) => {
   const [area, setArea] = useState("");
   const { getPropertyData, BuyData } = useContext(Store);
 
-
   const myParam = MyURL.get("category");
+  const subCategory = MyURL.get("subCategory");
   // useEffect(() => {
   //   setsubcatvalue(
-  //     MyURL.get("subCategory") == null ? "" : MyURL.get("subCategory")
+  //     MyURL.get("subCategory") && MyURL.get("subCategory")
   //   );
   // });
+
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_SERVERURL}/lov/sub-category/${category}`)
@@ -57,11 +59,40 @@ const AdvancedSearch = ({ category, showPage }) => {
   }, [category]);
 
   useEffect(() => {
-    BuyData(slug == "buy" ? "forSale" : slug == "rent" ? "forRent" : slug, selectedData);
+    console.log('sluggish', searchParams);
+    const myParam = MyURL.get("category");
+    const subCategory = MyURL.get("subCategory");
+    const bedRooms = MyURL.get("bedRooms");
+    const bathRooms = MyURL.get("bathRooms");
+    // const filterArray = [
+    //   { key: "subCategory", value: subCategory },
+    //   { key: "bedRooms", value: bedRooms },
+    //   { key: "bathRooms", value: bathRooms },
+    //   { key: "purpose", value: 'forSale' }
+    // ]
+
+    // filterArray.map((element) => {
+    //   if (element.value != "") {
+    //     params.append(element.key, element.value);
+    //   }
+    // });
+
+
+    handleSearchClick(
+      category || "all",
+      subcatvalue != "" && subcatvalue,
+      // area || "",
+      bedrooms || "",
+      bathrooms || "",
+      price || "",
+     'forSale'
+    )
+
+    // BuyData(slug == "buy" ? "forSale" : slug == "rent" ? "forRent" : slug, selectedData);
     // if(MyURL.get('find') === 'check'){
-      
+
     // }
-  }, [myParam, selectedData, slug]);
+  }, [myParam, selectedData, slug, MyURL]);
 
   const handleSearchClick = (
     category,
@@ -78,11 +109,11 @@ const AdvancedSearch = ({ category, showPage }) => {
       { key: "area", value: area },
       { key: "bedRooms", value: bedrooms },
       { key: "bathRooms", value: bathrooms },
-      { key: "price", value: price },
+      { key: "price", value: price }
     ];
     filterarr.map((element) => {
       if (element.value != "") {
-        console.log(element.key, element.value, "..");
+        console.log(filterarr, "mapsout");
         params.append(element.key, element.value);
       }
     });
@@ -90,8 +121,17 @@ const AdvancedSearch = ({ category, showPage }) => {
     //   console.log('advance_search_new', params.toString())
     //   navigate(`/property/${showPage}?category=${category}&${params.toString()}`);
     // } else {
-      navigate(`/property/${showPage}?category=${category}`);
+    // navigate(`/property/${showPage}?category=${category}`);
     // }
+    console.log('mast_chepia',
+      category,
+      subcatvalue,
+      area,
+      bedrooms,
+      bathrooms,
+      price,
+      showPage
+    );
     getPropertyData(
       category,
       subcatvalue,
@@ -102,23 +142,17 @@ const AdvancedSearch = ({ category, showPage }) => {
       showPage == "rent" ? "forRent" : showPage
     );
   };
-  useEffect(() => {
-    handleSearchClick(
-      category || "",
-      subcatvalue == "" ? "" : subcatvalue,
-      area || "",
-      bedrooms || "",
-      bathrooms || "",
-      price || "",
-      showPage
-    );
-  }, [
-    MyURL.get("subCategory"),
-    MyURL.get("bedRooms"),
-    MyURL.get("bathRooms"),
-    category,
-    showPage,
-  ]);
+  // useEffect(() => {
+  //   handleSearchClick(
+  //     category || "",
+  //     subcatvalue && subcatvalue,
+  //     area || "",
+  //     bedrooms || "",
+  //     bathrooms || "",
+  //     price || "",
+  //     showPage
+  //   );
+  // }, [MyURL.get("subCategory"), MyURL.get("bedRooms"), MyURL.get("bathRooms"), category, showPage]);
 
   const bathRoomsData = [
     { key: "All", value: "All" },
@@ -131,9 +165,10 @@ const AdvancedSearch = ({ category, showPage }) => {
 
   return (
     <>
+      {console.log('subCategory', subCategory)}
       <div className="px-12 py-4 bg-white lg:z-50 w-full border-b-2 border-grey">
         <div className="w-full xl:w-1/5 mb-4 mt-7 flex flex-col justify-center items-center mx-auto gap-2">
-          <h1 className="font-bold text-primary tracking-wider text-2xl xl:text-2xl text-center" style={{color: 'black'}}>
+          <h1 className="font-bold text-primary tracking-wider text-2xl xl:text-2xl text-center" style={{ color: 'black' }}>
             Advanced Search
           </h1>
           <h1 className="font-semibold text-primary tracking-wider text-lg xl:text-xl text-center">
@@ -191,7 +226,7 @@ const AdvancedSearch = ({ category, showPage }) => {
             </label>
           </div>
         </div>
-        {/* Rsidential & Commercial Section Ends */}
+        {/* Residential & Commercial Section Ends */}
         <div className="flex justify-center flex-row flex-wrap items-center lg:flex-wrap px-0 gap-x-8 py-2 w-full custom-input">
           <Box sx={{ minWidth: 180 }}>
             <FormControl fullWidth size="small">
@@ -317,24 +352,23 @@ const AdvancedSearch = ({ category, showPage }) => {
 
         <div className="w-full flex justify-center mb-2">
           <button
-            onClick={() =>
+            onClick={() => {
               handleSearchClick(
-                category || "",
-                subcatvalue == "" ? "" : subcatvalue,
+                category || "all",
+                subcatvalue != "" && subcatvalue,
                 area || "",
                 bedrooms || "",
                 bathrooms || "",
                 price || "",
                 showPage
               )
-            }
+            }}
             className="px-4 py-2 bg-primary text-white text-lg tracking-widest mt-3 hover:bg-primary/75 bg rounded-md"
           >
             search property
           </button>
         </div>
       </div>
-
       {/* {console.log("pp", propertyData)} */}
     </>
   );

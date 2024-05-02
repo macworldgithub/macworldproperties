@@ -27,6 +27,7 @@ import SelectOption from "../components/Dashboard/selectOption";
 import LocationMarker from "../components/common/Marker";
 import { propertyDetails } from '../app/slices/PopertySlice';
 import { useSelector, useDispatch } from 'react-redux';
+import Autocomplete from "react-google-autocomplete";
 
 
 import "leaflet/dist/leaflet.css";
@@ -86,6 +87,7 @@ const PageOne = () => {
     const state = useSelector(state => state.property.form);
     const reduxDispatch = useDispatch();
 
+    const [toggleDropDown, setToggleDropDown] = useState(false);
     // const [selectedValue, setSelectedValue] = useState("option1");
     const [catvalue, setCatvalue] = useState("");
     const [subcatvalue, setsubCatvalue] = useState("option1");
@@ -102,6 +104,7 @@ const PageOne = () => {
     const [rentfreqOptions, setrentfreqOptions] = useState([]);
     const [paidbyOptions, setpaidbyOptions] = useState([]);
     const [ownOptions, setownOptions] = useState([]);
+    const [locationOptions, setLocationOptions] = useState([]);
     const NavigateTo = useNavigate();
     const [position, setPosition] = useState({
         lat: 24.43214670001102,
@@ -140,65 +143,123 @@ const PageOne = () => {
         name: "",
     });
 
+
+
+
+    // Reverse geocoding example (coordinates to address)
+    // var latitude = '52.3877830';
+    // var longitude = '9.7334394';
+    // var query = latitude + ',' + longitude;
+
+    const handleSearch = (query) => {
+        var api_key = 'AIzaSyDNtTiWsqgeSv0IdENvpBY1d0vhqcl5epM'; // Replace with your OpenCage API key
+
+        // Forward geocoding example (address to coordinates)
+        var query = 'Philipsbornstr. 2, 30165 Hannover, Germany'; // Replace with your address
+        var api_url = 'https://api.opencagedata.com/geocode/v1/json';
+
+        fetch(`https://api.opencagedata.com/geocode/v1/json?key=${api_key}&q=${encodeURIComponent(query)}&pretty=1&no_annotations=1`)
+            .then(res => res.json())
+            .then(res2 => {
+                console.log('from_database', res2.data);
+            })
+
+    };
+
+    const api_key = 'AIzaSyDNtTiWsqgeSv0IdENvpBY1d0vhqcl5epM'; // Replace with your OpenCage API key
+
+    // Forward geocoding example (address to coordinates)
+    const query = 'Philipsbornstr. 2, 30165 Hannover, Germany'; // Replace with your address
+
+    // Reverse geocoding example (coordinates to address)
+    // const latitude = '52.3877830';
+    // const longitude = '9.7334394';
+    // const query = `${latitude},${longitude}`;
+
+
+
+
+    (() => {
+        const api_key = 'AIzaSyDNtTiWsqgeSv0IdENvpBY1d0vhqcl5epM'; // Replace with your OpenCage API key
+        const query = 'Philipsbornstr. 2, 30165 Hannover, Germany'; // Replace with your address
+        const api_url = 'https://api.opencagedata.com/geocode/v1/json';
+
+        // const request_url = `${api_url}?key=${api_key}&q=${encodeURIComponent(query)}&pretty=1&no_annotations=1`;
+        const request_url = `https://maps.googleapis.com/maps/api/geocode/json?address=${query}&key=${api_key}`;
+        fetch(request_url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('from_data', data);
+            })
+    }
+    )()
+
     const { ref, autocompleteRef } = usePlacesWidget({
-        apiKey: "AIzaSyBmlfCX9N5NAKdGidMbSxMXkc4CNHcT6rQ",
+        apiKey: "AIzaSyDNtTiWsqgeSv0IdENvpBY1d0vhqcl5epM",
         onPlaceSelected: (place) => {
-            setKey("AIzaSyBmlfCX9N5NAKdGidMbSxMXkc4CNHcT6rQ");
+            console.log('ehsti,', place);
+            setKey("AIzaSyDNtTiWsqgeSv0IdENvpBY1d0vhqcl5epM");
             setLanguage("en");
             setRegion("ae");
-            console.log("now_wheat", place?.formatted_address);
             setFormData((state) => ({
                 ...state,
-                location: place?.formatted_address,
+                location: place?.formatted_address
             }));
-            fromPlaceId(place?.place_id)
-                .then(({ results }) => {
-                    const { lat, lng } = results[0].geometry.location;
-                    setPosition({ lat: lat, lng: lng });
-                })
-                .catch(console.error);
+            // fromPlaceId(place?.place_id)
+            //     .then(({ results }) => {
+            //         const { lat, lng } = results[0].geometry.location;
+            //         setPosition({ lat: lat, lng: lng });
+            //     })
+            //     .catch(console.error);
         },
         options: {
             types: ['geocode'],
-            componentRestrictions: { country: "ae" },
+            componentRestrictions: { country: "ae" }
         },
     });
 
     useEffect(() => {
+        console.log('new_Check');
         console.log('ytuyrurt', state?.updateProperty?.rentDetails)
-        if (state?.updatePropertyToggle) {
-            setFormData({
-                // propertyDetailsObj
-                referncenumber: state?.updateProperty?.propertyDetails?.refNo,
-                title: state?.updateProperty?.propertyDetails?.title,
-                arabicTitle: state?.updateProperty?.propertyDetails?.titleArabic,
-                desc: state?.updateProperty?.propertyDetails?.description,
-                descArabic: state?.updateProperty?.propertyDetails?.descriptionArabic,
-                area: state?.updateProperty?.propertyDetails?.areaSquare,
-                price: state?.updateProperty?.propertyDetails?.InclusivePrice,
-                permitNo: state?.updateProperty?.propertyDetails?.PermitNumber,
-                completion: state?.updateProperty?.propertyDetails?.completionStatus,
-                ownValue: state?.updateProperty?.propertyDetails?.ownerShipStatus,
-                bedRooms: 0,
-                bathRooms: 0,
-                // typesAndPurposeObj
-                category: state?.updateProperty?.typesAndPurpose?.category,
-                subCategory: state?.updateProperty?.typesAndPurpose?.subCategory,
-                purpose: state?.updateProperty?.typesAndPurpose?.purpose,
-                // rentalDetails
-                rentAED: state?.updateProperty?.rentDetails?.rent,
-                rentFrequency: state?.updateProperty?.rentDetails?.rentFrequency,
-                contractperiod: state?.updateProperty?.rentDetails?.minimumContractPeriod,
-                vacatingperiod: state?.updateProperty?.rentDetails?.noticePeriod,
-                maintfee: state?.updateProperty?.rentDetails?.state?.updateProperty?.rentDetails?.maintainanceFee,
-                paidby: state?.updateProperty?.rentDetails?.paidBy,
-                //  ================ New Values =============
-                location: state?.updateProperty?.locationAndAddress?.location,
-                longitude: state?.updateProperty?.locationAndAddress?.longitude,
-                latitude: state?.updateProperty?.locationAndAddress?.latitude,
-                address: state?.updateProperty?.locationAndAddress?.address,
-            });
-        } else {
+        // if (state?.updatePropertyToggle) {
+        //     setFormData({
+        //         // propertyDetailsObj
+        //         referncenumber: state?.updateProperty?.propertyDetails?.refNo,
+        //         title: state?.updateProperty?.propertyDetails?.title,
+        //         arabicTitle: state?.updateProperty?.propertyDetails?.titleArabic,
+        //         desc: state?.updateProperty?.propertyDetails?.description,
+        //         descArabic: state?.updateProperty?.propertyDetails?.descriptionArabic,
+        //         area: state?.updateProperty?.propertyDetails?.areaSquare,
+        //         price: state?.updateProperty?.propertyDetails?.InclusivePrice,
+        //         permitNo: state?.updateProperty?.propertyDetails?.PermitNumber,
+        //         completion: state?.updateProperty?.propertyDetails?.completionStatus,
+        //         ownValue: state?.updateProperty?.propertyDetails?.ownerShipStatus,
+        //         bedRooms: 0,
+        //         bathRooms: 0,
+        //         // typesAndPurposeObj
+        //         category: state?.updateProperty?.typesAndPurpose?.category,
+        //         subCategory: state?.updateProperty?.typesAndPurpose?.subCategory,
+        //         purpose: state?.updateProperty?.typesAndPurpose?.purpose,
+        //         // rentalDetails
+        //         rentAED: state?.updateProperty?.rentDetails?.rent,
+        //         rentFrequency: state?.updateProperty?.rentDetails?.rentFrequency,
+        //         contractperiod: state?.updateProperty?.rentDetails?.minimumContractPeriod,
+        //         vacatingperiod: state?.updateProperty?.rentDetails?.noticePeriod,
+        //         maintfee: state?.updateProperty?.rentDetails?.state?.updateProperty?.rentDetails?.maintainanceFee,
+        //         paidby: state?.updateProperty?.rentDetails?.paidBy,
+        //         //  ================ New Values =============
+        //         location: state?.updateProperty?.locationAndAddress?.location,
+        //         longitude: state?.updateProperty?.locationAndAddress?.longitude,
+        //         latitude: state?.updateProperty?.locationAndAddress?.latitude,
+        //         address: state?.updateProperty?.locationAndAddress?.address,
+        //     });
+        // } else {
+        if (state?.propertyDetails?.title) {
             setFormData({
                 // propertyDetailsObj
                 referncenumber: state?.propertyDetails?.refNo,
@@ -233,6 +294,7 @@ const PageOne = () => {
                 address: state?.locationAndAddress?.address,
             });
         }
+        // }
     }, []);
 
     useEffect(() => {
@@ -257,6 +319,7 @@ const PageOne = () => {
             .get(`${process.env.REACT_APP_SERVERURL}/lov/paid-by`)
             .then((res) => setpaidbyOptions(res.data.data));
     }, []);
+
     useEffect(() => {
         if (formData?.category) {
             axios
@@ -265,7 +328,32 @@ const PageOne = () => {
                 )
                 .then((res) => setsubcatOptions(res.data.data));
         }
+
     }, [formData?.category]);
+    function debounce(callback, delay = 1000) {
+        var time;
+        return (...args) => {
+            clearTimeout(time);
+            time = setTimeout(() => {
+                callback(...args);
+            }, delay);
+        };
+    }
+
+    const getSearchResult = debounce(() => {
+        axios.post(`${process.env.REACT_APP_SERVERURL}/property/search-property-location`, { value: formData?.location }).then(res => {
+            console.log('check_from_sea_view', res?.data?.results);
+            setLocationOptions(res?.data);
+        });
+    }, 1000);
+
+    useEffect(() => {
+        if (formData?.location) {
+            getSearchResult();
+            setToggleDropDown(true);
+        }
+        console.log('check_tis', formData?.location)
+    }, [formData?.location]);
 
     const nextPage = () => {
         const data = JSON.parse(localStorage.getItem("userData"));
@@ -538,6 +626,26 @@ const PageOne = () => {
             name: data?.email,
         }));
     };
+    const geocodeSetCoordinates = (query) => {
+        const api_key = 'AIzaSyDNtTiWsqgeSv0IdENvpBY1d0vhqcl5epM'; // Replace with your OpenCage API key
+        // const query = 'Philipsbornstr. 2, 30165 Hannover, Germany';  Replace with your address
+        // const api_url = 'https://api.opencagedata.com/geocode/v1/json';
+        console.log('DRUM', query);
+        // const request_url = `${api_url}?key=${api_key}&q=${encodeURIComponent(query)}&pretty=1&no_annotations=1`;
+        const request_url = `https://maps.googleapis.com/maps/api/geocode/json?address=${query}&region=ae&key=${api_key}`;
+        fetch(request_url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                setFormData((state) => ({ ...state, latitude: data?.results[0]?.geometry?.location.lat }));
+                setFormData((state) => ({ ...state, longitude: data?.results[0]?.geometry?.location?.lng }));
+                console.log(data?.results[0]?.geometry?.location, 'from_geocode_api', data?.results[0]?.geometry?.location?.lng);
+            })
+    }
 
     return (
         <Layout>
@@ -548,6 +656,7 @@ const PageOne = () => {
             //     backgroundSize: "cover",
             //   }}
             >
+                {/* </section> */}
                 <div className="md:mx-10 mx-6 py-10">
                     <section className="block rounded-[15px] bg-white px-6 py-3 sm:py-4 md:py-5 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] justify-center items-center mt-10">
                         <ProgressButton step={1} />
@@ -899,14 +1008,33 @@ const PageOne = () => {
                         <div className="flex flex-col gap-2 mt-4">
                             <div className="grid lg:grid-cols-2 gap-3 mt-4">
                                 <div className="flex flex-col gap-[5px] mb-2">
+                                    {/* <input type="text" list="data" /> */}
+
+                                    {/* <datalist id="data" style={{width: '100%'}}>
+                                        <option key={0} value='check' />
+                                        {locationOptions.map((item, key) =>
+                                            <option key={key} value={item} />
+                                        )}
+                                    </datalist> */}
                                     <Input
                                         _name="location"
                                         _placeholder="Location"
-                                        ref={ref}
+                                        // ref={ref}
                                         _onchange={handleChange}
                                         _value={formData.location}
                                     />
-
+                                    <div className={`flex h-20 overflow-y-scroll gap-y-1 flex-col ${toggleDropDown ? 'flex' : 'hidden'}`}>
+                                        {toggleDropDown && locationOptions?.map((item, key) => (
+                                            <div className="rounded cursor-pointer bg-amber-400 px-2 py-1" key={`key-|-${item?.address}`} onClick={() => {
+                                                setToggleDropDown(false);
+                                                geocodeSetCoordinates(item?.address);
+                                                setFormData((prevData) => ({
+                                                    ...prevData,
+                                                    'location': item?.address,
+                                                }));
+                                            }}>{item?.address}</div>
+                                        ))}
+                                    </div>
                                 </div>
                                 <div className="flex flex-col gap-[5px] mb-2">
 
@@ -958,7 +1086,7 @@ const PageOne = () => {
                     </section>
                 </div>
             </div>
-        </Layout>
+        </Layout >
     );
 };
 

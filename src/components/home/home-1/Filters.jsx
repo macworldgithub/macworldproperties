@@ -19,7 +19,7 @@ const Filters = () => {
   const [visitedColor, setVisitedColor] = useState(1)
   const [searchArray, setSearchArray] = useState([]);
 
-  const [MyURL] = useSearchParams();
+  const [MyURL, setSearchParams] = useSearchParams();
   const location = useLocation();
   const navigate = useNavigate();
   const [subcatvalue, setsubcatvalue] = useState(
@@ -46,7 +46,7 @@ const Filters = () => {
   }, [category]);
 
   const { ref, autocompleteRef } = usePlacesWidget({
-    apiKey: "AIzaSyCN5_vVFCU-LZ2sQHmUzch_-fXkJq2THjA",
+    apiKey: "AIzaSyDNtTiWsqgeSv0IdENvpBY1d0vhqcl5epM",
     onPlaceSelected: (place) => {
       // console.log('yupyupyupyup', place);
       // setKey("AIzaSyCN5_vVFCU-LZ2sQHmUzch_-fXkJq2THjA");
@@ -162,7 +162,7 @@ const Filters = () => {
                     MenuProps={{ PaperProps: { style: { maxHeight: "40vh" } } }}
                     sx={{
                       "&:before": {
-                        borderColor: "yellow !important",
+                        borderColor: "yellow !important"
                       },
                       "&:after": {
                         borderColor: "yellow !important",
@@ -332,14 +332,15 @@ const Filters = () => {
                     const params = new URLSearchParams();
                     searchArray.length > 0 &&
                       searchArray.map((item) => {
+                        console.log('check_filters', item);
                         params.append(item.key, item.value);
                       });
                     const response = await axios.get(
                       `${process.env.REACT_APP_SERVERURL
-                      }/property/get-property?find=check&category=residential&${params.toString()}`
+                      }/property/get-property?find=check&category=all&${params.toString()}`
                     );
                     navigate(
-                      `/property/forSale?category=residential&${params.toString()}`
+                      `/property/forSale?category=all&${params.toString()}`
                     );
                     dispatch({ type: "FORSALE_SCREEN_TOGGLE", payload: true });
                   }}

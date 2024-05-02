@@ -3,7 +3,7 @@ import { BiBriefcase, BiBuildings, BiMap, BiMoney } from "react-icons/bi";
 import { AiFillStar } from "react-icons/ai";
 import { agent } from "../../data/dummyData";
 import { Link } from 'react-router-dom';
-import UserImg from '../../assets/agents/img11.png'
+import UserImg from '../../assets/agents/agents.jpg'
 import { Footer } from '../../components/common';
 import '../../App.css'
 import { FormControl, Select, Box, MenuItem, InputLabel, TextField } from "@mui/material";
@@ -46,11 +46,11 @@ const Agents = () => {
       <div className="px-4 md:px-8">
         <section className="mx-auto button-style-progress-button agents-forms-2 px-5 py-4">
           <div className="flex gap-x-3">
-            <span className="inline-block px-3 py-2 rounded bg-lime-400 rounded-lg border-[#243c5a]">Agents</span>
-            <span className="inline-block px-3 py-2 bg-lime-400 rounded-lg border-[#243c5a]">Companies</span>
+            <span className="inline-block px-3 py-2 rounded bg-yellow-400 rounded-lg button-style-progress-button">Agents</span>
+            <span className="inline-block px-3 py-2 bg-yellow-400 rounded-lg button-style-progress-button">Companies</span>
           </div>
-          <div className="flex justify-center flex-row flex-wrap px-4 xl:px-12 sm:gap-4 md:gap-3 gap-4 py-2 w-full mt-3">
-            <Box sx={{ minWidth: 290 }} className="mb-2 sm: mb-0">
+          <div className="flex flex-col md:flex-row justify-center flex-row flex-wrap px-4 xl:px-12 sm:gap-4 md:gap-3 gap-4 py-2 w-full mt-3">
+            <Box sx={{ minWidth: 290 }} className="mb-5 sm: mb-0">
               <FormControl fullWidth size="small">
                 <TextField
                   size="small"
@@ -66,7 +66,121 @@ const Agents = () => {
             <Box sx={{ minWidth: 290 }}>
               <FormControl fullWidth size="small">
                 <InputLabel id="demo-simple-select-label" className="bg-white">
-                  Bathrooms
+                  Service needed
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  // value={bathrooms}
+                  label="category"
+                  MenuProps={{ PaperProps: { style: { maxHeight: "40vh" } } }}
+                  sx={{
+                    "&:before": {
+                      borderColor: "yellow !important",
+                    },
+                    "&:after": {
+                      borderColor: "yellow !important",
+                    },
+                  }}
+                // onChange={(e) => {
+                //   // setBathrooms(e.target.value);
+                //   // params.append('bathRooms', e.target.value);
+                //   // if (state.some(item => item.key == 'bathRooms')) {
+                //   //   const temp = [...state];
+                //   //   const temp2 = temp.filter(e => e.key !== 'bathRooms');
+                //   //   temp2.push({ key: 'bathRooms', value: e.target.value })
+                //   //   console.log('ppopopiokp', temp2);
+                //   //   return temp2;
+                //   // }
+                //   setSearchArray((state) => {
+                //     if (state.some((item) => item.key == "bedRooms")) {
+                //       const temp = [...state];
+                //       const temp2 = temp.filter((e) => e.key !== "bedRooms");
+                //       temp2.push({ key: "bedRooms", value: e.target.value });
+                //       console.log("ppopopiokp", temp2);
+                //       return temp2;
+                //     }
+                //     return [
+                //       ...state,
+                //       { key: "bathRooms", value: e.target.value },
+                //     ];
+                //   });
+                // }}
+                >
+                  {[]?.map((opt, i) => (
+                    <MenuItem
+                      key={i}
+                      selected={opt?.key == '' ? true : false}
+                      value={opt?.key == "All" ? "" : opt.key}
+                      name={opt?.key}
+                    >
+                      {opt?.value}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Box>
+            <Box sx={{ minWidth: 290 }}>
+              <FormControl fullWidth size="small">
+                <InputLabel id="demo-simple-select-label" className="bg-white">
+                  Language
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  // value={bathrooms}
+                  label="category"
+                  MenuProps={{ PaperProps: { style: { maxHeight: "40vh" } } }}
+                  sx={{
+                    "&:before": {
+                      borderColor: "yellow !important",
+                    },
+                    "&:after": {
+                      borderColor: "yellow !important",
+                    },
+                  }}
+                // onChange={(e) => {
+                //   // setBathrooms(e.target.value);
+                //   // params.append('bathRooms', e.target.value);
+                //   // if (state.some(item => item.key == 'bathRooms')) {
+                //   //   const temp = [...state];
+                //   //   const temp2 = temp.filter(e => e.key !== 'bathRooms');
+                //   //   temp2.push({ key: 'bathRooms', value: e.target.value })
+                //   //   console.log('ppopopiokp', temp2);
+                //   //   return temp2;
+                //   // }
+                //   setSearchArray((state) => {
+                //     if (state.some((item) => item.key == "bedRooms")) {
+                //       const temp = [...state];
+                //       const temp2 = temp.filter((e) => e.key !== "bedRooms");
+                //       temp2.push({ key: "bedRooms", value: e.target.value });
+                //       console.log("ppopopiokp", temp2);
+                //       return temp2;
+                //     }
+                //     return [
+                //       ...state,
+                //       { key: "bathRooms", value: e.target.value },
+                //     ];
+                //   });
+                // }}
+                >
+                  {[]?.map((opt, i) => (
+                    <MenuItem
+                      key={i}
+                      selected={opt?.key == '' ? true : false}
+                      value={opt?.key == "All" ? "" : opt.key}
+                      name={opt?.key}
+                    >
+                      {opt?.value}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Box>
+            <Box sx={{ minWidth: 290 }}>
+              <FormControl fullWidth size="small">
+                <InputLabel id="demo-simple-select-label" className="bg-white">
+                  Nationality
                 </InputLabel>
                 <Select
                   labelId="demo-simple-select-label"
@@ -138,9 +252,9 @@ const Agents = () => {
                 //   dispatch({ type: "FORSALE_SCREEN_TOGGLE", payload: true });
                 // }}
                 size="large"
-                className="bg-primary border-0 hover:text-white text-white text-lg tracking-widest  hover:bg-primary/75 rounded-md mx-auto"
+                className="text-black button-style-progress-button bg-primary border-0 text-lg tracking-widest  hover:bg-primary/75 rounded-md mx-auto"
               >
-                search property
+                Search Property
               </Button>
             </Box>
           </div>
@@ -148,21 +262,25 @@ const Agents = () => {
 
       </div>
 
-      <section className="grid gap-y-2 gap-x-2 grid-cols-[minmax(400px,_1fr)_minmax(400px,_1fr)] mt-5 px-5">
+      <section className="grid gap-y-4 gap-x-2 grid-cols-1 lg:grid-cols-[minmax(400px,_1fr)_minmax(400px,_1fr)] mt-12 px-5 xl:px-12">
         {
           [1, 2, 3].map(ele => (
-            <div className="flex bg-slate-300 rounded-lg">
+            <div className="flex rounded-lg button-style-progress-button gap-x-3">
               <div className="rounded-bl-lg rounded-tl-lg">
-                <img src="https://www.propertyfinder.ae/agent/0/260/200/MODE/29bc18/248053-9c8f2o.jpg?ctr=ae" />
+                <img src={UserImg} className="rounded-bl-lg rounded-tl-lg" style={{ height: '260px', width: '220px' }} />
               </div>
-              <div>
-                <h1>Asad</h1>
-                <h4>Property Consultant</h4>
-                <span className="inline-block px-2 py-1 rounded bg-yellow-400 rounded-lg border-[#243c5a]">SUPER AGENT</span>
-                <h4><span>Nationality: </span> <span>Ukraine</span></h4>
-                <h4><span>Languages: </span> <span>English, Russian, Ukrainian</span></h4>
-
-
+              <div className="flex flex-col justify-between py-5">
+                <div className="flex flex-col gap-y-1">
+                  <h1 className="text-3xl font-semibold">Asad</h1>
+                  <h4 className="text-slate-400">Property Consultant</h4>
+                  <span className="w-40 flex justify-center px-2 py-1 rounded bg-yellow-400 rounded-lg border-[#243c5a] font-semibold">SUPER AGENT</span>
+                  <h4><span className="text-slate-400">Nationality:</span> <span className="text-black font-semibold">Ukraine</span></h4>
+                  <h4><span className="text-slate-400">Languages:</span> <span className="text-black font-semibold">English, Russian, Ukrainian</span></h4>
+                </div>
+                <div className="flex gap-x-3">
+                  <span className="bg-yellow-400 button-style-progress-button py-1 px-2 rounded font-semibold">For Sale: 7</span>
+                  <span className="bg-yellow-400 button-style-progress-button py-1 px-2 rounded font-semibold">For Rent: 7</span>
+                </div>
               </div>
 
             </div>
