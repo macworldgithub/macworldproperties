@@ -20,6 +20,8 @@ const PriceAreaRangeField = ({
   minPriceFn,
   maxPriceFn,
   setValueFn,
+  searchParams,
+  setSearchParams
 }) => {
   const [open, setOpen] = useState(false);
 
@@ -60,7 +62,11 @@ const PriceAreaRangeField = ({
                 <InputLabel htmlFor="demo-dialog-native">Min</InputLabel>
                 <Select
                   value={minPrice}
-                  onChange={(e) => minPriceFn(e.target.value)}
+                  onChange={(e) => {
+                    minPriceFn(e.target.value);
+                    searchParams.set('price', `${minPrice}|${e.target.value}`);
+                    setSearchParams(searchParams);
+                  }}
                   input={<OutlinedInput label="Age" id="demo-dialog-native" />}
                 >
                   {minPriceArray?.map((opt, i) => (
@@ -81,7 +87,11 @@ const PriceAreaRangeField = ({
                   labelId="demo-dialog-select-label"
                   id="demo-dialog-select"
                   value={maxPrice}
-                  onChange={(e) => maxPriceFn(e.target.value)}
+                  onChange={(e) => {
+                    maxPriceFn(e.target.value);
+                    searchParams.set('price', `${e.target.value}|${maxPrice}`);
+                    setSearchParams(searchParams);                 
+                  }}
                   input={<OutlinedInput label="Age" />}
                 >
                   {minPriceArray?.map((opt, i) => (

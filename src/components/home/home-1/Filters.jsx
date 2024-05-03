@@ -18,6 +18,7 @@ const Filters = () => {
   const [locationData, setLocationData] = useState("");
   const [visitedColor, setVisitedColor] = useState(1)
   const [searchArray, setSearchArray] = useState([]);
+  const [slugName, setSlugName] = useState('forSale')
 
   const [MyURL, setSearchParams] = useSearchParams();
   const location = useLocation();
@@ -143,9 +144,18 @@ const Filters = () => {
   return (
     <div className="xl:w-[1200px] mx-auto relative px-4 md:px-8">
       <div className="floating-forms">
-        <div onClick={() => setVisitedColor(1)} style={visitedColor == 1 ? { backgroundColor: '#ffffff' } : { backgroundColor: "rgb(252 203 0 / 0.75)" }} className="inline-block bg-blue-200 px-5 py-2 border-top-left-radius cursor-pointer visited:text-purple-600">Buy</div>
-        <div onClick={() => setVisitedColor(2)} style={visitedColor == 2 ? { backgroundColor: '#ffffff' } : { backgroundColor: "rgb(252 203 0 / 0.75)" }} className="inline-block bg-blue-200 px-5 py-2 cursor-pointer">Off-Plan</div>
-        <div onClick={() => setVisitedColor(3)} style={visitedColor == 3 ? { backgroundColor: '#ffffff' } : { backgroundColor: "rgb(252 203 0 / 0.75)" }} className="inline-block bg-blue-200 px-5 py-2 border-top-right-radius cursor-pointer">Rent</div>
+        <div onClick={() => {
+          setVisitedColor(1);
+          setSlugName('forSale');
+          }} style={visitedColor == 1 ? { backgroundColor: '#ffffff' } : { backgroundColor: "rgb(252 203 0 / 0.75)" }} className="inline-block bg-blue-200 px-5 py-2 border-top-left-radius cursor-pointer visited:text-purple-600">Buy</div>
+        <div onClick={() => {
+          setVisitedColor(2);
+          setSlugName('offPlan');
+          }} style={visitedColor == 2 ? { backgroundColor: '#ffffff' } : { backgroundColor: "rgb(252 203 0 / 0.75)" }} className="inline-block bg-blue-200 px-5 py-2 cursor-pointer">Off-Plan</div>
+        <div onClick={() => {
+          setVisitedColor(3);
+          setSlugName('forRent');
+          }} style={visitedColor == 3 ? { backgroundColor: '#ffffff' } : { backgroundColor: "rgb(252 203 0 / 0.75)" }} className="inline-block bg-blue-200 px-5 py-2 border-top-right-radius cursor-pointer">Rent</div>
         <div className="border-white flex-col rounded-xl border-top-left-radius-none card gap-x-4 flex-center-between gap-y-4  md:flex-row card card-shadow dark:shadow-none  w-[100%]  ">
           <div className="lg:sticky lg:top-20 w-full">
             <div className="flex justify-center  flex-row flex-wrap px-4 xl:px-12 sm:gap-4 md:gap-7 gap-2 py-2 w-full ">
@@ -335,12 +345,12 @@ const Filters = () => {
                         console.log('check_filters', item);
                         params.append(item.key, item.value);
                       });
-                    const response = await axios.get(
-                      `${process.env.REACT_APP_SERVERURL
-                      }/property/get-property?find=check&category=all&${params.toString()}`
-                    );
+                    // const response = await axios.get(
+                    //   `${process.env.REACT_APP_SERVERURL
+                    //   }/property/get-property?find=check&category=all&${params.toString()}`
+                    // );
                     navigate(
-                      `/property/forSale?category=all&${params.toString()}`
+                      `/property/${slugName}?category=all&${params.toString()}`
                     );
                     dispatch({ type: "FORSALE_SCREEN_TOGGLE", payload: true });
                   }}

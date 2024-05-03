@@ -52,15 +52,15 @@ const Buy = () => {
   const [selectedData, setSelectedData] = useState(MyURL.get("category"));
 
   const [isChecked, setIsChecked] = useState(false);
-  useEffect(() => {
-    setSelectedData(MyURL.get("category"));
-  });
-  useEffect(() => {
-    BuyData(slug == "buy" ? "forSale" : slug == "rent" ? "forRent" : slug, selectedData);
-    // if(MyURL.get('find') === 'check'){
+  // useEffect(() => {
+  //   setSelectedData(MyURL.get("category"));
+  // });
+  // useEffect(() => {
+  //   BuyData(slug == "buy" ? "forSale" : slug == "rent" ? "forRent" : slug, selectedData);
+  //   // if(MyURL.get('find') === 'check'){
 
-    // }
-  }, [myParam, selectedData, slug]);
+  //   // }
+  // }, [myParam, selectedData, slug]);
 
   // useEffect(() => {
   //   onCategoryChange(selectedData);

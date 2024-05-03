@@ -73,47 +73,51 @@ export const StoreProvider = ({ children }) => {
   };
 
   const getPropertyData = async (
-    category,
-    subcatvalue,
-    area,
-    bedrooms,
-    bathRooms,
-    price,
-    showPage
+    parameters
+    // category,
+    // subcatvalue,
+    // area,
+    // bedrooms,
+    // bathRooms,
+    // price,
+    // showPage
   ) => {
-    console.log("page", showPage);
+    console.log("page", Object.entries(parameters));
     try {
       const params = new URLSearchParams();
-      const filterarr = [
-        // { key: "category", value: category },
-        { key: "subCategory", value: subcatvalue },
-        { key: "area", value: area },
-        { key: "bedRooms", value: bedrooms },
-        { key: "bathRooms", value: bathRooms },
-        { key: "price", value: price }
-        // { key: "purpose", value: "forSale" },
-      ];
-      filterarr.map((element) => {
-        if (
-          element.value != ""
-          // ||
-          // element.value != [] ||
-          // element.value !== 0 ||
-          // element.value != undefined
-        ) {
-          console.log(element.value, "from_Context_store", showPage);
-          params.append(element.key, element.value);
-        }
-      });
-
+      // const filterarr = [
+      //   // { key: "category", value: category },
+      //   { key: "subCategory", value: subcatvalue },
+      //   { key: "area", value: area },
+      //   { key: "bedRooms", value: bedrooms },
+      //   { key: "bathRooms", value: bathRooms },
+      //   { key: "price", value: price }
+      //   // { key: "purpose", value: "forSale" },
+      // ];
+      // filterarr.map((element) => {
+      //   if (
+      //     element.value != ""
+      //     // ||
+      //     // element.value != [] ||
+      //     // element.value !== 0 ||
+      //     // element.value != undefined
+      //   ) {
+      //     console.log(element.value, "from_Context_store", showPage);
+      //     params.append(element.key, element.value);
+      //   }
+      // });
+      Object.entries(parameters)?.map(([key, value]) => {
+        params.append(key, value);
+      })
+      console.log("Property_Filter_Data", params);
       const response = await axios.get(
         `${process.env.REACT_APP_SERVERURL
-        }/property/get-property?purpose=${showPage}&category=${category}&${params.toString()}`
+        }/property/get-property?${params.toString()}`
       );
       if (response) {
         const propertydataArr = response.data.data;
         dispatch({ type: "GET_FILTER_DATA", payload: propertydataArr });
-        console.log("Property Filter Data:", propertydataArr);
+  
       } else {
         console.error("API request failed");
       }
