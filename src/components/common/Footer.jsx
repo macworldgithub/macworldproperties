@@ -4,7 +4,7 @@ import Share from "../Share";
 import { BiBuildingHouse } from "react-icons/bi";
 import { FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
 import { FiFacebook } from "react-icons/fi";
-import { MdPhone } from "react-icons/md";
+import { MdPhone, MdMobileFriendly } from "react-icons/md";
 import { MdEmail } from "react-icons/md";
 import { MdPlace } from "react-icons/md";
 import Logo1 from '../../logo/logo3.png';
@@ -41,12 +41,13 @@ const Footer = () => {
           </div>
           {/* lg:mt-[75px] */}
           <div className="flex-1 basis-[10rem]">
-            <h2 className="text-xl font-semibold">Contact Us</h2>
+            <h2 className="text-xl font-semibold mb-2">Contact Us</h2>
+            <h1 className="text-md font-semibold">Mac World Real Estate Brokers</h1>
             <ul>
               <li className="my-3 text-muted">
                 <div className="flex flex-row gap-2">
                   <MdPlace className="text-primary" />
-                  <a>The Exchange Tower, Business Bay</a>
+                  <a>Office 605, The Exchange Tower, Business Bay, Dubai UAE</a>
                 </div>
               </li>
               <li className="my-3 text-muted">
@@ -57,8 +58,14 @@ const Footer = () => {
               </li>
               <li className="my-3 text-muted">
                 <div className="flex flex-row gap-2">
+                  <MdMobileFriendly className="text-primary" />
+                  <a>+971 552239077</a>
+                </div>
+              </li>
+              <li className="my-3 text-muted">
+                <div className="flex flex-row gap-2">
                   <MdEmail className="text-primary" />
-                  <a href={`mailto:${'info@macworldproperties.com'}`}>info@macworldproperties.com</a>
+                  <a href={`mailto:${'zulfi@macworldproperties.com'}`}>zulfi@macworldproperties.com</a>
                 </div>
               </li>
             </ul>
