@@ -88,14 +88,14 @@ const ContactForm = () => {
                         <p class="mb-2 text-neutral-500 dark:text-neutral-200">
                           Zulfiqar Ali-CEO
                         </p>
-                        <p class="mb-2 text-neutral-500 dark:text-neutral-200">
-                          The Exchange Tower
-                        </p>
-                        <p class="mb-2 text-neutral-500 dark:text-neutral-200">
-                          Business Bay Sheikh Zayed Road  Dubai UAE.
-                        </p>
-                        <p class="text-neutral-500 dark:text-neutral-200">
+                        <p class="text-neutral-500 dark:text-neutral-200 mb-2">
                           zulfi@macworldproperties.com
+                        </p>
+                        <p class="text-neutral-500 dark:text-neutral-200 mb-2">
+                          Mobile No: +971 552239077
+                        </p>
+                        <p class="text-neutral-500 dark:text-neutral-200 mb-2">
+                          Telephone no: +971 43219202
                         </p>
                       </div>
                     </div>
