@@ -9,8 +9,36 @@ import { MdEmail } from "react-icons/md";
 import { MdPlace } from "react-icons/md";
 import Logo1 from '../../logo/logo3.png';
 import { Link } from 'react-router-dom';
+import React,{ useState } from 'react'
+import axios from 'axios';
+import { ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Footer = () => {
+  const [email, setEmail] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+      toast.error("Please enter a valid email address.");
+      return;
+    }
+  
+    // Proceed with form submission
+    axios.post(`${process.env.REACT_APP_SERVERURL}/users/news-letter-signup`, {email:email})
+      .then((response) => {
+        toast.success(response.message);
+       setEmail('');
+      })
+      .catch((error) => {
+        console.log("Error:", error.response.data);
+        toast.error(error.message);
+      });
+  };
+
   return (
     <div className="text-slate-200">
       <footer>
@@ -74,11 +102,13 @@ const Footer = () => {
           <div className="flex-1 basis-[10rem] text-center md:text-left">
             <div className="justify-center my-3 flex-align-center">
               <input
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
                 type="text"
                 className="px-4 py-[0.35rem] card-bordered dark:shadow-none outline-none bg-transparent rounded-lg border-dark !border-r-0"
                 placeholder="Email Address.."
               />
-              <button className="-ml-2 text-sm btn bg-yellow-500 !p-2">subscribe</button>
+              <button onClick={handleSubmit} className="-ml-2 text-sm btn bg-yellow-500 !p-2">subscribe</button>
             </div>
           </div>
         </div>

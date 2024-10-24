@@ -29,11 +29,11 @@ const ContactForm = () => {
       return;
     }
   
-    // const phonePattern = /^[0-9]{10}$/; // Adjust this pattern as necessary for your use case
-    // if (!phonePattern.test(phoneNumber)) {
-    //   toast.error("Please enter a valid phone number (10 digits).");
-    //   return;
-    // }
+    const phonePattern = /^[0-9]{10}$/; // Adjust this pattern as necessary for your use case
+    if (!phonePattern.test(phoneNumber)) {
+      toast.error("Please enter a valid phone number (10 digits).");
+      return;
+    }
   
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(email)) {
