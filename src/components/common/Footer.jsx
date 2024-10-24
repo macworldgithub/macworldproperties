@@ -32,6 +32,7 @@ const Footer = () => {
       .then((response) => {
         toast.success(response.message);
        setEmail('');
+       
       })
       .catch((error) => {
         console.log("Error:", error.response.data);
