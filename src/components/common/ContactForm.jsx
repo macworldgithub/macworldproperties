@@ -1,16 +1,16 @@
-import axios from 'axios';
-import React,{ useState } from 'react'
+import axios from "axios";
+import React, { useState } from "react";
 import { ToastContainer } from "react-toastify";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    phoneNumber: '',
-    email: '',
-    message: '',
+    firstName: "",
+    lastName: "",
+    phoneNumber: "",
+    email: "",
+    message: "",
   });
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -21,117 +21,159 @@ const ContactForm = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-  
+
     // Validation checks
     const { firstName, lastName, phoneNumber, email, message } = formData;
     if (!firstName || !lastName || !phoneNumber || !email || !message) {
       toast.error("Please fill out all fields.");
       return;
     }
-  
+
     const phonePattern = /^[0-9]{10}$/; // Adjust this pattern as necessary for your use case
     if (!phonePattern.test(phoneNumber)) {
       toast.error("Please enter a valid phone number (10 digits).");
       return;
     }
-  
+
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(email)) {
       toast.error("Please enter a valid email address.");
       return;
     }
-  
+
     // Proceed with form submission
-    axios.post(`${process.env.REACT_APP_SERVERURL}/contactUs`, formData)
+    axios
+      .post(`${process.env.REACT_APP_SERVERURL}/contactUs`, formData)
       .then((response) => {
         toast.success("Contact Successfully Submitted");
         // Optionally, reset the form
         setFormData({
-          firstName: '',
-          lastName: '',
-          phoneNumber: '',
-          email: '',
-          message: '',
+          firstName: "",
+          lastName: "",
+          phoneNumber: "",
+          email: "",
+          message: "",
         });
       })
       .catch((error) => {
         console.log("Error:", error);
-        toast.error("There was an error submitting your contact. Please try again.");
+        toast.error(
+          "There was an error submitting your contact. Please try again."
+        );
       });
   };
   return (
     <div class="container mx-auto">
-      <ToastContainer/>
+      <ToastContainer />
       <section class="mx-auto mb-32">
         <div class="relative h-[300px] overflow-hidden bg-cover bg-[100%] bg-no-repeat bg-[url('https://media.istockphoto.com/id/1166193240/photo/sea-view-living-room-of-luxury-beach-house-with-sofa-on-wooden-floor.jpg?s=1024x1024&w=is&k=20&c=C8k2EHvND0HwEJj3kaRFP1F9f06ijEEzbTEEL3vfQZw=')]"></div>
         <div class="container px-6 md:px-12">
-          <div
-            class="block rounded-lg bg-[hsla(0,0%,100%,0.8)] px-4 py-12 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] md:py-16 md:px-12 -mt-[100px] backdrop-blur-[30px]">
+          <div class="block rounded-lg bg-[hsla(0,0%,100%,0.8)] px-4 py-12 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] md:py-16 md:px-12 -mt-[100px] backdrop-blur-[30px]">
             <div class="flex flex-wrap">
               <div class="mb-12 w-full shrink-0 grow-0 basis-auto md:px-3 lg:mb-0 lg:w-5/12 lg:px-6">
                 <form>
                   <div class="relative mb-6" data-te-input-wrapper-init>
-                    <input type="text"
-                    name="firstName"
-                    value={formData.firstName}
-                    onChange={handleChange}
-                    required
+                    <input
+                      type="text"
+                      name="firstName"
+                      value={formData.firstName}
+                      onChange={handleChange}
+                      required
                       class="peer border-b-2 border-gray-300 block min-h-[auto] w-full rounded border-0 bg-transparent py-[0.32rem] px-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                      id="exampleInput90" placeholder="First Name" />
+                      id="exampleInput90"
+                      placeholder="First Name"
+                    />
                     <label
-                      className={`${formData.firstName && '-translate-y-[0.9rem] text-primary'} pointer-events-none absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary`}
-                      for="exampleInput90">First Name
+                      className={`${
+                        formData.firstName &&
+                        "-translate-y-[0.9rem] text-primary"
+                      } pointer-events-none absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary`}
+                      for="exampleInput90"
+                    >
+                      First Name
                     </label>
                   </div>
                   <div class="relative mb-6" data-te-input-wrapper-init>
-                    <input type="text"
-                    name="lastName"
-                    value={formData.lastName}
-                    onChange={handleChange}
-                    required
+                    <input
+                      type="text"
+                      name="lastName"
+                      value={formData.lastName}
+                      onChange={handleChange}
+                      required
                       class="peer block min-h-[auto] border-b-2 border-gray-300  w-full rounded border-0 bg-transparent py-[0.32rem] px-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                      id="exampleInput90" placeholder="Last Name" />
+                      id="exampleInput90"
+                      placeholder="Last Name"
+                    />
                     <label
-                      class={`${formData.lastName && '-translate-y-[0.9rem] text-primary'} pointer-events-none absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary`}
-                      for="exampleInput90">Last Name
+                      class={`${
+                        formData.lastName &&
+                        "-translate-y-[0.9rem] text-primary"
+                      } pointer-events-none absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary`}
+                      for="exampleInput90"
+                    >
+                      Last Name
                     </label>
                   </div>
                   <div class="relative mb-6" data-te-input-wrapper-init>
-                    <input type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
                       class="peer block min-h-[auto] border-b-2 border-gray-300  w-full rounded border-0 bg-transparent py-[0.32rem] px-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                      id="exampleInput91" placeholder="Email address" />
+                      id="exampleInput91"
+                      placeholder="Email address"
+                    />
                     <label
-                      class={`${formData.email && '-translate-y-[0.9rem] text-primary'} pointer-events-none absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary`}
-                      for="exampleInput91">Email address
+                      class={`${
+                        formData.email && "-translate-y-[0.9rem] text-primary"
+                      } pointer-events-none absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary`}
+                      for="exampleInput91"
+                    >
+                      Email address
                     </label>
                   </div>
                   <div class="relative mb-6" data-te-input-wrapper-init>
-                    <input type="text"
-                    name="phoneNumber"
-                    value={formData.phoneNumber}
-                    onChange={handleChange}
-                    required
+                    <input
+                      type="text"
+                      name="phoneNumber"
+                      value={formData.phoneNumber}
+                      onChange={handleChange}
+                      required
                       class="peer block min-h-[auto] w-full border-b-2 border-gray-300 rounded border-0 bg-transparent py-[0.32rem] px-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                      id="exampleInput91" placeholder="Phone Number" />
+                      id="exampleInput91"
+                      placeholder="Phone Number"
+                    />
                     <label
-                      class={`${formData.phoneNumber && '-translate-y-[0.9rem] text-primary'} pointer-events-none absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary`}
-                      for="exampleInput91">Phone Number
+                      class={`${
+                        formData.phoneNumber &&
+                        "-translate-y-[0.9rem] text-primary"
+                      } pointer-events-none absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary`}
+                      for="exampleInput91"
+                    >
+                      Phone Number
                     </label>
                   </div>
                   <div class="relative mb-6" data-te-input-wrapper-init>
                     <textarea
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      required
                       class="peer block min-h-[auto]  border-b-2 border-gray-300 w-full rounded border-0 bg-transparent py-[0.32rem] px-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                      id="exampleFormControlTextarea1" rows="3" placeholder="Your message"></textarea>
-                    <label for="exampleFormControlTextarea1"
-                      class={`${formData.message && '-translate-y-[0.9rem] text-primary'} pointer-events-none absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary`}>Message</label>
+                      id="exampleFormControlTextarea1"
+                      rows="3"
+                      placeholder="Your message"
+                    ></textarea>
+                    <label
+                      for="exampleFormControlTextarea1"
+                      class={`${
+                        formData.message && "-translate-y-[0.9rem] text-primary"
+                      } pointer-events-none absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary`}
+                    >
+                      Message
+                    </label>
                   </div>
                   {/* <div class="mb-6 inline-block min-h-[1.5rem] justify-center pl-[1.5rem] md:flex">
                     <input
@@ -142,8 +184,13 @@ const ContactForm = () => {
                       Send me a copy of this message
                     </label>
                   </div> */}
-                  <button type="button" data-te-ripple-init data-te-ripple-color="light" onClick={handleSubmit}
-                    class="mb-6 inline-block w-full rounded bg-primary px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] lg:mb-0">
+                  <button
+                    type="button"
+                    data-te-ripple-init
+                    data-te-ripple-color="light"
+                    onClick={handleSubmit}
+                    class="mb-6 inline-block w-full rounded bg-primary px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] lg:mb-0"
+                  >
                     Send
                   </button>
                 </form>
@@ -154,10 +201,19 @@ const ContactForm = () => {
                     <div class="flex items-start">
                       <div class="shrink-0">
                         <div class="inline-block rounded-md bg-primary-100 p-4 text-primary">
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                            stroke="currentColor" class="h-6 w-6">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                              d="M14.25 9.75v-4.5m0 4.5h4.5m-4.5 0l6-6m-3 18c-8.284 0-15-6.716-15-15V4.5A2.25 2.25 0 014.5 2.25h1.372c.516 0 .966.351 1.091.852l1.106 4.423c.11.44-.054.902-.417 1.173l-1.293.97a1.062 1.062 0 00-.38 1.21 12.035 12.035 0 007.143 7.143c.441.162.928-.004 1.21-.38l.97-1.293a1.125 1.125 0 011.173-.417l4.423 1.106c.5.125.852.575.852 1.091V19.5a2.25 2.25 0 01-2.25 2.25h-2.25z" />
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="2"
+                            stroke="currentColor"
+                            class="h-6 w-6"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M14.25 9.75v-4.5m0 4.5h4.5m-4.5 0l6-6m-3 18c-8.284 0-15-6.716-15-15V4.5A2.25 2.25 0 014.5 2.25h1.372c.516 0 .966.351 1.091.852l1.106 4.423c.11.44-.054.902-.417 1.173l-1.293.97a1.062 1.062 0 00-.38 1.21 12.035 12.035 0 007.143 7.143c.441.162.928-.004 1.21-.38l.97-1.293a1.125 1.125 0 011.173-.417l4.423 1.106c.5.125.852.575.852 1.091V19.5a2.25 2.25 0 01-2.25 2.25h-2.25z"
+                            />
                           </svg>
                         </div>
                       </div>
@@ -172,6 +228,9 @@ const ContactForm = () => {
                           zulfi@macworldproperties.com
                         </p>
                         <p class="text-neutral-500 dark:text-neutral-200 mb-2">
+                          Telephone no: +971 506637569
+                        </p>
+                        <p class="text-neutral-500 dark:text-neutral-200 mb-2">
                           Mobile No: +971 552239077
                         </p>
                         <p class="text-neutral-500 dark:text-neutral-200 mb-2">
@@ -184,10 +243,19 @@ const ContactForm = () => {
                     <div class="flex items-start">
                       <div class="shrink-0">
                         <div class="inline-block rounded-md bg-primary-100 p-4 text-primary">
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                            stroke="currentColor" class="h-6 w-6">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                              d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z" />
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="2"
+                            stroke="currentColor"
+                            class="h-6 w-6"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z"
+                            />
                           </svg>
                         </div>
                       </div>
@@ -198,14 +266,27 @@ const ContactForm = () => {
                         <p class="mb-2 text-neutral-500 dark:text-neutral-200">
                           ORN: 20525
                         </p>
+
                         <p class="mb-2 text-neutral-500 dark:text-neutral-200">
                           Office 605
+                        </p>
+
+                        <p class="mb-2 text-neutral-500 dark:text-neutral-200">
+                          Premise Number 345270703
+                        </p>
+
+                        <p class="mb-2 text-neutral-500 dark:text-neutral-200">
+                          Premise Type office
+                        </p>
+
+                        <p class="mb-2 text-neutral-500 dark:text-neutral-200">
+                          PO Box : 282543, Dubai, UAE
                         </p>
                         <p class="mb-2 text-neutral-500 dark:text-neutral-200">
                           The Exchange Tower
                         </p>
                         <p class="mb-2 text-neutral-500 dark:text-neutral-200">
-                          Business Bay Sheikh Zayed Road  Dubai UAE
+                          Business Bay Sheikh Zayed Road Dubai UAE
                         </p>
                       </div>
                     </div>
@@ -217,7 +298,7 @@ const ContactForm = () => {
         </div>
       </section>
     </div>
-  )
-}
+  );
+};
 
-export default ContactForm
+export default ContactForm;
