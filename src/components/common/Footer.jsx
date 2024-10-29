@@ -7,16 +7,20 @@ import { FiFacebook } from "react-icons/fi";
 import { MdPhone, MdMobileFriendly } from "react-icons/md";
 import { MdEmail } from "react-icons/md";
 import { MdPlace } from "react-icons/md";
-import Logo1 from '../../logo/logo3.png';
-import { Link } from 'react-router-dom';
-import React,{ useState } from 'react'
-import axios from 'axios';
+import { MdNumbers } from "react-icons/md";
+import { ImOffice } from "react-icons/im";
+import { SlEnvolopeLetter } from "react-icons/sl";
+
+import Logo1 from "../../logo/logo3.png";
+import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import axios from "axios";
 import { ToastContainer } from "react-toastify";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Footer = () => {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -26,13 +30,15 @@ const Footer = () => {
       toast.error("Please enter a valid email address.");
       return;
     }
-  
+
     // Proceed with form submission
-    axios.post(`${process.env.REACT_APP_SERVERURL}/users/news-letter-signup`, {email:email})
+    axios
+      .post(`${process.env.REACT_APP_SERVERURL}/users/news-letter-signup`, {
+        email: email,
+      })
       .then((response) => {
         toast.success(response.message);
-       setEmail('');
-       
+        setEmail("");
       })
       .catch((error) => {
         console.log("Error:", error.response.data);
@@ -43,27 +49,26 @@ const Footer = () => {
   return (
     <div className="text-slate-200">
       <footer>
-        <Link to='/'>
+        <Link to="/">
           <img src={Logo1} className="w-40 h-15 mb-10"></img>
         </Link>
         <div className="flex flex-wrap gap-2">
           <div className="flex-1 basis-[10rem]">
-
             <h2 className="text-xl font-semibold">Discover</h2>
             <ul>
-              <Link className="my-3 text-muted" to='/agents'>
+              <Link className="my-3 text-muted" to="/agents">
                 <li className="leading-7 mt-2.5">Agents</li>
               </Link>
-              <Link className="my-3 text-muted" to='/contact'>
+              <Link className="my-3 text-muted" to="/contact">
                 <li className="leading-7">Contact Us</li>
               </Link>
-              <Link className="my-3 text-muted" to='/blog'>
+              <Link className="my-3 text-muted" to="/blog">
                 <li className="leading-7">Blog</li>
               </Link>
-              <Link className="my-3 text-muted" to='/about'>
+              <Link className="my-3 text-muted" to="/about">
                 <li className="leading-7">About</li>
               </Link>
-              <Link className="my-3 text-muted" to='/property-management'>
+              <Link className="my-3 text-muted" to="/property-management">
                 <li className="leading-7">Property Management</li>
               </Link>
             </ul>
@@ -71,7 +76,9 @@ const Footer = () => {
           {/* lg:mt-[75px] */}
           <div className="flex-1 basis-[10rem]">
             <h2 className="text-xl font-semibold mb-2">Contact Us</h2>
-            <h1 className="text-md font-semibold">Mac World Real Estate Brokers</h1>
+            <h1 className="text-md font-semibold">
+              Mac World Real Estate Brokers
+            </h1>
             <ul>
               <li className="my-3 text-muted">
                 <div className="flex flex-row gap-2">
@@ -79,6 +86,35 @@ const Footer = () => {
                   <a>Office 605, The Exchange Tower, Business Bay, Dubai UAE</a>
                 </div>
               </li>
+
+              <li className="my-3 text-muted">
+                <div className="flex flex-row gap-2">
+                  <MdNumbers className="text-primary" />
+                  <a>Premise Number: 345270703</a>
+                </div>
+              </li>
+
+              <li className="my-3 text-muted">
+                <div className="flex flex-row gap-2">
+                  <ImOffice className="text-primary" />
+                  <a>Premise Type: Office</a>
+                </div>
+              </li>
+
+              <li className="my-3 text-muted">
+                <div className="flex flex-row gap-2">
+                  <SlEnvolopeLetter className="text-primary" />
+                  <a>PO Box : 282543, Dubai, UAE </a>
+                </div>
+              </li>
+
+              <li className="my-3 text-muted">
+                <div className="flex flex-row gap-2">
+                  <MdPhone className="text-primary" />
+                  <a>+971 506637569</a>
+                </div>
+              </li>
+
               <li className="my-3 text-muted">
                 <div className="flex flex-row gap-2">
                   <MdPhone className="text-primary" />
@@ -94,7 +130,9 @@ const Footer = () => {
               <li className="my-3 text-muted">
                 <div className="flex flex-row gap-2">
                   <MdEmail className="text-primary" />
-                  <a href={`mailto:${'zulfi@macworldproperties.com'}`}>zulfi@macworldproperties.com</a>
+                  <a href={`mailto:${"zulfi@macworldproperties.com"}`}>
+                    zulfi@macworldproperties.com
+                  </a>
                 </div>
               </li>
             </ul>
@@ -103,25 +141,38 @@ const Footer = () => {
           <div className="flex-1 basis-[10rem] text-center md:text-left">
             <div className="justify-center my-3 flex-align-center">
               <input
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 type="text"
                 className="px-4 py-[0.35rem] card-bordered dark:shadow-none outline-none bg-transparent rounded-lg border-dark !border-r-0"
                 placeholder="Email Address.."
               />
-              <button onClick={handleSubmit} className="-ml-2 text-sm btn bg-yellow-500 !p-2">subscribe</button>
+              <button
+                onClick={handleSubmit}
+                className="-ml-2 text-sm btn bg-yellow-500 !p-2"
+              >
+                subscribe
+              </button>
             </div>
           </div>
         </div>
       </footer>
       <div className="py-2 mt-3 justify-center align-center border-t text-muted border-dark flex lg:flex-row sm:flex-col gap-10">
         <div className="flex flex-row gap-2 mt-1">
-          <a href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`} target="_blank">
+          <a
+            href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`}
+            target="_blank"
+          >
             <div className="text-primary hover:bg-hover-color-dark">
               <FiFacebook />
             </div>
           </a>
-          <a href={`https://twitter.com/intent/tweet?url=${window.location.href}&text=${encodeURI(`Visit Macworld Properties`)}`} target="_blank">
+          <a
+            href={`https://twitter.com/intent/tweet?url=${
+              window.location.href
+            }&text=${encodeURI(`Visit Macworld Properties`)}`}
+            target="_blank"
+          >
             <div className="text-primary hover:bg-hover-color-dark">
               <FaTwitter />
             </div>
