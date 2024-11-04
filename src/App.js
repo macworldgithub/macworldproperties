@@ -45,6 +45,9 @@ import UpdatePageOne from "./pages/UpdatePageOne";
 import UpdateDashboard from "./pages/UpdateDashboard";
 import Page1New from "./pages/Page1New";
 import UpdateDashboardPage3 from "./pages/UpdateDashboardPage3";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsConditions from "./pages/TermsConditions";
+import CookiesPolicy from "./pages/CookiesPolicy";
 
 function App() {
   const [showButton, setShowButton] = useState(false);
@@ -110,6 +113,9 @@ function App() {
           )} */}
         <div className="h-screen">
           <Routes>
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/cookies-policy" element={<CookiesPolicy />} />
+          <Route path="/terms&conditions" element={<TermsConditions />} />
             <Route path="/dashboard-page3" element={<ProtectedRoutes><Dashboardpage3 /></ProtectedRoutes>} />
             <Route path="/dashboard" element={<ProtectedRoutes><Dashboard /></ProtectedRoutes>} />
             <Route path="/" element={<Home />} />

@@ -73,6 +73,24 @@ const Footer = () => {
               </Link>
             </ul>
           </div>
+
+
+
+          <div className="flex-1 basis-[10rem]">
+            <h2 className="text-xl font-semibold">Policies</h2>
+            <ul>
+              <Link className="my-3 text-muted" to="/terms&conditions">
+                <li className="leading-7 mt-2.5">Terms and Conditions </li>
+              </Link>
+              <Link className="my-3 text-muted" to="/cookies-policy">
+                <li className="leading-7">Cookies Policy</li>
+              </Link>
+              <Link className="my-3 text-muted" to="/privacy-policy">
+                <li className="leading-7">Privacy Policy</li>
+              </Link>
+             
+            </ul>
+          </div>
           {/* lg:mt-[75px] */}
           <div className="flex-1 basis-[10rem]">
             <h2 className="text-xl font-semibold mb-2">Contact Us</h2>
