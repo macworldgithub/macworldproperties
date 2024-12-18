@@ -22,9 +22,7 @@ import "react-toastify/dist/ReactToastify.css";
 const Footer = () => {
   const [email, setEmail] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
+  const handleSubmit = () => {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(email)) {
       toast.error("Please enter a valid email address.");
@@ -37,8 +35,8 @@ const Footer = () => {
         email: email,
       })
       .then((response) => {
-        toast.success(response.message);
         setEmail("");
+        toast.success("Successfully Subscribed");
       })
       .catch((error) => {
         console.log("Error:", error.response.data);
@@ -48,6 +46,7 @@ const Footer = () => {
 
   return (
     <div className="text-slate-200">
+      <ToastContainer />
       <footer>
         <Link to="/">
           <img src={Logo1} className="w-40 h-15 mb-10"></img>
@@ -74,8 +73,6 @@ const Footer = () => {
             </ul>
           </div>
 
-
-
           <div className="flex-1 basis-[10rem]">
             <h2 className="text-xl font-semibold">Policies</h2>
             <ul>
@@ -88,7 +85,6 @@ const Footer = () => {
               <Link className="my-3 text-muted" to="/privacy-policy">
                 <li className="leading-7">Privacy Policy</li>
               </Link>
-             
             </ul>
           </div>
           {/* lg:mt-[75px] */}
