@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import WelcomeSection from '../components/WelcomeSection';
 
+import axios from 'axios';
+import Loader from '../components/common/Loader';
+
 const PostAProperty = () => {
+    const [loading,setLoading]=useState(false)
   const [formData, setFormData] = useState({
     email: '',
     ownerName: '',
@@ -32,49 +36,55 @@ const PostAProperty = () => {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
-  
+    setLoading(true)
     const requiredFields = ['email', 'ownerName', 'mobileNo', 'propertyType'];
     const missingFields = requiredFields.filter((field) => !formData[field]);
   
     if (missingFields.length > 0) {
+    setLoading(false)
+        
       alert(`Please fill in the following required fields: ${missingFields.join(', ')}`);
       return;
     }
   
     const form = new FormData();
-    // Append form data
     Object.entries(formData).forEach(([key, value]) => {
       form.append(key, value);
     });
+    try {
+        const response = await axios.post(`${process.env.REACT_APP_SERVERURL}/property/list`, 
+            form,
+            {
+                headers: {
+                  "Content-Type": "multipart/form-data", 
+                },
+              }
 
-    // Object.entries(files).forEach(([key, value]) => {
-    //   if (value) form.append(key, value);
-    // });
-    console.log('Submitted Data:', formData);
-    // try {
-    //     const response = await fetch("https://api.example.com/properties", {
-    //       method: "POST",
-    //       body: form,
-    //     });
-    //     if (response.ok) {
-    //       alert("Property submitted successfully!");
-    //     } else {
-    //       alert("Error submitting property");
-    //     }
-    //   } catch (error) {
-    //     console.error("Error:", error);
-    //     alert("An unexpected error occurred");
-    //   }
+        );
+        if (response.status==200) {
+    setLoading(false)
+          alert("Property Request submitted successfully!");
+        } else {
+    setLoading(false)
+          alert("Error submitting property");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+    setLoading(false)
+
+        alert("An unexpected error occurred");
+      }
   
-    // Add API call logic or further processing here
-    alert('Property details submitted successfully!');
   };
 
   return (
     <div className="py-24 min-h-screen w-screen flex justify-center items-center bg-gray-50">
       <div className="max-w-5xl bg-white shadow-lg rounded-lg p-8">
         <WelcomeSection/>
-
+        {loading && <div className="fixed top-0 left-0 z-50 w-full flex-col gap-3 h-full flex-center-center backdrop-blur-sm dark:bg-main-dark">
+      <div className="loader"></div>
+      <p className='text-black font-semibold text-lg'>Submiting</p>
+    </div>}
         {/* Form Section */}
         <div className="bg-gray-100 p-8 rounded-lg shadow-md">
           <h2 className="text-primary font-bold text-2xl mb-6 text-center">
