@@ -51,7 +51,7 @@ const Navbar = ({ isloggedIn, setIsloggedIn }) => {
 
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem('token'));
-    setUserData(data)
+    setUserData(data?data:"")
   }, [localStorage.getItem('token')])
 
 
